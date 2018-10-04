@@ -13,20 +13,6 @@
 	<meta name="keywords" content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive" />
 	<meta name="author" content="FREEHTML5.CO" />
 
-  <!-- 
-	//////////////////////////////////////////////////////
-
-	FREE HTML5 TEMPLATE 
-	DESIGNED & DEVELOPED by FREEHTML5.CO
-		
-	Website: 		http://freehtml5.co/
-	Email: 			info@freehtml5.co
-	Twitter: 		http://twitter.com/fh5co
-	Facebook: 		https://www.facebook.com/fh5co
-
-	//////////////////////////////////////////////////////
-	 -->
-
   	<!-- Facebook and Twitter integration -->
 	<meta property="og:title" content=""/>
 	<meta property="og:image" content=""/>
@@ -78,15 +64,13 @@
 			<div class="container">
 				<div class="nav-header">
 					<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle dark"><i></i></a>
-					<h1 id="fh5co-logo"><a href="index.html"><i class="icon-airplane"></i>TIWbnb</a></h1>
+					<h1 id="fh5co-logo"><a href="index.jsp"><i class="icon-airplane"></i>TIWbnb</a></h1>
 					<!-- START #fh5co-menu-wrap -->
 					<nav id="fh5co-menu-wrap" role="navigation">
 						<ul class="sf-menu" id="fh5co-primary-menu">
-							<li class="active"><a href="index.html">Home</a></li>
-							<li ><a href="viajes.html">Viajes</a></li>
-							<li ><a href="mensajes.html">Mensajes</a></li>                              
-							<li><a href="#" id="Registro">Regístrate</a></li>                            
-							<li><a href="#" id="Login">Inicia sesión</a></li>                            
+							<li ><a href="index.jsp">Home</a></li>
+							<li class="active"><a href="trips.jsp">Trips</a></li>
+							<li ><a href="messages.jsp">Messages</a></li>                              
 						</ul>
 					</nav>
 				</div>
@@ -95,12 +79,15 @@
 
 		<!-- end:header-top -->
 
-		<div id="fh5co-tours" class="fh5co-section-gray">
+    
+           
+            
+     <div id="fh5co-tours" class="fh5co-section-gray">
 			<div class="container">
 				<div class="row">
 					<div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
-						<h3>Resultados</h3>
-						<p>Estos son los resultados de acuerdo a tu selección.</p>
+						<h3>Trips</h3>
+						<p>These are the reservations you have made so far</p>
 					</div>
 				</div>
 				<div class="row row-bottom-padded-md">
@@ -108,10 +95,10 @@
 						<div href="#"><img src="images/place-1.jpg" alt="Free HTML5 Website Template by FreeHTML5.co" class="img-responsive">
 							<div class="desc">
 								<span></span>
-								<h3>Estudio en Sol</h3>
-								<span>Apartamento entero. 2 camas</span>
-								<span class="price">60€</span>
-								<a class="btn btn-primary btn-outline" href="#">Seleccionar <i class="icon-arrow-right22"></i></a>
+								<h3>Apartment in Sol</h3>
+								<span>Entire apartment, two beds</span>
+                                <span>Dates: 1/12/2016 to 5/12/2016</span>                
+								<a class="btn btn-primary btn-outline" href="#">More Info<i class="icon-arrow-right22"></i></a>
 							</div>
 						</div>
 					</div>
@@ -119,10 +106,10 @@
 						<div href="#"><img src="images/place-2.jpg" alt="Free HTML5 Website Template by FreeHTML5.co" class="img-responsive">
 							<div class="desc">
 								<span></span>
-								<h3>Apartamento junto a Gran Via</h3>
-								<span>Apartamento entero. 1 cama</span>
-								<span class="price">70€</span>
-								<a class="btn btn-primary btn-outline" href="#">Seleccionar <i class="icon-arrow-right22"></i></a>
+								<h3>Apartment near Gran Via</h3>
+								<span>Entire apartment, one bed</span>
+                                <span>Dates: 1/12/2016 to 5/12/2016</span>       
+								<a class="btn btn-primary btn-outline" href="#">More Info<i class="icon-arrow-right22"></i></a>
 							</div>
 						</div>
 					</div>
@@ -130,10 +117,10 @@
 						<div href="#"><img src="images/place-3.jpg" alt="Free HTML5 Website Template by FreeHTML5.co" class="img-responsive">
 							<div class="desc">
 								<span></span>
-								<h3>Piso frente al Palacio Real</h3>
-								<span>Loft entero. 2 camas</span>
-								<span class="price">80€</span>
-								<a class="btn btn-primary btn-outline" href="#">Seleccionar <i class="icon-arrow-right22"></i></a>
+								<h3>Flat in front of the Royal Palace</h3>
+								<span>Entire loft, two beds</span>
+                                <span>Dates: 1/12/2016 to 5/12/2016</span>       
+								<a class="btn btn-primary btn-outline" href="#">More Info<i class="icon-arrow-right22"></i></a>
 							</div>
 						</div>
 					</div>
@@ -141,10 +128,10 @@
 						<div href="#"><img src="images/place-1.jpg" alt="Free HTML5 Website Template by FreeHTML5.co" class="img-responsive">
 							<div class="desc">
 								<span></span>
-								<h3>Céntrico y tranquilo</h3>
-								<span>Apartamento entero. 2 camas</span>
-								<span class="price">65€</span>
-								<a class="btn btn-primary btn-outline" href="#">Seleccionar <i class="icon-arrow-right22"></i></a>
+								<h3>Central and quiet</h3>
+								<span>Entire apartment, two beds</span>
+                                <span>Dates: 1/12/2016 to 5/12/2016</span>       
+								<a class="btn btn-primary btn-outline" href="#">More Info<i class="icon-arrow-right22"></i></a>
 							</div>
 						</div>
 					</div>
@@ -153,9 +140,9 @@
 							<div class="desc">
 								<span></span>
 								<h3>Stunning Apartment in Sol</h3>
-								<span>Apartamento entero. 2 camas</span>
-								<span class="price">50€</span>
-								<a class="btn btn-primary btn-outline" href="#">Seleccionar <i class="icon-arrow-right22"></i></a>
+								<span>Entire apartment, two beds</span>
+                                <span>Dates: 1/12/2016 to 5/12/2016</span>       
+								<a class="btn btn-primary btn-outline" href="#">More Info<i class="icon-arrow-right22"></i></a>
 							</div>
 						</div>
 					</div>
@@ -164,17 +151,15 @@
 							<div class="desc">
 								<span></span>
 								<h3>Pretty Apartment in Plaza Mayor</h3>
-								<span>Apartamento entero. 1 cama</span>
-								<span class="price">30€</span>
-								<a class="btn btn-primary btn-outline" href="#">Seleccionar <i class="icon-arrow-right22"></i></a>
+								<span>Entire apartment, one bed</span>
+                                <span>Dates: 1/12/2016 to 5/12/2016</span>       
+								<a class="btn btn-primary btn-outline" href="#">More Info<i class="icon-arrow-right22"></i></a>
 							</div>
 						</div>
 					</div>
 				</div>
 
-			</div>
-		</div>
-            
+     
 		<footer>
 			<div id="footer">
 				<div class="container">

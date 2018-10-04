@@ -13,20 +13,6 @@
 	<meta name="keywords" content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive" />
 	<meta name="author" content="FREEHTML5.CO" />
 
-  <!-- 
-	//////////////////////////////////////////////////////
-
-	FREE HTML5 TEMPLATE 
-	DESIGNED & DEVELOPED by FREEHTML5.CO
-		
-	Website: 		http://freehtml5.co/
-	Email: 			info@freehtml5.co
-	Twitter: 		http://twitter.com/fh5co
-	Facebook: 		https://www.facebook.com/fh5co
-
-	//////////////////////////////////////////////////////
-	 -->
-
   	<!-- Facebook and Twitter integration -->
 	<meta property="og:title" content=""/>
 	<meta property="og:image" content=""/>
@@ -78,15 +64,15 @@
 			<div class="container">
 				<div class="nav-header">
 					<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle dark"><i></i></a>
-					<h1 id="fh5co-logo"><a href="index.html"><i class="icon-airplane"></i>TIWbnb</a></h1>
+					<h1 id="fh5co-logo"><a href="index.jsp"><i class="icon-airplane"></i>TIWbnb</a></h1>
 					<!-- START #fh5co-menu-wrap -->
 					<nav id="fh5co-menu-wrap" role="navigation">
 						<ul class="sf-menu" id="fh5co-primary-menu">
-							<li class="active"><a href="index.html">Home</a></li>
-							<li ><a href="viajes.html">Viajes</a></li>
-							<li ><a href="mensajes.html">Mensajes</a></li>                                                                              							
-							<li><a href="#" id="Registro">Regístrate</a></li>                            
-							<li><a href="#" id="Login">Inicia sesión</a></li>                            
+							<li class="active"><a href="index.jsp">Home</a></li>
+							<li ><a href="trips.jsp">Trips</a></li>
+							<li ><a href="messages.jsp">Messages</a></li>                                                                              							
+							<li><a href="#" id="Registro">Registrate</a></li>                            
+							<li><a href="#" id="Login">Log in</a></li>                            
 						</ul>
 					</nav>
 				</div>
@@ -100,31 +86,31 @@
 		
 				<div class="row">
 					<div class="col-md-12 animate-box">
-						<h2 class="heading-title">Estudio en Sol</h2>
+						<h2 class="heading-title">Apartment in Sol</h2>
 					</div>
 					<div class="col-md-6 animate-box">
                         <span class="description">
-						<p>Estudio en Sol es un acogedor alojamiento en pleno centro de Madrid, donde en cada esquina se encuentra la diversión debido a los innumerables bares, restaurantes, tiendas y mercados de la zona.
-						El apartamento cuenta con cocina americana, wifi gratis en todas las zonas, televisión, horno y microondas, lavadora, secador de pelo, cafetera y tostadora. Se facilitan sábanas y toallas a la llegada.</p> 
+						<p>Apartment in Sol is a cozy accommodation right in the center of Madrid, where on every corner there is fun due to the innumerable bars, restaurants, shops and markets in the area.
+							The apartment has a kitchenette, free wifi in all areas, television, oven and microwave, washing machine, hair dryer, coffee maker and toaster. Sheets and towels are provided upon arrival.</p> 
                         </span>
                         <table class="table">
                             <tbody>
                                 <tr>                                
-                                    <th scope="row">Anfitrión:</th>
+                                    <th scope="row">Host:</th>
                                     <td><span class="host">Pepe</span></td>
                                 </tr>
                                 
                                 <tr>                                
-                                        <th scope="row">Precio:</th>
+                                        <th scope="row">Price:</th>
                                     <td><span class="price">30€</span></td>
                                 </tr>
                                 <tr>
-                                        <th scope="row">Nº Camas:</th>
+                                        <th scope="row">Beds:</th>
                                         <td><span class="beds">2</span></td>
                                 </tr>
                                 <tr>
-                                        <th scope="row">Tipo Alojamiento:</th>
-                                        <td><span class="type">Alojamiento Entero</span></td>
+                                        <th scope="row">Type:</th>
+                                        <td><span class="type">Entire apartment</span></td>
                                 </tr>                                
                             </tbody>
                         </table>

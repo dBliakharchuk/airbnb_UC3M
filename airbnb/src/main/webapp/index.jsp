@@ -13,20 +13,6 @@
 	<meta name="keywords" content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive" />
 	<meta name="author" content="FREEHTML5.CO" />
 
-  <!-- 
-	//////////////////////////////////////////////////////
-
-	FREE HTML5 TEMPLATE 
-	DESIGNED & DEVELOPED by FREEHTML5.CO
-		
-	Website: 		http://freehtml5.co/
-	Email: 			info@freehtml5.co
-	Twitter: 		http://twitter.com/fh5co
-	Facebook: 		https://www.facebook.com/fh5co
-
-	//////////////////////////////////////////////////////
-	 -->
-
   	<!-- Facebook and Twitter integration -->
 	<meta property="og:title" content=""/>
 	<meta property="og:image" content=""/>
@@ -78,15 +64,15 @@
 			<div class="container">
 				<div class="nav-header">
 					<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle dark"><i></i></a>
-					<h1 id="fh5co-logo"><a href="index.html"><i class="icon-airplane"></i>TIWbnb</a></h1>
+					<h1 id="fh5co-logo"><a href="index.jsp"><i class="icon-airplane"></i>TIWbnb</a></h1>
 					<!-- START #fh5co-menu-wrap -->
 					<nav id="fh5co-menu-wrap" role="navigation">
 						<ul class="sf-menu" id="fh5co-primary-menu">
-							<li class="active"><a href="index.html">Home</a></li>
-							<li ><a href="viajes.html">Viajes</a></li>
-							<li ><a href="mensajes.html">Mensajes</a></li>                              
-							<li><a href="#" id="Registro">Regístrate</a></li>                            
-							<li><a href="#" id="Login">Inicia sesión</a></li>                            
+							<li class="active"><a href="index.jsp">Home</a></li>
+							<li ><a href="trips.jsp">Trips</a></li>
+							<li ><a href="messages.jsp">Messages</a></li>                              
+							<li><a href="#" id="Registro">Registration</a></li>                            
+							<li><a href="#" id="Login">Log in</a></li>                            
 						</ul>
 					</nav>
 				</div>
@@ -102,13 +88,13 @@
 					<div class="container">
 						<div class="row">
 							<div class="col-sm-5 col-md-5">
-								<!-- <a href="index.html" id="main-logo">Travel</a> -->
+								<!-- <a href="index.jsp" id="main-logo">Travel</a> -->
 								<div class="tabulation animate-box">
 
 								  <!-- Nav tabs -->
 								   <ul class="nav nav-tabs" role="tablist">
 								      <li role="presentation" class="active">
-								    	   <a href="#alojamientos" aria-controls="alojamientos" role="tab" data-toggle="tab">Alojamientos</a>
+								    	   <a href="#alojamientos" aria-controls="alojamientos" role="tab" data-toggle="tab">Accommodations</a>
 								      </li>
 								   </ul>
 
@@ -118,51 +104,51 @@
 									 	<div class="row">
 											<div class="col-xxs-12 col-xs-12 mt">
 												<div class="input-field">
-													<label for="from">Ciudad:</label>
+													<label for="from">City:</label>
 													<input type="text" class="form-control" id="from-place" placeholder="Madrid, SPAIN"/>
 												</div>
 											</div>
 											<div class="col-xxs-12 col-xs-6 mt alternate">
 												<div class="input-field">
-													<label for="date-start">Ida:</label>
+													<label for="date-start">Start:</label>
 													<input type="text" class="form-control" id="date-start" placeholder="mm/dd/yyyy"/>
 												</div>
 											</div>
 											<div class="col-xxs-12 col-xs-6 mt alternate">
 												<div class="input-field">
-													<label for="date-end">Vuelta:</label>
+													<label for="date-end">End:</label>
 													<input type="text" class="form-control" id="date-end" placeholder="mm/dd/yyyy"/>
 												</div>
 											</div>
                                             
 											<div class="col-sm-12 mt">
 												<section>
-													<label for="class">Precio</label>
+													<label for="class">Price</label>
 													<select class="cs-select cs-skin-border">
-														<option value="" disabled selected>Hasta 35€</option>
-														<option value="P1">Hasta 35€</option>            
+														<option value="" disabled selected>Less than 35€</option>
+														<option value="P1">Less than 35€</option>            
 														<option value="P2">36€ - 69€</option>
 														<option value="P3">70€ - 130€</option>
-														<option value="P4">131€ o más</option>
+														<option value="P4">131€ or more</option>
 													</select>
 												</section>
 											</div>
                                             
         									<div class="col-sm-12 mt">
 												<section>
-													<label for="class">Tipo de alojamiento</label>
+													<label for="class">Type of accommodation</label>
 													<select class="cs-select cs-skin-border">
-														<option value="" disabled selected>Alojamiento entero</option>
-														<option value="entero">Alojamiento entero</option>
-														<option value="privada">Habitación privada</option>
-														<option value="compartida">Habitación compartida</option>
+														<option value="" disabled selected>Entire accommodation</option>
+														<option value="entero">Entire accommodation</option>
+														<option value="privada">Private room</option>
+														<option value="compartida">Shared room</option>
 													</select>
 												</section>
 											</div>
                                             
 											<div class="col-xxs-12 col-xs-6 mt">
 												<section>
-													<label for="class">Adultos:</label>
+													<label for="class">Adults:</label>
 													<select class="cs-select cs-skin-border">
 														<option value="" disabled selected>1</option>
 														<option value="1">1</option>
@@ -174,7 +160,7 @@
 											</div>
 											<div class="col-xxs-12 col-xs-6 mt">
 												<section>
-													<label for="class">Niños:</label>
+													<label for="class">Children:</label>
 													<select class="cs-select cs-skin-border">
 														<option value="" disabled selected>1</option>
 														<option value="1">1</option>
@@ -185,7 +171,7 @@
 												</section>
 											</div>
 											<div class="col-xs-12">
-												<input type="submit" class="btn btn-primary btn-block" value="Buscar">
+												<input type="submit" class="btn btn-primary btn-block" value="Search">
 											</div>
                                         </div>
 				                    </div>
@@ -197,9 +183,9 @@
 							<div class="desc2 animate-box">
 								<div class="col-sm-7 col-sm-push-1 col-md-7 col-md-push-1">
 									<h3>TIWbnb</h3>
-									<h2>Planea tu estancia</h2>
-									<h3>Escoge entre miles de alojamientos disponiles</h3>
-									<p>Desde <span class="price">35€</span> por noche</p>
+									<h2>Plan your stay</h2>
+									<h3>Choose from thousands of available accommodations</h3>
+									<p>From <span class="price">35€</span> per night</p>
 									<!-- <p><a class="btn btn-primary btn-lg" href="#">Get Started</a></p> -->
 								</div>
 							</div>
@@ -220,7 +206,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-        <h1 class="h3 mb-3 font-weight-normal">Iniciar sesión para continuar</h1>
+        <h1 class="h3 mb-3 font-weight-normal">Log in to continue</h1>
       </div>
       <div class="modal-body">
           <form class="form-signin">
@@ -228,17 +214,17 @@
       <input type="password" id="loginPassword" class="form-control" placeholder="Contraseña" required>
       <div class="checkbox mb-3">
         <label>
-          <input type="checkbox" value="remember-me"> Recordarme
+          <input type="checkbox" value="remember-me"> Remember me
         </label>
       </div>
-      <button class="btn btn-lg btn-primary btn-block" type="submit" id="IniciaSesion">Inicia sesión</button>
+      <button class="btn btn-lg btn-primary btn-block" type="submit" id="IniciaSesion">Log in</button>
     </form>
 
       </div>
 
       <div class="modal-footer">
-        <p class="text-center">¿No tienes cuenta?<a href="index.html">  Regístrate</a></p>
-        <p class="text-center"><a href="index.html"> Atrás </a></p>
+        <p class="text-center">You do not have an account?<a href="index.jsp">  Registrate</a></p>
+        <p class="text-center"><a href="index.jsp"> Back </a></p>
       </div>
 
     </div>
@@ -255,21 +241,21 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-        <h1 class="h3 mb-3 font-weight-normal">Introduce tus datos</h1>
+        <h1 class="h3 mb-3 font-weight-normal">Enter your data</h1>
       </div>
       <div class="modal-body">
           <form class="form-registro">
-      <input type="email" id="inputEmail" class="form-control" placeholder="Dirección de correo electrónico" required autofocus>
-      <input type="name" id="inputName" class="form-control" placeholder="Nombre" required>
-      <input type="surname" id="inputSurname" class="form-control" placeholder="Apellidos" required>              
-      <input type="password" id="inputPassword" class="form-control" placeholder="Establece una contraseña" required>
+      <input type="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus>
+      <input type="name" id="inputName" class="form-control" placeholder="Name" required>
+      <input type="surname" id="inputSurname" class="form-control" placeholder="Surname" required>              
+      <input type="password" id="inputPassword" class="form-control" placeholder="Set a password" required>
       <button class="btn btn-lg btn-primary btn-block" type="submit" id="Registrate">Registrate</button>
     </form>
 
       </div>
 
       <div class="modal-footer">
-        <p class="text-center">¿Ya tienes una cuenta TIWbnb?<a href="#" id="goRegistroLogin">  Inicia sesión</a></p>
+        <p class="text-center">Do you already have a TIWbnb account?<a href="#" id="goRegistroLogin">  Log in</a></p>
       </div>
 
     </div>

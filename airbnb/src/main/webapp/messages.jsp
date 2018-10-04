@@ -13,20 +13,6 @@
 	<meta name="keywords" content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive" />
 	<meta name="author" content="FREEHTML5.CO" />
 
-  <!-- 
-	//////////////////////////////////////////////////////
-
-	FREE HTML5 TEMPLATE 
-	DESIGNED & DEVELOPED by FREEHTML5.CO
-		
-	Website: 		http://freehtml5.co/
-	Email: 			info@freehtml5.co
-	Twitter: 		http://twitter.com/fh5co
-	Facebook: 		https://www.facebook.com/fh5co
-
-	//////////////////////////////////////////////////////
-	 -->
-
   	<!-- Facebook and Twitter integration -->
 	<meta property="og:title" content=""/>
 	<meta property="og:image" content=""/>
@@ -79,13 +65,13 @@
 			<div class="container">
 				<div class="nav-header">
 					<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle dark"><i></i></a>
-					<h1 id="fh5co-logo"><a href="index.html"><i class="icon-airplane"></i>TIWbnb</a></h1>
+					<h1 id="fh5co-logo"><a href="index.jsp"><i class="icon-airplane"></i>TIWbnb</a></h1>
 					<!-- START #fh5co-menu-wrap -->
 					<nav id="fh5co-menu-wrap" role="navigation">
 						<ul class="sf-menu" id="fh5co-primary-menu">
-							<li ><a href="index.html">Home</a></li>
-							<li ><a href="viajes.html">Viajes</a></li>
-							<li class="active" ><a href="mensajes.html">Mensajes</a></li>                              
+							<li ><a href="index.jsp">Home</a></li>
+							<li ><a href="trips.jsp">Trips</a></li>
+							<li class="active" ><a href="messages.jsp">Messages</a></li>                              
 						</ul>
 					</nav>
 				</div>
@@ -99,8 +85,8 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
-						<h3>Mensajes</h3>
-						<p>Estos son los mensajes que has recibido hasta ahora.</p>
+						<h3>Messages</h3>
+						<p>These are the messages you have received</p>
 				</div>
 			</div>
 			
@@ -110,9 +96,9 @@
 						<div class="panel-body">
 							<div class="pull-right">
 								<div class="btn-group">
-									<button type="button" class="btn btn-success btn-filter" data-target="leido">Leidos</button>
-									<button type="button" class="btn btn-warning btn-filter" data-target="no-leido">No Leidos</button>
-									<button type="button" class="btn btn-default btn-filter" data-target="all">Todos</button>
+									<button type="button" class="btn btn-success btn-filter" data-target="leido">Read</button>
+									<button type="button" class="btn btn-warning btn-filter" data-target="no-leido">Unread</button>
+									<button type="button" class="btn btn-default btn-filter" data-target="all">All</button>
 								</div>
 							</div>
 							<div class="table-container">
