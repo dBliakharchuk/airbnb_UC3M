@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSession;
 
 
 @WebServlet(
-		urlPatterns="/login",
+		urlPatterns="/results",
 		loadOnStartup=1,
 		initParams={@WebInitParam(name="configuracion", value="es.uc3m.tiw")}
 		)
