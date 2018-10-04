@@ -23,7 +23,7 @@ import es.uc3m.tiw.dominios.Usuario;
 		loadOnStartup=1,
 		initParams={@WebInitParam(name="configuracion", value="es.uc3m.tiw")}
 		)
-public class MessagesServlet extends HttpServlet {
+public class MessageServlet extends HttpServlet {
 	/**
 	 * 
 	 */
