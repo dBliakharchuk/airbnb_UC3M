@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.uc3m.ctftw.airbnb.database.DataAccess;
+
 
 @WebServlet(
 		urlPatterns="/accommodation",
@@ -33,7 +35,7 @@ public class AccommodationServlet extends HttpServlet {
 		@Override
 		public void init(ServletConfig config) throws ServletException {
 			this.config = config;
-
+			DataAccess.initialize();
 		}
 	       
 
