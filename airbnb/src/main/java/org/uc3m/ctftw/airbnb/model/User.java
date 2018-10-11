@@ -1,4 +1,4 @@
-package model;
+package org.uc3m.ctftw.airbnb.model;
 
 public class User
 {
