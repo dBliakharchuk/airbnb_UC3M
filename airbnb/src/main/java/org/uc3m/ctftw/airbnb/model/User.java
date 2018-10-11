@@ -1,11 +1,15 @@
 package org.uc3m.ctftw.airbnb.model;
 
+import java.util.List;
+
 public class User
 {
 	private String email;
 	private String name;
 	private String surname;
 	private String passwaord;
+	
+	private List<Trip> userTrips;
 
 	public User(String email, String name, String surname, String passwaord)
 	{
