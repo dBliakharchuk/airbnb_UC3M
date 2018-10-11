@@ -7,5 +7,4 @@ public class Message
 	private Boolean messageIsUnred;
 	private String content;
 	private Date date;
-	
 }

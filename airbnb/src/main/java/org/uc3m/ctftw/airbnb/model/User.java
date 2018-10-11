@@ -7,9 +7,10 @@ public class User
 	private String email;
 	private String name;
 	private String surname;
-	private String passwaord;
+	private String password;
 	
 	private List<Trip> userTrips;
+	private List<Message> messagesReceived;
 
 	public User(String email, String name, String surname, String passwaord)
 	{
@@ -17,7 +18,7 @@ public class User
 		this.email = email;
 		this.name = name;
 		this.surname = surname;
-		this.passwaord = passwaord;
+		this.password = passwaord;
 	}
 
 	public String getEmail()
@@ -52,12 +53,12 @@ public class User
 
 	public String getPasswaord()
 	{
-		return passwaord;
+		return password;
 	}
 
 	public void setPasswaord(String passwaord)
 	{
-		this.passwaord = passwaord;
+		this.password = passwaord;
 	}
 
 }

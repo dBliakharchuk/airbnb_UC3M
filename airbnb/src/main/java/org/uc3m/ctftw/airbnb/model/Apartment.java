@@ -12,7 +12,8 @@ public class Apartment
 	private Localization localization;
 	private BigDecimal pricePerDay;
 	private String typeOfApartment;
-	private int beds;
+	private int bedsAdult;
+	private int bedsChild;
 	
 	private List<Date> bookedDays;
 	
