@@ -17,10 +17,10 @@ import org.uc3m.ctftw.airbnb.model.User;
 
 public class DataAccessLocal
 {
-	private static ArrayList<Apartment> apartments = new ArrayList<Apartment>();
-	private static ArrayList<Message> messages = new ArrayList<Message>();
-	private static ArrayList<Trip> trips = new ArrayList<Trip>();
-	private static ArrayList<User> users = new ArrayList<User>();
+	private static List<Apartment> apartments = new ArrayList<Apartment>();
+	private static List<Message> messages = new ArrayList<Message>();
+	private static List<Trip> trips = new ArrayList<Trip>();
+	private static List<User> users = new ArrayList<User>();
 
 	public static void initialize()
 	
