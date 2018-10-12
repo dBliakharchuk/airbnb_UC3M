@@ -9,9 +9,9 @@
 
 
 <!-- import -->
-
+<%@ page import="org.uc3m.ctftw.airbnb.database.*"%>
 <%@ page import="org.uc3m.ctftw.airbnb.model.*"%>
-<%@ page import=" java.util.ArrayList"%>
+<%@ page import=" java.util.*"%>
 <%@ page import="java.sql.Date"%>
 <%@ page import="java.net.URL"%>
 
@@ -116,14 +116,10 @@
 					<div class="row row-bottom-padded-md">
 					
 						<%
-							ArrayList<Trip> trips = new ArrayList<Trip>();
-							Date dateIn = new Date(115, 11, 1);
-							Date dateOut = new Date(115, 11, 6);
-							URL url = new URL(
-									"https://www.esmadrid.com/sites/default/files/styles/content_type_full/public/edfitorial/Madrid_undia_1397223554.735.jpg?itok=4ziKw0gD");
-
-							Trip newTrip = new Trip("Madrit", "super apartment", dateIn, dateOut, url);
-							trips.add(newTrip);
+							User currentUser = new User("fakeMail@gmail.com", "Jan", "Kowal", "haslo12");
+							DataAccessLocal.initialize();
+							List<Trip> trips = DataAccessLocal.getUserTrips(currentUser);
+							
 
 							for (int i = 0; i < trips.size(); i++)
 							{ %>
@@ -144,23 +140,7 @@
 								</div>
 							</div>
 						<% } %>
-						
-						<div class="col-md-4 col-sm-6 fh5co-tours animate-box"
-							data-animate-effect="fadeIn">
-							<div href="#">
-								<img src="images/place-2.jpg"
-									alt="Free HTML5 Website Template by FreeHTML5.co"
-									class="img-responsive">
-								<div class="desc">
-									<span></span>
-									<h3>Apartment near Gran Via</h3>
-									<span>Entire apartment, one bed</span> <span>Dates:
-										1/12/2016 to 5/12/2016</span> <a class="btn btn-primary btn-outline"
-										href="#">More Info<i class="icon-arrow-right22"></i></a>
-								</div>
-							</div>
-						</div>
-						
+												
 						
 					</div>
 

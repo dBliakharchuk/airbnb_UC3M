@@ -1,7 +1,7 @@
 package org.uc3m.ctftw.airbnb.model;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 public class Apartment
@@ -15,10 +15,10 @@ public class Apartment
 	private int bedsAdult;
 	private int bedsChild;
 	
-	private List<Date> bookedDays;
+	private List<java.sql.Date> bookedDays;
 
 	public Apartment(String name, String description, User host, Localization localization, BigDecimal pricePerDay,
-			String typeOfApartment, int bedsAdult, int bedsChild, List<Date> bookedDays)
+			String typeOfApartment, int bedsAdult, int bedsChild, List<java.sql.Date> bookedDays2)
 	{
 		super();
 		this.name = name;
@@ -29,9 +29,10 @@ public class Apartment
 		this.typeOfApartment = typeOfApartment;
 		this.bedsAdult = bedsAdult;
 		this.bedsChild = bedsChild;
-		this.bookedDays = bookedDays;
+		this.bookedDays = bookedDays2;
 	}
 
+	
 	public String getName()
 	{
 		return name;
