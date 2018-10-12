@@ -10,7 +10,7 @@
 
 <!-- import -->
 
-<%@ page import="model.*"%>
+<%@ page import="org.uc3m.ctftw.airbnb.model.*"%>
 <%@ page import=" java.util.ArrayList"%>
 <%@ page import="java.sql.Date"%>
 <%@ page import="java.net.URL"%>
@@ -114,6 +114,7 @@
 						</div>
 					</div>
 					<div class="row row-bottom-padded-md">
+					
 						<%
 							ArrayList<Trip> trips = new ArrayList<Trip>();
 							Date dateIn = new Date(115, 11, 1);
@@ -142,8 +143,8 @@
 									</div>
 								</div>
 							</div>
-						
 						<% } %>
+						
 						<div class="col-md-4 col-sm-6 fh5co-tours animate-box"
 							data-animate-effect="fadeIn">
 							<div href="#">

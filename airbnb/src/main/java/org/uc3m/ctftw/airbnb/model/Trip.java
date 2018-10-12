@@ -10,6 +10,7 @@ public class Trip
 	private Date moveInDate;
 	private Date moveOutDate;
 	private URL photo;
+	
 	public String getName()
 	{
 		return name;
