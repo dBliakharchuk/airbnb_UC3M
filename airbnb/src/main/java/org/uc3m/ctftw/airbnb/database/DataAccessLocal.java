@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -91,7 +92,7 @@ public class DataAccessLocal
 	private static void initializeApartments()
 	{
 		User user = new User("fakeMail@gmail.com", "Jan", "Kowal", "haslo12");
-		Localization localization = new Localization("Polan", "Warsaw", "Chmielna", 4, 4);
+		Localization localization = new Localization("Polan", "Warsaw", "Chmielna", "4", "4");
 		List<java.sql.Date> bookedDays = new ArrayList<java.sql.Date>();
 		BigDecimal price = new BigDecimal(50);
 		Apartment newApartment = new Apartment("Apartment in Warsaw", "super cooll single room studio", user, localization, price, "single room studio", 1, 1, bookedDays);
@@ -101,22 +102,22 @@ public class DataAccessLocal
 	
 	private static void initializeMessages()
 	{
-		Date date = new Date(115, 11, 1);
+		Timestamp date = new Timestamp(2018, 10, 15, 21, 17, 12, 00);
 		Message newMessage = new Message(false, "Does house have parking place?", date);
 		
 		messages.add(newMessage);
 		
-		date = new Date(115, 11, 11);
+		date = new Timestamp(2018, 10, 22, 11, 17, 12, 00);
 		newMessage = new Message(false, "Is it a quiete neighborhood?", date);
 		
 		messages.add(newMessage);
 		
-		date = new Date(113, 11, 11);
+		date = new Timestamp(2018, 10, 1, 15, 17, 12, 00);
 		newMessage = new Message(true, "I like footbal.", date);
 		
 		messages.add(newMessage);
 		
-		date = new Date(114, 5, 11);
+		date = new Timestamp(2018, 10, 15, 2, 17, 12, 00);
 		newMessage = new Message(true, "Bulid the wall!.", date);
 		
 		messages.add(newMessage);

@@ -1,14 +1,14 @@
 package org.uc3m.ctftw.airbnb.model;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 public class Message
 {
 	private Boolean messageIsUnred;
 	private String content;
-	private Date date;
+	private Timestamp date;
 	
-	public Message(Boolean messageIsUnred, String content, Date date)
+	public Message(Boolean messageIsUnred, String content, Timestamp date)
 	{
 		super();
 		this.messageIsUnred = messageIsUnred;
@@ -36,12 +36,12 @@ public class Message
 		this.content = content;
 	}
 
-	public Date getDate()
+	public Timestamp getDate()
 	{
 		return date;
 	}
 
-	public void setDate(Date date)
+	public void setDate(Timestamp date)
 	{
 		this.date = date;
 	}

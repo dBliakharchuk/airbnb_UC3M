@@ -4,7 +4,6 @@ import java.nio.charset.StandardCharsets;
 import org.apache.commons.codec.binary.Hex;	
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
 
 public class Localization
 {
@@ -28,7 +27,7 @@ public class Localization
 	
 	
 
-	public Localization(String country, String city, String street, int buildingNumber, int flatNumber)
+	public Localization(String country, String city, String street, String buildingNumber, String flatNumber)
 	{
 		super();
 		this.country = country;
@@ -70,22 +69,22 @@ public class Localization
 		this.street = street;
 	}
 
-	public int getBuildingNumber()
+	public String getBuildingNumber()
 	{
 		return buildingNumber;
 	}
 
-	public void setBuildingNumber(int buildingNumber)
+	public void setBuildingNumber(String buildingNumber)
 	{
 		this.buildingNumber = buildingNumber;
 	}
 
-	public int getFlatNumber()
+	public String getFlatNumber()
 	{
 		return flatNumber;
 	}
 
-	public void setFlatNumber(int flatNumber)
+	public void setFlatNumber(String flatNumber)
 	{
 		this.flatNumber = flatNumber;
 	}
