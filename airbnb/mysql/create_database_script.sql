@@ -24,12 +24,11 @@ CREATE TABLE IF NOT EXISTS `airbnbdb`.`Localization` (
   `country` VARCHAR(255) NOT NULL,
   `city` VARCHAR(255) NOT NULL,
   `street` VARCHAR(255) NOT NULL,
-  `building_number` INT NOT NULL,
-  `flat_number` INT NULL,
+  `building_number` VARCHAR(255) NOT NULL,
+  `flat_number` VARCHAR(255) NULL,
   `id` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
-
 
 -- -----------------------------------------------------
 -- Table `airbnbdb`.`Apartment`
@@ -70,6 +69,11 @@ CREATE TABLE IF NOT EXISTS `airbnbdb`.`Reservation` (
   CONSTRAINT `account_email`
     FOREIGN KEY (`account_email`)
     REFERENCES `airbnbdb`.`User` (`email`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `property_localization_id`
+    FOREIGN KEY (`property_id`)
+    REFERENCES `airbnbdb`.`Localization` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
