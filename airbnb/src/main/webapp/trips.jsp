@@ -9,6 +9,7 @@
 
 
 <!-- import -->
+
 <%@ page import="org.uc3m.ctftw.airbnb.database.*"%>
 <%@ page import="org.uc3m.ctftw.airbnb.model.*"%>
 <%@ page import=" java.util.*"%>
