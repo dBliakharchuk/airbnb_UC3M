@@ -14,9 +14,10 @@ import org.uc3m.ctftw.airbnb.model.Message;
 import org.uc3m.ctftw.airbnb.model.Trip;
 import org.uc3m.ctftw.airbnb.model.User;
 
-public class DataAccess
+public class DataAccess 
 {
 	private static Connection connection;
+	
 
 	public static void initialize()
 	{

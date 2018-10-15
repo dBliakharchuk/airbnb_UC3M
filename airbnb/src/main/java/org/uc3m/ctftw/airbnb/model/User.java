@@ -12,13 +12,13 @@ public class User
 	private List<Trip> userTrips;
 	private List<Message> messagesReceived;
 
-	public User(String email, String name, String surname, String passwaord)
+	public User(String email, String name, String surname, String password)
 	{
 		super();
 		this.email = email;
 		this.name = name;
 		this.surname = surname;
-		this.password = passwaord;
+		this.password = password;
 	}
 
 	public String getEmail()
