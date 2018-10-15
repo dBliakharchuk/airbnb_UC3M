@@ -1,32 +1,19 @@
--- MySQL Workbench Forward Engineering
-
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
--- -----------------------------------------------------
--- Schema airbnbdb
--- -----------------------------------------------------
 
--- -----------------------------------------------------
--- Schema airbnbdb
--- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `airbnbdb` DEFAULT CHARACTER SET utf8 ;
--- -----------------------------------------------------
--- Schema new_schema1
--- -----------------------------------------------------
 USE `airbnbdb` ;
 
--- -----------------------------------------------------
--- Table `airbnbdb`.`User`
--- -----------------------------------------------------
+
 CREATE TABLE IF NOT EXISTS `airbnbdb`.`User` (
   `email` VARCHAR(255) NOT NULL,
   `name` VARCHAR(255) NULL,
   `surname` VARCHAR(255) NULL,
   `password` VARCHAR(255) NULL,
   PRIMARY KEY (`email`),
-  UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE)
+  UNIQUE INDEX `email_UNIQUE` (`email` ASC))
 ENGINE = InnoDB;
 
 
@@ -40,7 +27,7 @@ CREATE TABLE IF NOT EXISTS `airbnbdb`.`Localization` (
   `building_number` INT NOT NULL,
   `flat_number` INT NULL,
   `id` VARCHAR(255) NOT NULL,
-  PRIMARY KEY (`building_number`, `street`, `city`, `country`, `id`))
+  PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
 
@@ -56,9 +43,9 @@ CREATE TABLE IF NOT EXISTS `airbnbdb`.`Apartment` (
   `description` VARCHAR(4096) NOT NULL,
   `beds_child` INT NOT NULL,
   `localization_id` VARCHAR(255) NOT NULL,
-  INDEX `host_email_idx` (`host` ASC) VISIBLE,
+  INDEX `host_email_idx` (`host` ASC),
   PRIMARY KEY (`host`, `price`, `localization_id`, `name`),
-  INDEX `localization_id_idx` (`localization_id` ASC) VISIBLE,
+  INDEX `localization_id_idx` (`localization_id` ASC),
   CONSTRAINT `host_email`
     FOREIGN KEY (`host`)
     REFERENCES `airbnbdb`.`User` (`email`)
@@ -79,7 +66,7 @@ CREATE TABLE IF NOT EXISTS `airbnbdb`.`Reservation` (
   `property_id` VARCHAR(255) NOT NULL,
   `account_email` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`property_id`, `account_email`),
-  INDEX `account_email_idx` (`account_email` ASC) VISIBLE,
+  INDEX `account_email_idx` (`account_email` ASC),
   CONSTRAINT `account_email`
     FOREIGN KEY (`account_email`)
     REFERENCES `airbnbdb`.`User` (`email`)
@@ -94,10 +81,10 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `airbnbdb`.`Message` (
   `sender` VARCHAR(255) NOT NULL,
   `receiver` VARCHAR(255) NOT NULL,
-  `message` VARCHAR(4096) NOT NULL,
+  `message` VARCHAR(2048) NOT NULL,
   `date` DATETIME NOT NULL,
-  PRIMARY KEY (`message`, `date`, `sender`, `receiver`),
-  INDEX `receiver_email_idx` (`receiver` ASC) VISIBLE,
+  PRIMARY KEY (`date`, `sender`, `receiver`),
+  INDEX `receiver_email_idx` (`receiver` ASC),
   CONSTRAINT `sender_email`
     FOREIGN KEY (`sender`)
     REFERENCES `airbnbdb`.`User` (`email`)
@@ -110,8 +97,6 @@ CREATE TABLE IF NOT EXISTS `airbnbdb`.`Message` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-CREATE USER 'userLQE' IDENTIFIED BY '2dAlhk2RqPhVlFOK';
-
 GRANT ALL ON `airbnbdb`.* TO 'userLQE';
 GRANT ALL ON `new_schema1`.* TO 'userLQE';
 GRANT SELECT ON TABLE `airbnbdb`.* TO 'userLQE';
@@ -120,9 +105,5 @@ GRANT SELECT, INSERT, TRIGGER ON TABLE `airbnbdb`.* TO 'userLQE';
 GRANT SELECT, INSERT, TRIGGER ON TABLE `new_schema1`.* TO 'userLQE';
 GRANT SELECT, INSERT, TRIGGER, UPDATE, DELETE ON TABLE `airbnbdb`.* TO 'userLQE';
 GRANT SELECT, INSERT, TRIGGER, UPDATE, DELETE ON TABLE `new_schema1`.* TO 'userLQE';
-GRANT EXECUTE ON ROUTINE `airbnbdb`.* TO 'userLQE';
-GRANT EXECUTE ON ROUTINE `new_schema1`.* TO 'userLQE';
-
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+GRANT EXECUTE ON `airbnbdb`.* TO 'userLQE';
+GRANT EXECUTE ON `new_schema1`.* TO 'userLQE';

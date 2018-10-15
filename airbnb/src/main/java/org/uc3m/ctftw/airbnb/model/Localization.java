@@ -1,6 +1,7 @@
 package org.uc3m.ctftw.airbnb.model;
 
 import java.nio.charset.StandardCharsets;
+import org.apache.commons.codec.binary.Hex;	
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
@@ -10,8 +11,8 @@ public class Localization
 	private String country;
 	private String city;
 	private String street;
-	private int buildingNumber;
-	private int flatNumber;
+	private String buildingNumber;
+	private String flatNumber;
 	
 	public String getHash() {
 		MessageDigest digest = null;
@@ -20,9 +21,9 @@ public class Localization
 		} catch (NoSuchAlgorithmException ex) {
 			ex.printStackTrace();
 		}
-		byte[] message = (country + city + street + String.valueOf(buildingNumber) + String.valueOf(flatNumber)).getBytes(StandardCharsets.UTF_8);
+		byte[] message = (country + city + street + buildingNumber + flatNumber).getBytes(StandardCharsets.UTF_8);
 		byte[] byteHash = digest.digest(message);
-		return new String(byteHash);
+		return Hex.encodeHexString(byteHash);
 	}
 	
 }

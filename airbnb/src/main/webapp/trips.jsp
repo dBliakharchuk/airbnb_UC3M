@@ -10,7 +10,7 @@
 
 <!-- import -->
 
-<%@ page import="model.*"%>
+<%@ page import="org.uc3m.ctftw.airbnb.model.*"%>
 <%@ page import=" java.util.ArrayList"%>
 <%@ page import="java.sql.Date"%>
 <%@ page import="java.net.URL"%>
