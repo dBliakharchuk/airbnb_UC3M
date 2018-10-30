@@ -41,6 +41,7 @@ public class AccommodationServlet extends HttpServlet {
 			Session sessionObj = Application.buildSessionFactory().openSession();
 			try
 		    {
+				System.out.println("Hibernate test");
 		        List<User> users = sessionObj.createCriteria(User.class).list();
 		        System.out.println(users);
 		    } catch (Exception e) {
