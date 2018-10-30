@@ -16,7 +16,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.hibernate.Session;
 import org.uc3m.ctftw.airbnb.database.DataAccess;
+import org.uc3m.ctftw.airbnb.logic.Application;
+import org.uc3m.ctftw.airbnb.model.User;
 
 
 @WebServlet(
@@ -35,7 +38,15 @@ public class AccommodationServlet extends HttpServlet {
 		@Override
 		public void init(ServletConfig config) throws ServletException {
 			this.config = config;
-			DataAccess.initialize();
+			Session sessionObj = Application.buildSessionFactory().openSession();
+			try
+		    {
+		        List<User> users = sessionObj.createCriteria(User.class).list();
+		        System.out.println(users);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+
 		}
 	       
 

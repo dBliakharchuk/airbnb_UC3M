@@ -64,6 +64,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `airbnbdb`.`Reservation` (
   `property_id` VARCHAR(255) NOT NULL,
   `account_email` VARCHAR(255) NOT NULL,
+  `date` DATE NOT NULL,
   PRIMARY KEY (`property_id`, `account_email`),
   INDEX `account_email_idx` (`account_email` ASC),
   CONSTRAINT `account_email`
@@ -87,6 +88,7 @@ CREATE TABLE IF NOT EXISTS `airbnbdb`.`Message` (
   `receiver` VARCHAR(255) NOT NULL,
   `message` VARCHAR(2048) NOT NULL,
   `date` DATETIME NOT NULL,
+  `isUnread` TINYINT NULL,
   PRIMARY KEY (`date`, `sender`, `receiver`),
   INDEX `receiver_email_idx` (`receiver` ASC),
   CONSTRAINT `sender_email`
@@ -100,6 +102,8 @@ CREATE TABLE IF NOT EXISTS `airbnbdb`.`Message` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
+
+CREATE USER 'userLQE'@'%' IDENTIFIED BY '2dAlhk2RqPhVlFOK';
 
 GRANT ALL ON `airbnbdb`.* TO 'userLQE';
 GRANT ALL ON `new_schema1`.* TO 'userLQE';

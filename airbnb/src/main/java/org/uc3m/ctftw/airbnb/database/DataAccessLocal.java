@@ -91,18 +91,18 @@ public class DataAccessLocal
 	
 	private static void initializeApartments()
 	{
-		User user = new User("fakeMail@gmail.com", "Jan", "Kowal", "haslo12");
+		/*User user = new User("fakeMail@gmail.com", "Jan", "Kowal", "haslo12");
 		Localization localization = new Localization("Polan", "Warsaw", "Chmielna", "4", "4");
 		List<java.sql.Date> bookedDays = new ArrayList<java.sql.Date>();
-		BigDecimal price = new BigDecimal(50);
+		double price = 50.0;
 		Apartment newApartment = new Apartment("Apartment in Warsaw", "super cooll single room studio", user, localization, price, "single room studio", 1, 1, bookedDays);
-		apartments.add(newApartment);
+		apartments.add(newApartment);*/
 	}
 	
 	
 	private static void initializeMessages()
 	{
-		Timestamp date = new Timestamp(2018, 10, 15, 21, 17, 12, 00);
+		/*Timestamp date = new Timestamp(2018, 10, 15, 21, 17, 12, 00);
 		Message newMessage = new Message(false, "Does house have parking place?", date);
 		
 		messages.add(newMessage);
@@ -120,10 +120,10 @@ public class DataAccessLocal
 		date = new Timestamp(2018, 10, 15, 2, 17, 12, 00);
 		newMessage = new Message(true, "Bulid the wall!.", date);
 		
-		messages.add(newMessage);
+		messages.add(newMessage);*/
 	}
 
-	private static void initializeTrips()
+	public static void initializeTrips()
 	{
 		Date dateIn = new Date(115, 11, 1);
 		Date dateOut = new Date(115, 11, 6);

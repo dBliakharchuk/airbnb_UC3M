@@ -118,7 +118,7 @@
 					
 						<%
 							User currentUser = new User("fakeMail@gmail.com", "Jan", "Kowal", "haslo12");
-							DataAccessLocal.initialize();
+							DataAccessLocal.initializeTrips();
 							List<Trip> trips = DataAccessLocal.getUserTrips(currentUser);
 							
 

@@ -58,8 +58,8 @@ VALUES('dima@gmail.com',60.0,2,'Entire apartment','Apartment in Sol','Apartment 
 The apartment has a kitchenette, free wifi in all areas, television, oven and microwave, washing machine, hair dryer, coffee maker and toaster. Sheets and towels are provided upon arrival.',1,'BE858B0E5F319023C10AAB4228588F53C25C59A05AE02D1962008AE5967C4B17');
 
 INSERT INTO `airbnbdb`.`Reservation`
-VALUES('customer@gmail.com','BE858B0E5F319023C10AAB4228588F53C25C59A05AE02D1962008AE5967C4B17');
+VALUES('E097C1F237C5719528DA1591C64BB4197F2175E4BCC388B77699BFA6A4D86724', 'dima@gmail.com', '2018-7-04');
 
 INSERT INTO `airbnbdb`.`Message` 
-VALUES('dima@gmail.com', 'customer@gmail.com','hey hello', '2018-10-15 11:12:32');
+VALUES('dima@gmail.com', 'customer@gmail.com','hello', '2018-10-25 11:12:32', false);
 
