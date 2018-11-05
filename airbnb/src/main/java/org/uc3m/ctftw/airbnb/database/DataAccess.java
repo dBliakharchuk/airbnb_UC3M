@@ -35,7 +35,7 @@ public class DataAccess
 	@SuppressWarnings("unchecked")
 	public static void test() {
 		Session session = sessionFactory.openSession();
-		Query query = session.createQuery("select u from User u");
+		Query query = session.createQuery("from User u");
 		System.out.println("mamy " + query + " userow");
 	}
 	
