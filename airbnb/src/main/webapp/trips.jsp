@@ -116,31 +116,7 @@
 					</div>
 					<div class="row row-bottom-padded-md">
 					
-						<%
-							User currentUser = new User("fakeMail@gmail.com", "Jan", "Kowal", "haslo12");
-							DataAccessLocal.initializeTrips();
-							List<Trip> trips = DataAccessLocal.getUserTrips(currentUser);
-							
-
-							for (int i = 0; i < trips.size(); i++)
-							{ %>
-								
-							<div class="col-md-4 col-sm-6 fh5co-tours animate-box"
-								data-animate-effect="fadeIn">
-								<div href="#">
-									<img src="images/place-1.jpg"
-										alt="Free HTML5 Website Template by FreeHTML5.co"
-										class="img-responsive">
-									<div class="desc">
-										<span></span>
-										<h3><%= trips.get(i).getName() %></h3>
-										<span><%= trips.get(i).getTypeOfApartment() %></span> <span>Dates:
-											<%= trips.get(i).getmoveInDate().toString() %> to <%= trips.get(i).getmoveOutDate().toString() %></span> <a class="btn btn-primary btn-outline"
-											href="#">More Info<i class="icon-arrow-right22"></i></a>
-									</div>
-								</div>
-							</div>
-						<% } %>
+						
 												
 						
 					</div>

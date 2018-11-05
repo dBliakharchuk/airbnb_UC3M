@@ -38,15 +38,7 @@ public class AccommodationServlet extends HttpServlet {
 		@Override
 		public void init(ServletConfig config) throws ServletException {
 			this.config = config;
-			Session sessionObj = Application.buildSessionFactory().openSession();
-			try
-		    {
-				System.out.println("Hibernate test");
-		        List<User> users = sessionObj.createCriteria(User.class).list();
-		        System.out.println(users);
-		    } catch (Exception e) {
-		        e.printStackTrace();
-		    }
+			DataAccess.test();
 
 		}
 	       

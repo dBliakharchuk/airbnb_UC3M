@@ -1,6 +1,6 @@
 package org.uc3m.ctftw.airbnb.database;
 
-import java.math.BigDecimal;
+import java.math.BigDecimal; 
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.Date;
@@ -11,16 +11,16 @@ import java.util.List;
 import javax.jws.soap.SOAPBinding.Use;
 
 import org.uc3m.ctftw.airbnb.model.Apartment;
-import org.uc3m.ctftw.airbnb.model.Localization;
+//import org.uc3m.ctftw.airbnb.model.Localization;
 import org.uc3m.ctftw.airbnb.model.Message;
-import org.uc3m.ctftw.airbnb.model.Trip;
+//import org.uc3m.ctftw.airbnb.model.Trip;
 import org.uc3m.ctftw.airbnb.model.User;
 
 public class DataAccessLocal
 {
 	private static List<Apartment> apartments = new ArrayList<Apartment>();
 	private static List<Message> messages = new ArrayList<Message>();
-	private static List<Trip> trips = new ArrayList<Trip>();
+	//private static List<Trip> trips = new ArrayList<Trip>();
 	private static List<User> users = new ArrayList<User>();
 
 	public static void initialize()
@@ -28,7 +28,7 @@ public class DataAccessLocal
 	{	initializeUsers();
 		initializeApartments();
 		initializeMessages();
-		initializeTrips();
+		//initializeTrips();
 
 	}
 	
@@ -74,19 +74,19 @@ public class DataAccessLocal
 		return messages;
 	}
 
-	public static List<Trip> getUserTrips(User user)
+	/*public static List<Trip> getUserTrips(User user)
 	{
 		return trips;
-	}
+	}*/
 
 	private static void initializeUsers()
 	{
-		User newUser = new User("fakeMail@gmail.com", "Jan", "Kowal", "haslo12");
+		/*User newUser = new User("fakeMail@gmail.com", "Jan", "Kowal", "haslo12");
 		users.add(newUser);
 		
 		newUser = new User("andrzejduda@gmail.com", "Andrzej", "Duda", "dudaczynicuda");
 		users.add(newUser);
-		
+		*/
 	}
 	
 	private static void initializeApartments()
@@ -123,7 +123,7 @@ public class DataAccessLocal
 		messages.add(newMessage);*/
 	}
 
-	public static void initializeTrips()
+	/*public static void initializeTrips()
 	{
 		Date dateIn = new Date(115, 11, 1);
 		Date dateOut = new Date(115, 11, 6);
@@ -171,6 +171,6 @@ public class DataAccessLocal
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
+	}*/
 	
 }

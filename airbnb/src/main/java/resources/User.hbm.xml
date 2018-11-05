@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 05-Nov-2018 15:22:00 by Hibernate Tools 5.3.6.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class catalog="airbnbdb" dynamic-insert="false" dynamic-update="false" mutable="true" name="org.uc3m.ctftw.airbnb.model.User" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="user">
+        <id name="email" type="string">
+            <column length="100" name="email"/>
+            <generator class="assigned"/>
+        </id>
+        <property generated="never" lazy="false" name="name" optimistic-lock="true" type="string" unique="false">
+            <column name="name"/>
+        </property>
+        <property generated="never" lazy="false" name="surname" optimistic-lock="true" type="string" unique="false">
+            <column name="surname"/>
+        </property>
+        <property generated="never" lazy="false" name="password" optimistic-lock="true" type="string" unique="false">
+            <column name="password"/>
+        </property>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="reservations" optimistic-lock="true" sort="unsorted" table="reservation">
+            <key on-delete="noaction">
+                <column length="100" name="userEmail" not-null="true"/>
+            </key>
+            <one-to-many class="org.uc3m.ctftw.airbnb.model.Reservation" embed-xml="true" not-found="exception"/>
+        </set>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="messagesForReceiver" optimistic-lock="true" sort="unsorted" table="message">
+            <key on-delete="noaction">
+                <column length="100" name="receiver" not-null="true"/>
+            </key>
+            <one-to-many class="org.uc3m.ctftw.airbnb.model.Message" embed-xml="true" not-found="exception"/>
+        </set>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="apartments" optimistic-lock="true" sort="unsorted" table="apartment">
+            <key on-delete="noaction">
+                <column length="100" name="host" not-null="true"/>
+            </key>
+            <one-to-many class="org.uc3m.ctftw.airbnb.model.Apartment" embed-xml="true" not-found="exception"/>
+        </set>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="messagesForSender" optimistic-lock="true" sort="unsorted" table="message">
+            <key on-delete="noaction">
+                <column length="100" name="sender" not-null="true"/>
+            </key>
+            <one-to-many class="org.uc3m.ctftw.airbnb.model.Message" embed-xml="true" not-found="exception"/>
+        </set>
+    </class>
+</hibernate-mapping>

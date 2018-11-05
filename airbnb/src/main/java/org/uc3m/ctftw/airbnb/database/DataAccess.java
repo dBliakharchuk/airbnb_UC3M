@@ -1,6 +1,6 @@
 package org.uc3m.ctftw.airbnb.database;
 
-import java.sql.Connection;
+import java.sql.Connection; 
 
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -9,54 +9,36 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
+import org.hibernate.service.ServiceRegistry;
 import org.uc3m.ctftw.airbnb.model.Apartment;
 import org.uc3m.ctftw.airbnb.model.Message;
-import org.uc3m.ctftw.airbnb.model.Trip;
+//import org.uc3m.ctftw.airbnb.model.Trip;
 import org.uc3m.ctftw.airbnb.model.User;
 
 public class DataAccess 
 {
-	private static Connection connection;
+	static SessionFactory sessionFactory = buildSessionFactory();
 	
-
-	public static void initialize()
-	{
-		try
-		{
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
-			connection = DriverManager.getConnection(
-					"jdbc:mysql://127.0.0.1:3306/sampledb?autoReconnect=true&useSSL=false", "userLQE",
-					"2dAlhk2RqPhVlFOK");
-			Statement stmt = connection.createStatement();
-			ResultSet rs = stmt.executeQuery("select * from users;");
-
-			ResultSetMetaData rsmd = rs.getMetaData();
-			int columnsNumber = rsmd.getColumnCount();
-			while (rs.next())
-			{
-				for (int i = 1; i <= columnsNumber; i++)
-				{
-					if (i > 1)
-						System.out.print(",  ");
-					String columnValue = rs.getString(i);
-					System.out.print(columnValue + " " + rsmd.getColumnName(i));
-				}
-				System.out.println("");
-			}
-
-			if (rs != null)
-			{
-				rs.close();
-			}
-			if (stmt != null)
-			{
-				stmt.close();
-			}
-		} catch (Exception ex)
-		{
-			ex.printStackTrace();
-		}
+	public static SessionFactory buildSessionFactory() {
+		Configuration configObj = new Configuration();
+		configObj.configure("/resources/hibernate.cfg.xml");
+		ServiceRegistry serviceRegistryObj = new StandardServiceRegistryBuilder().applySettings(configObj.getProperties()).build(); 
+		sessionFactory = configObj.buildSessionFactory(serviceRegistryObj);
+		return sessionFactory;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public static void test() {
+		Session session = sessionFactory.openSession();
+		Query query = session.createQuery("select u from User u");
+		System.out.println("mamy " + query + " userow");
+	}
+	
 	
 	public static User getUserByEmail(String email) {
 		return null;
@@ -78,9 +60,9 @@ public class DataAccess
 		return null;
 	}
 	
-	public static List<Trip> getUserTrips(User user) {
+	/*public static List<Trip> getUserTrips(User user) {
 		return null;
-	}
+	}*/
 	
 
 }
