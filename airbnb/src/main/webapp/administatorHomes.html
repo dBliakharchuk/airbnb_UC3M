@@ -52,6 +52,7 @@
 	<!-- Modernizr JS -->
 	<script src="js/modernizr-2.6.2.min.js"></script>
 	<script type="text/javascript" src="js/administrator.js"></script>
+
 	<!-- FOR IE9 below -->
 	<!--[if lt IE 9]>
 		<script src="js/respond.min.js"></script>
@@ -75,8 +76,8 @@
 						<!-- START #fh5co-menu-wrap -->
 						<nav id="fh5co-menu-wrap" role="navigation">
 							<ul class="sf-menu" id="fh5co-primary-menu">
-								<li class="active"><a href="administatorUsers.html">Users</a></li>
-								<li ><a href="administatorHomes.html">Homes</a></li>
+								<li ><a href="administatorUsers.html">Users</a></li>
+								<li class="active"><a href="trips.jsp">Homes</a></li>
 								<li ><a href="messages.jsp">Messages</a></li>
 								<li><a href="#" id="Log-Out">Log out</a></li>
 							</ul>
@@ -92,52 +93,58 @@
 				<div class="fh5co-overlay"></div>
 				<div class="fh5co-cover" data-stellar-background-ratio="0.5" style="background-image: url(images/cover_bg_5.jpg);">
 					<div class="desc">
-						<div class="container" id="search-user-form-container">
+						<div class="container" id="search-place-form-container">
 							<form class="search-form" action="index.html" method="post">
-								<input type="text" class="search-form-input" id="search-use-email" placeholder="User Email"/>
+								<input type="text" class="search-form-input" id="from-place-name" placeholder="Place Name"/>
 								<input type="submit" class="search-form-submit" value="search"/>
 							</form>
 						 </div>
-						 <div class="container" id="users-panel">
+						 <div class="container" id="places-panel">
 						 	<div id="left-panel" class="panel-containter">
-								<div class="user-cel">
-									<div class="user-email-field">
-											Email
+								<div class="place-cel">
+									<div class="place-email-field">
+											Host Email
 									</div>
-									<div class="user-name-field">
+									<div class="place-name-field">
 											Name
 									</div>
-									<div class="user-surname-field">
-											Surname
-									</div>
 								</div>
-								<div class="user-cel"  id="user-cel-1" onclick="selectUser(this.id)">   <!--  on clik used for testing -->
-									<div class="user-email-field">
+								<div class="place-cel">
+									<div class="place-email-field">
 											piotrducki@gmail.com
 									</div>
-									<div class="user-name-field">
-											Piotr
-									</div>
-									<div class="user-surname-field">
-											Ducki
+									<div class="place-name-field">
+											Apartment in Warsaw
 									</div>
 								</div>
+
+
 
 						 	</div>
 							<div id="midle-panel" class="panel-containter">
-								<label for="email">Email</label>
-								<input type="text" id="user-email" name="email" value="" >
-								<label for="name">Name</label>
-								<input type="text" id="user-name" name="name" value="" >
-								<label for="name" > Surname</label>
-								<input type="text" id="user-surname" name="surname" value="" >
-								<button type="button" class="btn btn-success" id="save-user-button">Save</button>
-							</div>
-							<div id="right-panel" class="panel-containter">
+								<label for="name">Place Name</label>
+								<input type="text" name="name" value="" >
+								<label for="host-email">Host Email</label>
+								<input type="email" name="host-email" value="" >
+								<label for="localization">Localization</label>
+								<input type="text" name="localization" value="" >
+								<label for="price-per-day">Price Per Day</label>
+								<input type="number" name="price-per-day" value="" >
+								<label for="type-of-apartment">Type Of Apartment</label>
+								<input type="text" name="type-of-apartment" value="" >
+								<label for="beds-adult">Adults Beds</label>
+								<input type="number" name="beds-adult" value="" >
+								<label for="beds-child">Children Beds</label>
+								<input type="number" name="beds-child" value="" >
+								<label for="description">Description</label>
 
-								<button type="button" class="btn btn-success" onclick="messageUser()">Messag User</button>
-								<button type="button" class="btn btn-warning" onclick="changePassword()">Change Password</button>
-								<button type="button" class="btn btn-danger"  onclick="deleteUser()">Delete User</button>
+								<textarea id="place-description" name="description"> </textarea>
+								<button type="button" class="btn btn-success" id="save-place-button">Save</button>
+								</div>
+								<div id="right-panel" class="panel-containter">
+
+								<button type="button" class="btn btn-success" onclick="messageUser()">Messag Host</button>
+								<button type="button" class="btn btn-danger" onclick="deletePlace()" >Delete Place</button>
 
 						 	</div>
 						 </div>
@@ -146,11 +153,6 @@
 			</div>
 		</div>
 	</div>
-
-
-	<!-- **************** pop ups **************** -->
-
-
 
 
 
