@@ -10,32 +10,29 @@ import java.util.List;
  * 
  */
 @Entity
-@NamedQuery(name="User.findAll", query="SELECT u FROM User u")
+@NamedQueries({
+	@NamedQuery(name="User.findAll", query="SELECT u FROM User u"),
+	@NamedQuery(name="User.findByEmail", query="SELECT u FROM User u where u.email = :email"),
+	@NamedQuery(name="User.findBySurname", query="SELECT u FROM User u where u.surname = :surname") })
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	private String email;
-
 	private String name;
-
 	private String password;
-
+	private String phone;
 	private String surname;
 
-	//bi-directional many-to-one association to Apartment
-	@OneToMany(mappedBy="user")
+	@OneToMany(mappedBy="host")
 	private List<Apartment> apartments;
 
-	//bi-directional many-to-one association to Message
 	@OneToMany(mappedBy="sender")
 	private List<Message> messagesSent;
 
-	//bi-directional many-to-one association to Message
 	@OneToMany(mappedBy="receiver")
 	private List<Message> messagesReceived;
 
-	//bi-directional many-to-one association to Reservation
 	@OneToMany(mappedBy="user")
 	private List<Reservation> reservations;
 
@@ -66,6 +63,14 @@ public class User implements Serializable {
 		this.password = password;
 	}
 
+	public String getPhone() {
+		return this.phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
 	public String getSurname() {
 		return this.surname;
 	}
@@ -84,14 +89,14 @@ public class User implements Serializable {
 
 	public Apartment addApartment(Apartment apartment) {
 		getApartments().add(apartment);
-		apartment.setUser(this);
+		apartment.setHost(this);
 
 		return apartment;
 	}
 
 	public Apartment removeApartment(Apartment apartment) {
 		getApartments().remove(apartment);
-		apartment.setUser(null);
+		apartment.setHost(null);
 
 		return apartment;
 	}

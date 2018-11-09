@@ -9,49 +9,54 @@ import javax.persistence.*;
  */
 @Embeddable
 public class ApartmentPK implements Serializable {
-	//default serial version id, required for serializable classes.
 	private static final long serialVersionUID = 1L;
 
 	@Column(insertable=false, updatable=false)
 	private String host;
-
 	private String buildingNumber;
-
 	private String street;
-
 	private String flatNumber;
-
 	private String city;
 
 	public ApartmentPK() {
 	}
+	
 	public String getHost() {
 		return this.host;
 	}
+	
 	public void setHost(String host) {
 		this.host = host;
 	}
+	
 	public String getBuildingNumber() {
 		return this.buildingNumber;
 	}
+	
 	public void setBuildingNumber(String buildingNumber) {
 		this.buildingNumber = buildingNumber;
 	}
+	
 	public String getStreet() {
 		return this.street;
 	}
+	
 	public void setStreet(String street) {
 		this.street = street;
 	}
+	
 	public String getFlatNumber() {
 		return this.flatNumber;
 	}
+	
 	public void setFlatNumber(String flatNumber) {
 		this.flatNumber = flatNumber;
 	}
+	
 	public String getCity() {
 		return this.city;
 	}
+	
 	public void setCity(String city) {
 		this.city = city;
 	}

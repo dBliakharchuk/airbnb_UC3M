@@ -20,12 +20,6 @@ public class Reservation implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date date;
 
-	//bi-directional many-to-one association to User
-	@ManyToOne
-	@JoinColumn(name="userEmail")
-	private User user;
-
-	//bi-directional many-to-one association to Apartment
 	@ManyToOne
 	@JoinColumns({
 		@JoinColumn(name="apartmentBuildingNumber", referencedColumnName="buildingNumber"),
@@ -35,6 +29,10 @@ public class Reservation implements Serializable {
 		@JoinColumn(name="apartmentStreet", referencedColumnName="street")
 		})
 	private Apartment apartment;
+
+	@ManyToOne
+	@JoinColumn(name="userEmail")
+	private User user;
 
 	public Reservation() {
 	}
@@ -55,20 +53,20 @@ public class Reservation implements Serializable {
 		this.date = date;
 	}
 
-	public User getUser() {
-		return this.user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
 	public Apartment getApartment() {
 		return this.apartment;
 	}
 
 	public void setApartment(Apartment apartment) {
 		this.apartment = apartment;
+	}
+
+	public User getUser() {
+		return this.user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 }

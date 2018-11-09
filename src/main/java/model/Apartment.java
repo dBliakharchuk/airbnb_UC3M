@@ -10,33 +10,35 @@ import java.util.List;
  * 
  */
 @Entity
-@NamedQuery(name="Apartment.findAll", query="SELECT a FROM Apartment a")
+@NamedQueries({
+	@NamedQuery(name="Apartment.findAll", query="SELECT a FROM Apartment a"),
+	@NamedQuery(name="Apartment.findByHost", query="SELECT a FROM Apartment a where a.id.host = :host"),
+	@NamedQuery(name="Apartment.findByName", query="SELECT a FROM Apartment a where a.name = :name"),
+	@NamedQuery(name="Apartment.findByCountry", query="SELECT a FROM Apartment a where a.country = :country"),
+	@NamedQuery(name="Apartment.findByCity", query="SELECT a FROM Apartment a where a.id.city = :city"),
+	@NamedQuery(name="Apartment.findCheaperThan", query="SELECT a FROM Apartment a where a.price <= :price")})
 public class Apartment implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
 	private ApartmentPK id;
-
+	
 	@Column(name="beds_adult")
 	private int bedsAdult;
-
 	@Column(name="beds_child")
 	private int bedsChild;
-
 	private String country;
-
 	private String description;
-
 	private String name;
-
+	@Lob
+	private byte[] picture;
 	private double price;
-
 	private String type;
 
 	//bi-directional many-to-one association to User
 	@ManyToOne
 	@JoinColumn(name="host")
-	private User user;
+	private User host;
 
 	//bi-directional many-to-one association to Reservation
 	@OneToMany(mappedBy="apartment")
@@ -93,6 +95,14 @@ public class Apartment implements Serializable {
 		this.name = name;
 	}
 
+	public byte[] getPicture() {
+		return this.picture;
+	}
+
+	public void setPicture(byte[] picture) {
+		this.picture = picture;
+	}
+
 	public double getPrice() {
 		return this.price;
 	}
@@ -109,12 +119,12 @@ public class Apartment implements Serializable {
 		this.type = type;
 	}
 
-	public User getUser() {
-		return this.user;
+	public User getHost() {
+		return this.host;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setHost(User host) {
+		this.host = host;
 	}
 
 	public List<Reservation> getReservations() {

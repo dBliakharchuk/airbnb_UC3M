@@ -18,12 +18,10 @@ public class Message implements Serializable {
 
 	private byte isUnread;
 
-	//bi-directional many-to-one association to User
 	@ManyToOne
 	@JoinColumn(name="receiver")
 	private User sender;
 
-	//bi-directional many-to-one association to User
 	@ManyToOne
 	@JoinColumn(name="sender")
 	private User receiver;

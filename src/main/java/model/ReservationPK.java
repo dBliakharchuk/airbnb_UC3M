@@ -9,62 +9,68 @@ import javax.persistence.*;
  */
 @Embeddable
 public class ReservationPK implements Serializable {
-	//default serial version id, required for serializable classes.
 	private static final long serialVersionUID = 1L;
 
 	@Column(insertable=false, updatable=false)
 	private String userEmail;
-
 	@Column(insertable=false, updatable=false)
 	private String apartmentHost;
-
 	@Column(insertable=false, updatable=false)
 	private String apartmentBuildingNumber;
-
 	@Column(insertable=false, updatable=false)
 	private String apartmentStreet;
-
 	@Column(insertable=false, updatable=false)
 	private String apartmentFlatNumber;
-
 	@Column(insertable=false, updatable=false)
 	private String apartmentCity;
 
 	public ReservationPK() {
 	}
+	
 	public String getUserEmail() {
 		return this.userEmail;
 	}
+	
 	public void setUserEmail(String userEmail) {
 		this.userEmail = userEmail;
 	}
+	
 	public String getApartmentHost() {
 		return this.apartmentHost;
 	}
+	
 	public void setApartmentHost(String apartmentHost) {
 		this.apartmentHost = apartmentHost;
 	}
+	
 	public String getApartmentBuildingNumber() {
 		return this.apartmentBuildingNumber;
 	}
+	
 	public void setApartmentBuildingNumber(String apartmentBuildingNumber) {
 		this.apartmentBuildingNumber = apartmentBuildingNumber;
 	}
+	
 	public String getApartmentStreet() {
 		return this.apartmentStreet;
 	}
+	
 	public void setApartmentStreet(String apartmentStreet) {
 		this.apartmentStreet = apartmentStreet;
 	}
+	
 	public String getApartmentFlatNumber() {
 		return this.apartmentFlatNumber;
 	}
+	
 	public void setApartmentFlatNumber(String apartmentFlatNumber) {
 		this.apartmentFlatNumber = apartmentFlatNumber;
 	}
+	
 	public String getApartmentCity() {
 		return this.apartmentCity;
 	}
+	
 	public void setApartmentCity(String apartmentCity) {
 		this.apartmentCity = apartmentCity;
 	}
