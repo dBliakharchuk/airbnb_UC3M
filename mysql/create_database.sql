@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS `airbnbdb`.`Apartment` (
   `city` VARCHAR(100) NOT NULL,
   `country` VARCHAR(100) NOT NULL,
   `flatNumber` VARCHAR(20) NOT NULL,
-  `picture` LONGBLOB NULL,
+  `picture` LONGBLOB NOT NULL,
   INDEX `host_email_idx` (`host` ASC),
   PRIMARY KEY (`host`, `buildingNumber`, `street`, `flatNumber`, `city`),
   CONSTRAINT `host_email`
