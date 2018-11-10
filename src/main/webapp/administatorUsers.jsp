@@ -75,8 +75,8 @@
 						<!-- START #fh5co-menu-wrap -->
 						<nav id="fh5co-menu-wrap" role="navigation">
 							<ul class="sf-menu" id="fh5co-primary-menu">
-								<li class="active"><a href="administatorUsers.html">Users</a></li>
-								<li ><a href="administatorHomes.html">Homes</a></li>
+								<li class="active"><a href="administatorUsers.jsp">Users</a></li>
+								<li ><a href="administatorHomes.jsp">Homes</a></li>
 								<li ><a href="messages.jsp">Messages</a></li>
 								<li><a href="#" id="Log-Out">Log out</a></li>
 							</ul>
