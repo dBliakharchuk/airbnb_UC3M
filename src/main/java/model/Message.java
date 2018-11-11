@@ -1,6 +1,9 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Calendar;
+import java.util.Date;
+
 import javax.persistence.*;
 
 
@@ -15,8 +18,7 @@ public class Message implements Serializable {
 
 	@EmbeddedId
 	private MessagePK id;
-
-	private byte isUnread;
+	private boolean isUnread;
 
 	@ManyToOne
 	@JoinColumn(name="receiver")
@@ -27,6 +29,19 @@ public class Message implements Serializable {
 	private User receiver;
 
 	public Message() {
+	
+	}
+
+	public Message(User sender, User receiver, Date date, String message) {
+		this.id = new MessagePK(message, date, sender.getEmail(), receiver.getEmail());
+		this.isUnread = true;
+		this.sender = sender;
+		this.receiver = receiver;
+	}
+	
+	public static Message createNewMessage(User sender, User receiver, String message) {
+		Date date = new Date();
+		return new Message(sender, receiver, date, message);
 	}
 
 	public MessagePK getId() {
@@ -37,11 +52,11 @@ public class Message implements Serializable {
 		this.id = id;
 	}
 
-	public byte getIsUnread() {
+	public boolean getIsUnread() {
 		return this.isUnread;
 	}
 
-	public void setIsUnread(byte isUnread) {
+	public void setIsUnread(boolean isUnread) {
 		this.isUnread = isUnread;
 	}
 

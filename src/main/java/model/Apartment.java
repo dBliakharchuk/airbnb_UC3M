@@ -2,6 +2,8 @@ package model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -35,16 +37,48 @@ public class Apartment implements Serializable {
 	private double price;
 	private String type;
 
-	//bi-directional many-to-one association to User
 	@ManyToOne
 	@JoinColumn(name="host")
 	private User host;
 
-	//bi-directional many-to-one association to Reservation
 	@OneToMany(mappedBy="apartment")
 	private List<Reservation> reservations;
 
 	public Apartment() {
+	}
+
+	public Apartment(User host, String buildingNumber, String street, String flatNumber, 
+			String city, int bedsAdult, int bedsChild, String country, String description, String name,
+			byte[] picture, double price, String type, List<Reservation> reservations) {
+		
+		this.id = new ApartmentPK(host.getEmail(), buildingNumber, street, flatNumber, city);
+		this.bedsAdult = bedsAdult;
+		this.bedsChild = bedsChild;
+		this.country = country;
+		this.description = description;
+		this.name = name;
+		this.picture = picture;
+		this.price = price;
+		this.type = type;
+		this.host = host;
+		this.reservations = reservations;
+	}
+
+	public Apartment(User host, String buildingNumber, String street, String flatNumber, 
+			String city, int bedsAdult, int bedsChild, String country, String description, String name,
+			byte[] picture, double price, String type) {
+		
+		this.id = new ApartmentPK(host.getEmail(), buildingNumber, street, flatNumber, city);
+		this.bedsAdult = bedsAdult;
+		this.bedsChild = bedsChild;
+		this.country = country;
+		this.description = description;
+		this.name = name;
+		this.picture = picture;
+		this.price = price;
+		this.type = type;
+		this.host = host;
+		this.reservations = new ArrayList<Reservation>();;
 	}
 
 	public ApartmentPK getId() {
