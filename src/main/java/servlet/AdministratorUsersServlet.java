@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import database.DataAccess;
+import logic.AdministratorLogic;
 import model.User;
 
 
@@ -51,8 +53,20 @@ public class AdministratorUsersServlet extends HttpServlet {
 		 */
 		protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			
-				
-			
+			 String email = request.getParameter("email");
+			 String name = request.getParameter("name");
+			 String surname = request.getParameter("surname");
+			 String	phoneNumber = request.getParameter("phone-number");
+			 
+			 User updatedUser = new User(email, name, phoneNumber, surname);
+			 
+			 AdministratorLogic.updateUserData(updatedUser);
+			 
+			 request.getRequestDispatcher("administatorUsers.jsp").forward(request, response);
+			 
+//			 final PrintWriter writerA = response.getWriter();
+//			 writerA.println(email + name + surname + phoneNumber);
+
 		}
 		
 		

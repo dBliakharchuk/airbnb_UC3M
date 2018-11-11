@@ -123,13 +123,17 @@ textarea{
 
 
 
-#midle-panel > input{
+.edit-user-form > input{
    margin-bottom:  20px;
    width: 100%;
 }
 
-#midle-panel > label{
+.edit-user-form > label{
    width: 100%;
+}
+
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
 }
 
 #midle-panel{

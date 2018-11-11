@@ -127,16 +127,16 @@
 											Phone
 									</div>
 								</div>
-								
-								
+
+
 								<%
 
 									ArrayList<User> users = (ArrayList<User>)request.getAttribute("users");
 									String cellId = "user-cel-";
-									
+
 									for (int i = 0; i < users.size(); i++)
-									{  %>	
-										<div class="user-cel"  id=<%=cellId + i %> onclick="selectUserCell(this.id, <%=users.size() %>)"> 
+									{  %>
+										<div class="user-cel"  id=<%=cellId + i %> onclick="selectUserCell(this.id, <%=users.size() %>)">
 											<div class="user-email-field">
 												<%= users.get(i).getEmail() %>
 											</div>
@@ -150,25 +150,27 @@
 												<%= users.get(i).getPhone() %>
 											</div>
 										</div>
-									
-									
-									<% } %> 
-								
-								
-								
-								
+
+
+									<% } %>
+
+
+
+
 
 						 	</div>
 							<div id="midle-panel" class="panel-containter">
-								<label for="email">Email</label>
-								<input type="text" id="user-email" name="email" value="" disabled>
-								<label for="name">Name</label>
-								<input type="text" id="user-name" name="name" value="" >
-								<label for="name" > Surname</label>
-								<input type="text" id="user-surname" name="surname" value="" >
-								<label for="phone" > Phone Number</label>
-								<input type="number" id="user-phone-number" name="phone-number" value="" >
-								<button type="button" class="btn btn-success" id="save-user-button">Save</button>
+								<form class="edit-user-form" action="administatorUsers" method="post">
+									<label for="email">Email</label>
+									<input type="text" id="user-email" name="email" value="" readonly>
+									<label for="name">Name</label>
+									<input type="text" id="user-name" name="name" value="" >
+									<label for="name" > Surname</label>
+									<input type="text" id="user-surname" name="surname" value="" >
+									<label for="phone" > Phone Number</label>
+									<input type="number" id="user-phone-number" name="phone-number" value="" >
+									<input type="submit" class="btn btn-success" id="save-user-button" value="save">
+								</form>
 							</div>
 							<div id="right-panel" class="panel-containter">
 
