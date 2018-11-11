@@ -1,7 +1,20 @@
-<!-- <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<!DOCTYPE html> -->
-<html>
+
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+
+<!-- import -->
+
+<%@ page import="model.*" %>
+<%@ page import=" java.util.*"%>
+
+
+
 <head>
 	<meta charset="UTF-8">
 	<title>TIWbnb Administator</title>
@@ -75,8 +88,8 @@
 						<!-- START #fh5co-menu-wrap -->
 						<nav id="fh5co-menu-wrap" role="navigation">
 							<ul class="sf-menu" id="fh5co-primary-menu">
-								<li class="active"><a href="administatorUsers.jsp">Users</a></li>
-								<li ><a href="administatorHomes.jsp">Homes</a></li>
+								<li class="active"><a href="administatorUsers">Users</a></li>
+								<li ><a href="administatorHomes">Homes</a></li>
 								<li ><a href="messages.jsp">Messages</a></li>
 								<li><a href="#" id="Log-Out">Log out</a></li>
 							</ul>
@@ -110,27 +123,51 @@
 									<div class="user-surname-field">
 											Surname
 									</div>
-								</div>
-								<div class="user-cel"  id="user-cel-1" onclick="selectUser(this.id)">   <!--  on clik used for testing -->
-									<div class="user-email-field">
-											piotrducki@gmail.com
-									</div>
-									<div class="user-name-field">
-											Piotr
-									</div>
-									<div class="user-surname-field">
-											Ducki
+									<div class="user-phone-field">
+											Phone
 									</div>
 								</div>
+								
+								
+								<%
+
+									ArrayList<User> users = (ArrayList<User>)request.getAttribute("users");
+									String cellId = "user-cel-";
+									
+									for (int i = 0; i < users.size(); i++)
+									{  %>	
+										<div class="user-cel"  id=<%=cellId + i %> onclick="selectUserCell(this.id, <%=users.size() %>)"> 
+											<div class="user-email-field">
+												<%= users.get(i).getEmail() %>
+											</div>
+											<div class="user-name-field">
+												<%= users.get(i).getName() %>
+											</div>
+											<div class="user-surname-field">
+												<%= users.get(i).getSurname() %>
+											</div>
+											<div class="user-phone-field">
+												<%= users.get(i).getPhone() %>
+											</div>
+										</div>
+									
+									
+									<% } %> 
+								
+								
+								
+								
 
 						 	</div>
 							<div id="midle-panel" class="panel-containter">
 								<label for="email">Email</label>
-								<input type="text" id="user-email" name="email" value="" >
+								<input type="text" id="user-email" name="email" value="" disabled>
 								<label for="name">Name</label>
 								<input type="text" id="user-name" name="name" value="" >
 								<label for="name" > Surname</label>
 								<input type="text" id="user-surname" name="surname" value="" >
+								<label for="phone" > Phone Number</label>
+								<input type="number" id="user-phone-number" name="phone-number" value="" >
 								<button type="button" class="btn btn-success" id="save-user-button">Save</button>
 							</div>
 							<div id="right-panel" class="panel-containter">

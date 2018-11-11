@@ -13,22 +13,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import database.DataAccess;
-import model.Apartment;
 import model.User;
 
 
 @WebServlet(
-		urlPatterns="/administatorHomes",
+		urlPatterns="/administatorUsers",
 		loadOnStartup=1,
 		initParams={@WebInitParam(name="configuracion", value="es.uc3m.tiw")}
 		)
-public class AdministratorHomesServlet extends HttpServlet {
+public class AdministratorUsersServlet extends HttpServlet {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	private ServletConfig config;
-	private List<Apartment> apartments;
+	private List<User> users;
 	
 		@Override
 		public void init(ServletConfig config) throws ServletException {
@@ -42,9 +41,9 @@ public class AdministratorHomesServlet extends HttpServlet {
 		 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 		 */
 		protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			apartments =  new ArrayList<Apartment>(DataAccess.getAllApartments());
-			request.setAttribute("apartments", apartments);
-			request.getRequestDispatcher("administatorHomes.jsp").forward(request, response);
+			users =  new ArrayList<User>(DataAccess.getAllUsers());
+			request.setAttribute("users", users);
+			request.getRequestDispatcher("administatorUsers.jsp").forward(request, response);
 		}
 
 		/**
@@ -61,14 +60,3 @@ public class AdministratorHomesServlet extends HttpServlet {
 
 
 }
-
-
-
-
-
-
-
-
-
-
-

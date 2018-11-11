@@ -90,8 +90,8 @@
 						<!-- START #fh5co-menu-wrap -->
 						<nav id="fh5co-menu-wrap" role="navigation">
 							<ul class="sf-menu" id="fh5co-primary-menu">
-								<li ><a href="administatorUsers.jsp">Users</a></li>
-								<li class="active"><a href="trips.jsp">Homes</a></li>
+								<li ><a href="administatorUsers">Users</a></li>
+								<li class="active"><a href="trips">Homes</a></li>
 								<li ><a href="messages.jsp">Messages</a></li>
 								<li><a href="#" id="Log-Out">Log out</a></li>
 							</ul>
@@ -120,7 +120,7 @@
 											Host Email
 									</div>
 									<div class="place-name-field">
-											Name
+											Apartment Name
 									</div>
 								</div>
 								
@@ -128,17 +128,17 @@
 								
 								<%
 
-									ArrayList<User> users = (ArrayList<User>)request.getAttribute("users");
+									ArrayList<Apartment> apartments = (ArrayList<Apartment>)request.getAttribute("apartments");
 
 									
-									for (int i = 0; i < users.size(); i++)
+									for (int i = 0; i < apartments.size(); i++)
 									{ %>
 										<div class="place-cel">
 											<div class="place-email-field">
-												<%= users.get(i).getEmail() %>
+												<%= apartments.get(i).getHost().getEmail() %>
 											</div>
 											<div class="place-name-field">
-												<%= users.get(i).getName() %>
+												<%= apartments.get(i).getName() %>
 											</div>
 										</div>
 									
@@ -151,7 +151,7 @@
 
 						 	</div>
 							<div id="midle-panel" class="panel-containter">
-								<label for="name">Place Name</label>
+								<label for="name">Apartment Name</label>
 								<input type="text" name="name" value="" >
 								<label for="host-email">Host Email</label>
 								<input type="email" name="host-email" value="" >
