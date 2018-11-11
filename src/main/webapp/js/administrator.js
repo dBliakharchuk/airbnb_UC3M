@@ -43,9 +43,10 @@ function selectUserCell(id, elementsNumber)
 	var email = cell.children[0].innerText;
 	var name = cell.children[1].innerText;
 	var surname = cell.children[2].innerText;
-	var phone = cell.children[3].innerHTML;
+	var phone_raw = cell.children[3].innerHTML;
+	var  phone = phone_raw.trim();
 	
-	var phoneField = cell.children[3];
+	var phoneField = cell.children[3].childNodes[0];
 	
 	console.log(email.innerText);
 	

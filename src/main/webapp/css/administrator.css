@@ -113,12 +113,14 @@ textarea{
 
 #left-panel{
    float: left;
-   overflow: auto;
    padding: 8px;
    padding-top: 20px;
 
    /* direction: rtl; */
 }
+
+
+
 
 
 #midle-panel > input{
