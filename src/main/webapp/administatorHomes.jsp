@@ -1,15 +1,29 @@
-<!-- <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<!DOCTYPE html> -->
-<html>
+
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+
+
+
+ <%@ page import="model.*" %>
+ <%@ page import=" java.util.*"%>
+ 
+
+
 <head>
-	<meta charset="UTF-8">
-	<title>TIWbnb Administator</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="Free HTML5 Template by FREEHTML5.CO" />
-	<meta name="keywords"
-		content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive" />
-	<meta name="author" content="FREEHTML5.CO" />
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>TIWbnb</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Free HTML5 Template by FREEHTML5.CO" />
+<meta name="keywords"
+	content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive" />
+<meta name="author" content="FREEHTML5.CO" />
 
 	<!-- Facebook and Twitter integration -->
 	<meta property="og:title" content="" />
@@ -109,14 +123,29 @@
 											Name
 									</div>
 								</div>
-								<div class="place-cel">
-									<div class="place-email-field">
-											piotrducki@gmail.com
-									</div>
-									<div class="place-name-field">
-											Apartment in Warsaw
-									</div>
-								</div>
+								
+								
+								
+								<%
+
+									ArrayList<User> users = (ArrayList<User>)request.getAttribute("users");
+
+									
+									for (int i = 0; i < users.size(); i++)
+									{ %>
+										<div class="place-cel">
+											<div class="place-email-field">
+												<%= users.get(i).getEmail() %>
+											</div>
+											<div class="place-name-field">
+												<%= users.get(i).getName() %>
+											</div>
+										</div>
+									
+									
+									<% } %> 
+																	
+								
 
 
 

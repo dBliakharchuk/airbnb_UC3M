@@ -35,7 +35,9 @@ public class TripServlet extends HttpServlet {
 		 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 		 */
 		protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+			request.setAttribute("str1", "Test1");
+            request.getRequestDispatcher("trips.jsp").forward(request, response);
+			
 		}
 
 		/**
