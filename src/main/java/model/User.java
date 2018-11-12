@@ -68,9 +68,6 @@ public class User implements Serializable {
 		this.messagesReceived = new ArrayList<Message>();
 		this.reservations = new ArrayList<Reservation>();
 	}
-	
-	
-	
 
 	public User(String email, String name, String phone, String surname)
 	{
@@ -80,9 +77,6 @@ public class User implements Serializable {
 		this.phone = phone;
 		this.surname = surname;
 	}
-
-
-
 
 	public String getEmail() {
 		return this.email;

@@ -112,6 +112,29 @@ public class DataAccess
 		return true;
 	}
 	
+	public static boolean updateUser(User user) {
+		EntityManager manager = managerFactory.createEntityManager();
+		try {
+			manager.find(User.class, user.getEmail());
+			manager.getTransaction().begin();
+			manager.merge(user);
+			manager.getTransaction().commit();
+		} catch (Exception ex) {
+			try {
+				if (manager.getTransaction().isActive()) {
+					manager.getTransaction().rollback();
+				}
+			} catch (Exception e) {
+				ex.printStackTrace();
+				throw e;
+			}
+			throw ex;
+		} finally {
+			manager.close();
+		}
+		return true;
+	}
+	
 	public static boolean removeUser(User user)  {
 		EntityManager manager = managerFactory.createEntityManager();
 		User managed = null;
@@ -244,6 +267,29 @@ public class DataAccess
 		try {
 			manager.getTransaction().begin();
 			manager.persist(apartment);
+			manager.getTransaction().commit();
+		} catch (Exception ex) {
+			try {
+				if (manager.getTransaction().isActive()) {
+					manager.getTransaction().rollback();
+				}
+			} catch (Exception e) {
+				ex.printStackTrace();
+				throw e;
+			}
+			throw ex;
+		} finally {
+			manager.close();
+		}
+		return true;
+	}
+	
+	public static boolean updateApartment(Apartment apartment)  {
+		EntityManager manager = managerFactory.createEntityManager();
+		try {
+			manager.find(Apartment.class, apartment.getId());
+			manager.getTransaction().begin();
+			manager.merge(apartment);
 			manager.getTransaction().commit();
 		} catch (Exception ex) {
 			try {

@@ -159,6 +159,39 @@ public class Apartment implements Serializable {
 
 	public void setHost(User host) {
 		this.host = host;
+		id.setHost(host.getEmail());
+	}
+	
+	public String getBuildingNumber() {
+		return id.getBuildingNumber();
+	}
+	
+	public void setBuildingNumber(String buildingNumber) {
+		id.setBuildingNumber(buildingNumber);
+	}
+	
+	public String getStreet() {
+		return id.getStreet();
+	}
+	
+	public void setStreet(String street) {
+		id.setStreet(street);
+	}
+	
+	public String getFlatNumber() {
+		return id.getFlatNumber();
+	}
+	
+	public void setFlatNumber(String flatNumber) {
+		id.setFlatNumber(flatNumber);
+	}
+	
+	public String getCity() {
+		return id.getCity();
+	}
+	
+	public void setCity(String city) {
+		id.setCity(city);
 	}
 
 	public List<Reservation> getReservations() {

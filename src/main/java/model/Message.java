@@ -66,6 +66,7 @@ public class Message implements Serializable {
 
 	public void setSender(User sender) {
 		this.sender = sender;
+		id.setSender(sender.getEmail());
 	}
 
 	public User getReceiver() {
@@ -74,6 +75,23 @@ public class Message implements Serializable {
 
 	public void setReceiver(User receiver) {
 		this.receiver = receiver;
+		id.setReceiver(receiver.getEmail());
+	}
+	
+	public String getMessage() {
+		return id.getMessage();
+	}
+	
+	public void setMessage(String message) {
+		id.setMessage(message);
+	}
+	
+	public Date getDate() {
+		return id.getDate();
+	}
+	
+	public void setDate(Date date) {
+		id.setDate(date);
 	}
 
 }

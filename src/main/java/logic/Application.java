@@ -10,22 +10,20 @@ import model.User;
 public class Application {
 	
 	public static void main(String[] args) {
-		List<User> users = DataAccess.getAllUsers();
-		for (User u : users) {
-			System.out.println(u.getEmail());
-		}
 		
-		User user = DataAccess.getUserByEmail("piotrszylar@gmail.com");
-		System.out.println(user.getName());
 		
+		User piotr = DataAccess.getUserByEmail("piotrszylar@gmail.com");		
 		User host = new User("test@gmail.com", "Test", "Kowalski", "kowal", "8993945939");
 		User sender = DataAccess.getAllUsers().get(0);
 		User receiver = DataAccess.getAllUsers().get(1);
+		
 		Apartment apartment = new Apartment(host,"3A", "Koszykowa", "2", "Warszawa", 3, 0, "Polska", "test", "Przyklad", new byte[2], 30.0, "test");
 		
 		//removeUserTest(host);
 		
-		sendMessageTest(sender, receiver, "test message");
+		//sendMessageTest(sender, receiver, "test message");
+		
+		updateUserTest(piotr);
 		
 	}
 	
@@ -58,6 +56,15 @@ public class Application {
 		List<User> usersAfter = DataAccess.getAllUsers();
 		System.out.println("Teraz jest tyle: " + usersAfter.size());
 		
+	}
+	
+	private static void updateUserTest(User user) {
+		User before = DataAccess.getUserByEmail(user.getEmail());
+		System.out.println(before.getName());
+		before.setName(before.getName() + "test");
+		DataAccess.updateUser(before);
+		User after = DataAccess.getUserByEmail(user.getEmail());
+		System.out.println(after.getName());
 	}
 	
 	private static void sendMessageTest(User sender, User receiver, String message) {
