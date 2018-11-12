@@ -78,6 +78,9 @@ public class Apartment implements Serializable {
 	public void setCountry(String country) {
 		this.country = country;
 	}
+	public String getCity() {
+		return this.id.getCity();
+	}
 
 	public String getDescription() {
 		return this.description;
