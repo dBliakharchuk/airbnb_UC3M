@@ -146,6 +146,10 @@ input[type=number]::-webkit-inner-spin-button {
    overflow: auto;
 }
 
+#action-name{
+	visibility: hidden;
+}
+
 #right-panel{
    float: left;
    padding-top: 80px;

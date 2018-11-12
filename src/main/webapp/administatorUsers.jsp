@@ -64,6 +64,7 @@
 
 	<!-- Modernizr JS -->
 	<script src="js/modernizr-2.6.2.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 	<script type="text/javascript" src="js/administrator.js"></script>
 	<!-- FOR IE9 below -->
 	<!--[if lt IE 9]>
@@ -129,20 +130,7 @@
 								</div>
 								
 								
-								<% String userUpdated = (String)request.getAttribute("userUpdated"); 
-								
-									if(userUpdated!=null)
-									{
-										if(userUpdated.equals("yes"))
-										{									%>
-											<script type="text/javascript">
-												showUserUpdatedInfo();
-											</script>
-									<%	
-											request.setAttribute(userUpdated, "no");
-										} %>
-								<%	} %>
-
+							
 
 								<%
 
@@ -184,6 +172,7 @@
 									<input type="text" id="user-surname" name="surname" value="" >
 									<label for="phone" > Phone Number</label>
 									<input type="number" id="user-phone-number" name="phone-number" value="" >
+									<input type="hidden" id="action-name" name="action" value="updateUser" >
 									<input type="submit" class="btn btn-success" id="save-user-button" value="save">
 								</form>
 							</div>
