@@ -26,6 +26,8 @@ public class Application {
 		
 		//updateUserTest(piotr);
 		
+		//System.out.println(DataAccess.getUserByEmail("sadw"));
+		
 	}
 	
 	private static void addApartmentTest(Apartment apartment, User host) {
