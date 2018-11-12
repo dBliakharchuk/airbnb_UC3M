@@ -133,7 +133,7 @@
 											augue, eleifend ut dui eu, egestas malesuada velit.</p>
 									</div>
 									<div class="col-md-2 col-sm-2 col-xs-12 fh5co-footer-link">
-										<h3>Lorem ipsum</h3>
+										<h3><%=request.getAttribute("str1") %></h3>
 										<ul>
 											<li><a href="#">Xxxxx xxxx</a></li>
 											<li><a href="#">Xxxxx xxxx</a></li>

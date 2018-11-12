@@ -1,6 +1,8 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Date;
+
 import javax.persistence.*;
 
 /**
@@ -23,6 +25,8 @@ public class ReservationPK implements Serializable {
 	private String apartmentFlatNumber;
 	@Column(insertable=false, updatable=false)
 	private String apartmentCity;
+	@Temporal(TemporalType.DATE)
+	private Date date;
 
 	public ReservationPK() {
 	}
@@ -73,6 +77,14 @@ public class ReservationPK implements Serializable {
 	
 	public void setApartmentCity(String apartmentCity) {
 		this.apartmentCity = apartmentCity;
+	}
+	
+	public Date getDate() {
+		return this.date;
+	}
+	
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
 	public boolean equals(Object other) {
