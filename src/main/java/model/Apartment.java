@@ -35,7 +35,8 @@ public class Apartment implements Serializable {
 	@Lob
 	private byte[] picture;
 	private double price;
-	private String type;
+	@Enumerated(EnumType.STRING)
+	private ApartmentType type;
 
 	@ManyToOne
 	@JoinColumn(name="host")
@@ -49,7 +50,7 @@ public class Apartment implements Serializable {
 
 	public Apartment(User host, String buildingNumber, String street, String flatNumber, 
 			String city, int bedsAdult, int bedsChild, String country, String description, String name,
-			byte[] picture, double price, String type, List<Reservation> reservations) {
+			byte[] picture, double price, ApartmentType type, List<Reservation> reservations) {
 		
 		this.id = new ApartmentPK(host.getEmail(), buildingNumber, street, flatNumber, city);
 		this.bedsAdult = bedsAdult;
@@ -66,7 +67,7 @@ public class Apartment implements Serializable {
 
 	public Apartment(User host, String buildingNumber, String street, String flatNumber, 
 			String city, int bedsAdult, int bedsChild, String country, String description, String name,
-			byte[] picture, double price, String type) {
+			byte[] picture, double price, ApartmentType type) {
 		
 		this.id = new ApartmentPK(host.getEmail(), buildingNumber, street, flatNumber, city);
 		this.bedsAdult = bedsAdult;
@@ -145,12 +146,16 @@ public class Apartment implements Serializable {
 		this.price = price;
 	}
 
-	public String getType() {
+	public ApartmentType getType() {
 		return this.type;
 	}
 
-	public void setType(String type) {
+	public void setType(ApartmentType type) {
 		this.type = type;
+	}
+	
+	public void setType(String type) {
+		this.type = ApartmentType.fromString(type);
 	}
 
 	public User getHost() {

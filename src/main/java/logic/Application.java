@@ -4,6 +4,7 @@ import java.util.List;
 
 import database.DataAccess;
 import model.Apartment;
+import model.ApartmentType;
 import model.Message;
 import model.User;
 
@@ -11,19 +12,19 @@ public class Application {
 	
 	public static void main(String[] args) {
 		
-		
+		List<Apartment> aps = DataAccess.getAllApartments();
 		User piotr = DataAccess.getUserByEmail("piotrszylar@gmail.com");		
 		User host = new User("test@gmail.com", "Test", "Kowalski", "kowal", "8993945939");
 		User sender = DataAccess.getAllUsers().get(0);
 		User receiver = DataAccess.getAllUsers().get(1);
 		
-		Apartment apartment = new Apartment(host,"3A", "Koszykowa", "2", "Warszawa", 3, 0, "Polska", "test", "Przyklad", new byte[2], 30.0, "test");
+		Apartment apartment = new Apartment(host,"3A", "Koszykowa", "2", "Warszawa", 3, 0, "Polska", "test", "Przyklad", new byte[2], 30.0, ApartmentType.PRIVATE_ROOM);
 		
 		//removeUserTest(host);
 		
 		//sendMessageTest(sender, receiver, "test message");
 		
-		updateUserTest(piotr);
+		//updateUserTest(piotr);
 		
 	}
 	
