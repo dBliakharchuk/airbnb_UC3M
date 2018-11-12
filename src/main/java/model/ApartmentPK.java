@@ -21,6 +21,15 @@ public class ApartmentPK implements Serializable {
 	public ApartmentPK() {
 	}
 	
+	public ApartmentPK(String host, String buildingNumber, String street, String flatNumber, String city) {
+		super();
+		this.host = host;
+		this.buildingNumber = buildingNumber;
+		this.street = street;
+		this.flatNumber = flatNumber;
+		this.city = city;
+	}
+
 	public String getHost() {
 		return this.host;
 	}

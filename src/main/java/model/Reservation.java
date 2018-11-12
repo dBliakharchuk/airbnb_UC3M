@@ -17,9 +17,6 @@ public class Reservation implements Serializable {
 	@EmbeddedId
 	private ReservationPK id;
 
-	@Temporal(TemporalType.DATE)
-	private Date date;
-
 	@ManyToOne
 	@JoinColumns({
 		@JoinColumn(name="apartmentBuildingNumber", referencedColumnName="buildingNumber"),
@@ -46,11 +43,11 @@ public class Reservation implements Serializable {
 	}
 
 	public Date getDate() {
-		return this.date;
+		return id.getDate();
 	}
 
 	public void setDate(Date date) {
-		this.date = date;
+		id.getDate();
 	}
 
 	public Apartment getApartment() {
@@ -59,6 +56,11 @@ public class Reservation implements Serializable {
 
 	public void setApartment(Apartment apartment) {
 		this.apartment = apartment;
+		id.setApartmentBuildingNumber(apartment.getBuildingNumber());
+		id.setApartmentCity(apartment.getCity());
+		id.setApartmentFlatNumber(apartment.getFlatNumber());
+		id.setApartmentHost(apartment.getHost().getEmail());
+		id.setApartmentStreet(apartment.getStreet());
 	}
 
 	public User getUser() {
@@ -67,6 +69,7 @@ public class Reservation implements Serializable {
 
 	public void setUser(User user) {
 		this.user = user;
+		id.setUserEmail(user.getEmail());
 	}
 
 }

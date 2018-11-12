@@ -1,6 +1,8 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Date;
+
 import javax.persistence.*;
 
 /**
@@ -13,15 +15,24 @@ public class MessagePK implements Serializable {
 
 	private String message;
 	@Temporal(TemporalType.TIMESTAMP)
-	private java.util.Date date;
+	private Date date;
 	@Column(insertable=false, updatable=false)
 	private String sender;
 	@Column(insertable=false, updatable=false)
 	private String receiver;
 
 	public MessagePK() {
+		
 	}
 	
+	public MessagePK(String message, Date date, String sender, String receiver) {
+		super();
+		this.message = message;
+		this.date = date;
+		this.sender = sender;
+		this.receiver = receiver;
+	}
+
 	public String getMessage() {
 		return this.message;
 	}
@@ -30,11 +41,11 @@ public class MessagePK implements Serializable {
 		this.message = message;
 	}
 	
-	public java.util.Date getDate() {
+	public Date getDate() {
 		return this.date;
 	}
 	
-	public void setDate(java.util.Date date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 	

@@ -2,6 +2,8 @@ package model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -33,18 +35,51 @@ public class Apartment implements Serializable {
 	@Lob
 	private byte[] picture;
 	private double price;
-	private String type;
+	@Enumerated(EnumType.STRING)
+	private ApartmentType type;
 
-	//bi-directional many-to-one association to User
 	@ManyToOne
 	@JoinColumn(name="host")
 	private User host;
 
-	//bi-directional many-to-one association to Reservation
 	@OneToMany(mappedBy="apartment")
 	private List<Reservation> reservations;
 
 	public Apartment() {
+	}
+
+	public Apartment(User host, String buildingNumber, String street, String flatNumber, 
+			String city, int bedsAdult, int bedsChild, String country, String description, String name,
+			byte[] picture, double price, ApartmentType type, List<Reservation> reservations) {
+		
+		this.id = new ApartmentPK(host.getEmail(), buildingNumber, street, flatNumber, city);
+		this.bedsAdult = bedsAdult;
+		this.bedsChild = bedsChild;
+		this.country = country;
+		this.description = description;
+		this.name = name;
+		this.picture = picture;
+		this.price = price;
+		this.type = type;
+		this.host = host;
+		this.reservations = reservations;
+	}
+
+	public Apartment(User host, String buildingNumber, String street, String flatNumber, 
+			String city, int bedsAdult, int bedsChild, String country, String description, String name,
+			byte[] picture, double price, ApartmentType type) {
+		
+		this.id = new ApartmentPK(host.getEmail(), buildingNumber, street, flatNumber, city);
+		this.bedsAdult = bedsAdult;
+		this.bedsChild = bedsChild;
+		this.country = country;
+		this.description = description;
+		this.name = name;
+		this.picture = picture;
+		this.price = price;
+		this.type = type;
+		this.host = host;
+		this.reservations = new ArrayList<Reservation>();;
 	}
 
 	public ApartmentPK getId() {
@@ -111,12 +146,16 @@ public class Apartment implements Serializable {
 		this.price = price;
 	}
 
-	public String getType() {
+	public ApartmentType getType() {
 		return this.type;
 	}
 
-	public void setType(String type) {
+	public void setType(ApartmentType type) {
 		this.type = type;
+	}
+	
+	public void setType(String type) {
+		this.type = ApartmentType.fromString(type);
 	}
 
 	public User getHost() {
@@ -125,6 +164,39 @@ public class Apartment implements Serializable {
 
 	public void setHost(User host) {
 		this.host = host;
+		id.setHost(host.getEmail());
+	}
+	
+	public String getBuildingNumber() {
+		return id.getBuildingNumber();
+	}
+	
+	public void setBuildingNumber(String buildingNumber) {
+		id.setBuildingNumber(buildingNumber);
+	}
+	
+	public String getStreet() {
+		return id.getStreet();
+	}
+	
+	public void setStreet(String street) {
+		id.setStreet(street);
+	}
+	
+	public String getFlatNumber() {
+		return id.getFlatNumber();
+	}
+	
+	public void setFlatNumber(String flatNumber) {
+		id.setFlatNumber(flatNumber);
+	}
+	
+	public String getCity() {
+		return id.getCity();
+	}
+	
+	public void setCity(String city) {
+		id.setCity(city);
 	}
 
 	public List<Reservation> getReservations() {

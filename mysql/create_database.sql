@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS `airbnbdb`.`Apartment` (
   `city` VARCHAR(100) NOT NULL,
   `country` VARCHAR(100) NOT NULL,
   `flatNumber` VARCHAR(20) NOT NULL,
-  `picture` LONGBLOB NULL,
+  `picture` LONGBLOB NOT NULL,
   INDEX `host_email_idx` (`host` ASC),
   PRIMARY KEY (`host`, `buildingNumber`, `street`, `flatNumber`, `city`),
   CONSTRAINT `host_email`
@@ -43,13 +43,13 @@ ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `airbnbdb`.`Reservation` (
   `userEmail` VARCHAR(100) NOT NULL,
-  `date` DATE NULL,
+  `date` DATE NOT NULL,
   `apartmentHost` VARCHAR(100) NOT NULL,
   `apartmentBuildingNumber` VARCHAR(20) NOT NULL,
   `apartmentStreet` VARCHAR(150) NOT NULL,
   `apartmentFlatNumber` VARCHAR(20) NOT NULL,
   `apartmentCity` VARCHAR(100) NOT NULL,
-  PRIMARY KEY (`userEmail`, `apartmentHost`, `apartmentBuildingNumber`, `apartmentStreet`, `apartmentFlatNumber`, `apartmentCity`),
+  PRIMARY KEY (`userEmail`, `apartmentHost`, `apartmentBuildingNumber`, `apartmentStreet`, `apartmentFlatNumber`, `apartmentCity`, `date`),
   INDEX `account_email_idx` (`userEmail` ASC),
   INDEX `fk_Reservation_Apartment1_idx` (`apartmentHost` ASC, `apartmentBuildingNumber` ASC, `apartmentStreet` ASC, `apartmentFlatNumber` ASC, `apartmentCity` ASC),
   CONSTRAINT `account_email`

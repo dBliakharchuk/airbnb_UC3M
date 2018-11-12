@@ -2,6 +2,8 @@ package model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -37,10 +39,35 @@ public class User implements Serializable {
 	private List<Reservation> reservations;
 
 	public User() {
+		
+	}
+
+	public User(String email, String name, String surname, String password, String phone, List<Apartment> apartments,
+			List<Message> messagesSent, List<Message> messagesReceived, List<Reservation> reservations) {
+		super();
+		this.email = email;
+		this.name = name;
+		this.password = password;
+		this.phone = phone;
+		this.surname = surname;
+		this.apartments = apartments;
+		this.messagesSent = messagesSent;
+		this.messagesReceived = messagesReceived;
+		this.reservations = reservations;
 	}
 	
-	
-	
+	public User(String email, String name, String surname, String password, String phone) {
+		super();
+		this.email = email;
+		this.name = name;
+		this.password = password;
+		this.phone = phone;
+		this.surname = surname;
+		this.apartments = new ArrayList<Apartment>();
+		this.messagesSent = new ArrayList<Message>();
+		this.messagesReceived = new ArrayList<Message>();
+		this.reservations = new ArrayList<Reservation>();
+	}
 
 	public User(String email, String name, String phone, String surname)
 	{
@@ -50,9 +77,6 @@ public class User implements Serializable {
 		this.phone = phone;
 		this.surname = surname;
 	}
-
-
-
 
 	public String getEmail() {
 		return this.email;
