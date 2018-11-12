@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebInitParam;
@@ -30,6 +31,7 @@ public class AdministratorUsersServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ServletConfig config;
 	private List<User> users;
+	private Boolean userUpdated = false;
 	
 		@Override
 		public void init(ServletConfig config) throws ServletException {
@@ -43,9 +45,27 @@ public class AdministratorUsersServlet extends HttpServlet {
 		 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 		 */
 		protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			users =  new ArrayList<User>(DataAccess.getAllUsers());
-			request.setAttribute("users", users);
-			request.getRequestDispatcher("administatorUsers.jsp").forward(request, response);
+			
+			
+			if(userUpdated == true)
+			{
+				
+				users =  new ArrayList<User>(DataAccess.getAllUsers());
+				
+				request.setAttribute("userUpdated", "yes");
+				
+				userUpdated = false;
+				request.setAttribute("users", users);
+				request.getRequestDispatcher("administatorUsers.jsp").forward(request, response);
+				
+			}
+			else
+			{
+				users =  new ArrayList<User>(DataAccess.getAllUsers());
+				request.setAttribute("users", users);
+				request.getRequestDispatcher("administatorUsers.jsp").forward(request, response);
+			}
+			
 		}
 
 		/**
@@ -60,9 +80,11 @@ public class AdministratorUsersServlet extends HttpServlet {
 			 
 			 User updatedUser = new User(email, name, phoneNumber, surname);
 			 
-			 AdministratorLogic.updateUserData(updatedUser);
 			 
-			 request.getRequestDispatcher("administatorUsers.jsp").forward(request, response);
+			 
+			 userUpdated = AdministratorLogic.updateUserData(updatedUser);
+			 
+			 response.sendRedirect("administatorUsers");
 			 
 //			 final PrintWriter writerA = response.getWriter();
 //			 writerA.println(email + name + surname + phoneNumber);

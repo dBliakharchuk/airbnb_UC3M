@@ -25,6 +25,11 @@ function deletePlace()
    confirm("Do you want to delete this place?");
 }
 
+function showUserUpdatedInfo()
+{
+	alert("User updated!");
+}
+
 function selectUserCell(id, elementsNumber)
 {
 	

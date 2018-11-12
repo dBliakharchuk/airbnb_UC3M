@@ -127,6 +127,21 @@
 											Phone
 									</div>
 								</div>
+								
+								
+								<% String userUpdated = (String)request.getAttribute("userUpdated"); 
+								
+									if(userUpdated!=null)
+									{
+										if(userUpdated.equals("yes"))
+										{									%>
+											<script type="text/javascript">
+												showUserUpdatedInfo();
+											</script>
+									<%	
+											request.setAttribute(userUpdated, "no");
+										} %>
+								<%	} %>
 
 
 								<%
