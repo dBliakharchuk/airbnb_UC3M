@@ -163,7 +163,7 @@
 
 						 	</div>
 							<div id="midle-panel" class="panel-containter">
-								<form class="edit-user-form" action="administatorUsers" method="post">
+								<form class="edit-user-form">
 									<label for="email">Email</label>
 									<input type="text" id="user-email" name="email" value="" readonly>
 									<label for="name">Name</label>
@@ -173,12 +173,12 @@
 									<label for="phone" > Phone Number</label>
 									<input type="number" id="user-phone-number" name="phone-number" value="" >
 									<input type="hidden" id="action-name" name="action" value="updateUser" >
-									<input type="submit" class="btn btn-success" id="save-user-button" value="save">
+									<input type="button" class="btn btn-success" id="save-user-button" value="save" onclick="updateUserData();">
 								</form>
 							</div>
 							<div id="right-panel" class="panel-containter">
 
-								<button type="button" class="btn btn-success" onclick="messageUser()">Messag User</button>
+								<button type="button" class="btn btn-success" onclick="messageUser()">Message User</button>
 								<button type="button" class="btn btn-warning" onclick="changePassword()">Change Password</button>
 								<button type="button" class="btn btn-danger"  onclick="deleteUser()">Delete User</button>
 

@@ -1,4 +1,3 @@
-
 $(document).ready(function() {
 
 });
@@ -6,6 +5,42 @@ $(document).ready(function() {
 function messageUser() {
 	var message = prompt("Please enter your message");
 
+}
+
+function updateUserData() {
+
+	var selectedUserEmail = $("#user-email").val();
+	var selectedUserName = $("#user-name").val();
+	var selectedUserSurname = $("#user-surname").val();
+	var selectedUserPhone = $("#user-phone-number").val();
+
+	if (selectedUserEmail != null && selectedUserEmail != "") {
+		if (selectedUserName != null && selectedUserName != ""
+				&& selectedUserSurname != null && selectedUserSurname != ""
+				&& selectedUserPhone != null && selectedUserPhone != "") {
+			$.post("/airbnb/administatorUsers", {
+				action : "updateUser",
+				email : selectedUserEmail,
+				name : selectedUserName,
+				surname : selectedUserSurname,
+				phoneNumber : selectedUserPhone
+			}).done(function(status) {
+				if (status == 1) {
+					if (alert("User data updated successfully")) {
+					} else
+						window.location.reload();
+				} else if (status == 0)
+					alert("Incorrect Data");
+				else
+					alert("Unknow error");
+			});
+		} else {
+			alert("You can't leav empty fields");
+		}
+
+	} else {
+		alert("User not selected");
+	}
 }
 
 function changePassword() {
@@ -22,9 +57,9 @@ function changePassword() {
 				password : password,
 				email : selectedUserEmail
 			}).done(function(status) {
-				if(status == 1)
+				if (status == 1)
 					alert("Password updated successfully");
-				else if(status == 0)
+				else if (status == 0)
 					alert("Incorrect Password");
 				else
 					alert("Unknow error");
@@ -39,35 +74,32 @@ function changePassword() {
 }
 
 function deleteUser() {
-	
+
 	var selectedUserEmail = $("#user-email").val();
 
 	if (selectedUserEmail != null && selectedUserEmail != "") {
-		
-		if(confirm("Do you want to delete this user?"))
-		{
+
+		if (confirm("Do you want to delete this user?")) {
 			$.post("/airbnb/administatorUsers", {
 				action : "deleteUser",
 				email : selectedUserEmail
 			}).done(function(status) {
-				if(status == 1)
-				{
-					if(alert("User deleteed successfully")){}
-					else    window.location.reload();
-				}
-				else if(status == 0)
+				if (status == 1) {
+					if (alert("User deleteed successfully")) {
+					} else
+						window.location.reload();
+				} else if (status == 0)
 					alert("Incorrect Data");
 				else
 					alert("Unknow error");
 			});
-			
+
 		}
 
 	} else {
 		alert("User not selected");
 	}
-	
-	
+
 }
 
 function deletePlace() {

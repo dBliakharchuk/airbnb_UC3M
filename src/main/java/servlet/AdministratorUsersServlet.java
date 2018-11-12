@@ -55,22 +55,20 @@ public class AdministratorUsersServlet extends HttpServlet
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		
-		final PrintWriter writer = response.getWriter();
-
+		PrintWriter writer = response.getWriter();
 		String action = request.getParameter("action");
-		
 		
 		if ("updateUser".equals(action))
 		{
 			 String email = request.getParameter("email");
 			 String name = request.getParameter("name");
 			 String surname = request.getParameter("surname");
-			 String	phoneNumber = request.getParameter("phone-number");
+			 String	phoneNumber = request.getParameter("phoneNumber");
 			 
 			 User updatedUserData = new User(email, name, phoneNumber, surname);
-			 
-			 Boolean userUpdatedCorrectly = AdministratorLogic.updateUserData(updatedUserData);
+			
+			 int userUpdatedStatus = AdministratorLogic.updateUserData(updatedUserData);
+			 writer.println(userUpdatedStatus);
 				
 		} else if ("changePassword".equals(action))
 		{
@@ -85,13 +83,9 @@ public class AdministratorUsersServlet extends HttpServlet
 			int userDeletedStatus = AdministratorLogic.deleteUser(email);
 			writer.println(userDeletedStatus);
 			
-
 		}
 		
-			// response.sendRedirect("administatorUsers");
 
-//			 final PrintWriter writerA = response.getWriter();
-//			 writerA.println(email + name + surname + phoneNumber);
 
 	}
 
