@@ -129,10 +129,41 @@ function selectUserCell(id, elementsNumber) {
 
 	var phoneField = cell.children[3].childNodes[0];
 
-
 	document.getElementById("user-email").value = email;
 	document.getElementById("user-name").value = name;
 	document.getElementById("user-surname").value = surname;
 	document.getElementById("user-phone-number").value = phone;
+
+}
+
+function selectApartmentCell(id, elementsNumber) {
+
+	for (var i = 0; i < elementsNumber; i++) {
+		var currnet_id = "place-cel-" + i;
+		var currnet_cell = document.getElementById(currnet_id);
+		currnet_cell.className = "place-cel";
+	}
+	var cell = document.getElementById(id);
+
+	cell.className = "place-cel-active";
+
+	var email = cell.children[0].innerText;
+	var apartment_name = cell.children[1].innerText;
+	var cuntry = cell.children[2].innerText;
+	var price_raw = cell.children[3].innerHTML;
+	var price = price_raw.trim();
+	var type = cell.children[4].innerText;
+	var adultsBeds = cell.children[5].innerHTML;
+	var childrensBeds = cell.children[6].innerHTML;
+	var descriptions = cell.children[7].innerText;
+
+	document.getElementById("host-email").value = email;
+	document.getElementById("apartment-name").value = apartment_name;
+
+	
+	// document.getElementById("user-email").value = email;
+	// document.getElementById("user-name").value = name;
+	// document.getElementById("user-surname").value = surname;
+	// document.getElementById("user-phone-number").value = phone;
 
 }

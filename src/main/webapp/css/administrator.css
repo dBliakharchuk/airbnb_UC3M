@@ -237,11 +237,29 @@ input[type=number]::-webkit-inner-spin-button {
    border-radius: 8px;
    height: 40px;
    margin-bottom: 10px;
+   cursor: pointer;
 
 }
 
 .place-cel  * {
    float: left;
+   padding: 5px;
+   font-size: 13px;
+}
+
+
+.place-cel-active {
+    width: 100%;
+   border: 2px solid white;
+   border-radius: 8px;
+   height: 40px;
+   margin-bottom: 10px;
+   cursor: pointer;
+
+} 
+
+.place-cel-active  * {
+    float: left;
    padding: 5px;
    font-size: 13px;
 }
@@ -266,6 +284,31 @@ input[type=number]::-webkit-inner-spin-button {
 #save-place-button{
    margin-top: 30px;
 }
+
+
+
+
+
+.eidit-apartment-form > input{
+   margin-bottom:  20px;
+   width: 100%;
+}
+
+.eidit-apartment-form > input[type=submit]{
+	margin-top: 20px;
+}
+
+.eidit-apartment-form > label{
+   width: 100%;
+}
+
+.place-country-field, .place-price-field, .place-type-field, .place-adults-beds-field, .place-children-beds-field, .place-description-field  {
+	
+	visibility: hidden;
+	display: none;
+}
+
+
 
 
 /* **************** pop ups ****************  */
