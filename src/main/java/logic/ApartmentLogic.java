@@ -6,6 +6,7 @@ import java.util.List;
 
 import database.DataAccess;
 import model.Apartment;
+import model.ApartmentType;
 import model.Reservation;
 
 public class ApartmentLogic {
@@ -17,7 +18,7 @@ public class ApartmentLogic {
 		
 		DataAccess.createApartment(apartment);
 	}
-	public static List<Apartment> search(String fromPlace, String price, String typeOfAccom, Integer adults, Integer children, Date dateStart, Date dateEnd){
+	public static List<Apartment> search(String fromPlace, String price, ApartmentType typeOfAccom, Integer adults, Integer children, Date dateStart, Date dateEnd){
 		
 		List<Apartment> availableApartmentsList = DataAccess.getAllApartments();
 		List<Apartment> resultApartmentsList = new ArrayList<Apartment>();
@@ -83,7 +84,7 @@ public class ApartmentLogic {
 			return false;
 		}
 	}
-	private static boolean checkApartmentType(Apartment apartment, String typeOfAccom) {
+	public static boolean checkApartmentType(Apartment apartment, ApartmentType typeOfAccom) {
 		
 		
 		if(typeOfAccom == null) {

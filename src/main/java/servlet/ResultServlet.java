@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import database.DataAccess;
 import logic.ApartmentLogic;
 import model.Apartment;
+import model.ApartmentType;
 import model.Reservation;
 
 
@@ -74,7 +75,13 @@ public class ResultServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 			String price = request.getParameter("price");
-			String typeOfAccom = request.getParameter("typeOfAccom");
+			
+			ApartmentType typeOfAccom = null;
+			
+			if(request.getParameter("typeOfAccom")!=null){
+				
+				typeOfAccom = ApartmentType.fromString(request.getParameter("typeOfAccom"));
+			}
 			
 			Integer adults = null;
 			Integer children = null;
