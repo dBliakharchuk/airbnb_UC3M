@@ -10,6 +10,7 @@ import javax.persistence.Query;
 
 import model.Apartment;
 import model.Message;
+import model.Reservation;
 import model.User;
 
 public class DataAccess 
@@ -359,5 +360,52 @@ public class DataAccess
 		return true;
 	}
 	
+	public static boolean createReservation(Reservation reservation) {
+		EntityManager manager = managerFactory.createEntityManager();
+		try {
+			manager.getTransaction().begin();
+			manager.persist(reservation);
+			manager.getTransaction().commit();
+		} catch (Exception ex) {
+			try {
+				if (manager.getTransaction().isActive()) {
+					manager.getTransaction().rollback();
+				}
+			} catch (Exception e) {
+				ex.printStackTrace();
+				throw e;
+			}
+			throw ex;
+		} finally {
+			manager.close();
+		}
+		return true;
+	}
+	
+	public static boolean removeReservation(Reservation reservation)  {
+		EntityManager manager = managerFactory.createEntityManager();
+		Reservation managed = null;
+		try {
+			manager.getTransaction().begin();
+			if (!manager.contains(reservation)) {
+			    managed = manager.merge(reservation);
+			}
+			manager.remove(managed);
+			manager.getTransaction().commit();
+		} catch (Exception ex) {
+			try {
+				if (manager.getTransaction().isActive()) {
+					manager.getTransaction().rollback();
+				}
+			} catch (Exception e) {
+				ex.printStackTrace();
+				throw e;
+			}
+			throw ex;
+		} finally {
+			manager.close();
+		}
+		return true;
+	}
 
 }
