@@ -129,7 +129,6 @@ function selectUserCell(id, elementsNumber) {
 
 	var phoneField = cell.children[3].childNodes[0];
 
-	console.log(email.innerText);
 
 	document.getElementById("user-email").value = email;
 	document.getElementById("user-name").value = name;
