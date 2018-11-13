@@ -20,8 +20,7 @@ import model.User;
 @WebServlet(
 		urlPatterns="/administatorHomes",
 		loadOnStartup=1,
-		initParams={@WebInitParam(name="configuracion", value="es.uc3m.tiw")}
-		)
+		initParams={@WebInitParam(name="configuracion", value="es.uc3m.tiw")})
 public class AdministratorHomesServlet extends HttpServlet {
 	/**
 	 * 
@@ -33,7 +32,7 @@ public class AdministratorHomesServlet extends HttpServlet {
 		@Override
 		public void init(ServletConfig config) throws ServletException {
 			this.config = config;
-			DataAccess.test();
+
 		}
 	       
 
