@@ -25,6 +25,25 @@ public class AdministratorLogic
 		
 		return status;
 	}
+	
+	// *********************** administratorHomes ***********************
+
+	public static int updateApartmentData()
+	{
+		int status = 1;
+		
+			
+		return status;
+	}
+	
+	
+	public static int deleteApartment()
+	{
+		int status = 1;
+		
+		return status;
+	}
+	
 }
 
 

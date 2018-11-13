@@ -302,12 +302,17 @@ input[type=number]::-webkit-inner-spin-button {
    width: 100%;
 }
 
-.place-country-field, .place-price-field, .place-type-field, .place-adults-beds-field, .place-children-beds-field, .place-description-field  {
+.place-country-field, .place-price-field, .place-type-field, 
+.place-adults-beds-field, .place-children-beds-field, .place-description-field,
+.place-building-number-field, .place-street-field, .place-flat-number-field, .place-city-field {
 	
 	visibility: hidden;
 	display: none;
 }
 
+#save-place-button{
+	width: 100%;
+}
 
 
 

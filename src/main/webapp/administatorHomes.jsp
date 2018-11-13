@@ -160,9 +160,19 @@
 									<div class="place-description-field">
 										<%=apartments.get(i).getDescription()%>
 									</div>
+									<div class="place-building-number-field">
+										<%=apartments.get(i).getId().getBuildingNumber()%>
+									</div>
+									<div class="place-street-field">
+										<%=apartments.get(i).getId().getStreet()%>
+									</div>
+									<div class="place-flat-number-field">
+										<%=apartments.get(i).getId().getFlatNumber()%>
+									</div>
+									<div class="place-city-field">
+										<%=apartments.get(i).getId().getCity()%>
+									</div>		
 								</div>
-
-
 								<%
 									}
 								%>
@@ -177,7 +187,7 @@
 									<label for="name">Apartment Name</label> 
 									<input type="text" name="name" id="apartment-name" value=""> 
 									<label for="host-email">Host Email</label> 
-									<input type="email"  name="host-email" id="host-email" value="">
+									<input type="email"  name="host-email" id="host-email" value="" readonly>
 									<label for="country">Country</label>
 									 <input type="text" name="country" id="apartment-country" value=""> 
 									 <label for="price-per-day">Price Per Day</label>
@@ -192,7 +202,7 @@
 
 									<textarea id="place-description" name="description"> </textarea>
 									<button type="button" class="btn btn-success"
-										id="save-place-button">Save</button>
+										id="save-place-button" onclick="updateApartmentData()">Save</button>
 								</div>
 							</div>
 
