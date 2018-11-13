@@ -17,6 +17,8 @@ import java.util.List;
 	@NamedQuery(name="User.findBySurname", query="SELECT u FROM User u where u.surname = :surname") })
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
+	private static final String adminLogin = "admin";
+	private static final String adminPassword = "admin123";
 
 	@Id
 	private String email;
@@ -203,6 +205,14 @@ public class User implements Serializable {
 		reservation.setUser(null);
 
 		return reservation;
+	}
+
+	public static String getAdminlogin() {
+		return adminLogin;
+	}
+
+	public static String getAdminpassword() {
+		return adminPassword;
 	}
 
 }
