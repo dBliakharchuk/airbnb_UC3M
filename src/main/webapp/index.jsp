@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -50,11 +49,12 @@
 
 	<!-- Modernizr JS -->
 	<script src="js/modernizr-2.6.2.min.js"></script>
+	<script type="text/javascript" src="js/accountJS.js"></script>
 	<!-- FOR IE9 below -->
 	<!--[if lt IE 9]>
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
-
+	<%@ page import="model.*"%>
 	</head>
 	<body>
 		<div id="fh5co-wrapper">
@@ -64,17 +64,38 @@
 			<div class="container">
 				<div class="nav-header">
 					<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle dark"><i></i></a>
-					<h1 id="fh5co-logo"><a href="index.jsp"><i class="icon-airplane"></i>TIWbnb</a></h1>
 					<!-- START #fh5co-menu-wrap -->
+					<%
+					
+					User currentUser = (User) request.getSession().getAttribute("loggedUser"); 		
+					if (currentUser == null) {  %>
+					<h1 id="fh5co-logo"><a href="index.jsp"><i class="icon-airplane"></i>TIWbnb</a></h1>
+					<nav id="fh5co-menu-wrap" role="navigation">
+						<ul class="sf-menu" id="fh5co-primary-menu">
+							<li><a href="index.jsp">Home</a></li>                           
+							<li><a href="#" id="Registro">Registration</a></li>                            
+							<li><a href="#" id="Login">Log in</a></li>
+						</ul>
+					</nav>
+					<% } else { %>  
+					<h1 id="fh5co-logo"><a href="index.jsp"><i class="icon-airplane"></i>TIWbnb</a></h1>
 					<nav id="fh5co-menu-wrap" role="navigation">
 						<ul class="sf-menu" id="fh5co-primary-menu">
 							<li class="active"><a href="index.jsp">Home</a></li>
 							<li ><a href="trips.jsp">Trips</a></li>
-							<li ><a href="messages.jsp">Messages</a></li>                              
-							<li><a href="#" id="Registro">Registration</a></li>                            
-							<li><a href="#" id="Login">Log in</a></li>                            
+							<li ><a href="messages.jsp">Messages</a></li>
+							<li ><a href="manageProfile.jsp">Manage Profile</a></li>
+							<li ><a href='logoutServlet'>Log out</a></li>                           
+							</li>
 						</ul>
 					</nav>
+					<% } %>
+					<% String msgBox = (String) request.getAttribute("msgBox");
+						if (msgBox != null) { %>
+						<script type="text/javascript">
+							messageUser("<%=msgBox.toString()%>");
+						</script>
+					<% } %>
 				</div>
 			</div>
 		</header>
@@ -209,16 +230,16 @@
         <h1 class="h3 mb-3 font-weight-normal">Log in to continue</h1>
       </div>
       <div class="modal-body">
-          <form class="form-signin">
-      <input type="email" id="loginEmail" class="form-control" placeholder="DirecciÃ³n de correo electrÃ³nico" required autofocus>
-      <input type="password" id="loginPassword" class="form-control" placeholder="ContraseÃ±a" required>
-      <div class="checkbox mb-3">
-        <label>
-          <input type="checkbox" value="remember-me"> Remember me
-        </label>
-      </div>
-      <button class="btn btn-lg btn-primary btn-block" type="submit" id="IniciaSesion">Log in</button>
-    </form>
+          <form class="form-signin" action="loginServlet" method="post">
+		      <input type="email" id="loginEmail" name="inputEmail" class="form-control" placeholder="Dirección de correo electrónico" required autofocus>
+		      <input type="password" id="loginPassword" name="inputPassword" class="form-control" placeholder="Contraseña" required>
+		      <div class="checkbox mb-3">
+		        <label>
+		          <input type="checkbox" name="inputCheckbox" value="remember-me"> Remember me
+		        </label>
+		      </div>
+		      <button class="btn btn-lg btn-primary btn-block" type="submit" id="IniciaSesion">Log in</button>
+            </form>
 
       </div>
 
@@ -244,14 +265,13 @@
         <h1 class="h3 mb-3 font-weight-normal">Enter your data</h1>
       </div>
       <div class="modal-body">
-          <form class="form-registro">
-      <input type="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus>
-      <input type="name" id="inputName" class="form-control" placeholder="Name" required>
-      <input type="surname" id="inputSurname" class="form-control" placeholder="Surname" required>              
-      <input type="password" id="inputPassword" class="form-control" placeholder="Set a password" required>
-      <button class="btn btn-lg btn-primary btn-block" type="submit" id="Registrate">Registrate</button>
-    </form>
-
+           <form class="form-registro" action="registrationServlet" method="post">
+		      <input type="email" id="inputEmail" name="inputEmail" class="form-control" placeholder="Email" required autofocus>
+		      <input type="name" id="inputName" class="form-control" name="inputName" placeholder="Name" required>
+		      <input type="surname" id="inputSurname" class="form-control" name="inputSurname" placeholder="Surname" required>              
+		      <input type="password" id="inputPassword" class="form-control" name="inputPassword" placeholder="Set a password" required>
+		      <button class="btn btn-lg btn-primary btn-block" type="submit" id="Registrate">Registrate</button>
+    		</form>
       </div>
 
       <div class="modal-footer">

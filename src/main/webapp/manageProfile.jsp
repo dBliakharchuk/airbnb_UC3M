@@ -73,7 +73,7 @@
 							<li ><a href="trips.jsp">Trips</a></li>
 							<li ><a href="messages.jsp">Messages</a></li>
 							<li class="active"><a href="manageProfile.jsp">Manage Profile</a></li>
-							<li><a href="#" id="Login">Log Out</a></li>
+							<li ><a href='logoutServlet'>Log out</a></li>  
 						</ul>
 					</nav>
 				</div>

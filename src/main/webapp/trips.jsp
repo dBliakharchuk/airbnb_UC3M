@@ -94,6 +94,8 @@
 								<li><a href="index.jsp">Home</a></li>
 								<li class="active"><a href="trips.jsp">Trips</a></li>
 								<li><a href="messages.jsp">Messages</a></li>
+								<li ><a href="manageProfile.jsp">Manage Profile</a></li>
+								<li ><a href='logoutServlet'>Log out</a></li>  
 							</ul>
 						</nav>
 					</div>

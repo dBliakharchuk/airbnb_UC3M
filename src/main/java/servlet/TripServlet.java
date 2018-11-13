@@ -1,6 +1,9 @@
 package servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -9,6 +12,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import database.DataAccess;
+import model.User;
 
 
 @WebServlet(
@@ -25,8 +31,7 @@ public class TripServlet extends HttpServlet {
 	
 		@Override
 		public void init(ServletConfig config) throws ServletException {
-			this.config = config;
-			
+			this.config = config;		
 		}
 	       
 
@@ -34,10 +39,7 @@ public class TripServlet extends HttpServlet {
 		/**
 		 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 		 */
-		protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			request.setAttribute("str1", "Test1");
-            request.getRequestDispatcher("trips.jsp").forward(request, response);
-			
+		protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {			
 		}
 
 		/**
