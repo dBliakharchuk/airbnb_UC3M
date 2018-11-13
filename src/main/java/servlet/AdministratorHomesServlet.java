@@ -20,8 +20,7 @@ import model.User;
 @WebServlet(
 		urlPatterns="/administatorHomes",
 		loadOnStartup=1,
-		initParams={@WebInitParam(name="configuracion", value="es.uc3m.tiw")}
-		)
+		initParams={@WebInitParam(name="configuracion", value="es.uc3m.tiw")})
 public class AdministratorHomesServlet extends HttpServlet {
 	/**
 	 * 
