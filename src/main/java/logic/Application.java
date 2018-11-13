@@ -14,7 +14,7 @@ public class Application {
 	public static void main(String[] args) {
 		
 		List<Apartment> aps = DataAccess.getAllApartments();
-		User piotr = DataAccess.getUserByEmail("piotrszylar@gmail.com");		
+		//User piotr = DataAccess.getUserByEmail("piotrszylar@gmail.com");		
 		User host = new User("test@gmail.com", "Test", "Kowalski", "kowal", "8993945939");
 		User sender = DataAccess.getAllUsers().get(0);
 		User receiver = DataAccess.getAllUsers().get(1);
@@ -25,7 +25,7 @@ public class Application {
 		//Apartment found = DataAccess.getApartmentById(apKey);
 		
 		//System.out.println(found.getCity());
-		
+		User found = DataAccess.getUserByEmail("mateusz@gmail.com");
 		//removeUserTest(host);
 		
 		//sendMessageTest(sender, receiver, "test message");

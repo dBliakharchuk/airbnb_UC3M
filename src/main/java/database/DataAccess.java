@@ -1,5 +1,10 @@
 package database;
 
+import java.sql.Connection; 
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,6 +12,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+
+import org.apache.log4j.Logger;
 
 import model.Apartment;
 import model.ApartmentPK;
@@ -17,6 +24,8 @@ import model.User;
 public class DataAccess 
 {	
 	private static EntityManagerFactory managerFactory = Persistence.createEntityManagerFactory("airbnb");
+	private static Connection connection = null;
+	private static Logger logger = Logger.getLogger(DataAccess.class); 
 	
 	public static List<User> getAllUsers() {
 		List<User> results;
@@ -34,16 +43,25 @@ public class DataAccess
 		return results;
 	}
 	
-	public static User getUserByEmail(String email) throws IllegalStateException {
+	public static User getUserByEmail(String email) {
 		User result = null;
-		EntityManager manager = managerFactory.createEntityManager();
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		logger.info("looking for User " + email);
 		try {
-			result = manager.find(User.class, email);
+			connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/airbnbdb?user=userLQE&password=2dAlhk2RqPhVlFOK" + 
+							"&useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC");
+			stmt = connection.prepareStatement("SELECT * FROM user where email = ?");
+			stmt.setString(1, email);
+		    rs = stmt.executeQuery();
+		    
+		    if (rs.first()) {
+		    	result = new User(rs.getString("email"), rs.getString("name"), rs.getString("surname"), rs.getString("password"), rs.getString("phone"));
+		    }
+		    
 		} catch(Exception ex) {
-			//logger.error("Exception in method getUserByEmail");
+			logger.error("Exception in method getUserByEmail");
 			ex.printStackTrace();
-		} finally {
-			manager.close();
 		}
 		
 		return result;		

@@ -90,4 +90,12 @@ public class MessagePK implements Serializable {
 		
 		return hash;
 	}
+
+	@Override
+	public String toString() {
+		return "MessagePK [message=" + message + ", date=" + date + ", sender=" + sender + ", receiver=" + receiver
+				+ "]";
+	}
+	
+	
 }

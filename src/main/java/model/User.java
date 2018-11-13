@@ -215,4 +215,13 @@ public class User implements Serializable {
 		return adminPassword;
 	}
 
+	@Override
+	public String toString() {
+		return "User [email=" + email + ", name=" + name + ", password=" + password + ", phone=" + phone + ", surname="
+				+ surname + ", apartments=" + apartments + ", messagesSent=" + messagesSent + ", messagesReceived="
+				+ messagesReceived + ", reservations=" + reservations + "]";
+	}
+	
+	
+
 }

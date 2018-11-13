@@ -94,4 +94,11 @@ public class Message implements Serializable {
 		id.setDate(date);
 	}
 
+	@Override
+	public String toString() {
+		return "Message [id=" + id.toString() + ", isUnread=" + isUnread + ", sender=" + sender + ", receiver=" + receiver + "]";
+	}
+	
+	
+
 }
