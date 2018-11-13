@@ -181,7 +181,7 @@ function updateApartmentData() {
 	var cuntry = $("#apartment-country").val();
 	var price = $("#apartment-price").val().toString();
 	
-	var type = $("#apartment-typ").val();
+	var type = $("#apartment-type").val();
 	var adults_beds = $("#apartment-adults-beds").val().toString();
 	var childeren_beds = $("#apartment-child-beds").val().toString();
 	var description = $("#place-description").val();
@@ -190,20 +190,21 @@ function updateApartmentData() {
 	
 
 	if (email != null && email != "") {
-//		if (placeName != null && placeName != ""
-//				&& cuntry != null && cuntry != ""
-//				&& price != null && price != ""
-//				&& type != null && type != ""
-//				&& adults_beds != null && adults_beds != ""
-//				&& childeren_bedsy != null && childeren_beds != "") 
-//		{
+		if (placeName != null && placeName != ""
+				&& cuntry != null && cuntry != ""
+				&& price != null && price != ""
+				&& type != null && type != ""
+				&& adults_beds != null && adults_beds != ""
+				&& childeren_beds != null && childeren_beds != ""
+				&& description != null && description != "") 
+		{
 		
 		
 			var place_cel_active = $(".place-cel-active")[0];
 			
-			var building_number = place_cel_active.children[8].innerHTML;
+			var building_number = place_cel_active.children[8].innerHTML.toString();
 			var street = place_cel_active.children[9].innerText;
-			var flat_number = place_cel_active.children[10].innerHTML;
+			var flat_number = place_cel_active.children[10].innerHTML.toString();
 			var city = place_cel_active.children[11].innerText;
 			
 			var apartment = {
@@ -222,9 +223,20 @@ function updateApartmentData() {
 		      }
 			
 			
-			$.post("/airbnb/administatorHomes", {
-//				JSON.stringify(apartment),                     PROBLEM
-				action : "updateApartment"
+			$.post("/airbnb/administatorHomes", {                  
+				action : "updateApartment",
+				email : email,
+				placeName : placeName,
+				cuntry : cuntry,
+				price : price,
+				type : type,
+				adults_beds : adults_beds,
+				childeren_beds : childeren_beds,
+				description : description,
+				building_number : building_number, 
+				street : street,
+				flat_number : flat_number, 
+				city : city
 				
 			}).done(function(status) {
 				alert(status);
@@ -237,10 +249,10 @@ function updateApartmentData() {
 //				else
 //					alert("Unknow error");
 			});
-//		} 
-//		else {
-//			alert("You can't leav empty fields");
-//		}
+		} 
+		else {
+			alert("You can't leav empty fields");
+		}
 
 	} else {
 		alert("User not selected");

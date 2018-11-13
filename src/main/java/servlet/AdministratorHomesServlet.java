@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import database.DataAccess;
 import logic.AdministratorLogic;
 import model.Apartment;
+import model.ApartmentPK;
 import model.User;
 
 
@@ -58,40 +59,32 @@ public class AdministratorHomesServlet extends HttpServlet {
 			String action = request.getParameter("action");
 			
 			if ("updateApartment".equals(action))
-			{
-				
+			{	
 				String email = request.getParameter("email");
 				String placeName = request.getParameter("placeName");
 				String cuntry= request.getParameter("cuntry");
-//				double	price = (double)request.getAttribute("price");
-//
-//				String type = request.getParameter("type");
-				String adults_beds = request.getParameter("adults_beds");
-//				String childeren_beds = request.getParameter("childeren_beds");
-//				String	description = request.getParameter("description");
+				double	price = Double.parseDouble(request.getParameter("price"));
+				String type = request.getParameter("type");
+				int adults_beds = Integer.parseInt(request.getParameter("adults_beds"));
+				int childeren_beds = Integer.parseInt(request.getParameter("childeren_beds"));
+				String	description = request.getParameter("description");
+				
+				int buildingNumber = Integer.parseInt(request.getParameter("building_number"));
+				String street = request.getParameter("street");
+				int flatNumber = Integer.parseInt(request.getParameter("flat_number"));
+				String	city = request.getParameter("city");
+				
+				
+			//	ApartmentPK apartmentPK = new ApartmentPK(email, buildingNumber, street, flatNumber, city);
 //				
-//				
-//				String building_number = request.getParameter("building_number");
-//				String street = request.getParameter("street");
-//				String flat_number = request.getParameter("flat_number");
-//				String	city = request.getParameter("city");
-				
-				
-				
-//				 String email = request.getParameter("email");
-//				 String name = request.getParameter("name");
-//				 String surname = request.getParameter("surname");
-//				 String	phoneNumber = request.getParameter("phoneNumber");
 //				 
 //				 User updatedUserData = new User(email, name, phoneNumber, surname);
 //				
 //				 int userUpdatedStatus = AdministratorLogic.updateUserData(updatedUserData);
 				
-				writer.println(email + placeName +  adults_beds);
 				
 //				 writer.println(email + placeName + cuntry + price + type + adults_beds + childeren_beds
 //						 + description + building_number + street + flat_number + city);
-//					
 			}else if ("deletePlace".equals(action))
 			{
 //				String email = request.getParameter("email");
