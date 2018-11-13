@@ -7,6 +7,7 @@
 
 <%@ page import="model.*" %>
 <%@ page import=" java.util.*"%>
+<%@ page import="logic.*" %>
 
 	<head>
 	<meta charset="utf-8">
@@ -107,9 +108,13 @@
  							<div class="desc">
 								<span></span>
 										<h3><%= apartment.getName() %></h3>
-										<span><%= apartment.getType() %></span> 
-										<span class="price"><%= apartment.getPrice() %></span>
-										 <a class="btn btn-primary btn-outline" href="#">Select <i class="icon-arrow-right22"></i></a>
+										<span><%= ApartmentLogic.correctApartmentTypeDisplay(apartment.getType().toString()) %></span> 
+										<span class="price"><%= String.format ("%.2f", apartment.getPrice()) %></span>
+										<form method="get">
+											<input name="apartmentID" type="text" value="<%= apartment.getId() %>" hidden>
+											<input type="submit" class="btn btn-primary btn-outline" value="Select">
+<!-- 										 	<a class="btn btn-primary btn-outline" href="results">Select <i class="icon-arrow-right22"></i></a> -->
+										</form>
 									</div>
 								</div>
 							</div>

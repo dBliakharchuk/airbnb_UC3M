@@ -36,6 +36,42 @@ public class ApartmentLogic {
 		return resultApartmentsList;
 	}
 	
+	public static Apartment findApartmentById (String apartmentID) {
+		
+		List<Apartment> availableApartmentsList = DataAccess.getAllApartments();
+		
+		for(Apartment apartment : availableApartmentsList) {
+			
+			if(apartment.getId().toString().equals(apartmentID) == true)  {
+					
+				return apartment;
+			}	
+		}
+		return null;
+	}
+	public static String correctApartmentTypeDisplay (String apartmentType) {
+		
+		String apartmentTypeToDisplay = null;
+	
+		if(apartmentType.equals("ENTIRE_APARTMENT")){
+		
+			apartmentTypeToDisplay = "Entire Apartment";
+		}
+		else if(apartmentType.equals("PRIVATE_ROOM")){
+		
+			apartmentTypeToDisplay = "Private Room";
+		}
+		else if(apartmentType.equals("SHARED_ROOM")){
+		
+			apartmentTypeToDisplay = "Shared Room";
+		}
+		else {
+		
+			apartmentTypeToDisplay = "None";
+		}
+		
+		return apartmentTypeToDisplay;
+	}
 	private static boolean checkApartmentName(Apartment apartment, String obtainedName) {
 		
 		if(obtainedName.contains(apartment.getCity().toLowerCase())==true ){
@@ -84,7 +120,7 @@ public class ApartmentLogic {
 			return false;
 		}
 	}
-	public static boolean checkApartmentType(Apartment apartment, ApartmentType typeOfAccom) {
+	private static boolean checkApartmentType(Apartment apartment, ApartmentType typeOfAccom) {
 		
 		
 		if(typeOfAccom == null) {

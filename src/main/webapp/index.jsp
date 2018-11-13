@@ -127,7 +127,7 @@
 													<label for="class">Price</label>
 													<select class="cs-select cs-skin-border" id="price" name="price">
 														<option value="" disabled selected>Less than 35€</option>
-														<option value="P1">Less than 35€</option>            
+														<option value="P1">Less than 35</option>            
 														<option value="P2">36€ - 69€</option>
 														<option value="P3">70€ - 130€</option>
 														<option value="P4">131€ or more</option>

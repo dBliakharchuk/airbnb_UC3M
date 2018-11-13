@@ -43,13 +43,16 @@ public class ResultServlet extends HttpServlet {
 			
 		}
 	       
-
-
 		/**
 		 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 		 */
 		protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			
+			request.setAttribute("selectedApartment", ApartmentLogic.findApartmentById(request.getParameter("apartmentID")));
+					
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/accommodation.jsp");
+			
+			dispatcher.forward(request, response);
 		}
 
 		/**
@@ -96,7 +99,7 @@ public class ResultServlet extends HttpServlet {
 			}
 			
 			List<Apartment> resultApartmentsList = ApartmentLogic.search(fromPlace, price, typeOfAccom, adults, children, dateStart, dateEnd);
-			
+		
 			request.setAttribute("resultApartments", resultApartmentsList);
 			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/results.jsp");
@@ -123,7 +126,7 @@ public class ResultServlet extends HttpServlet {
 //			
 //			out.flush();
 //			out.close();
-//					
+					
 		}
 		
 }
