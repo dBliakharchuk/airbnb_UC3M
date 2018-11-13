@@ -69,14 +69,14 @@ public class AdministratorHomesServlet extends HttpServlet {
 				int childeren_beds = Integer.parseInt(request.getParameter("childeren_beds"));
 				String	description = request.getParameter("description");
 				
-				int buildingNumber = Integer.parseInt(request.getParameter("building_number"));
+				String buildingNumber = request.getParameter("building_number");
 				String street = request.getParameter("street");
-				int flatNumber = Integer.parseInt(request.getParameter("flat_number"));
+				String flatNumber = request.getParameter("flat_number");
 				String	city = request.getParameter("city");
 				
 				
-			//	ApartmentPK apartmentPK = new ApartmentPK(email, buildingNumber, street, flatNumber, city);
-//				
+				ApartmentPK apartmentPK = new ApartmentPK(email, buildingNumber, street, flatNumber, city);
+				// Apartment apartmen = new Apartment(apartmentPK, adults_beds, childeren_beds, cuntry, description, placeName, price, type); change type
 //				 
 //				 User updatedUserData = new User(email, name, phoneNumber, surname);
 //				
