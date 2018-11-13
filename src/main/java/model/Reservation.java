@@ -72,4 +72,11 @@ public class Reservation implements Serializable {
 		id.setUserEmail(user.getEmail());
 	}
 
+	@Override
+	public String toString() {
+		return "Reservation [id=" + id.toString() + ", apartment=" + apartment + ", user=" + user + "]";
+	}
+	
+	
+
 }

@@ -12,7 +12,9 @@ import javax.persistence.*;
  * 
  */
 @Entity
-@NamedQuery(name="Message.findAll", query="SELECT m FROM Message m")
+@NamedQueries({
+	@NamedQuery(name="Message.findAll", query="SELECT m FROM Message m"),
+	@NamedQuery(name="Message.findUserMessages", query="SELECT m FROM Message m where m.sender = :userEmail or m.receiver = :userEmail")})
 public class Message implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -93,5 +95,12 @@ public class Message implements Serializable {
 	public void setDate(Date date) {
 		id.setDate(date);
 	}
+
+	@Override
+	public String toString() {
+		return "Message [id=" + id.toString() + ", isUnread=" + isUnread + ", sender=" + sender + ", receiver=" + receiver + "]";
+	}
+	
+	
 
 }

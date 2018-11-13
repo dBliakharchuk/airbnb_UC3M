@@ -13,11 +13,12 @@ public class ApartmentLogic {
 	
 	public static void addApartment(Apartment apartment) {
 		if (!UserLogic.isUserRegistered(apartment.getHost())) {
-			UserLogic.createUser(apartment.getHost());
+			UserLogic.registerUser(apartment.getHost());
 		}
 		
 		DataAccess.createApartment(apartment);
 	}
+
 	public static List<Apartment> search(String fromPlace, String price, ApartmentType typeOfAccom, Integer adults, Integer children, Date dateStart, Date dateEnd){
 		
 		List<Apartment> availableApartmentsList = DataAccess.getAllApartments();
@@ -234,6 +235,11 @@ public class ApartmentLogic {
 	private static boolean isDateBetweenTwoDates(Date dateStart, Date dateEnd, Date examinedDate) {
 		
 		return dateStart.compareTo(examinedDate) * dateEnd.compareTo(examinedDate) <= 0;
+  }
+  
+	public static boolean removeApartment(Apartment apartment) {
+		//TODO
+		return true;
 
 	}
 }
