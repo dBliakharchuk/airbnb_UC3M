@@ -224,10 +224,12 @@ public class Apartment implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Apartment [id=" + id.toString() + ", bedsAdult=" + bedsAdult + ", bedsChild=" + bedsChild + ", country=" + country
+		return "Apartment [id=" + id + ", bedsAdult=" + bedsAdult + ", bedsChild=" + bedsChild + ", country=" + country
 				+ ", description=" + description + ", name=" + name + ", picture=" + Arrays.toString(picture)
-				+ ", price=" + price + ", type=" + type + ", host=" + host + ", reservations=" + reservations + "]";
+				+ ", price=" + price + ", type=" + type + ", host=" + host + "]";
 	}
+
+	
 	
 	
 

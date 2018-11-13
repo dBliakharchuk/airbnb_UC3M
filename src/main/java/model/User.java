@@ -69,7 +69,7 @@ public class User implements Serializable {
 		this.messagesReceived = new ArrayList<Message>();
 		this.reservations = new ArrayList<Reservation>();
 	}
-
+	
 	public User(String email, String name, String phone, String surname)
 	{
 		super();
@@ -218,8 +218,7 @@ public class User implements Serializable {
 	@Override
 	public String toString() {
 		return "User [email=" + email + ", name=" + name + ", password=" + password + ", phone=" + phone + ", surname="
-				+ surname + ", apartments=" + apartments + ", messagesSent=" + messagesSent + ", messagesReceived="
-				+ messagesReceived + ", reservations=" + reservations + "]";
+				+ surname + "]";
 	}
 	
 	

@@ -368,6 +368,27 @@ public class DataAccess
 		return true;
 	}
 	
+	public static boolean removeMessage(Message message) {
+		List<Message> results = null;
+		EntityManager manager = managerFactory.createEntityManager();
+		try {
+			User sender = manager.find(User.class, message.getSender().getEmail());
+			User receiver = manager.find(User.class, message.getReceiver().getEmail());
+			manager.getTransaction().begin();
+			manager.remove(message);
+			sender.removeMessagesSent(message);
+			receiver.removeMessagesReceived(message);
+			manager.getTransaction().commit();
+		} catch(Exception ex) {
+			//logger.error("Exception in method getUserByEmail");
+			ex.printStackTrace();
+		} finally {
+			manager.close();
+		}
+		
+		return true;
+	}
+	
 	public static boolean createReservation(Reservation reservation) {
 		EntityManager manager = managerFactory.createEntityManager();
 		try {

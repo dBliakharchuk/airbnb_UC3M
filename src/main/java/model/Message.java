@@ -12,7 +12,9 @@ import javax.persistence.*;
  * 
  */
 @Entity
-@NamedQuery(name="Message.findAll", query="SELECT m FROM Message m")
+@NamedQueries({
+	@NamedQuery(name="Message.findAll", query="SELECT m FROM Message m"),
+	@NamedQuery(name="Message.findUserMessages", query="SELECT m FROM Message m where m.sender = :userEmail or m.receiver = :userEmail")})
 public class Message implements Serializable {
 	private static final long serialVersionUID = 1L;
 
