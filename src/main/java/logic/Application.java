@@ -4,6 +4,7 @@ import java.util.List;
 
 import database.DataAccess;
 import model.Apartment;
+import model.ApartmentPK;
 import model.ApartmentType;
 import model.Message;
 import model.User;
@@ -19,6 +20,11 @@ public class Application {
 		User receiver = DataAccess.getAllUsers().get(1);
 		
 		Apartment apartment = new Apartment(host,"3A", "Koszykowa", "2", "Warszawa", 3, 0, "Polska", "test", "Przyklad", new byte[2], 30.0, ApartmentType.PRIVATE_ROOM);
+		ApartmentPK apKey = new ApartmentPK("dima@gmail.com", "15", "Calle Central", "5", "Madrid");
+		
+		//Apartment found = DataAccess.getApartmentById(apKey);
+		
+		//System.out.println(found.getCity());
 		
 		//removeUserTest(host);
 		

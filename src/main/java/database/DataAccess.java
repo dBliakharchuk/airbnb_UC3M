@@ -9,6 +9,7 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 import model.Apartment;
+import model.ApartmentPK;
 import model.Message;
 import model.Reservation;
 import model.User;
@@ -16,21 +17,6 @@ import model.User;
 public class DataAccess 
 {	
 	private static EntityManagerFactory managerFactory = Persistence.createEntityManagerFactory("airbnb");
-	
-	public static List<User> test() {
-		System.out.println("TEST INCOMING");
-		List<User> results;
-		EntityManager manager = managerFactory.createEntityManager();
-		try {
-			Query query = manager.createNamedQuery("User.findAll", User.class);
-			results = query.getResultList();
-		} finally {
-			manager.close();
-		}
-		System.out.println("TEST");
-		System.out.println(results);
-		return results;
-	}
 	
 	public static List<User> getAllUsers() {
 		List<User> results;
@@ -49,12 +35,10 @@ public class DataAccess
 	}
 	
 	public static User getUserByEmail(String email) throws IllegalStateException {
-		List<User> results = null;
+		User result = null;
 		EntityManager manager = managerFactory.createEntityManager();
 		try {
-			Query query = manager.createNamedQuery("User.findByEmail", User.class);
-			query.setParameter("email", email);
-			results = query.getResultList();
+			result = manager.find(User.class, email);
 		} catch(Exception ex) {
 			//logger.error("Exception in method getUserByEmail");
 			ex.printStackTrace();
@@ -62,16 +46,7 @@ public class DataAccess
 			manager.close();
 		}
 		
-		if (results == null || results.isEmpty()) {
-			return null;
-		}
-		
-		if (results.size() > 1) {
-			throw new IllegalStateException("PK duplicate in User table");
-		}
-		
-		
-		return results.get(0);		
+		return result;		
 	}
 	
 	public static List<User> getUsersBySurname(String surname) {
@@ -176,6 +151,21 @@ public class DataAccess
 			manager.close();
 		}
 		return results;
+	}
+	
+	public static Apartment getApartmentById(ApartmentPK apartmentKey) {
+		Apartment result = null;
+		EntityManager manager = managerFactory.createEntityManager();
+		try {
+			result = manager.find(Apartment.class, apartmentKey);
+		} catch(Exception ex) {
+			//logger.error("Exception in method getUserByEmail");
+			ex.printStackTrace();
+		} finally {
+			manager.close();
+		}
+	
+		return result;		
 	}
 	
 	public static List<Apartment> getApartmentByHost(String email) {
