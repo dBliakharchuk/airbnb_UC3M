@@ -51,6 +51,7 @@
 	<link rel="stylesheet" href="css/cs-skin-border.css">
 	
 	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/reservation.css" type="text/css"/>
 
 
 	<!-- Modernizr JS -->
@@ -86,41 +87,54 @@
 
 		<!-- end:header-top -->
 
-		<div id="fh5co-tours" class="fh5co-section-gray">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
-						<h3>Results</h3>
-						<p>These are the results according to your selection</p>
+		 <div class="fh5co-hero">
+			<div class="fh5co-overlay"></div>
+			<div class="fh5co-cover" data-stellar-background-ratio="0.5" style="background-image: url(images/cover_bg_5.jpg);">
+				<div class="desc">
+					<div class="container">
+							<div id="reservation-container">
+								<div>
+									<span id="reservation-header">Reservation </span>
+								</div>
+								<div id="reservation-box">
+								<div class="reservation-info-field">
+									<span class="reservation-field-title">Apartment:</span>
+									Vamos a la playa 
+								</div>
+								<div class="reservation-info-field">
+									<span class="reservation-field-title">Address:</span>
+									Madrid
+								</div>
+								<div class="reservation-info-field">
+									<span class="reservation-field-title">User:</span>
+									piotrszylar@gmail.com
+								</div>
+									<div class="date-box">
+										<div class="input-field">
+											<span class="reservation-field-title">Start:</span>
+											<input type="text" class="form-control" id="date-start" name="date-start" placeholder="mm/dd/yyyy"/>
+										</div>
+									</div>
+									<div class="date-box">
+										<div class="input-field">
+											<span class="reservation-field-title">End:</span>
+											<input type="text" class="form-control" id="date-start" name="date-start" placeholder="mm/dd/yyyy"/>
+										</div>
+									</div>
+										<div id="reservation-price">
+											<span>Price:</span>
+											1000zl
+										</div>
+									<div style="clear:both;"></div>
+									<br/>
+									<input type="submit" class="btn btn-primary reservation-button" value="Reserve">
+									<input type="submit" class="btn btn-primary reservation-button" value="Cancel">
+								</div>
+						</div>
 					</div>
 				</div>
-				
-				<div class="row row-bottom-padded-md">
-				<%
-				
-						ArrayList<Apartment> apartments = (ArrayList<Apartment>)request.getAttribute("resultApartments");
-							
-							for (Apartment apartment : apartments)
-							{ %>
-								
-							<div class="col-md-4 col-sm-6 fh5co-tours animate-box" data-animate-effect="fadeIn">
-							<div href="#"><img src="images/place-1.jpg" alt="Free HTML5 Website Template by FreeHTML5.co" class="img-responsive">
- 							<div class="desc">
-								<span></span>
-										<h3><%= apartment.getName() %></h3>
-										<span><%= ApartmentLogic.correctApartmentTypeDisplay(apartment.getType().toString()) %></span> 
-										<span class="price"><%= String.format ("%.2f", apartment.getPrice()) %></span>
-										<form method="get">
-											<input name="apartmentID" type="text" value="<%= apartment.getId() %>" hidden>
-											<input type="submit" class="btn btn-primary btn-outline" value="Select">
-										</form>
-									</div>
-								</div>
-							</div>
-						<% } %>
-				</div>
-
 			</div>
+
 		</div>
             
 		<footer>
@@ -234,4 +248,3 @@
         
 	</body>
 </html>
-
