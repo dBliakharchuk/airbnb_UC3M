@@ -11,6 +11,7 @@ import model.ApartmentType;
 import model.Message;
 import model.Reservation;
 import model.ReservationPK;
+import model.Trip;
 import model.User;
 
 public class Application {
@@ -20,7 +21,13 @@ public class Application {
 		//List<Apartment> aps = DataAccess.getAllApartments();
 		User piotr = DataAccess.getUserByEmail("customer@gmail.com");
 		User mat = DataAccess.getUserByEmail("mateusz@gmail.com");
-		UserLogic.deleteUser(piotr);
+		//UserLogic.deleteUser(piotr);
+		List<Trip> trips = TripLogic.getUserTrips(piotr);
+		System.out.println(trips.size());
+		
+		for (Trip t : trips) {
+			System.out.println(t.getBeginning() + " " + t.getEnd());
+		}
 //		List<User> users = DataAccess.getAllUsers();
 //		List<Reservation> reservs = DataAccess.getAllReservations();
 //		//ApartmentPK apKey = new ApartmentPK("dima@gmail.com", "15", "Calle Central", "5", "Madrid");

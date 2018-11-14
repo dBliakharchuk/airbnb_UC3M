@@ -8,6 +8,11 @@ import java.util.List;
 
 public class DateUtils {
 	public static List<Date> getDatesBetween(Date startDate, Date endDate) {
+		if (startDate.after(endDate)) {
+			Date temp = endDate;
+			endDate = startDate;
+			startDate = temp;
+		}
 	    List<Date> datesInRange = new ArrayList<>();
 	    Calendar calendar = new GregorianCalendar();
 	    calendar.setTime(startDate);
@@ -22,4 +27,5 @@ public class DateUtils {
 	    }
 	    return datesInRange;
 	}
+	
 }

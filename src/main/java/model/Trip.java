@@ -1,12 +1,13 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class Trip {
 	Date beginning;
 	Date end;
-	List<Reservation> reservations;
+	List<Reservation> reservations = new ArrayList();
 	
 	public Trip() {
 		
