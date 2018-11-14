@@ -56,6 +56,8 @@
 
 	<!-- Modernizr JS -->
 	<script src="js/modernizr-2.6.2.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+	<script type="text/javascript" src="js/manageProfile.js"></script>
 	<!-- FOR IE9 below -->
 	<!--[if lt IE 9]>
 	<script src="js/respond.min.js"></script>
@@ -66,26 +68,17 @@
 		<div id="fh5co-wrapper">
 		<div id="fh5co-page">
 
-		<header id="fh5co-header-section" class="sticky-banner">
-			<div class="container">
-				<div class="nav-header">
-					<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle dark"><i></i></a>
-					<h1 id="fh5co-logo"><a href="index.jsp"><i class="icon-airplane"></i>TIWbnb</a></h1>
-					<!-- START #fh5co-menu-wrap -->
-					<nav id="fh5co-menu-wrap" role="navigation">
-						<ul class="sf-menu" id="fh5co-primary-menu">
-							<li ><a href="index.jsp">Home</a></li>
-							<li ><a href="trips.jsp">Trips</a></li>
-							<li ><a href="messages.jsp">Messages</a></li>
-							<li class="active"><a href="manageProfile.jsp">Manage Profile</a></li>
-							<li><a href="#" id="Login">Log Out</a></li>
-						</ul>
-					</nav>
-				</div>
-			</div>
-		</header>
+			<!-- start:header-top -->
+			<%
+			String emailOfLoggedUser = (String) request.getSession().getAttribute("emailOfLoggedUser"); 		
+			if (emailOfLoggedUser != null) {  %>
+				<jsp:include page="headerLogin.jsp"/>
+			<% } %>
+			<script type="text/javascript">
+				document.getElementById("tab-profile").classList.add("active");
+			</script>
 
-		<!-- end:header-top -->
+			<!-- end:header-top -->
 
 		<div id="fh5co-tours" class="fh5co-section-gray">
 			<div class="container" id="user-data-container">
@@ -93,7 +86,7 @@
 				<div id="profile-picture">
 
 				</div>
-				<form action="" id="user-data-form">
+				<form action="/airbnb/UserServlet" id="user-data-form">
 				<% User user =  (User)request.getAttribute("user");
 					if(user != null)
 					{		%>
@@ -104,12 +97,14 @@
 					<label for="name" > Surname</label>
 					<input type="text" id="user-surname" name="surname" value="<%= user.getSurname() %>" >
 					<label for="phone" > Phone Number</label>
-					<input type="phone" id="user-phone" name="phone" value="<%= user.getPhone() %>" >
+					<input type="number" id="user-phone" name="phoneNumber" value="<%= user.getPhone() %>" >
+					<input type="hidden"  name="action" value="updateUser" >
+					
 					<input type="button" class="btn btn-success" id="save-changes-button" value="save">
 				<% }	%> 
 				</form>
-				<button type="button" class="btn btn-warning" onclick="changePassword()">Change Password</button>
-				<button type="button" class="btn btn-danger"  id="delete-acount-button">Delete Acount</button>
+				<button type="button" class="btn btn-warning" id="change-password-button" onclick="changePassword()">Change Password</button>
+		 		<button type="button" class="btn btn-danger"  id="delete-acount-button"onclick="deleteAccount()">Delete Account</button>
 
 			</div>
 
@@ -165,12 +160,7 @@
 		</div>
 
 
-
-		
-
-
-
-	</div>
+	<jsp:include page="footer.jsp"/></div>
 	<!-- END fh5co-page -->
 
 	</div>

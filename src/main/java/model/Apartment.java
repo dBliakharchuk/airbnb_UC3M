@@ -43,7 +43,7 @@ public class Apartment implements Serializable {
 	@JoinColumn(name="host")
 	private User host;
 
-	@OneToMany(mappedBy="apartment")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="apartment")
 	private List<Reservation> reservations;
 
 	public Apartment() {

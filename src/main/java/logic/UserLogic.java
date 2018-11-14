@@ -13,8 +13,7 @@ public class UserLogic {
 			return false;
 		}
 		
-		DataAccess.updateUser(user);
-		return true;
+		return DataAccess.updateUser(user);
 	}
 	
 	public static boolean registerUser(User user) {
@@ -22,35 +21,13 @@ public class UserLogic {
 			return false;
 		}
 		
-		DataAccess.createUser(user);
-		return true;
+		return DataAccess.createUser(user);
 	}
 	
 	public static boolean deleteUser(User user) {
 		if (user == null || !isUserRegistered(user)) {
 			return false;
 		}
-		
-		for (Message m : user.getMessagesSent()) {
-			DataAccess.removeMessage(m);
-		}
-		for (Message m : user.getMessagesReceived()) {
-			DataAccess.removeMessage(m);
-		}
-		user.setMessagesReceived(null);
-		user.setMessagesSent(null);
-		
-		for (Apartment a : user.getApartments()) {
-			ApartmentLogic.removeApartment(a);
-		}
-		
-		user.setApartments(null);
-		
-		for (Reservation r : user.getReservations()) {
-			TripLogic.removeReservation(r);
-		}
-		
-		user.setReservations(null);
 		
 		return DataAccess.removeUser(user);
 	}

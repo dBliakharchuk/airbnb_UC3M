@@ -40,13 +40,16 @@ public class ManageProfileServlet extends HttpServlet
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		String email = "piotrducki@gmail.com";
+		String email = (String)request.getSession().getAttribute("emailOfLoggedUser");
+		if(email != null)
+		{
+			User user = DataAccess.getUserByEmail(email);
+			request.setAttribute("user", user);
 		
-		User user = DataAccess.getUserByEmail(email);
-		request.setAttribute("user", user);
+			ArrayList<Apartment> userApartments =  new ArrayList<Apartment>(DataAccess.getApartmentByHost(email));
+			request.setAttribute("userApartments", userApartments);
+		}
 		
-		ArrayList<Apartment> userApartments =  new ArrayList<Apartment>(DataAccess.getApartmentByHost(email));
-		request.setAttribute("userApartments", userApartments);
 
 		request.getRequestDispatcher("manageProfile.jsp").forward(request, response);
 	}

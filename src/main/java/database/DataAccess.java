@@ -1,10 +1,11 @@
 package database;
 
-import java.sql.Connection; 
+import java.sql.Connection;  
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,26 +46,17 @@ public class DataAccess
 	
 	public static User getUserByEmail(String email) {
 		User result = null;
-		PreparedStatement stmt = null;
-		ResultSet rs = null;
-		logger.info("looking for User " + email);
+		EntityManager manager = managerFactory.createEntityManager();
 		try {
-			connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/airbnbdb?user=userLQE&password=2dAlhk2RqPhVlFOK" + 
-							"&useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC");
-			stmt = connection.prepareStatement("SELECT * FROM user where email = ?");
-			stmt.setString(1, email);
-		    rs = stmt.executeQuery();
-		    
-		    if (rs.first()) {
-		    	result = new User(rs.getString("email"), rs.getString("name"), rs.getString("surname"), rs.getString("password"), rs.getString("phone"));
-		    }
-		    
+			result = manager.find(User.class, email);
 		} catch(Exception ex) {
-			logger.error("Exception in method getUserByEmail");
+			//logger.error("Exception in method getUserByEmail");
 			ex.printStackTrace();
+		} finally {
+			manager.close();
 		}
 		
-		return result;		
+		return result; 
 	}
 	
 	public static List<User> getUsersBySurname(String surname) {
@@ -371,16 +363,20 @@ public class DataAccess
 	public static boolean removeMessage(Message message) {
 		List<Message> results = null;
 		EntityManager manager = managerFactory.createEntityManager();
+		Message managed = null;
 		try {
 			User sender = manager.find(User.class, message.getSender().getEmail());
 			User receiver = manager.find(User.class, message.getReceiver().getEmail());
 			manager.getTransaction().begin();
-			manager.remove(message);
-			sender.removeMessagesSent(message);
-			receiver.removeMessagesReceived(message);
+			if (!manager.contains(message)) {
+			    managed = manager.merge(message);
+			}
+			manager.remove(managed);
+			sender.removeMessagesSent(managed);
+			receiver.removeMessagesReceived(managed);
 			manager.getTransaction().commit();
 		} catch(Exception ex) {
-			//logger.error("Exception in method getUserByEmail");
+			logger.error("Exception in method removeMessage");
 			ex.printStackTrace();
 		} finally {
 			manager.close();
@@ -389,25 +385,44 @@ public class DataAccess
 		return true;
 	}
 	
-	public static boolean createReservation(Reservation reservation) {
+	public static List<Reservation> getAllReservations() {
+		List<Reservation> results;
 		EntityManager manager = managerFactory.createEntityManager();
 		try {
-			manager.getTransaction().begin();
-			manager.persist(reservation);
-			manager.getTransaction().commit();
-		} catch (Exception ex) {
-			try {
-				if (manager.getTransaction().isActive()) {
-					manager.getTransaction().rollback();
-				}
-			} catch (Exception e) {
-				ex.printStackTrace();
-				throw e;
-			}
-			throw ex;
+			Query query = manager.createNamedQuery("Reservation.findAll", Reservation.class);
+			results = query.getResultList();
+		} catch(Exception ex) {
+			//logger.error("Exception in method getAllUsers");
+			ex.printStackTrace();
+			results = new ArrayList();
 		} finally {
 			manager.close();
 		}
+		return results;
+	}
+	
+	public static boolean createReservation(Reservation reservation) {
+		PreparedStatement stmt = null;
+		logger.info("creating Reservation");
+		try {
+			connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/airbnbdb?user=userLQE&password=2dAlhk2RqPhVlFOK" + 
+							"&useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC");
+			stmt = connection.prepareStatement("INSERT INTO Reservation VALUES(?,?,?,?,?,?,?)");
+			stmt.setString(1, reservation.getUser().getEmail());
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");  
+			stmt.setString(2, dateFormat.format(reservation.getDate()));
+			stmt.setString(3, reservation.getApartment().getHost().getEmail());
+			stmt.setString(4, reservation.getApartment().getBuildingNumber());
+			stmt.setString(5, reservation.getApartment().getStreet());
+			stmt.setString(6, reservation.getApartment().getFlatNumber());
+			stmt.setString(7, reservation.getApartment().getCity());
+		    stmt.executeUpdate();
+		     
+		} catch(Exception ex) {
+			logger.error("Exception in method createReservation");
+			ex.printStackTrace();
+		}
+		
 		return true;
 	}
 	

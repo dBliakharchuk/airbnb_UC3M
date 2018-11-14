@@ -212,7 +212,7 @@ public class ApartmentLogic {
 			
 		else if(dateStart == null && dateEnd != null) {
 			
-			Date currentDate = new Date(new java.util.Date().getTime());
+			Date currentDate = new Date(new Date().getTime());
 			
 			for(Date date : bookedDays) {
 				
@@ -235,11 +235,13 @@ public class ApartmentLogic {
 	private static boolean isDateBetweenTwoDates(Date dateStart, Date dateEnd, Date examinedDate) {
 		
 		return dateStart.compareTo(examinedDate) * dateEnd.compareTo(examinedDate) <= 0;
-  }
+	}
   
 	public static boolean removeApartment(Apartment apartment) {
-		//TODO
-		return true;
-
+		if (apartment == null) {
+			return false;
+		}
+		
+		return DataAccess.removeApartment(apartment);
 	}
 }
