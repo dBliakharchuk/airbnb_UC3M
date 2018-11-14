@@ -11,7 +11,7 @@ import java.util.Date;
  */
 @Entity
 @NamedQuery(name="Reservation.findAll", query="SELECT r FROM Reservation r")
-public class Reservation implements Serializable {
+public class Reservation implements Serializable, Comparable<Reservation> {
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
@@ -89,6 +89,17 @@ public class Reservation implements Serializable {
 	@Override
 	public String toString() {
 		return "Reservation [id=" + id.toString() + ", apartment=" + apartment + ", user=" + user + "]";
+	}
+
+	@Override
+	public int compareTo(Reservation arg0) {
+		if (this.getDate().after(arg0.getDate())) {
+			return 1;
+		} else if (this.getDate().before(arg0.getDate())) {
+			return -1;
+		} else {
+			return 0;
+		}
 	}
 	
 	

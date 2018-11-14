@@ -1,12 +1,14 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class Trip {
 	Date beginning;
 	Date end;
-	List<Reservation> reservations;
+	Apartment apartment;
+	List<Reservation> reservations = new ArrayList();
 	
 	public Trip() {
 		
@@ -33,6 +35,14 @@ public class Trip {
 
 	public void setEnd(Date end) {
 		this.end = end;
+	}
+
+	public Apartment getApartment() {
+		return apartment;
+	}
+
+	public void setApartment(Apartment apartment) {
+		this.apartment = apartment;
 	}
 
 	public List<Reservation> getReservations() {
