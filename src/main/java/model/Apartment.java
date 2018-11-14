@@ -4,6 +4,7 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -238,5 +239,16 @@ public class Apartment implements Serializable {
 
 		return reservation;
 	}
+
+	@Override
+	public String toString() {
+		return "Apartment [id=" + id + ", bedsAdult=" + bedsAdult + ", bedsChild=" + bedsChild + ", country=" + country
+				+ ", description=" + description + ", name=" + name + ", picture=" + Arrays.toString(picture)
+				+ ", price=" + price + ", type=" + type + ", host=" + host + "]";
+	}
+
+	
+	
+	
 
 }

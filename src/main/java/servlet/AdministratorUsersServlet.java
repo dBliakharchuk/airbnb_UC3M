@@ -29,12 +29,15 @@ public class AdministratorUsersServlet extends HttpServlet
 	private ServletConfig config;
 	private List<User> users;
 
-	@Override
-	public void init(ServletConfig config) throws ServletException
-	{
-		this.config = config;
-		DataAccess.test();
-	}
+	private Boolean userUpdated = false;
+	
+		@Override
+		public void init(ServletConfig config) throws ServletException {
+			this.config = config;
+
+		}
+	       
+
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -64,10 +67,8 @@ public class AdministratorUsersServlet extends HttpServlet
 			 String name = request.getParameter("name");
 			 String surname = request.getParameter("surname");
 			 String	phoneNumber = request.getParameter("phoneNumber");
-			 
-			 User updatedUserData = new User(email, name, phoneNumber, surname);
-			
-			 int userUpdatedStatus = AdministratorLogic.updateUserData(updatedUserData);
+			 			
+			 int userUpdatedStatus = AdministratorLogic.updateUserData(email, name, phoneNumber, surname);
 			 writer.println(userUpdatedStatus);
 				
 		} else if ("changePassword".equals(action))

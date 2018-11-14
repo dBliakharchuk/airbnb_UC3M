@@ -116,4 +116,14 @@ public class ReservationPK implements Serializable {
 		
 		return hash;
 	}
+
+	@Override
+	public String toString() {
+		return "ReservationPK [userEmail=" + userEmail + ", apartmentHost=" + apartmentHost
+				+ ", apartmentBuildingNumber=" + apartmentBuildingNumber + ", apartmentStreet=" + apartmentStreet
+				+ ", apartmentFlatNumber=" + apartmentFlatNumber + ", apartmentCity=" + apartmentCity + ", date=" + date
+				+ "]";
+	}
+	
+	
 }

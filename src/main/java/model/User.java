@@ -14,10 +14,11 @@ import java.util.List;
 @Entity
 @NamedQueries({
 	@NamedQuery(name="User.findAll", query="SELECT u FROM User u"),
-	@NamedQuery(name="User.findByEmail", query="SELECT u FROM User u where u.email = :email"),
 	@NamedQuery(name="User.findBySurname", query="SELECT u FROM User u where u.surname = :surname") })
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
+	private static final String adminLogin = "admin";
+	private static final String adminPassword = "admin123";
 
 	@Id
 	private String email;
@@ -68,7 +69,7 @@ public class User implements Serializable {
 		this.messagesReceived = new ArrayList<Message>();
 		this.reservations = new ArrayList<Reservation>();
 	}
-
+	
 	public User(String email, String name, String phone, String surname)
 	{
 		super();
@@ -205,5 +206,21 @@ public class User implements Serializable {
 
 		return reservation;
 	}
+
+	public static String getAdminlogin() {
+		return adminLogin;
+	}
+
+	public static String getAdminpassword() {
+		return adminPassword;
+	}
+
+	@Override
+	public String toString() {
+		return "User [email=" + email + ", name=" + name + ", password=" + password + ", phone=" + phone + ", surname="
+				+ surname + "]";
+	}
+	
+	
 
 }

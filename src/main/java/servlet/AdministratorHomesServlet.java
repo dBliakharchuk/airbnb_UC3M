@@ -23,8 +23,7 @@ import model.User;
 @WebServlet(
 		urlPatterns="/administatorHomes",
 		loadOnStartup=1,
-		initParams={@WebInitParam(name="configuracion", value="es.uc3m.tiw")}
-		)
+		initParams={@WebInitParam(name="configuracion", value="es.uc3m.tiw")})
 public class AdministratorHomesServlet extends HttpServlet {
 	/**
 	 * 
@@ -36,7 +35,7 @@ public class AdministratorHomesServlet extends HttpServlet {
 		@Override
 		public void init(ServletConfig config) throws ServletException {
 			this.config = config;
-			DataAccess.test();
+
 		}
 	       
 
@@ -76,17 +75,28 @@ public class AdministratorHomesServlet extends HttpServlet {
 				
 				
 				ApartmentPK apartmentPK = new ApartmentPK(email, buildingNumber, street, flatNumber, city);
-				// Apartment apartmen = new Apartment(apartmentPK, adults_beds, childeren_beds, cuntry, description, placeName, price, type); change type
-//				 
+				
+//				 Apartment apartmen = new Apartment(apartmentPK, adults_beds, childeren_beds, cuntry, description, placeName, price, type); change type
 //				 User updatedUserData = new User(email, name, phoneNumber, surname);
-//				
 //				 int userUpdatedStatus = AdministratorLogic.updateUserData(updatedUserData);
 				
 				
-//				 writer.println(email + placeName + cuntry + price + type + adults_beds + childeren_beds
-//						 + description + building_number + street + flat_number + city);
+//				 writer.println(email + placeName + cuntry  + type + Double.toString(price) + Integer.toString(childeren_beds) + Integer.toString(adults_beds)
+//						 + description + buildingNumber + street + flatNumber + city);
 			}else if ("deletePlace".equals(action))
 			{
+				
+				String email = request.getParameter("email");
+				String buildingNumber = request.getParameter("building_number");
+				String street = request.getParameter("street");
+				String flatNumber = request.getParameter("flat_number");
+				String	city = request.getParameter("city");
+				
+				
+				
+				writer.println(email + buildingNumber + street + flatNumber + city);
+				
+				
 //				String email = request.getParameter("email");
 //				int userDeletedStatus = AdministratorLogic.deleteUser(email);
 //				writer.println(userDeletedStatus);

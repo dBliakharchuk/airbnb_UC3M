@@ -68,8 +68,8 @@
 					<!-- START #fh5co-menu-wrap -->
 					<nav id="fh5co-menu-wrap" role="navigation">
 						<ul class="sf-menu" id="fh5co-primary-menu">
-							<li class="active"><a href="index.jsp">Home</a></li>
-							<li ><a href="trips.jsp">Trips</a></li>
+							<li class="active"><a   href="index.jsp">Home</a></li>
+							<li ><a href="trips.jsp" >Trips</a></li>
 							<li ><a href="messages.jsp">Messages</a></li>                              
 							<li><a href="#" id="Registro">Registration</a></li>                            
 							<li><a href="#" id="Login">Log in</a></li>                            
@@ -78,7 +78,6 @@
 				</div>
 			</div>
 		</header>
-
 		<!-- end:header-top -->
 	
 		<div class="fh5co-hero">

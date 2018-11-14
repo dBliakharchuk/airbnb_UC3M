@@ -4,7 +4,7 @@ import model.User;
 
 public class AdministratorLogic
 {
-	public static int updateUserData(User updatedUser)
+	public static int updateUserData(String email,String name,String phoneNumber,String surname)
 	{
 		int status = 1;
 		

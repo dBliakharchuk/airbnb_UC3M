@@ -1,5 +1,10 @@
 package database;
 
+import java.sql.Connection; 
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +13,10 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
+import org.apache.log4j.Logger;
+
 import model.Apartment;
+import model.ApartmentPK;
 import model.Message;
 import model.Reservation;
 import model.User;
@@ -16,21 +24,8 @@ import model.User;
 public class DataAccess 
 {	
 	private static EntityManagerFactory managerFactory = Persistence.createEntityManagerFactory("airbnb");
-	
-	public static List<User> test() {
-		System.out.println("TEST INCOMING");
-		List<User> results;
-		EntityManager manager = managerFactory.createEntityManager();
-		try {
-			Query query = manager.createNamedQuery("User.findAll", User.class);
-			results = query.getResultList();
-		} finally {
-			manager.close();
-		}
-		System.out.println("TEST");
-		System.out.println(results);
-		return results;
-	}
+	private static Connection connection = null;
+	private static Logger logger = Logger.getLogger(DataAccess.class); 
 	
 	public static List<User> getAllUsers() {
 		List<User> results;
@@ -48,30 +43,28 @@ public class DataAccess
 		return results;
 	}
 	
-	public static User getUserByEmail(String email) throws IllegalStateException {
-		List<User> results = null;
-		EntityManager manager = managerFactory.createEntityManager();
+	public static User getUserByEmail(String email) {
+		User result = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		logger.info("looking for User " + email);
 		try {
-			Query query = manager.createNamedQuery("User.findByEmail", User.class);
-			query.setParameter("email", email);
-			results = query.getResultList();
+			connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/airbnbdb?user=userLQE&password=2dAlhk2RqPhVlFOK" + 
+							"&useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC");
+			stmt = connection.prepareStatement("SELECT * FROM user where email = ?");
+			stmt.setString(1, email);
+		    rs = stmt.executeQuery();
+		    
+		    if (rs.first()) {
+		    	result = new User(rs.getString("email"), rs.getString("name"), rs.getString("surname"), rs.getString("password"), rs.getString("phone"));
+		    }
+		    
 		} catch(Exception ex) {
-			//logger.error("Exception in method getUserByEmail");
+			logger.error("Exception in method getUserByEmail");
 			ex.printStackTrace();
-		} finally {
-			manager.close();
 		}
 		
-		if (results == null || results.isEmpty()) {
-			return null;
-		}
-		
-		if (results.size() > 1) {
-			throw new IllegalStateException("PK duplicate in User table");
-		}
-		
-		
-		return results.get(0);		
+		return result;		
 	}
 	
 	public static List<User> getUsersBySurname(String surname) {
@@ -176,6 +169,21 @@ public class DataAccess
 			manager.close();
 		}
 		return results;
+	}
+	
+	public static Apartment getApartmentById(ApartmentPK apartmentKey) {
+		Apartment result = null;
+		EntityManager manager = managerFactory.createEntityManager();
+		try {
+			result = manager.find(Apartment.class, apartmentKey);
+		} catch(Exception ex) {
+			//logger.error("Exception in method getUserByEmail");
+			ex.printStackTrace();
+		} finally {
+			manager.close();
+		}
+	
+		return result;		
 	}
 	
 	public static List<Apartment> getApartmentByHost(String email) {
@@ -357,6 +365,27 @@ public class DataAccess
 		} finally {
 			manager.close();
 		}
+		return true;
+	}
+	
+	public static boolean removeMessage(Message message) {
+		List<Message> results = null;
+		EntityManager manager = managerFactory.createEntityManager();
+		try {
+			User sender = manager.find(User.class, message.getSender().getEmail());
+			User receiver = manager.find(User.class, message.getReceiver().getEmail());
+			manager.getTransaction().begin();
+			manager.remove(message);
+			sender.removeMessagesSent(message);
+			receiver.removeMessagesReceived(message);
+			manager.getTransaction().commit();
+		} catch(Exception ex) {
+			//logger.error("Exception in method getUserByEmail");
+			ex.printStackTrace();
+		} finally {
+			manager.close();
+		}
+		
 		return true;
 	}
 	

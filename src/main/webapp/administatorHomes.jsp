@@ -212,7 +212,7 @@
 								<button type="button" class="btn btn-success"
 									onclick="messageUser()">Message Host</button>
 								<button type="button" class="btn btn-danger"
-									onclick="deletePlace()">Delete Place</button>
+									onclick="deleteApartment()">Delete Place</button>
 
 							</div>
 						</div>

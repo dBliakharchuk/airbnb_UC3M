@@ -97,4 +97,12 @@ public class ApartmentPK implements Serializable {
 		
 		return hash;
 	}
+
+	@Override
+	public String toString() {
+		return "ApartmentPK [host=" + host + ", buildingNumber=" + buildingNumber + ", street=" + street
+				+ ", flatNumber=" + flatNumber + ", city=" + city + "]";
+	}
+	
+	
 }

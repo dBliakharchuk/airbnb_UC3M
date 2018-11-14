@@ -153,13 +153,12 @@ function selectApartmentCell(id, elementsNumber) {
 
 	var email = cell.children[0].innerText;
 	var apartment_name = cell.children[1].innerText;
-	var cuntry = cell.children[2].innerText;
-	var price_raw = cell.children[3].innerHTML;
-	var price = price_raw.trim();
-	var type = cell.children[4].innerText;
-	var adultsBeds = cell.children[5].innerHTML;
-	var childrensBeds = cell.children[6].innerHTML;
-	var descriptions = cell.children[7].innerText;
+	var cuntry = cell.children[2].innerText.trim();
+	var price = cell.children[3].innerHTML.trim();
+	var type = cell.children[4].innerText.trim();
+	var adultsBeds = cell.children[5].innerHTML.trim();
+	var childrensBeds = cell.children[6].innerHTML.trim();
+	var descriptions = cell.children[7].innerText.trim();
 
 	document.getElementById("host-email").value = email;
 	document.getElementById("apartment-name").value = apartment_name;
@@ -202,10 +201,10 @@ function updateApartmentData() {
 		
 			var place_cel_active = $(".place-cel-active")[0];
 			
-			var building_number = place_cel_active.children[8].innerHTML.toString();
-			var street = place_cel_active.children[9].innerText;
-			var flat_number = place_cel_active.children[10].innerHTML.toString();
-			var city = place_cel_active.children[11].innerText;
+			var building_number = place_cel_active.children[8].innerHTML.toString().trim();
+			var street = place_cel_active.children[9].innerText.trim();
+			var flat_number = place_cel_active.children[10].innerHTML.toString().trim();
+			var city = place_cel_active.children[11].innerText.trim();
 			
 			var apartment = {
 					email : email,
@@ -239,15 +238,14 @@ function updateApartmentData() {
 				city : city
 				
 			}).done(function(status) {
-				alert(status);
-//				if (status == 1) {
-//					if (alert("User data updated successfully")) {
-//					} else
-//						window.location.reload();
-//				} else if (status == 0)
-//					alert("Incorrect Data");
-//				else
-//					alert("Unknow error");
+				if (status == 1) {
+					if (alert("User data updated successfully")) {
+					} else
+						window.location.reload();
+				} else if (status == 0)
+					alert("Incorrect Data");
+				else
+					alert("Unknow error");
 			});
 		} 
 		else {
@@ -264,10 +262,10 @@ function deleteApartment() {
 
 	var place_cel_active = $(".place-cel-active")[0];
 	
-	var building_number = place_cel_active.children[8].innerHTML;
-	var street = place_cel_active.children[9].innerText;
-	var flat_number = place_cel_active.children[10].innerHTML;
-	var city = place_cel_active.children[11].innerText;
+	var building_number = place_cel_active.children[8].innerHTML.trim();
+	var street = place_cel_active.children[9].innerText.trim();
+	var flat_number = place_cel_active.children[10].innerHTML.trim();
+	var city = place_cel_active.children[11].innerText.trim();
 	
 	var email = $("#host-email").val();
 
@@ -278,11 +276,13 @@ function deleteApartment() {
 		if (confirm("Do you want to delete this apartment?")) {
 			$.post("/airbnb/administatorHomes", {
 				action : "deletePlace",
+				email : email,
 				building_number : building_number,
 				street : street,
 				flat_number : flat_number,
 				city : city,
 			}).done(function(status) {
+				alert(status);
 				if (status == 1) {
 					if (alert("Apartment deleteed successfully")) {
 					} else
