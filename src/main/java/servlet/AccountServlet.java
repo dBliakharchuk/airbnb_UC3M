@@ -82,11 +82,11 @@ public class AccountServlet extends HttpServlet {
 				inputSurname = request.getParameter("inputSurname");
 				inputPassword = request.getParameter("inputPassword");
 				
-				registeredUser = DataAccess.getUserByEmail(inputEmail);
-				if (registeredUser == null) 
+				registeredUser = new User(inputEmail, inputName, inputSurname, inputPassword, "0000000000");
+				boolean isRegistered  = UserLogic.registerUser(registeredUser);
+				
+				if (isRegistered) 
 				{
-					registeredUser = new User(inputEmail, inputName, inputSurname, inputPassword, "0000000000");
-					DataAccess.createUser(registeredUser);
 					msgBox = "User was created";
 				} else 
 				{
@@ -96,7 +96,7 @@ public class AccountServlet extends HttpServlet {
 				inputEmail = request.getParameter("inputEmail");
 				inputPassword = request.getParameter("inputPassword");
 				inputCheckbox = request.getParameter("inputCheckbox");
-				
+		
 				loggedUser = DataAccess.getUserByEmail(inputEmail);//should check email and password
 	
 				if (loggedUser != null)
@@ -104,7 +104,7 @@ public class AccountServlet extends HttpServlet {
 					boolean correctPassword = loggedUser.getPassword().equals(inputPassword);
 					if (correctPassword) {
 						session = request.getSession();
-						session.setAttribute("loggedUser", loggedUser);
+						session.setAttribute("emailOfLoggedUser", inputEmail);
 //						msgBox = ("User was logged in");
 					}
 				} else {
@@ -114,7 +114,6 @@ public class AccountServlet extends HttpServlet {
 			else {
 				msgBox = "Wrong Servlet";
 			}
-			
 			request.setAttribute("msgBox", msgBox); 
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp"); 
 			dispatcher.forward(request, response); 

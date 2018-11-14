@@ -59,49 +59,27 @@
 	<body>
 		<div id="fh5co-wrapper">
 		<div id="fh5co-page">
-
-		<header id="fh5co-header-section" class="sticky-banner">
-			<div class="container">
-				<div class="nav-header">
-					<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle dark"><i></i></a>
-					<!-- START #fh5co-menu-wrap -->
-					<%
-					
-					User currentUser = (User) request.getSession().getAttribute("loggedUser"); 		
-					if (currentUser == null) {  %>
-					<h1 id="fh5co-logo"><a href="index.jsp"><i class="icon-airplane"></i>TIWbnb</a></h1>
-					<nav id="fh5co-menu-wrap" role="navigation">
-						<ul class="sf-menu" id="fh5co-primary-menu">
-							<li><a href="index.jsp">Home</a></li>                           
-							<li><a href="#" id="Registro">Registration</a></li>                            
-							<li><a href="#" id="Login">Log in</a></li>
-						</ul>
-					</nav>
-					<% } else { %>  
-					<h1 id="fh5co-logo"><a href="index.jsp"><i class="icon-airplane"></i>TIWbnb</a></h1>
-					<nav id="fh5co-menu-wrap" role="navigation">
-						<ul class="sf-menu" id="fh5co-primary-menu">
-							<li class="active"><a href="index.jsp">Home</a></li>
-							<li ><a href="trips.jsp">Trips</a></li>
-							<li ><a href="messages.jsp">Messages</a></li>
-							<li ><a href="manageProfile.jsp">Manage Profile</a></li>
-							<li ><a href='logoutServlet'>Log out</a></li>                           
-							</li>
-						</ul>
-					</nav>
-					<% } %>
-					<% String msgBox = (String) request.getAttribute("msgBox");
-						if (msgBox != null) { %>
-						<script type="text/javascript">
-							messageUser("<%=msgBox.toString()%>");
-						</script>
-					<% } %>
-				</div>
-			</div>
-		</header>
-
+		<!-- start:header-top -->
+		<%
+			String emailOfLoggedUser = (String) request.getSession().getAttribute("emailOfLoggedUser"); 		
+			if (emailOfLoggedUser != null) {  %>
+				<jsp:include page="headerLogin.jsp"/>
+			<% } else { %>  
+				<jsp:include page="headerLogout.jsp"/>
+			<% } %>
+		<script type="text/javascript">
+			document.getElementById("tab-index").classList.add("active");
+		</script>
 		<!-- end:header-top -->
 	
+		<!-- Test -->
+					<% String msgBox = (String) request.getAttribute("msgBox");
+				if (msgBox != null) { %>
+				<script type="text/javascript">
+					alert("<%=msgBox.toString()%>")
+				</script>
+			<% } %>
+		<!-- endTest -->
 		<div class="fh5co-hero">
 			<div class="fh5co-overlay"></div>
 			<div class="fh5co-cover" data-stellar-background-ratio="0.5" style="background-image: url(images/cover_bg_5.jpg);">
@@ -254,102 +232,37 @@
             
             
 <!-- Registro Modal -->
-<div class="modal fade" id="RegistroModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-    
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <h1 class="h3 mb-3 font-weight-normal">Enter your data</h1>
-      </div>
-      <div class="modal-body">
-           <form class="form-registro" action="registrationServlet" method="post">
-		      <input type="email" id="inputEmail" name="inputEmail" class="form-control" placeholder="Email" required autofocus>
-		      <input type="name" id="inputName" class="form-control" name="inputName" placeholder="Name" required>
-		      <input type="surname" id="inputSurname" class="form-control" name="inputSurname" placeholder="Surname" required>              
-		      <input type="password" id="inputPassword" class="form-control" name="inputPassword" placeholder="Set a password" required>
-		      <button class="btn btn-lg btn-primary btn-block" type="submit" id="Registrate">Registrate</button>
-    		</form>
-      </div>
-
-      <div class="modal-footer">
-        <p class="text-center">Do you already have a TIWbnb account?<a href="#" id="goRegistroLogin">  Log in</a></p>
-      </div>
-
-    </div>
-  </div>
-</div>            
-            
-		<footer>
-			<div id="footer">
-				<div class="container">
-					<div class="row row-bottom-padded-md">
-						<div class="col-md-2 col-sm-2 col-xs-12 fh5co-footer-link">
-							<h3>About TIWbnb</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla porttitor enim et libero pharetra, Nam ipsum augue, eleifend ut dui eu, egestas malesuada velit. </p>
-						</div>
-						<div class="col-md-2 col-sm-2 col-xs-12 fh5co-footer-link">
-							<h3>Lorem ipsum </h3>
-							<ul>
-								<li><a href="#">Xxxxx xxxx</a></li>
-								<li><a href="#">Xxxxx xxxx</a></li>
-								<li><a href="#">Xxxxx xxxx</a></li>
-								<li><a href="#">Xxxxx xxxx</a></li>
-							</ul>
-						</div>
-						<div class="col-md-2 col-sm-2 col-xs-12 fh5co-footer-link">
-							<h3>Lorem ipsum </h3>
-							<ul>
-								<li><a href="#">Xxxxx xxxx</a></li>
-								<li><a href="#">Xxxxx xxxx</a></li>
-								<li><a href="#">Xxxxx xxxx</a></li>
-								<li><a href="#">Xxxxx xxxx</a></li>
-							</ul>
-						</div>
-						<div class="col-md-2 col-sm-2 col-xs-12 fh5co-footer-link">
-							<h3>Lorem ipsum </h3>
-							<ul>
-								<li><a href="#">Xxxxx xxxx</a></li>
-								<li><a href="#">Xxxxx xxxx</a></li>
-								<li><a href="#">Xxxxx xxxx</a></li>
-								<li><a href="#">Xxxxx xxxx</a></li>
-							</ul>
-						</div>
-						<div class="col-md-2 col-sm-2 col-xs-12 fh5co-footer-link">
-							<h3>Lorem ipsum </h3>
-							<ul>
-								<li><a href="#">Xxxxx xxxx</a></li>
-								<li><a href="#">Xxxxx xxxx</a></li>
-								<li><a href="#">Xxxxx xxxx</a></li>
-								<li><a href="#">Xxxxx xxxx</a></li>
-							</ul>
-						</div>
-						<div class="col-md-2 col-sm-2 col-xs-12 fh5co-footer-link">
-							<h3>Lorem ipsum </h3>
-							<ul>
-								<li><a href="#">Xxxxx xxxx</a></li>
-								<li><a href="#">Xxxxx xxxx</a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-6 col-md-offset-3 text-center">
-							<p class="fh5co-social-icons">
-								<a href="#"><i class="icon-twitter2"></i></a>
-								<a href="#"><i class="icon-facebook2"></i></a>
-								<a href="#"><i class="icon-instagram"></i></a>
-								<a href="#"><i class="icon-dribbble2"></i></a>
-								<a href="#"><i class="icon-youtube"></i></a>
-							</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</footer>
-
+	<div class="modal fade" id="RegistroModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered" role="document">
+	    <div class="modal-content">
+	    
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	        <h1 class="h3 mb-3 font-weight-normal">Enter your data</h1>
+	      </div>
+	      <div class="modal-body">
+	           <form class="form-registro" action="registrationServlet" method="post">
+			      <input type="email" id="inputEmail" name="inputEmail" class="form-control" placeholder="Email" required autofocus>
+			      <input type="name" id="inputName" class="form-control" name="inputName" placeholder="Name" required>
+			      <input type="surname" id="inputSurname" class="form-control" name="inputSurname" placeholder="Surname" required>              
+			      <input type="password" id="inputPassword" class="form-control" name="inputPassword" placeholder="Set a password" required>
+			      <button class="btn btn-lg btn-primary btn-block" type="submit" id="Registrate">Registrate</button>
+	    		</form>
+	      </div>
 	
+	      <div class="modal-footer">
+	        <p class="text-center">Do you already have a TIWbnb account?<a href="#" id="goRegistroLogin">  Log in</a></p>
+	      </div>
+	
+	    </div>
+	  </div>
+	  </div>
+	 
+	
+	<jsp:include page="footer.jsp"/>
+           
 
 	</div>
 	<!-- END fh5co-page -->

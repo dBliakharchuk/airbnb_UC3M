@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebInitParam;
@@ -40,6 +41,14 @@ public class TripServlet extends HttpServlet {
 		 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 		 */
 		protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {			
+			String emailOfLoggedUser = (String) request.getSession().getAttribute("emailOfLoggedUser"); 
+			if (emailOfLoggedUser != null) {
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/trips.jsp"); 
+				dispatcher.forward(request, response); 
+			} else {
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp"); 
+				dispatcher.forward(request, response); 
+			}
 		}
 
 		/**

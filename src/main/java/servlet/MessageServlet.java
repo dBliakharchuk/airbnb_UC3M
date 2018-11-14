@@ -2,6 +2,7 @@ package servlet;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebInitParam;
@@ -36,7 +37,14 @@ public class MessageServlet extends HttpServlet {
 		 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 		 */
 		protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			
+			String emailOfLoggedUser = (String) request.getSession().getAttribute("emailOfLoggedUser"); 
+			if (emailOfLoggedUser != null) {
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/messages.jsp"); 
+				dispatcher.forward(request, response); 
+			} else {
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp"); 
+				dispatcher.forward(request, response); 
+			}
 		}
 
 		/**
