@@ -106,12 +106,7 @@
 				<div class="fh5co-overlay"></div>
 				<div class="fh5co-cover" data-stellar-background-ratio="0.5" style="background-image: url(images/cover_bg_5.jpg);">
 					<div class="desc">
-						<div class="container" id="search-user-form-container">
-							<form class="search-form" action="index.html" method="post">
-								<input type="text" class="search-form-input" id="search-use-email" placeholder="User Email"/>
-								<input type="submit" class="search-form-submit" value="search"/>
-							</form>
-						 </div>
+		
 						 <div class="container" id="users-panel">
 						 	<div id="left-panel" class="panel-containter">
 								<div class="user-cel">
@@ -136,26 +131,29 @@
 
 									ArrayList<User> users = (ArrayList<User>)request.getAttribute("users");
 									String cellId = "user-cel-";
+									if(users != null)
+									{
+										for (int i = 0; i < users.size(); i++)
+										{  %>
+											<div class="user-cel"  id=<%=cellId + i %> onclick="selectUserCell(this.id, <%=users.size() %>)">
+												<div class="user-email-field">
+													<%= users.get(i).getEmail() %>
+												</div>
+												<div class="user-name-field">
+													<%= users.get(i).getName() %>
+												</div>
+												<div class="user-surname-field">
+													<%= users.get(i).getSurname() %>
+												</div>
+												<div class="user-phone-field">
+													<%= users.get(i).getPhone() %>
+												</div>
+											</div>
+										
+							
 
-									for (int i = 0; i < users.size(); i++)
-									{  %>
-										<div class="user-cel"  id=<%=cellId + i %> onclick="selectUserCell(this.id, <%=users.size() %>)">
-											<div class="user-email-field">
-												<%= users.get(i).getEmail() %>
-											</div>
-											<div class="user-name-field">
-												<%= users.get(i).getName() %>
-											</div>
-											<div class="user-surname-field">
-												<%= users.get(i).getSurname() %>
-											</div>
-											<div class="user-phone-field">
-												<%= users.get(i).getPhone() %>
-											</div>
-										</div>
-
-
-									<% } %>
+								<% 		} 
+									}		%>
 
 
 

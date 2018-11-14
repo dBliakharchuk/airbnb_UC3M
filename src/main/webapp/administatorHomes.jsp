@@ -110,13 +110,6 @@
 				<div class="fh5co-cover" data-stellar-background-ratio="0.5"
 					style="background-image: url(images/cover_bg_5.jpg);">
 					<div class="desc">
-						<div class="container" id="search-place-form-container">
-							<form class="search-form" action="index.html" method="post">
-								<input type="text" class="search-form-input"
-									id="from-place-name" placeholder="Place Name" /> <input
-									type="submit" class="search-form-submit" value="search" />
-							</form>
-						</div>
 						<div class="container" id="places-panel">
 							<div id="left-panel" class="panel-containter">
 								<div class="place-cel">
@@ -125,57 +118,57 @@
 
 
 								</div>
-
-
-
 								<%
 									ArrayList<Apartment> apartments = (ArrayList<Apartment>) request.getAttribute("apartments");
 									String cellId = "place-cel-";
-									for (int i = 0; i < apartments.size(); i++)
-									{
-								%>
-								<div class="place-cel" id=<%=cellId + i%>
-									onclick="selectApartmentCell(this.id, <%=apartments.size()%>)">
-									<div class="place-email-field">
-										<%=apartments.get(i).getHost().getEmail()%>
-									</div>
-									<div class="place-name-field">
-										<%=apartments.get(i).getName()%>
-									</div>
-									<div class="place-country-field">
-										<%=apartments.get(i).getCountry()%>
-									</div>
-									<div class="place-price-field">
-										<%=apartments.get(i).getPrice()%>
-									</div>
-									<div class="place-type-field">
-										<%=apartments.get(i).getType()%>
-									</div>
-									<div class="place-adults-beds-field">
-										<%=apartments.get(i).getBedsAdult()%>
-									</div>
-									<div class="place-children-beds-field">
-										<%=apartments.get(i).getBedsChild()%>
-									</div>
-									<div class="place-description-field">
-										<%=apartments.get(i).getDescription()%>
-									</div>
-									<div class="place-building-number-field">
-										<%=apartments.get(i).getId().getBuildingNumber()%>
-									</div>
-									<div class="place-street-field">
-										<%=apartments.get(i).getId().getStreet()%>
-									</div>
-									<div class="place-flat-number-field">
-										<%=apartments.get(i).getId().getFlatNumber()%>
-									</div>
-									<div class="place-city-field">
-										<%=apartments.get(i).getId().getCity()%>
-									</div>		
-								</div>
-								<%
+									if(apartments != null)
+									{	
+										for (int i = 0; i < apartments.size(); i++)
+										{
+									%>
+										<div class="place-cel" id=<%=cellId + i%>
+											onclick="selectApartmentCell(this.id, <%=apartments.size()%>)">
+											<div class="place-email-field">
+												<%=apartments.get(i).getHost().getEmail()%>
+											</div>
+											<div class="place-name-field">
+												<%=apartments.get(i).getName()%>
+											</div>
+											<div class="place-country-field">
+												<%=apartments.get(i).getCountry()%>
+											</div>
+											<div class="place-price-field">
+												<%=apartments.get(i).getPrice()%>
+											</div>
+											<div class="place-type-field">
+												<%=apartments.get(i).getType()%>
+											</div>
+											<div class="place-adults-beds-field">
+												<%=apartments.get(i).getBedsAdult()%>
+											</div>
+											<div class="place-children-beds-field">
+												<%=apartments.get(i).getBedsChild()%>
+											</div>
+											<div class="place-description-field">
+												<%=apartments.get(i).getDescription()%>
+											</div>
+											<div class="place-building-number-field">
+												<%=apartments.get(i).getId().getBuildingNumber()%>
+											</div>
+											<div class="place-street-field">
+												<%=apartments.get(i).getId().getStreet()%>
+											</div>
+											<div class="place-flat-number-field">
+												<%=apartments.get(i).getId().getFlatNumber()%>
+											</div>
+											<div class="place-city-field">
+												<%=apartments.get(i).getId().getCity()%>
+											</div>		
+										</div>
+									<%
+										}
 									}
-								%>
+									%>
 
 
 

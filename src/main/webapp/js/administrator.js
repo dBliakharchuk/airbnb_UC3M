@@ -292,7 +292,6 @@ function deleteApartment() {
 				else
 					alert("Unknow error");
 			});
-
 		}
 
 	} else {

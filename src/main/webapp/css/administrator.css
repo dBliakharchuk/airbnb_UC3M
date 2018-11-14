@@ -42,6 +42,14 @@
    color:  #F78536;
 }
 
+/*  ********** administrator header ********* */
+
+.fh5co-cover .desc{
+	
+	margin-top: -240px;
+}
+
+
 
 
 /*  ********** administrator users ********* */
@@ -61,10 +69,7 @@
 }
 
 
-#search-user-form-container{
-   margin-top: -170px;
-   width: 40%;
-}
+
 
 .search-form-input{
    width: 70%;
@@ -215,6 +220,17 @@ input[type=number]::-webkit-inner-spin-button {
 	visibility: hidden;
 	width: 0;
 }
+
+
+/* ******** administator header ******** */
+
+
+
+.nav-header{
+	margin-bottom: -100px;
+}
+
+
 
 /* ******** administatorHomes ******** */
 
