@@ -12,7 +12,7 @@
 		<properties>
 			<property name="eclipselink.target-server" value="None"/>
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://127.0.0.1:3306/airbnbdb?useSSL=false&amp;useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC"/>
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://127.0.0.1:3306/airbnbdb?useSSL=false&amp;allowPublicKeyRetrieval=true&amp;useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC"/>
 			<property name="javax.persistence.jdbc.user" value="userLQE"/>
 			<property name="javax.persistence.jdbc.password" value="2dAlhk2RqPhVlFOK"/>
 			<property name="eclipselink.logging.level" value="FINE"/>
