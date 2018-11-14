@@ -4,6 +4,10 @@
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+
+<%@ page import="model.*" %>
+<%@ page import=" java.util.*"%>
+<%@ page import="logic.*" %>
 	<head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -85,33 +89,35 @@
 			<div class="container">
 		
 				<div class="row">
+					<% Apartment apartment = (Apartment)request.getAttribute("selectedApartment"); %>
 					<div class="col-md-12 animate-box">
-						<h2 class="heading-title">Apartment in Sol</h2>
+						<h2 class="heading-title"><%= apartment.getName() %></h2>
 					</div>
 					<div class="col-md-6 animate-box">
                         <span class="description">
-						<p>Apartment in Sol is a cozy accommodation right in the center of Madrid, where on every corner there is fun due to the innumerable bars, restaurants, shops and markets in the area.
-							The apartment has a kitchenette, free wifi in all areas, television, oven and microwave, washing machine, hair dryer, coffee maker and toaster. Sheets and towels are provided upon arrival.</p> 
+						<p><%= apartment.getDescription() %></p> 
                         </span>
                         <table class="table">
                             <tbody>
                                 <tr>                                
                                     <th scope="row">Host:</th>
-                                    <td><span class="host">Pepe</span></td>
+                                    <td><span class="host"><%= apartment.getHost().getName() + " " + apartment.getHost().getSurname() %></span></td>
                                 </tr>
                                 
                                 <tr>                                
                                         <th scope="row">Price:</th>
-                                    <td><span class="price">30€</span></td>
+                                    <td><span class="price"><%= String.format ("%.2f", apartment.getPrice()) %>€</span></td>
                                 </tr>
                                 <tr>
                                         <th scope="row">Beds:</th>
-                                        <td><span class="beds">2</span></td>
+                                        <td><span class="beds"><%= apartment.getBedsAdult() + " for adults and " + apartment.getBedsChild() + " for children"%></span></td>
                                 </tr>
                                 <tr>
                                         <th scope="row">Type:</th>
-                                        <td><span class="type">Entire apartment</span></td>
-                                </tr>                                
+                                        <td><span class="type">
+                                        <%=  ApartmentLogic.correctApartmentTypeDisplay(apartment.getType().toString()) %>
+                                       </span></td>
+                                </tr>                               
                             </tbody>
                         </table>
                         <div class="col-xxs-12 col-xs-6 mt">

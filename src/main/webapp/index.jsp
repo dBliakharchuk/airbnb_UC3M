@@ -101,31 +101,32 @@
 									<div class="tab-content">
 									 <div role="tabpanel" class="tab-pane active" id="hotels">
 									 	<div class="row">
+									 	<form action="results" method="post">
 											<div class="col-xxs-12 col-xs-12 mt">
 												<div class="input-field">
 													<label for="from">City:</label>
-													<input type="text" class="form-control" id="from-place" placeholder="Madrid, SPAIN"/>
+													<input type="text" class="form-control" id="from-place" name="from-place" placeholder="Madrid, SPAIN"/>
 												</div>
 											</div>
 											<div class="col-xxs-12 col-xs-6 mt alternate">
 												<div class="input-field">
 													<label for="date-start">Start:</label>
-													<input type="text" class="form-control" id="date-start" placeholder="mm/dd/yyyy"/>
+													<input type="text" class="form-control" id="date-start" name="date-start" placeholder="mm/dd/yyyy"/>
 												</div>
 											</div>
 											<div class="col-xxs-12 col-xs-6 mt alternate">
 												<div class="input-field">
 													<label for="date-end">End:</label>
-													<input type="text" class="form-control" id="date-end" placeholder="mm/dd/yyyy"/>
+													<input type="text" class="form-control" id="date-end" name="date-end" placeholder="mm/dd/yyyy"/>
 												</div>
 											</div>
                                             
 											<div class="col-sm-12 mt">
 												<section>
 													<label for="class">Price</label>
-													<select class="cs-select cs-skin-border">
+													<select class="cs-select cs-skin-border" id="price" name="price">
 														<option value="" disabled selected>Less than 35€</option>
-														<option value="P1">Less than 35€</option>            
+														<option value="P1">Less than 35</option>            
 														<option value="P2">36€ - 69€</option>
 														<option value="P3">70€ - 130€</option>
 														<option value="P4">131€ or more</option>
@@ -136,11 +137,11 @@
         									<div class="col-sm-12 mt">
 												<section>
 													<label for="class">Type of accommodation</label>
-													<select class="cs-select cs-skin-border">
+													<select class="cs-select cs-skin-border" id="typeOfAccom" name="typeOfAccom">
 														<option value="" disabled selected>Entire accommodation</option>
-														<option value="entero">Entire accommodation</option>
-														<option value="privada">Private room</option>
-														<option value="compartida">Shared room</option>
+														<option value="ENTIRE_APARTMENT">Entire accommodation</option>
+														<option value="PRIVATE_ROOM">Private room</option>
+														<option value="SHARED_ROOM">Shared room</option>
 													</select>
 												</section>
 											</div>
@@ -148,7 +149,7 @@
 											<div class="col-xxs-12 col-xs-6 mt">
 												<section>
 													<label for="class">Adults:</label>
-													<select class="cs-select cs-skin-border">
+													<select class="cs-select cs-skin-border" id="adults" name="adults">
 														<option value="" disabled selected>1</option>
 														<option value="1">1</option>
 														<option value="2">2</option>
@@ -160,7 +161,7 @@
 											<div class="col-xxs-12 col-xs-6 mt">
 												<section>
 													<label for="class">Children:</label>
-													<select class="cs-select cs-skin-border">
+													<select class="cs-select cs-skin-border" id="children" name="children">
 														<option value="" disabled selected>1</option>
 														<option value="1">1</option>
 														<option value="2">2</option>
@@ -172,6 +173,7 @@
 											<div class="col-xs-12">
 												<input type="submit" class="btn btn-primary btn-block" value="Search">
 											</div>
+											</form>
                                         </div>
 				                    </div>
 								 </div>
