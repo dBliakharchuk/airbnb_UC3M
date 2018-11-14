@@ -40,4 +40,22 @@
          <servlet-name>MessageServlet</servlet-name>
          <url-pattern>/messages</url-pattern>
     </servlet-mapping>
+    <servlet>
+	         <servlet-name>AccommodationServlet</servlet-name>
+	         <servlet-class>servlet.AccommodationServlet</servlet-class>
+	</servlet>
+    <servlet-mapping>
+         <servlet-name>AccommodationServlet</servlet-name>
+         <url-pattern>/accommodation</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+	         <servlet-name>ResultServlet</servlet-name>
+	         <servlet-class>servlet.ResultServlet</servlet-class>
+	</servlet>
+    <servlet-mapping>
+         <servlet-name>ResultServlet</servlet-name>
+         <url-pattern>/results</url-pattern>
+    </servlet-mapping>
+
 </web-app>
