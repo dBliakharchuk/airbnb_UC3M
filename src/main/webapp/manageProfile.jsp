@@ -4,6 +4,11 @@
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+
+<%@ page import="model.*" %>
+<%@ page import=" java.util.*"%>
+<%@ page import="logic.*" %>
+
 	<head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -89,16 +94,21 @@
 
 				</div>
 				<form action="" id="user-data-form">
+				<% User user =  (User)request.getAttribute("user");
+					if(user != null)
+					{		%>
 					<label for="email">Email</label>
-					<input type="text" id="user-email" name="email" value="piotrducki@gmail.com"  disabled >
+					<input type="text" id="user-email" name="email" value="<%= user.getEmail() %>"  disabled >
 					<label for="name">Name</label>
-					<input type="text" id="user-name" name="name" value="Piotr" >
+					<input type="text" id="user-name" name="name" value="<%= user.getName() %>" >
 					<label for="name" > Surname</label>
-					<input type="text" id="user-surname" name="surname" value="Ducki" >
+					<input type="text" id="user-surname" name="surname" value="<%= user.getSurname() %>" >
 					<label for="phone" > Phone Number</label>
-					<input type="phone" id="user-phone" name="phone" value="048712321321" >
+					<input type="phone" id="user-phone" name="phone" value="<%= user.getPhone() %>" >
 					<input type="button" class="btn btn-success" id="save-changes-button" value="save">
+				<% }	%> 
 				</form>
+				<button type="button" class="btn btn-warning" onclick="changePassword()">Change Password</button>
 				<button type="button" class="btn btn-danger"  id="delete-acount-button">Delete Acount</button>
 
 			</div>
@@ -112,28 +122,34 @@
 					</div>
 				</div>
 				<div class="row row-bottom-padded-md">
-					<div class="col-md-4 col-sm-6 fh5co-tours animate-box" data-animate-effect="fadeIn">
-						<div href="#"><img src="images/place-1.jpg" alt="Free HTML5 Website Template by FreeHTML5.co" class="img-responsive">
-							<div class="desc">
-								<span></span>
-								<h3>Apartment in Sol</h3>
-								<span>Entire apartment, two beds</span>
-								<span class="price">60€</span>
-								<a class="btn btn-primary btn-outline" href="#">Edit <i class="icon-arrow-right22"></i></a>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4 col-sm-6 fh5co-tours animate-box" data-animate-effect="fadeIn">
-						<div href="#"><img src="images/place-2.jpg" alt="Free HTML5 Website Template by FreeHTML5.co" class="img-responsive">
-							<div class="desc">
-								<span></span>
-								<h3>Apartment near Gran Via</h3>
-								<span>Entire apartment, one bed</span>
-								<span class="price">70€</span>
-								<a class="btn btn-primary btn-outline" href="#">Edit <i class="icon-arrow-right22" ></i></a>
-							</div>
-						</div>
-					</div>
+				
+				
+				
+					<%
+							ArrayList<Apartment> userApartments = (ArrayList<Apartment>) request.getAttribute("userApartments");
+							if(userApartments != null)
+							{
+								for (int i = 0; i < userApartments.size(); i++)
+								{ %>
+									
+								<div class="col-md-4 col-sm-6 fh5co-tours animate-box" data-animate-effect="fadeIn">
+									<div href="#"><img src="images/place-1.jpg" alt="Free HTML5 Website Template by FreeHTML5.co" class="img-responsive">
+										<div class="desc user-apartment">
+											<span></span>
+											<h3 class="user-apartment-title"> <%=userApartments.get(i).getName() %></h3>
+											<span><%=userApartments.get(i).getType() %></span>
+											<span class="price"><%=userApartments.get(i).getPrice() + "E" %></span>
+											<a class="btn btn-primary btn-outline" href="#">Edit <i class="icon-arrow-right22"></i></a>
+										</div>
+									</div>
+								</div>
+							
+						<%		 }
+							} %>
+					
+					
+					
+					
 					<div class="col-md-4 col-sm-6 fh5co-tours animate-box" data-animate-effect="fadeIn" id="add-apartemnt-square">
 						<div href="#"><img src="images/place-2.jpg" alt="Free HTML5 Website Template by FreeHTML5.co" class="img-responsive">
 							<div class="desc">

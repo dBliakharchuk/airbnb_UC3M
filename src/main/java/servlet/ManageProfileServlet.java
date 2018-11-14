@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -9,6 +11,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import database.DataAccess;
+import logic.AdministratorLogic;
+import model.Apartment;
+import model.User;
 
 @WebServlet(urlPatterns = "/manageProfile", loadOnStartup = 1, initParams = {
 		@WebInitParam(name = "configuracion", value = "es.uc3m.tiw") })
@@ -33,6 +40,14 @@ public class ManageProfileServlet extends HttpServlet
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
+		String email = "piotrducki@gmail.com";
+		
+		User user = DataAccess.getUserByEmail(email);
+		request.setAttribute("user", user);
+		
+		ArrayList<Apartment> userApartments =  new ArrayList<Apartment>(DataAccess.getApartmentByHost(email));
+		request.setAttribute("userApartments", userApartments);
+
 		request.getRequestDispatcher("manageProfile.jsp").forward(request, response);
 	}
 
@@ -42,7 +57,8 @@ public class ManageProfileServlet extends HttpServlet
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-
+	
+		
 	}
 
 }
