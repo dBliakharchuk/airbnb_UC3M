@@ -32,6 +32,20 @@ public class Reservation implements Serializable {
 	private User user;
 
 	public Reservation() {
+	
+	}
+
+	public Reservation(ReservationPK id, Apartment apartment, User user) {
+		super();
+		this.id = id;
+		this.apartment = apartment;
+		this.user = user;
+	}
+	
+	public Reservation(User user, Apartment apartment, Date date) {
+		this.id = new ReservationPK(user, apartment, date);
+		this.apartment = apartment;
+		this.user = user;
 	}
 
 	public ReservationPK getId() {
@@ -71,5 +85,12 @@ public class Reservation implements Serializable {
 		this.user = user;
 		id.setUserEmail(user.getEmail());
 	}
+
+	@Override
+	public String toString() {
+		return "Reservation [id=" + id.toString() + ", apartment=" + apartment + ", user=" + user + "]";
+	}
+	
+	
 
 }

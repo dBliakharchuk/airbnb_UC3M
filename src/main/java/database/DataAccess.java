@@ -1,5 +1,11 @@
 package database;
 
+import java.sql.Connection;  
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,6 +13,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+
+import org.apache.log4j.Logger;
 
 import model.Apartment;
 import model.ApartmentPK;
@@ -17,6 +25,8 @@ import model.User;
 public class DataAccess 
 {	
 	private static EntityManagerFactory managerFactory = Persistence.createEntityManagerFactory("airbnb");
+	private static Connection connection = null;
+	private static Logger logger = Logger.getLogger(DataAccess.class); 
 	
 	public static List<User> getAllUsers() {
 		List<User> results;
@@ -34,7 +44,7 @@ public class DataAccess
 		return results;
 	}
 	
-	public static User getUserByEmail(String email) throws IllegalStateException {
+	public static User getUserByEmail(String email) {
 		User result = null;
 		EntityManager manager = managerFactory.createEntityManager();
 		try {
@@ -46,7 +56,7 @@ public class DataAccess
 			manager.close();
 		}
 		
-		return result;		
+		return result; 
 	}
 	
 	public static List<User> getUsersBySurname(String surname) {
@@ -350,25 +360,69 @@ public class DataAccess
 		return true;
 	}
 	
-	public static boolean createReservation(Reservation reservation) {
+	public static boolean removeMessage(Message message) {
+		List<Message> results = null;
 		EntityManager manager = managerFactory.createEntityManager();
+		Message managed = null;
 		try {
+			User sender = manager.find(User.class, message.getSender().getEmail());
+			User receiver = manager.find(User.class, message.getReceiver().getEmail());
 			manager.getTransaction().begin();
-			manager.persist(reservation);
-			manager.getTransaction().commit();
-		} catch (Exception ex) {
-			try {
-				if (manager.getTransaction().isActive()) {
-					manager.getTransaction().rollback();
-				}
-			} catch (Exception e) {
-				ex.printStackTrace();
-				throw e;
+			if (!manager.contains(message)) {
+			    managed = manager.merge(message);
 			}
-			throw ex;
+			manager.remove(managed);
+			sender.removeMessagesSent(managed);
+			receiver.removeMessagesReceived(managed);
+			manager.getTransaction().commit();
+		} catch(Exception ex) {
+			logger.error("Exception in method removeMessage");
+			ex.printStackTrace();
 		} finally {
 			manager.close();
 		}
+		
+		return true;
+	}
+	
+	public static List<Reservation> getAllReservations() {
+		List<Reservation> results;
+		EntityManager manager = managerFactory.createEntityManager();
+		try {
+			Query query = manager.createNamedQuery("Reservation.findAll", Reservation.class);
+			results = query.getResultList();
+		} catch(Exception ex) {
+			//logger.error("Exception in method getAllUsers");
+			ex.printStackTrace();
+			results = new ArrayList();
+		} finally {
+			manager.close();
+		}
+		return results;
+	}
+	
+	public static boolean createReservation(Reservation reservation) {
+		PreparedStatement stmt = null;
+		logger.info("creating Reservation");
+		try {
+			connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/airbnbdb?user=userLQE&password=2dAlhk2RqPhVlFOK" + 
+							"&useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC");
+			stmt = connection.prepareStatement("INSERT INTO Reservation VALUES(?,?,?,?,?,?,?)");
+			stmt.setString(1, reservation.getUser().getEmail());
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");  
+			stmt.setString(2, dateFormat.format(reservation.getDate()));
+			stmt.setString(3, reservation.getApartment().getHost().getEmail());
+			stmt.setString(4, reservation.getApartment().getBuildingNumber());
+			stmt.setString(5, reservation.getApartment().getStreet());
+			stmt.setString(6, reservation.getApartment().getFlatNumber());
+			stmt.setString(7, reservation.getApartment().getCity());
+		    stmt.executeUpdate();
+		     
+		} catch(Exception ex) {
+			logger.error("Exception in method createReservation");
+			ex.printStackTrace();
+		}
+		
 		return true;
 	}
 	

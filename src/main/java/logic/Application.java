@@ -1,39 +1,55 @@
 package logic;
 
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import database.DataAccess;
 import model.Apartment;
 import model.ApartmentPK;
 import model.ApartmentType;
 import model.Message;
+import model.Reservation;
+import model.ReservationPK;
 import model.User;
 
 public class Application {
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		
-		List<Apartment> aps = DataAccess.getAllApartments();
-		User piotr = DataAccess.getUserByEmail("piotrszylar@gmail.com");		
-		User host = new User("test@gmail.com", "Test", "Kowalski", "kowal", "8993945939");
-		User sender = DataAccess.getAllUsers().get(0);
-		User receiver = DataAccess.getAllUsers().get(1);
+		//List<Apartment> aps = DataAccess.getAllApartments();
+		User piotr = DataAccess.getUserByEmail("customer@gmail.com");
+		User mat = DataAccess.getUserByEmail("mateusz@gmail.com");
+		UserLogic.deleteUser(piotr);
+//		List<User> users = DataAccess.getAllUsers();
+//		List<Reservation> reservs = DataAccess.getAllReservations();
+//		//ApartmentPK apKey = new ApartmentPK("dima@gmail.com", "15", "Calle Central", "5", "Madrid");
+//		
+		//DataAccess.createMessage(new Message(piotr, mat, new Date(), "test"));
 		
-		Apartment apartment = new Apartment(host,"3A", "Koszykowa", "2", "Warszawa", 3, 0, "Polska", "test", "Przyklad", new byte[2], 30.0, ApartmentType.PRIVATE_ROOM);
-		ApartmentPK apKey = new ApartmentPK("dima@gmail.com", "15", "Calle Central", "5", "Madrid");
-		
-		//Apartment found = DataAccess.getApartmentById(apKey);
-		
-		//System.out.println(found.getCity());
-		
-		//removeUserTest(host);
-		
-		//sendMessageTest(sender, receiver, "test message");
-		
-		//updateUserTest(piotr);
-		
-		//System.out.println(DataAccess.getUserByEmail("sadw"));
-		
+//		Apartment toReserve = null;
+//		User customer = null;
+//		Reservation res = null;
+//		
+//		for (Apartment a : aps) {
+//			if (a.getStreet().equals("Gran Via")) {
+//				toReserve = a;
+//				break;
+//			}
+//		}
+//		for (User u : users) {
+//			if (u.getEmail().equals("customer@gmail.com")) {
+//				customer = u;
+//				break;
+//			}
+//		}
+//		for (Reservation r : reservs) {
+//			if (r.getUser().getEmail().equals("customer@gmail.com") && r.getApartment().getStreet().equals("Gran Via")) {
+//				res = r;
+//				break;
+//			}
+//		}
+				
 	}
 	
 	private static void addApartmentTest(Apartment apartment, User host) {

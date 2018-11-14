@@ -27,16 +27,16 @@ public class User implements Serializable {
 	private String phone;
 	private String surname;
 
-	@OneToMany(mappedBy="host")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="host")
 	private List<Apartment> apartments;
 
-	@OneToMany(mappedBy="sender")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="sender")
 	private List<Message> messagesSent;
 
-	@OneToMany(mappedBy="receiver")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="receiver")
 	private List<Message> messagesReceived;
 
-	@OneToMany(mappedBy="user")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="user")
 	private List<Reservation> reservations;
 
 	public User() {
@@ -69,7 +69,7 @@ public class User implements Serializable {
 		this.messagesReceived = new ArrayList<Message>();
 		this.reservations = new ArrayList<Reservation>();
 	}
-
+	
 	public User(String email, String name, String phone, String surname)
 	{
 		super();
@@ -214,5 +214,13 @@ public class User implements Serializable {
 	public static String getAdminpassword() {
 		return adminPassword;
 	}
+
+	@Override
+	public String toString() {
+		return "User [email=" + email + ", name=" + name + ", password=" + password + ", phone=" + phone + ", surname="
+				+ surname + "]";
+	}
+	
+	
 
 }

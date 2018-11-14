@@ -4,6 +4,7 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -42,11 +43,29 @@ public class Apartment implements Serializable {
 	@JoinColumn(name="host")
 	private User host;
 
-	@OneToMany(mappedBy="apartment")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="apartment")
 	private List<Reservation> reservations;
 
 	public Apartment() {
 	}
+	
+	
+
+	public Apartment(ApartmentPK id, int bedsAdult, int bedsChild, String country, String description, String name,
+			double price, ApartmentType type)
+	{
+		super();
+		this.id = id;
+		this.bedsAdult = bedsAdult;
+		this.bedsChild = bedsChild;
+		this.country = country;
+		this.description = description;
+		this.name = name;
+		this.price = price;
+		this.type = type;
+	}
+
+
 
 	public Apartment(User host, String buildingNumber, String street, String flatNumber, 
 			String city, int bedsAdult, int bedsChild, String country, String description, String name,
@@ -220,5 +239,16 @@ public class Apartment implements Serializable {
 
 		return reservation;
 	}
+
+	@Override
+	public String toString() {
+		return "Apartment [id=" + id + ", bedsAdult=" + bedsAdult + ", bedsChild=" + bedsChild + ", country=" + country
+				+ ", description=" + description + ", name=" + name + ", picture=" + Arrays.toString(picture)
+				+ ", price=" + price + ", type=" + type + ", host=" + host + "]";
+	}
+
+	
+	
+	
 
 }
