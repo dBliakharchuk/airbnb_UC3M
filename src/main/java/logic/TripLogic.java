@@ -42,7 +42,9 @@ public class TripLogic {
 				}
 				
 				trip = new Trip();
+				trip.setApartment(r.getApartment());
 				trip.setBeginning(r.getDate());
+				trip.setEnd(r.getDate());
 				trip.addReservation(r);
 				last = r;
 				
