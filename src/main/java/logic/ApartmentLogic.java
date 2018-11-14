@@ -2,12 +2,16 @@ package logic;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 
 import database.DataAccess;
 import model.Apartment;
 import model.ApartmentType;
 import model.Reservation;
+import model.User;
 
 public class ApartmentLogic {
 	
@@ -235,6 +239,40 @@ public class ApartmentLogic {
 	private static boolean isDateBetweenTwoDates(Date dateStart, Date dateEnd, Date examinedDate) {
 		
 		return dateStart.compareTo(examinedDate) * dateEnd.compareTo(examinedDate) <= 0;
+	}
+	
+	public static boolean bookApartment(User user, Apartment apartment, Date start, Date end) {
+		if (user == null || apartment == null || start == null || end == null || end.before(start)) {
+			return false;
+		}
+		
+		Map<Date,Reservation> bookings = new HashMap<>();
+		for (Reservation r : apartment.getReservations()) bookings.put(r.getDate(), r);
+		
+		List<Reservation> reservations = new ArrayList<>();
+		List<Date> dates = DateUtils.getDatesBetween(start, end);
+		
+		for (Date date : dates) {
+			Reservation reservation = new Reservation(user, apartment, date);
+			reservations.add(reservation);
+			
+			if (bookings.containsKey(date)) {
+				return false;
+			} else {
+				bookings.put(date, reservation);
+			}
+		}
+		
+		List<Reservation> userReservations = user.getReservations();
+		userReservations.addAll(reservations);
+		
+		user.setReservations(new ArrayList(new HashSet(reservations)));
+		apartment.setReservations(new ArrayList(bookings.values()));
+		
+		DataAccess.updateApartment(apartment);
+		DataAccess.updateUser(user);
+		
+		return true;
 	}
   
 	public static boolean removeApartment(Apartment apartment) {
