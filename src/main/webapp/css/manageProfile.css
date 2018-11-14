@@ -19,25 +19,29 @@
 
 }
 
+
+
 #user-houses-container > h3{
 
 }
 
-#user-data-container > label{
+#user-data-form > label{
    width: 100%;
 }
 
-#user-data-container >input{
+#user-data-form >input{
    width: 100%;
    margin-bottom: 20px;
 }
 
 #save-changes-button{
    width: 100%;
+   height 40px;
+   margin-top: 10px;
 }
 
 #delete-acount-button{
-   margin-top: 50px;
+   margin-top: 40px;
    width: 100%;
 }
 

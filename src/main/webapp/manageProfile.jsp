@@ -88,13 +88,17 @@
 				<div id="profile-picture">
 
 				</div>
-				<label for="email">Email</label>
-				<input type="text" id="user-email" name="email" value="piotrducki@gmail.com"  disabled >
-				<label for="name">Name</label>
-				<input type="text" id="user-name" name="name" value="Piotr" >
-				<label for="name" > Surname</label>
-				<input type="text" id="user-surname" name="surname" value="Ducki" >
-				<button type="button" class="btn btn-success" id="save-changes-button">Save Changes</button>
+				<form action="" id="user-data-form">
+					<label for="email">Email</label>
+					<input type="text" id="user-email" name="email" value="piotrducki@gmail.com"  disabled >
+					<label for="name">Name</label>
+					<input type="text" id="user-name" name="name" value="Piotr" >
+					<label for="name" > Surname</label>
+					<input type="text" id="user-surname" name="surname" value="Ducki" >
+					<label for="phone" > Phone Number</label>
+					<input type="phone" id="user-phone" name="phone" value="048712321321" >
+					<input type="button" class="btn btn-success" id="save-changes-button" value="save">
+				</form>
 				<button type="button" class="btn btn-danger"  id="delete-acount-button">Delete Acount</button>
 
 			</div>
@@ -104,7 +108,7 @@
 			<div class="container" id="user-houses-container">
 				<div class="row">
 					<div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
-						<h3>Your Houses</h3>
+						<h3>Your Apartments</h3>
 					</div>
 				</div>
 				<div class="row row-bottom-padded-md">
@@ -146,72 +150,7 @@
 
 
 
-		<footer>
-			<div id="footer">
-				<div class="container">
-					<div class="row row-bottom-padded-md">
-						<div class="col-md-2 col-sm-2 col-xs-12 fh5co-footer-link">
-							<h3>About TIWbnb</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla porttitor enim et libero pharetra, Nam ipsum augue, eleifend ut dui eu, egestas malesuada velit. </p>
-						</div>
-						<div class="col-md-2 col-sm-2 col-xs-12 fh5co-footer-link">
-							<h3>Lorem ipsum </h3>
-							<ul>
-								<li><a href="#">Xxxxx xxxx</a></li>
-								<li><a href="#">Xxxxx xxxx</a></li>
-								<li><a href="#">Xxxxx xxxx</a></li>
-								<li><a href="#">Xxxxx xxxx</a></li>
-							</ul>
-						</div>
-						<div class="col-md-2 col-sm-2 col-xs-12 fh5co-footer-link">
-							<h3>Lorem ipsum </h3>
-							<ul>
-								<li><a href="#">Xxxxx xxxx</a></li>
-								<li><a href="#">Xxxxx xxxx</a></li>
-								<li><a href="#">Xxxxx xxxx</a></li>
-								<li><a href="#">Xxxxx xxxx</a></li>
-							</ul>
-						</div>
-						<div class="col-md-2 col-sm-2 col-xs-12 fh5co-footer-link">
-							<h3>Lorem ipsum </h3>
-							<ul>
-								<li><a href="#">Xxxxx xxxx</a></li>
-								<li><a href="#">Xxxxx xxxx</a></li>
-								<li><a href="#">Xxxxx xxxx</a></li>
-								<li><a href="#">Xxxxx xxxx</a></li>
-							</ul>
-						</div>
-						<div class="col-md-2 col-sm-2 col-xs-12 fh5co-footer-link">
-							<h3>Lorem ipsum </h3>
-							<ul>
-								<li><a href="#">Xxxxx xxxx</a></li>
-								<li><a href="#">Xxxxx xxxx</a></li>
-								<li><a href="#">Xxxxx xxxx</a></li>
-								<li><a href="#">Xxxxx xxxx</a></li>
-							</ul>
-						</div>
-						<div class="col-md-2 col-sm-2 col-xs-12 fh5co-footer-link">
-							<h3>Lorem ipsum </h3>
-							<ul>
-								<li><a href="#">Xxxxx xxxx</a></li>
-								<li><a href="#">Xxxxx xxxx</a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-6 col-md-offset-3 text-center">
-							<p class="fh5co-social-icons">
-								<a href="#"><i class="icon-twitter2"></i></a>
-								<a href="#"><i class="icon-facebook2"></i></a>
-								<a href="#"><i class="icon-instagram"></i></a>
-								<a href="#"><i class="icon-dribbble2"></i></a>
-								<a href="#"><i class="icon-youtube"></i></a>
-							</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</footer>
+		
 
 
 
