@@ -260,7 +260,7 @@ function updateApartmentData() {
 }
 
 
-function deleteUser() {
+function deleteApartment() {
 
 	var place_cel_active = $(".place-cel-active")[0];
 	
