@@ -59,6 +59,7 @@
 	<body>
 		<div id="fh5co-wrapper">
 		<div id="fh5co-page">
+
 		<%
 			String emailOfLoggedUser = (String) request.getSession().getAttribute("emailOfLoggedUser"); 		
 			if (emailOfLoggedUser != null) {  %>
@@ -210,8 +211,8 @@
       </div>
       <div class="modal-body">
           <form class="form-signin" action="loginServlet" method="post">
-		      <input type="email" id="loginEmail" name="inputEmail" class="form-control" placeholder="Dirección de correo electrónico" required autofocus>
-		      <input type="password" id="loginPassword" name="inputPassword" class="form-control" placeholder="Contraseña" required>
+		      <input type="email" id="loginEmail" name="inputEmail" class="form-control" placeholder="Direcciï¿½n de correo electrï¿½nico" required autofocus>
+		      <input type="password" id="loginPassword" name="inputPassword" class="form-control" placeholder="Contraseï¿½a" required>
 		      <div class="checkbox mb-3">
 		        <label>
 		          <input type="checkbox" name="inputCheckbox" value="remember-me"> Remember me
