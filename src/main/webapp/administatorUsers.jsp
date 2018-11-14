@@ -79,29 +79,26 @@
 <body>
 	<div id="fh5co-wrapper">
 		<div id="fh5co-page">
-
-			<header id="fh5co-header-section" class="sticky-banner">
-				<div class="container">
-					<div class="nav-header">
-						<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle dark"><i></i></a>
-						<h1 id="fh5co-logo"><a href="index.jsp"><i class="icon-airplane"></i>TIWbnb <p id="administrator-header">Administator </p></a></h1>
-
-						<!-- START #fh5co-menu-wrap -->
-						<nav id="fh5co-menu-wrap" role="navigation">
-							<ul class="sf-menu" id="fh5co-primary-menu">
-								<li class="active"><a href="administatorUsers">Users</a></li>
-								<li ><a href="administatorHomes">Homes</a></li>
-								<li ><a href="messages.jsp">Messages</a></li>
-								<li><a href="#" id="Log-Out">Log out</a></li>
-							</ul>
-						</nav>
-					</div>
-				</div>
-			</header>
-
-
-
-
+			
+			<%
+			String emailOfLoggedUser = (String) request.getSession().getAttribute("emailOfLoggedUser"); 		
+			if (emailOfLoggedUser != null) {  %>
+				<jsp:include page="headerAdmin.jsp"/>
+			<% } else { %>  
+				<jsp:include page="headerLogout.jsp"/>
+			<% } %>
+			<script type="text/javascript">
+				document.getElementById("tab-admin-users").classList.add("active");
+			</script>
+			<!-- Test -->
+			<% String msgBox = (String) request.getAttribute("msgBox");
+				if (msgBox != null) { %>
+				<script type="text/javascript">
+					alert("<%=msgBox.toString()%>")
+				</script>
+			<% } %>
+			<!-- endTest -->
+			
 			<div class="fh5co-hero">
 				<div class="fh5co-overlay"></div>
 				<div class="fh5co-cover" data-stellar-background-ratio="0.5" style="background-image: url(images/cover_bg_5.jpg);">

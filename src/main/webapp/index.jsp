@@ -60,25 +60,25 @@
 		<div id="fh5co-wrapper">
 		<div id="fh5co-page">
 
-		<%
-			String emailOfLoggedUser = (String) request.getSession().getAttribute("emailOfLoggedUser"); 		
-			if (emailOfLoggedUser != null) {  %>
-				<jsp:include page="headerLogin.jsp"/>
-			<% } else { %>  
-				<jsp:include page="headerLogout.jsp"/>
-			<% } %>
+			<% String emailOfLoggedUser = (String) request.getSession().getAttribute("emailOfLoggedUser"); 
+				if (emailOfLoggedUser != null) {  %>
+					<jsp:include page="headerLogin.jsp"/>
+				<% } else { %>  
+					<jsp:include page="headerLogout.jsp"/>
+				<% } %>
 		<script type="text/javascript">
 			document.getElementById("tab-index").classList.add("active");
 		</script>
 		<!-- end:header-top -->
 	
 		<!-- Test -->
-					<% String msgBox = (String) request.getAttribute("msgBox");
-				if (msgBox != null) { %>
-				<script type="text/javascript">
-					alert("<%=msgBox.toString()%>")
-				</script>
-			<% } %>
+		<% 
+		String msgBox = (String) request.getAttribute("msgBox");
+		if (msgBox != null) { %>
+		<script type="text/javascript">
+			alert("<%=msgBox.toString()%>")
+		</script>
+		<% } %>
 		<!-- endTest -->
 		<div class="fh5co-hero">
 			<div class="fh5co-overlay"></div>
@@ -199,68 +199,10 @@
 		            
 
 <!-- Login Modal -->
-<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-    
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <h1 class="h3 mb-3 font-weight-normal">Log in to continue</h1>
-      </div>
-      <div class="modal-body">
-          <form class="form-signin" action="loginServlet" method="post">
-		      <input type="email" id="loginEmail" name="inputEmail" class="form-control" placeholder="Direcci�n de correo electr�nico" required autofocus>
-		      <input type="password" id="loginPassword" name="inputPassword" class="form-control" placeholder="Contrase�a" required>
-		      <div class="checkbox mb-3">
-		        <label>
-		          <input type="checkbox" name="inputCheckbox" value="remember-me"> Remember me
-		        </label>
-		      </div>
-		      <button class="btn btn-lg btn-primary btn-block" type="submit" id="IniciaSesion">Log in</button>
-            </form>
-
-      </div>
-
-      <div class="modal-footer">
-        <p class="text-center">You do not have an account?<a href="index.jsp">  Registrate</a></p>
-        <p class="text-center"><a href="index.jsp"> Back </a></p>
-      </div>
-
-    </div>
-  </div>
-</div>
-            
+	<jsp:include page="loginWindow.jsp"></jsp:include>     
             
 <!-- Registro Modal -->
-	<div class="modal fade" id="RegistroModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-	  <div class="modal-dialog modal-dialog-centered" role="document">
-	    <div class="modal-content">
-	    
-	      <div class="modal-header">
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	          <span aria-hidden="true">&times;</span>
-	        </button>
-	        <h1 class="h3 mb-3 font-weight-normal">Enter your data</h1>
-	      </div>
-	      <div class="modal-body">
-	           <form class="form-registro" action="registrationServlet" method="post">
-			      <input type="email" id="inputEmail" name="inputEmail" class="form-control" placeholder="Email" required autofocus>
-			      <input type="name" id="inputName" class="form-control" name="inputName" placeholder="Name" required>
-			      <input type="surname" id="inputSurname" class="form-control" name="inputSurname" placeholder="Surname" required>              
-			      <input type="password" id="inputPassword" class="form-control" name="inputPassword" placeholder="Set a password" required>
-			      <button class="btn btn-lg btn-primary btn-block" type="submit" id="Registrate">Registrate</button>
-	    		</form>
-	      </div>
-	
-	      <div class="modal-footer">
-	        <p class="text-center">Do you already have a TIWbnb account?<a href="#" id="goRegistroLogin">  Log in</a></p>
-	      </div>
-	
-	    </div>
-	  </div>
-	  </div>
+	<jsp:include page="registrationWindow.jsp"></jsp:include>
 	 
 	
 	<jsp:include page="footer.jsp"/>

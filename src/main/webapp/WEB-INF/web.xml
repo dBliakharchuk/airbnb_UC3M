@@ -57,5 +57,22 @@
          <servlet-name>ResultServlet</servlet-name>
          <url-pattern>/results</url-pattern>
     </servlet-mapping>
-
+    
+    <servlet>
+	         <servlet-name>AdministratorHomesServlet</servlet-name>
+	         <servlet-class>servlet.AdministratorHomesServlet</servlet-class>
+	</servlet>
+    <servlet-mapping>
+         <servlet-name>AdministratorHomesServlet</servlet-name>
+         <url-pattern>/administatorHomes</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+	         <servlet-name>AdministratorUsersServlet</servlet-name>
+	         <servlet-class>servlet.AdministratorUsersServlet</servlet-class>
+	</servlet>
+    <servlet-mapping>
+         <servlet-name>AdministratorUsersServlet</servlet-name>
+         <url-pattern>/administatorUsers</url-pattern>
+    </servlet-mapping>
 </web-app>

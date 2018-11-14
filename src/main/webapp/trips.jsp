@@ -84,7 +84,9 @@
 			<%
 			String emailOfLoggedUser = (String) request.getSession().getAttribute("emailOfLoggedUser"); 		
 			if (emailOfLoggedUser != null) {  %>
-				<jsp:include page="headerLogin.jsp"/>
+			<jsp:include page="headerLogin.jsp"/>
+			<% } else { %>  
+				<jsp:include page="headerLogout.jsp"/>
 			<% } %>
 			<script type="text/javascript">
 				document.getElementById("tab-trips").classList.add("active");
@@ -105,16 +107,13 @@
 						</div>
 					</div>
 					<div class="row row-bottom-padded-md">
-					
-						
-												
-						
-					</div>
+				</div>
+			</div>
 
 			<jsp:include page="footer.jsp"/>
 
-				</div>
-				<!-- END fh5co-page -->
+			</div>
+			<!-- END fh5co-page -->
 
 			</div>
 			<!-- END fh5co-wrapper -->

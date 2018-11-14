@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import database.DataAccess;
 import logic.AdministratorLogic;
+import model.Apartment;
 import model.User;
 
 @WebServlet(urlPatterns = "/administatorUsers", loadOnStartup = 1, initParams = {
@@ -37,19 +38,23 @@ public class AdministratorUsersServlet extends HttpServlet
 
 		}
 	       
-
-
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-
-		users = new ArrayList<User>(DataAccess.getAllUsers());
-		request.setAttribute("users", users);
-		request.getRequestDispatcher("administatorUsers.jsp").forward(request, response);
-
+		String emailOfLoggedUser = (String) request.getSession().getAttribute("emailOfLoggedUser"); 
+		if (emailOfLoggedUser != null) {	
+			if (emailOfLoggedUser.equals("admin")) {
+					users = new ArrayList<User>(DataAccess.getAllUsers());
+					request.setAttribute("users", users);
+					request.getRequestDispatcher("administatorUsers.jsp").forward(request, response);
+			}
+		} else {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp"); 
+			dispatcher.forward(request, response); 
+		}
 	}
 
 	/**
