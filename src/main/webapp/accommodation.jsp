@@ -4,6 +4,10 @@
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+
+<%@ page import="model.*" %>
+<%@ page import=" java.util.*"%>
+<%@ page import="logic.*" %>
 	<head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -60,24 +64,17 @@
 		<div id="fh5co-wrapper">
 		<div id="fh5co-page">
 
-		<header id="fh5co-header-section" class="sticky-banner">
-			<div class="container">
-				<div class="nav-header">
-					<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle dark"><i></i></a>
-					<h1 id="fh5co-logo"><a href="index.jsp"><i class="icon-airplane"></i>TIWbnb</a></h1>
-					<!-- START #fh5co-menu-wrap -->
-					<nav id="fh5co-menu-wrap" role="navigation">
-						<ul class="sf-menu" id="fh5co-primary-menu">
-							<li class="active"><a href="index.jsp">Home</a></li>
-							<li ><a href="trips.jsp">Trips</a></li>
-							<li ><a href="messages.jsp">Messages</a></li>                                                                              							
-							<li><a href="#" id="Registro">Registrate</a></li>                            
-							<li><a href="#" id="Login">Log in</a></li>                            
-						</ul>
-					</nav>
-				</div>
-			</div>
-		</header>
+		<!-- start:header-top -->
+			<%
+			String emailOfLoggedUser = (String) request.getSession().getAttribute("emailOfLoggedUser"); 		
+			if (emailOfLoggedUser != null) {  %>
+				<jsp:include page="headerLogin.jsp"/>
+			<% } %>
+			<script type="text/javascript">
+				document.getElementById("tab-index").classList.add("active");
+			</script>
+
+			<!-- end:header-top -->
 
 		<!-- end:header-top -->
 
@@ -85,33 +82,35 @@
 			<div class="container">
 		
 				<div class="row">
+					<% Apartment apartment = (Apartment)request.getAttribute("selectedApartment"); %>
 					<div class="col-md-12 animate-box">
-						<h2 class="heading-title">Apartment in Sol</h2>
+						<h2 class="heading-title"><%= apartment.getName() %></h2>
 					</div>
 					<div class="col-md-6 animate-box">
                         <span class="description">
-						<p>Apartment in Sol is a cozy accommodation right in the center of Madrid, where on every corner there is fun due to the innumerable bars, restaurants, shops and markets in the area.
-							The apartment has a kitchenette, free wifi in all areas, television, oven and microwave, washing machine, hair dryer, coffee maker and toaster. Sheets and towels are provided upon arrival.</p> 
+						<p><%= apartment.getDescription() %></p> 
                         </span>
                         <table class="table">
                             <tbody>
                                 <tr>                                
                                     <th scope="row">Host:</th>
-                                    <td><span class="host">Pepe</span></td>
+                                    <td><span class="host"><%= apartment.getHost().getName() + " " + apartment.getHost().getSurname() %></span></td>
                                 </tr>
                                 
                                 <tr>                                
                                         <th scope="row">Price:</th>
-                                    <td><span class="price">30€</span></td>
+                                    <td><span class="price"><%= String.format ("%.2f", apartment.getPrice()) %>€</span></td>
                                 </tr>
                                 <tr>
                                         <th scope="row">Beds:</th>
-                                        <td><span class="beds">2</span></td>
+                                        <td><span class="beds"><%= apartment.getBedsAdult() + " for adults and " + apartment.getBedsChild() + " for children"%></span></td>
                                 </tr>
                                 <tr>
                                         <th scope="row">Type:</th>
-                                        <td><span class="type">Entire apartment</span></td>
-                                </tr>                                
+                                        <td><span class="type">
+                                        <%=  ApartmentLogic.correctApartmentTypeDisplay(apartment.getType().toString()) %>
+                                       </span></td>
+                                </tr>                               
                             </tbody>
                         </table>
                         <div class="col-xxs-12 col-xs-6 mt">
@@ -129,75 +128,7 @@
 			</div>
 		</div>
   
-         
-           <footer>
-			<div id="footer">
-				<div class="container">
-					<div class="row row-bottom-padded-md">
-						<div class="col-md-2 col-sm-2 col-xs-12 fh5co-footer-link">
-							<h3>About TIWbnb</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla porttitor enim et libero pharetra, Nam ipsum augue, eleifend ut dui eu, egestas malesuada velit. </p>
-						</div>
-						<div class="col-md-2 col-sm-2 col-xs-12 fh5co-footer-link">
-							<h3>Lorem ipsum </h3>
-							<ul>
-								<li><a href="#">Xxxxx xxxx</a></li>
-								<li><a href="#">Xxxxx xxxx</a></li>
-								<li><a href="#">Xxxxx xxxx</a></li>
-								<li><a href="#">Xxxxx xxxx</a></li>
-							</ul>
-						</div>
-						<div class="col-md-2 col-sm-2 col-xs-12 fh5co-footer-link">
-							<h3>Lorem ipsum </h3>
-							<ul>
-								<li><a href="#">Xxxxx xxxx</a></li>
-								<li><a href="#">Xxxxx xxxx</a></li>
-								<li><a href="#">Xxxxx xxxx</a></li>
-								<li><a href="#">Xxxxx xxxx</a></li>
-							</ul>
-						</div>
-						<div class="col-md-2 col-sm-2 col-xs-12 fh5co-footer-link">
-							<h3>Lorem ipsum </h3>
-							<ul>
-								<li><a href="#">Xxxxx xxxx</a></li>
-								<li><a href="#">Xxxxx xxxx</a></li>
-								<li><a href="#">Xxxxx xxxx</a></li>
-								<li><a href="#">Xxxxx xxxx</a></li>
-							</ul>
-						</div>
-						<div class="col-md-2 col-sm-2 col-xs-12 fh5co-footer-link">
-							<h3>Lorem ipsum </h3>
-							<ul>
-								<li><a href="#">Xxxxx xxxx</a></li>
-								<li><a href="#">Xxxxx xxxx</a></li>
-								<li><a href="#">Xxxxx xxxx</a></li>
-								<li><a href="#">Xxxxx xxxx</a></li>
-							</ul>
-						</div>
-						<div class="col-md-2 col-sm-2 col-xs-12 fh5co-footer-link">
-							<h3>Lorem ipsum </h3>
-							<ul>
-								<li><a href="#">Xxxxx xxxx</a></li>
-								<li><a href="#">Xxxxx xxxx</a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-6 col-md-offset-3 text-center">
-							<p class="fh5co-social-icons">
-								<a href="#"><i class="icon-twitter2"></i></a>
-								<a href="#"><i class="icon-facebook2"></i></a>
-								<a href="#"><i class="icon-instagram"></i></a>
-								<a href="#"><i class="icon-dribbble2"></i></a>
-								<a href="#"><i class="icon-youtube"></i></a>
-							</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</footer>
-
-	
+     <jsp:include page="footer.jsp"/>
 
 	</div>
 	<!-- END fh5co-page -->

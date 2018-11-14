@@ -64,6 +64,7 @@
 
 	<!-- Modernizr JS -->
 	<script src="js/modernizr-2.6.2.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 	<script type="text/javascript" src="js/administrator.js"></script>
 	<!-- FOR IE9 below -->
 	<!--[if lt IE 9]>
@@ -105,12 +106,7 @@
 				<div class="fh5co-overlay"></div>
 				<div class="fh5co-cover" data-stellar-background-ratio="0.5" style="background-image: url(images/cover_bg_5.jpg);">
 					<div class="desc">
-						<div class="container" id="search-user-form-container">
-							<form class="search-form" action="index.html" method="post">
-								<input type="text" class="search-form-input" id="search-use-email" placeholder="User Email"/>
-								<input type="submit" class="search-form-submit" value="search"/>
-							</form>
-						 </div>
+		
 						 <div class="container" id="users-panel">
 						 	<div id="left-panel" class="panel-containter">
 								<div class="user-cel">
@@ -129,45 +125,35 @@
 								</div>
 								
 								
-								<% String userUpdated = (String)request.getAttribute("userUpdated"); 
-								
-									if(userUpdated!=null)
-									{
-										if(userUpdated.equals("yes"))
-										{									%>
-											<script type="text/javascript">
-												showUserUpdatedInfo();
-											</script>
-									<%	
-											request.setAttribute(userUpdated, "no");
-										} %>
-								<%	} %>
-
+							
 
 								<%
 
 									ArrayList<User> users = (ArrayList<User>)request.getAttribute("users");
 									String cellId = "user-cel-";
+									if(users != null)
+									{
+										for (int i = 0; i < users.size(); i++)
+										{  %>
+											<div class="user-cel"  id=<%=cellId + i %> onclick="selectUserCell(this.id, <%=users.size() %>)">
+												<div class="user-email-field">
+													<%= users.get(i).getEmail() %>
+												</div>
+												<div class="user-name-field">
+													<%= users.get(i).getName() %>
+												</div>
+												<div class="user-surname-field">
+													<%= users.get(i).getSurname() %>
+												</div>
+												<div class="user-phone-field">
+													<%= users.get(i).getPhone() %>
+												</div>
+											</div>
+										
+							
 
-									for (int i = 0; i < users.size(); i++)
-									{  %>
-										<div class="user-cel"  id=<%=cellId + i %> onclick="selectUserCell(this.id, <%=users.size() %>)">
-											<div class="user-email-field">
-												<%= users.get(i).getEmail() %>
-											</div>
-											<div class="user-name-field">
-												<%= users.get(i).getName() %>
-											</div>
-											<div class="user-surname-field">
-												<%= users.get(i).getSurname() %>
-											</div>
-											<div class="user-phone-field">
-												<%= users.get(i).getPhone() %>
-											</div>
-										</div>
-
-
-									<% } %>
+								<% 		} 
+									}		%>
 
 
 
@@ -175,7 +161,7 @@
 
 						 	</div>
 							<div id="midle-panel" class="panel-containter">
-								<form class="edit-user-form" action="administatorUsers" method="post">
+								<form class="edit-user-form">
 									<label for="email">Email</label>
 									<input type="text" id="user-email" name="email" value="" readonly>
 									<label for="name">Name</label>
@@ -184,12 +170,13 @@
 									<input type="text" id="user-surname" name="surname" value="" >
 									<label for="phone" > Phone Number</label>
 									<input type="number" id="user-phone-number" name="phone-number" value="" >
-									<input type="submit" class="btn btn-success" id="save-user-button" value="save">
+									<input type="hidden" id="action-name" name="action" value="updateUser" >
+									<input type="button" class="btn btn-success" id="save-user-button" value="save" onclick="updateUserData();">
 								</form>
 							</div>
 							<div id="right-panel" class="panel-containter">
 
-								<button type="button" class="btn btn-success" onclick="messageUser()">Messag User</button>
+								<button type="button" class="btn btn-success" onclick="messageUser()">Message User</button>
 								<button type="button" class="btn btn-warning" onclick="changePassword()">Change Password</button>
 								<button type="button" class="btn btn-danger"  onclick="deleteUser()">Delete User</button>
 

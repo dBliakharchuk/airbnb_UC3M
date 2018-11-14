@@ -61,7 +61,7 @@
 		<div id="fh5co-wrapper">
 		<div id="fh5co-page">
 
-		<!-- start:header-top -->
+			<!-- start:header-top -->
 			<%
 			String emailOfLoggedUser = (String) request.getSession().getAttribute("emailOfLoggedUser"); 		
 			if (emailOfLoggedUser != null) {  %>
