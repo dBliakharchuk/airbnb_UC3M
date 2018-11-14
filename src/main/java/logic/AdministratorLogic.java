@@ -4,10 +4,46 @@ import model.User;
 
 public class AdministratorLogic
 {
-	public static Boolean updateUserData(User updatedUser)
+	public static int updateUserData(String email,String name,String phoneNumber,String surname)
 	{
-		if(updatedUser.getEmail() != "")
-			return true;
-		return false;
+		int status = 1;
+		
+			
+		return status;
 	}
+	
+	public static int updateUserPassword(String email, String password)
+	{
+		int status = 1;
+		
+		return status;
+	}
+	
+	public static int deleteUser(String email)
+	{
+		int status = 1;
+		
+		return status;
+	}
+	
+	// *********************** administratorHomes ***********************
+
+	public static int updateApartmentData()
+	{
+		int status = 1;
+		
+			
+		return status;
+	}
+	
+	
+	public static int deleteApartment()
+	{
+		int status = 1;
+		
+		return status;
+	}
+	
 }
+
+

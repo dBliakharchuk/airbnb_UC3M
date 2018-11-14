@@ -48,6 +48,24 @@ public class Apartment implements Serializable {
 
 	public Apartment() {
 	}
+	
+	
+
+	public Apartment(ApartmentPK id, int bedsAdult, int bedsChild, String country, String description, String name,
+			double price, ApartmentType type)
+	{
+		super();
+		this.id = id;
+		this.bedsAdult = bedsAdult;
+		this.bedsChild = bedsChild;
+		this.country = country;
+		this.description = description;
+		this.name = name;
+		this.price = price;
+		this.type = type;
+	}
+
+
 
 	public Apartment(User host, String buildingNumber, String street, String flatNumber, 
 			String city, int bedsAdult, int bedsChild, String country, String description, String name,
