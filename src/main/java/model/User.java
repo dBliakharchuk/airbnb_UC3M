@@ -27,16 +27,16 @@ public class User implements Serializable {
 	private String phone;
 	private String surname;
 
-	@OneToMany(mappedBy="host")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="host")
 	private List<Apartment> apartments;
 
-	@OneToMany(mappedBy="sender")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="sender")
 	private List<Message> messagesSent;
 
-	@OneToMany(mappedBy="receiver")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="receiver")
 	private List<Message> messagesReceived;
 
-	@OneToMany(mappedBy="user")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="user")
 	private List<Reservation> reservations;
 
 	public User() {

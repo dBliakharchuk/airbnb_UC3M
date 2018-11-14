@@ -31,6 +31,28 @@ public class ReservationPK implements Serializable {
 	public ReservationPK() {
 	}
 	
+	public ReservationPK(String userEmail, String apartmentHost, String apartmentBuildingNumber, String apartmentStreet,
+			String apartmentFlatNumber, String apartmentCity, Date date) {
+		super();
+		this.userEmail = userEmail;
+		this.apartmentHost = apartmentHost;
+		this.apartmentBuildingNumber = apartmentBuildingNumber;
+		this.apartmentStreet = apartmentStreet;
+		this.apartmentFlatNumber = apartmentFlatNumber;
+		this.apartmentCity = apartmentCity;
+		this.date = date;
+	}
+	
+	public ReservationPK(User user, Apartment apartment, Date date) {
+		this.userEmail = user.getEmail();
+		this.apartmentHost = apartment.getHost().getEmail();
+		this.apartmentBuildingNumber = apartment.getBuildingNumber();
+		this.apartmentStreet = apartment.getStreet();
+		this.apartmentFlatNumber = apartment.getFlatNumber();
+		this.apartmentCity = apartment.getCity();
+		this.date = date;
+	}
+
 	public String getUserEmail() {
 		return this.userEmail;
 	}
