@@ -96,28 +96,34 @@
 				
 				<div class="row row-bottom-padded-md">
 				<%
+				ApartmentPK apartmentKey = null;		
 				
-						ArrayList<Apartment> apartments = (ArrayList<Apartment>)request.getAttribute("resultApartments");
-							
-							for (Apartment apartment : apartments)
-							{ %>
-								
-							<div class="col-md-4 col-sm-6 fh5co-tours animate-box" data-animate-effect="fadeIn">
-							<div href="#"><img src="images/place-1.jpg" alt="Free HTML5 Website Template by FreeHTML5.co" class="img-responsive">
- 							<div class="desc">
-								<span></span>
-										<h3><%= apartment.getName() %></h3>
-										<span><%= ApartmentLogic.correctApartmentTypeDisplay(apartment.getType().toString()) %></span> 
-										<span class="price"><%= String.format ("%.2f", apartment.getPrice()) %></span>
-										<form method="get">
-											<input name="apartmentID" type="text" value="<%= apartment.getId() %>" hidden>
-											<input type="submit" class="btn btn-primary btn-outline" value="Select">
-<!-- 										 	<a class="btn btn-primary btn-outline" href="results">Select <i class="icon-arrow-right22"></i></a> -->
-										</form>
-									</div>
-								</div>
+				ArrayList<Apartment> apartments = (ArrayList<Apartment>)request.getAttribute("resultApartments");
+					
+					for (Apartment apartment : apartments)
+					{ 
+					
+					apartmentKey = apartment.getId();%>
+						
+					<div class="col-md-4 col-sm-6 fh5co-tours animate-box" data-animate-effect="fadeIn">
+					<div href="#"><img src="images/place-1.jpg" alt="Free HTML5 Website Template by FreeHTML5.co" class="img-responsive">
+						<div class="desc">
+						<span></span>
+								<h3><%= apartment.getName() %></h3>
+								<span><%= ApartmentLogic.correctApartmentTypeDisplay(apartment.getType().toString()) %></span> 
+								<span class="price"><%= String.format ("%.2f", apartment.getPrice()) %></span>
+								<form method="get">
+									<input name="apartmentHost" type="text" value="<%= apartmentKey.getHost() %>" hidden>
+									<input name="apartmentBuildingNumber" type="text" value="<%= apartmentKey.getBuildingNumber() %>" hidden>
+									<input name="apartmentStreet" type="text" value="<%= apartment.getStreet() %>" hidden>
+									<input name="apartmentFlatNumber" type="text" value="<%= apartment.getFlatNumber() %>" hidden>
+									<input name="apartmentCity" type="text" value="<%= apartment.getCity() %>" hidden>
+									<input type="submit" class="btn btn-primary btn-outline" value="Select">
+								</form>
 							</div>
-						<% } %>
+						</div>
+					</div>
+				<% } %>
 <!-- 					<div class="col-md-4 col-sm-6 fh5co-tours animate-box" data-animate-effect="fadeIn"> -->
 <!-- 						<div href="#"><img src="images/place-1.jpg" alt="Free HTML5 Website Template by FreeHTML5.co" class="img-responsive"> -->
 <!-- 							<div class="desc"> -->
