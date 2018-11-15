@@ -94,6 +94,13 @@ public class UserLogic {
 		return user != null && DataAccess.getUserByEmail(user.getEmail()) != null;
 	}
 	
+	public static boolean isAdmin(User user) {
+		if (user != null && user.getEmail().equals("admin")) {
+			return true;
+		}
+		return false;
+	}
+	
 	public static boolean isUserValid(User user) {
 		
 		return (user.getEmail().contains("@") || user.getEmail().equals("admin")) &&

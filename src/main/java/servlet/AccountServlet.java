@@ -11,6 +11,7 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebInitParam;
 import javax.servlet.annotation.WebServlet;
@@ -27,9 +28,12 @@ import model.User;
 		initParams={@WebInitParam(name="configuracion", value="es.uc3m.tiw")}
 		)
 public class AccountServlet extends HttpServlet {
-	/**
-	 * 
-	 */
+	private static final String LOGIN_SERVLET = "/loginServlet";
+	private static final String REGISTRATION_SERVLET = "/registrationServlet";
+	private static final String LOGOUT_SERVLET = "/logoutServlet";
+	private static final String ADMINISTRATOR_PATH = "/airbnb/administatorUsers";
+	private static final String USER_PATH = "/index.jsp";
+	
 	private static final long serialVersionUID = 1L;
 	private ServletConfig config;
 	private static List<User> users = new ArrayList<User>();
@@ -43,10 +47,6 @@ public class AccountServlet extends HttpServlet {
 	private String urlPath = "";
 	private HttpSession session = null;
 	private String msgBox = null;
-	
-	private static final String LOGIN_SERVLET = "/loginServlet";
-	private static final String REGISTRATION_SERVLET = "/registrationServlet";
-	private static final String LOGOUT_SERVLET = "/logoutServlet";
 	
 	
 		@Override
@@ -82,7 +82,7 @@ public class AccountServlet extends HttpServlet {
 				inputSurname = request.getParameter("inputSurname");
 				inputPassword = request.getParameter("inputPassword");
 				
-				registeredUser = new User(inputEmail, inputName, inputSurname, inputPassword, "0000000000");
+				registeredUser = new User(inputEmail, inputName, inputSurname, inputPassword, "000000000000");
 				boolean isRegistered  = UserLogic.registerUser(registeredUser);
 				
 				if (isRegistered) 
@@ -96,26 +96,39 @@ public class AccountServlet extends HttpServlet {
 				inputEmail = request.getParameter("inputEmail");
 				inputPassword = request.getParameter("inputPassword");
 				inputCheckbox = request.getParameter("inputCheckbox");
-		
-				loggedUser = DataAccess.getUserByEmail(inputEmail);//should check email and password
-	
+				
+				loggedUser = DataAccess.getUserByEmail(inputEmail);
 				if (loggedUser != null)
 				{
 					boolean correctPassword = loggedUser.getPassword().equals(inputPassword);
+					
 					if (correctPassword) {
 						session = request.getSession();
 						session.setAttribute("emailOfLoggedUser", inputEmail);
-//						msgBox = ("User was logged in");
+						msgBox = null;
+						
+						if (UserLogic.isAdmin(loggedUser))
+						{	
+							response.sendRedirect(ADMINISTRATOR_PATH);
+						} else {
+							RequestDispatcher rd= request.getRequestDispatcher(USER_PATH);
+							rd.forward(request, response); 
+						}
+					} else {
+						msgBox = "Password is wrong!!!";
 					}
 				} else {
-					msgBox = "Email or Password is wrong!!!";
+					msgBox = "Email is wrong!!!";
 				}
 			} 
 			else {
 				msgBox = "Wrong Servlet";
 			}
-			request.setAttribute("msgBox", msgBox); 
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp"); 
-			dispatcher.forward(request, response); 
+			
+			if (msgBox != null) {
+				request.setAttribute("msgBox", msgBox);
+				RequestDispatcher rd= request.getRequestDispatcher(USER_PATH);
+				rd.forward(request, response);
+			}
 		}
 }

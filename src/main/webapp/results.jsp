@@ -68,8 +68,14 @@
 		<!-- start:header-top -->
 			<%
 			String emailOfLoggedUser = (String) request.getSession().getAttribute("emailOfLoggedUser"); 		
-			if (emailOfLoggedUser != null) {  %>
-				<jsp:include page="headerLogin.jsp"/>
+			if (emailOfLoggedUser != null) { 
+				if (!emailOfLoggedUser.equals("admin")) {%>
+				<jsp:include page="headerLogin.jsp"/> 
+				<%} else { %>
+				<jsp:include page="headerAdmin.jsp"/>
+			<% } 
+			} else {  %>
+				<jsp:include page="headerLogout.jsp"/>
 			<% } %>
 			<script type="text/javascript">
 				document.getElementById("tab-index").classList.add("active");
@@ -182,6 +188,12 @@
 
 			</div>
 		</div>
+		<!-- Login Modal -->
+		<jsp:include page="loginWindow.jsp"></jsp:include>     
+            
+		<!-- Registro Modal -->
+		<jsp:include page="registrationWindow.jsp"></jsp:include>
+		
 		<jsp:include page="footer.jsp"/>
 
 	</div>
@@ -219,8 +231,18 @@
 	<!-- Main JS -->
 	<script src="js/main.js"></script>
 
-        
     <script>
+          $(document).on('click', '#Login', function () {
+              $("#loginModal").modal("show");
+           });
+          $(document).on('click', '#Registro', function () {
+              $("#RegistroModal").modal("show");
+           });
+        
+        $(document).on('click', '#goRegistroLogin', function () {
+              $("#RegistroModal").modal("hide");
+              $("#loginModal").modal("show");              
+           });
 		
     </script>
         
