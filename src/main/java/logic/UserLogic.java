@@ -62,6 +62,7 @@ public class UserLogic {
 		if (!isUserValid(toChange)) {
 			return false;
 		}
+
 		return DataAccess.updateUser(toChange);
 	}
 	
@@ -104,8 +105,8 @@ public class UserLogic {
 	public static boolean isUserValid(User user) {
 		
 		return (user.getEmail().contains("@") || user.getEmail().equals("admin")) &&
-				user.getName().matches(".*\\d+.*") &&
-				user.getSurname().matches(".*\\d+.*") &&
+			//	user.getName().matches(".*\\d+.*") &&
+			//	user.getSurname().matches(".*\\d+.*") &&
 				user.getPassword().length() >= 8 &&
 				user.getPhone().length() <= 12 && StringUtils.isNumeric(user.getPhone());
 	}

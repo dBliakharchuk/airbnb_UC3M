@@ -44,7 +44,7 @@ function updateUserData() {
 		if (selectedUserName != null && selectedUserName != ""
 				&& selectedUserSurname != null && selectedUserSurname != ""
 				&& selectedUserPhone != null && selectedUserPhone != "") {
-			$.post("/airbnb/UserServlet", {
+			$.post("updateUserServlet", {
 				action : "updateUser",
 				email : selectedUserEmail,
 				name : selectedUserName,
@@ -78,7 +78,7 @@ function changePassword() {
 
 		if (password != null && password != "") {
 			// to do get
-			$.post("/airbnb/UserServlet", {
+			$.post("updateUserServlet", {
 				action : "changePassword",
 				password : password,
 				email : selectedUserEmail
@@ -108,7 +108,7 @@ function deleteUser() {
 	if (selectedUserEmail != null && selectedUserEmail != "") {
 
 		if (confirm("Do you want to delete this user?")) {
-			$.post("/airbnb/UserServlet", {
+			$.post("updateUserServlet", {
 				action : "deleteUser",
 				email : selectedUserEmail
 			}).done(function(status) {

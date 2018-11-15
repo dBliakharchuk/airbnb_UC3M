@@ -92,12 +92,12 @@
 				<div id="profile-picture">
 
 				</div>
-				<form action="/airbnb/UserServlet" id="user-data-form">
+				<form action="updateUserServlet" id="user-data-form" method="POST">
 				<% User user =  (User)request.getAttribute("user");
 					if(user != null)
 					{		%>
 					<label for="email">Email</label>
-					<input type="text" id="user-email" name="email" value="<%= user.getEmail() %>"  disabled >
+					<input type="text" id="user-email" name="email" value="<%= user.getEmail() %>"  readonly >
 					<label for="name">Name</label>
 					<input type="text" id="user-name" name="name" value="<%= user.getName() %>" >
 					<label for="name" > Surname</label>
@@ -106,7 +106,7 @@
 					<input type="number" id="user-phone" name="phoneNumber" value="<%= user.getPhone() %>" >
 					<input type="hidden"  name="action" value="updateUser" >
 					
-					<input type="button" class="btn btn-success" id="save-changes-button" value="save">
+					<input type="submit" class="btn btn-success" id="save-changes-button" value="save">
 				<% }	%> 
 				</form>
 				<button type="button" class="btn btn-warning" id="change-password-button" onclick="changePassword()">Change Password</button>

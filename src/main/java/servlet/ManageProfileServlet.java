@@ -50,7 +50,6 @@ public class ManageProfileServlet extends HttpServlet
 			request.setAttribute("userApartments", userApartments);
 		}
 		
-
 		request.getRequestDispatcher("manageProfile.jsp").forward(request, response);
 	}
 

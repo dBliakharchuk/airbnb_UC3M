@@ -9,7 +9,7 @@ function changePassword() {
 
 		if (password != null && password != "") {
 			// to do get
-			$.post("/airbnb/UserServlet", {
+			$.post("updateUserServlet", {
 				action : "changePassword",
 				password : password,
 				email : selectedUserEmail
@@ -39,7 +39,7 @@ function deleteAccount(){
 	if (selectedUserEmail != null && selectedUserEmail != "") {
 
 		if (confirm("Do you want to delete this user?")) {
-			$.post("/airbnb/UserServlet", {
+			$.post("updateUserServlet", {
 				action : "deleteUser",
 				email : selectedUserEmail
 			}).done(function(status) {
