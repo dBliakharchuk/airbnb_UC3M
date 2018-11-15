@@ -31,7 +31,7 @@ public class UserLogic {
 	}
 	
 	public static boolean deleteUser(User user) {
-		if (user == null || !isUserRegistered(user)) {
+		if (user == null || !isUserRegistered(user) || user.getApartments().size() > 0) {
 			return false;
 		}
 		
