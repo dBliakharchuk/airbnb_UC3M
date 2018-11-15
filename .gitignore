@@ -1,7 +1,8 @@
 target/
 
 *.class
- 
+web.xml 
+
 # Package Files #
 *.jar
 *.war

@@ -64,8 +64,14 @@
 		<!-- start:header-top -->
 			<%
 			String emailOfLoggedUser = (String) request.getSession().getAttribute("emailOfLoggedUser"); 		
-			if (emailOfLoggedUser != null) {  %>
-				<jsp:include page="headerLogin.jsp"/>
+			if (emailOfLoggedUser != null) { 
+				if (!emailOfLoggedUser.equals("admin")) {%>
+				<jsp:include page="headerLogin.jsp"/> 
+				<%} else { %>
+				<jsp:include page="headerAdmin.jsp"/>
+			<% } 
+			} else {  %>
+				<jsp:include page="headerLogout.jsp"/>
 			<% } %>
 			<script type="text/javascript">
 				document.getElementById("tab-profile").classList.add("active");
