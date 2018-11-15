@@ -1,14 +1,25 @@
 # airbnb
 
-mysql database credentials:
- * Username: userLQE 
- * Password: 2dAlhk2RqPhVlFOK 
-
-how to connect to server with database:
- * download openshift origin client tools from https://github.com/openshift/origin/releases
- * unzip oc executive
- * open cmd/terminal in oc folder
- * run commands:
- 1. oc login https://api.starter-us-west-1.openshift.com --token=bERk1VH9HU901CKQtPUQirsdaknTAWaGSib8Vm2KcmI
- 2. oc port-forward airbnb-1-9zt82 3306:3306
- * don't close command prompt unless you finished your work with db
+##### Non-registered user (guest), who will only be able to query the homes available in the platform.
+##### Registered users, who will be able to user most of the functionalities of the application, including:
+##### Manage user’s profile:
+- [x] Registration
+- [x] Modify the user’s profile information
+- [x] Delete profile
+##### Rent a home:
+- [x] Find homes
+- [x] Book homes
+- [x] Show all the homes the user rented so far.
+- [x] Exchange messages with the host.
+##### Offer a home:
+- [x] Register a home
+- [x] Modify its information: change price per night, the description, etc.
+- [x] Delete it.
+- [ ] Show all the homes offered by the user.
+- [ ] Obtain information about the reservations
+- [ ] Exchange messages with the guests.
+- [ ] Exchange messages with the administrator.
+##### Administrator, who will be in charge of guaranteeing that all the processes are carried out in accordance to the site policy.
+- [x] Manage users: modify information and delete.
+- [x] Manage homes: modify information and delete.
+- [ ] Exchange messages with the hosts.
