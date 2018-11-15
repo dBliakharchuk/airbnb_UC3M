@@ -148,7 +148,7 @@
 					<div class="col-md-4 col-sm-6 fh5co-tours animate-box" data-animate-effect="fadeIn" id="add-apartemnt-square">
 						<div href="#"><img src="images/place-2.jpg" alt="Free HTML5 Website Template by FreeHTML5.co" class="img-responsive">
 							<div class="desc">
-								<h1 id="add-new-apartment-plus">+</h1>
+								<h1 id="add-new-apartment-plus"><a href="addApartment.jsp">+</a></h1>
 							</div>
 						</div>
 					</div>
