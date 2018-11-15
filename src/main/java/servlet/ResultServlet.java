@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import database.DataAccess;
 import logic.ApartmentLogic;
 import model.Apartment;
+import model.ApartmentPK;
 import model.ApartmentType;
 import model.Reservation;
 

@@ -15,6 +15,21 @@ import model.User;
 
 public class ApartmentLogic {
 
+	//To be deleted
+	public static Apartment findApartmentById (String apartmentID) {
+		
+		List<Apartment> availableApartmentsList = DataAccess.getAllApartments();
+		
+		for(Apartment apartment : availableApartmentsList) {
+			
+			if(apartment.getId().toString().equals(apartmentID) == true)  {
+					
+				return apartment;
+			}	
+		}
+		return null;
+	}
+
 	public static List<Apartment> search(String fromPlace, String price, 
 			ApartmentType typeOfAccom, Integer adults, Integer children, Date dateStart, Date dateEnd){
 		
