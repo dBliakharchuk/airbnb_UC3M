@@ -1,5 +1,6 @@
 package logic;
 
+import java.awt.datatransfer.StringSelection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -31,11 +32,19 @@ public class UserLogic {
 	}
 	
 	public static boolean deleteUser(User user) {
-		if (user == null || !isUserRegistered(user)) {
+		if (user == null || !isUserRegistered(user) || user.getApartments().size() > 0) {
 			return false;
 		}
 		
 		return DataAccess.removeUser(user);
+	}
+	
+	public static boolean deleteUser(String email) {
+		if (email == null || email.equals("")) {
+			return false;
+		}
+		User toDelete = DataAccess.getUserByEmail(email);
+		return deleteUser(toDelete);
 	}
 	
 	public static boolean changeUserName(String email, String name) {
