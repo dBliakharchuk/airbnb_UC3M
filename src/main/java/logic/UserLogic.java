@@ -4,6 +4,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.commons.lang3.StringUtils;
+
 import database.DataAccess;
 import model.Apartment;
 import model.Message;
@@ -39,24 +41,36 @@ public class UserLogic {
 	public static boolean changeUserName(String email, String name) {
 		User toChange = DataAccess.getUserByEmail(email);
 		toChange.setName(name);
+		if (!isUserValid(toChange)) {
+			return false;
+		}
 		return DataAccess.updateUser(toChange);
 	}
 	
 	public static boolean changeUserSurname(String email, String surname) {
 		User toChange = DataAccess.getUserByEmail(email);
 		toChange.setSurname(surname);
+		if (!isUserValid(toChange)) {
+			return false;
+		}
 		return DataAccess.updateUser(toChange);
 	}
 	
 	public static boolean changeUserPassword(String email, String password) {
 		User toChange = DataAccess.getUserByEmail(email);
 		toChange.setPassword(password);
+		if (!isUserValid(toChange)) {
+			return false;
+		}
 		return DataAccess.updateUser(toChange);
 	}
 	
 	public static boolean changeUserPhone(String email, String phone) {
 		User toChange = DataAccess.getUserByEmail(email);
 		toChange.setPhone(phone);
+		if (!isUserValid(toChange)) {
+			return false;
+		}
 		return DataAccess.updateUser(toChange);
 	}
 	
@@ -81,9 +95,12 @@ public class UserLogic {
 	}
 	
 	public static boolean isUserValid(User user) {
-		//TODO
-		//password strength check etc
-		return true;
+		
+		return (user.getEmail().contains("@") || user.getEmail().equals("admin")) &&
+				user.getName().matches(".*\\d+.*") &&
+				user.getSurname().matches(".*\\d+.*") &&
+				user.getPassword().length() >= 8 &&
+				user.getPhone().length() <= 12 && StringUtils.isNumeric(user.getPhone());
 	}
 
 }

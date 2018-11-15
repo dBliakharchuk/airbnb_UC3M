@@ -61,5 +61,13 @@ public class TripLogic {
 		
 		return userTrips;	
 	}
+	
+	public static boolean bookTrip(Trip trip) {
+		if (trip == null || trip.getReservations().isEmpty()) {
+			return false;
+		}
+		User user = trip.getReservations().get(0).getUser();
+		return ApartmentLogic.bookApartment(user, trip.getApartment(), trip.getBeginning(), trip.getEnd());
+	}
 
 }

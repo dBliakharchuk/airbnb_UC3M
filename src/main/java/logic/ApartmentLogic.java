@@ -14,14 +14,6 @@ import model.Reservation;
 import model.User;
 
 public class ApartmentLogic {
-	
-	public static void addApartment(Apartment apartment) {
-		if (!UserLogic.isUserRegistered(apartment.getHost())) {
-			UserLogic.registerUser(apartment.getHost());
-		}
-		
-		DataAccess.createApartment(apartment);
-	}
 
 	public static List<Apartment> search(String fromPlace, String price, ApartmentType typeOfAccom, Integer adults, Integer children, Date dateStart, Date dateEnd){
 		
@@ -241,6 +233,14 @@ public class ApartmentLogic {
 		return dateStart.compareTo(examinedDate) * dateEnd.compareTo(examinedDate) <= 0;
 	}
 	
+	public static void addApartment(Apartment apartment) {
+		if (!UserLogic.isUserRegistered(apartment.getHost())) {
+			UserLogic.registerUser(apartment.getHost());
+		}
+		
+		DataAccess.createApartment(apartment);
+	}
+	
 	public static boolean bookApartment(User user, Apartment apartment, Date start, Date end) {
 		if (user == null || apartment == null || start == null || end == null || end.before(start)) {
 			return false;
@@ -271,6 +271,7 @@ public class ApartmentLogic {
 		
 		DataAccess.updateApartment(apartment);
 		DataAccess.updateUser(user);
+		for (Reservation r : reservations) DataAccess.createReservation(r);
 		
 		return true;
 	}
