@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebInitParam;
@@ -44,9 +45,19 @@ public class AdministratorHomesServlet extends HttpServlet {
 		 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 		 */
 		protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			apartments =  new ArrayList<Apartment>(DataAccess.getAllApartments());
-			request.setAttribute("apartments", apartments);
-			request.getRequestDispatcher("administatorHomes.jsp").forward(request, response);
+			String emailOfLoggedUser = (String) request.getSession().getAttribute("emailOfLoggedUser"); 
+			if (emailOfLoggedUser != null) {
+				if (emailOfLoggedUser.equals("admin")) {
+					apartments =  new ArrayList<Apartment>(DataAccess.getAllApartments());
+					request.setAttribute("apartments", apartments);
+					
+					RequestDispatcher dispatcher = request.getRequestDispatcher("/administatorHomes.jsp"); 
+					dispatcher.forward(request, response); 
+				}
+			} else {
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp"); 
+				dispatcher.forward(request, response); 
+			}
 		}
 
 		/**
