@@ -82,7 +82,7 @@
 			
 			<%
 			String emailOfLoggedUser = (String) request.getSession().getAttribute("emailOfLoggedUser"); 		
-			if (emailOfLoggedUser != null) {  %>
+			if (emailOfLoggedUser != null && emailOfLoggedUser.equals("admin")) {  %>
 				<jsp:include page="headerAdmin.jsp"/>
 			<% } else { %>  
 				<jsp:include page="headerLogout.jsp"/>
