@@ -1,11 +1,14 @@
 package logic;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import database.DataAccess;
 import model.Apartment;
@@ -14,21 +17,6 @@ import model.Reservation;
 import model.User;
 
 public class ApartmentLogic {
-
-	//To be deleted
-	public static Apartment findApartmentById (String apartmentID) {
-		
-		List<Apartment> availableApartmentsList = DataAccess.getAllApartments();
-		
-		for(Apartment apartment : availableApartmentsList) {
-			
-			if(apartment.getId().toString().equals(apartmentID) == true)  {
-					
-				return apartment;
-			}	
-		}
-		return null;
-	}
 
 	public static List<Apartment> search(String fromPlace, String price, 
 			ApartmentType typeOfAccom, Integer adults, Integer children, Date dateStart, Date dateEnd){
@@ -70,6 +58,26 @@ public class ApartmentLogic {
 		}
 		
 		return apartmentTypeToDisplay;
+	}
+	public static double countTotalPrice (String dateStart, String dateEnd, Apartment apartment) {
+		
+		return daysBetweenTwoDates(dateStart, dateEnd) * apartment.getPrice();
+	}
+	private static int daysBetweenTwoDates(String dateStart, String dateEnd) {
+		
+		SimpleDateFormat myFormat = new SimpleDateFormat("MM/dd/yyyy");
+		int numberOfDays = 0;
+
+		try {
+		    Date date1 = myFormat.parse(dateStart);
+		    Date date2 = myFormat.parse(dateEnd);
+		    long diff = date2.getTime() - date1.getTime();
+		    numberOfDays = (int)TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+		} catch (ParseException e) {
+		    e.printStackTrace();
+		}
+		
+		return numberOfDays;
 	}
 	private static boolean checkApartmentName(Apartment apartment, String obtainedName) {
 		if (apartment == null || obtainedName == null) {

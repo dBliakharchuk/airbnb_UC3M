@@ -86,7 +86,7 @@
 			<div class="container">
 		
 				<div class="row">
-					<% Apartment apartment = (Apartment)request.getAttribute("selectedApartment"); %>
+					<% Apartment apartment = (Apartment)request.getSession().getAttribute("selectedApartment"); %>
 					<div class="col-md-12 animate-box">
 						<h2 class="heading-title"><%= apartment.getName() %></h2>
 					</div>
@@ -96,6 +96,11 @@
                         </span>
                         <table class="table">
                             <tbody>
+                            	<tr>
+                                        <th scope="row">Address:</th>
+                                        <td><span class="beds"><%= apartment.getId().getStreet() + " " + apartment.getId().getBuildingNumber() + "/" +apartment.getId().getFlatNumber() 
+                                        							+ ", " + apartment.getId().getCity() +", " + apartment.getCountry()%></span></td>
+                                </tr>
                                 <tr>                                
                                     <th scope="row">Host:</th>
                                     <td><span class="host"><%= apartment.getHost().getName() + " " + apartment.getHost().getSurname() %></span></td>
@@ -103,7 +108,7 @@
                                 
                                 <tr>                                
                                         <th scope="row">Price:</th>
-                                    <td><span class="price"><%= String.format ("%.2f", apartment.getPrice()) %>€</span></td>
+                                    <td><span class="price"><%= String.format ("%.2f", apartment.getPrice()) %></span></td>
                                 </tr>
                                 <tr>
                                         <th scope="row">Beds:</th>
@@ -117,11 +122,13 @@
                                 </tr>                               
                             </tbody>
                         </table>
+                        	<form action="reservations" method="get">
+                        	<div class="col-xxs-12 col-xs-6 mt">
+                            	<input type="submit" class="btn btn-primary btn-block" value="Reserve">
+                        	</div>
+                        	</form>
                         <div class="col-xxs-12 col-xs-6 mt">
-                            <input type="book" class="btn btn-primary btn-block" value="Reservar">
-                        </div>
-                        <div class="col-xxs-12 col-xs-6 mt">
-                            <input type="contact" class="btn btn-primary btn-block" value="Contactar">
+                            <input type="contact" class="btn btn-primary btn-block" value="Contact">
                         </div>
                                                                         
                     </div>
