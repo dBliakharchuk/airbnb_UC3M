@@ -12,6 +12,7 @@ import java.util.concurrent.TimeUnit;
 
 import database.DataAccess;
 import model.Apartment;
+import model.ApartmentPK;
 import model.ApartmentType;
 import model.Reservation;
 import model.User;
@@ -232,6 +233,14 @@ public class ApartmentLogic {
 		return true;
 	}
   
+	public static boolean removeApartment(ApartmentPK apartmentPk) {
+		if (apartmentPk == null) {
+			return false;
+		}
+		Apartment toDelete = DataAccess.getApartmentById(apartmentPk);
+		return removeApartment(toDelete);
+	}
+	
 	public static boolean removeApartment(Apartment apartment) {
 		if (apartment == null) {
 			return false;
