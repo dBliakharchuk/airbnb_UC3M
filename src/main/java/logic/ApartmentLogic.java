@@ -229,12 +229,16 @@ public class ApartmentLogic {
 		return true;
 	}
 	
-	public static void addApartment(Apartment apartment) {
+	public static boolean addApartment(Apartment apartment) {
+		if (apartment == null) {
+			return false;
+		}
+		
 		if (!UserLogic.isUserRegistered(apartment.getHost())) {
 			UserLogic.registerUser(apartment.getHost());
 		}
 		
-		DataAccess.createApartment(apartment);
+		return DataAccess.createApartment(apartment);
 	}
   
 	public static boolean modifyApartment(Apartment apartment) {

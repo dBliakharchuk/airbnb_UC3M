@@ -16,18 +16,47 @@ import model.User;
 
 public class Application {
 	
-	public static void main(String[] args) throws InterruptedException {
+	public static void main(String[] args) {
+//		boolean success = UserLogic.registerUser(null);
+//		boolean success2 = ApartmentLogic.addApartment(null);
+//		boolean success3 = MessageLogic.sendMessage(null);
+//		boolean success4 = TripLogic.bookTrip(null);
+//		
+//		boolean success5 = UserLogic.modifyUser(null);
+//		boolean success6 = ApartmentLogic.modifyApartment(null);
+//		//boolean success7 = DataAccess.updateMessage(null);
+//		//boolean success8 = DataAccess.updateReservation(null);
+//
+//		boolean success9 = UserLogic.removeUser("");
+//		//boolean success10 = ApartmentLogic.removeApartment(null);
+//		//boolean success11 = DataAccess.removeMessage(null);
+//		boolean success12 = TripLogic.removeReservation(null);
+//		
+//		System.out.println(success);
+//		System.out.println(success2);
+//		System.out.println(success3);
+//		System.out.println(success4);
+//		
+//		System.out.println(success5);
+//		System.out.println(success6);
+//		//System.out.println(success7);
+//		//System.out.println(success8);
+//		
+//		System.out.println(success9);
+//		//System.out.println(success10);
+//		//System.out.println(success11);
+//		System.out.println(success12);
 		
-		//List<Apartment> aps = DataAccess.getAllApartments();
-		User piotr = DataAccess.getUserByEmail("customer@gmail.com");
-		User mat = DataAccess.getUserByEmail("mateusz@gmail.com");
-		//UserLogic.deleteUser(piotr);
-		List<Trip> trips = TripLogic.getUserTrips(piotr);
-		System.out.println(trips.size());
+//		List<Apartment> aps = DataAccess.getAllApartments();
+//		User piotr = DataAccess.getUserByEmail("customer@gmail.com");
+//		User mat = DataAccess.getUserByEmail("mateusz@gmail.com");
+//		UserLogic.deleteUser(piotr);
+//		List<Trip> trips = TripLogic.getUserTrips(piotr);
+//		System.out.println(trips.size());
 		
-		for (Trip t : trips) {
-			System.out.println(t.getBeginning() + " " + t.getEnd());
-		}
+//		for (Trip t : trips) {
+//			System.out.println(t.getBeginning() + " " + t.getEnd());
+//		}
 //		List<User> users = DataAccess.getAllUsers();
 //		List<Reservation> reservs = DataAccess.getAllReservations();
 //		//ApartmentPK apKey = new ApartmentPK("dima@gmail.com", "15", "Calle Central", "5", "Madrid");

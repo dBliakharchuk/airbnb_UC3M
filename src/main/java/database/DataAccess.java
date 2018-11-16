@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -26,7 +27,6 @@ public class DataAccess
 {	
 	private static EntityManagerFactory managerFactory = Persistence.createEntityManagerFactory("airbnb");
 	private static Connection connection = null;
-	private static Logger logger = Logger.getLogger(DataAccess.class); 
 	
 	public static List<User> getAllUsers() {
 		List<User> results;
@@ -35,7 +35,6 @@ public class DataAccess
 			Query query = manager.createNamedQuery("User.findAll", User.class);
 			results = query.getResultList();
 		} catch(Exception ex) {
-			//logger.error("Exception in method getAllUsers");
 			ex.printStackTrace();
 			results = new ArrayList();
 		} finally {
@@ -50,7 +49,6 @@ public class DataAccess
 		try {
 			result = manager.find(User.class, email);
 		} catch(Exception ex) {
-			//logger.error("Exception in method getUserByEmail");
 			ex.printStackTrace();
 		} finally {
 			manager.close();
@@ -67,12 +65,11 @@ public class DataAccess
 			query.setParameter("surname", surname);
 			results = query.getResultList();
 		} catch(Exception ex) {
-			//logger.error("Exception in method getUserByEmail");
 			ex.printStackTrace();
+			results = new ArrayList();
 		} finally {
 			manager.close();
 		}
-		
 		return results;
 	}
 	
@@ -89,12 +86,13 @@ public class DataAccess
 				}
 			} catch (Exception e) {
 				ex.printStackTrace();
-				throw e;
+				e.printStackTrace();
 			}
-			throw ex;
-		} finally {
 			manager.close();
+			return false;
 		}
+		
+		manager.close();
 		return true;
 	}
 	
@@ -112,12 +110,13 @@ public class DataAccess
 				}
 			} catch (Exception e) {
 				ex.printStackTrace();
-				throw e;
+				e.printStackTrace();
 			}
-			throw ex;
-		} finally {
 			manager.close();
+			return false;
 		}
+		
+		manager.close();
 		return true;
 	}
 	
@@ -138,12 +137,13 @@ public class DataAccess
 				}
 			} catch (Exception e) {
 				ex.printStackTrace();
-				throw e;
+				e.printStackTrace();
 			}
-			throw ex;
-		} finally {
 			manager.close();
+			return false;
 		}
+		
+		manager.close();
 		return true;
 	}
 	
@@ -276,12 +276,13 @@ public class DataAccess
 				}
 			} catch (Exception e) {
 				ex.printStackTrace();
-				throw e;
+				e.printStackTrace();
 			}
-			throw ex;
-		} finally {
 			manager.close();
+			return false;
 		}
+		
+		manager.close();
 		return true;
 	}
 	
@@ -299,12 +300,13 @@ public class DataAccess
 				}
 			} catch (Exception e) {
 				ex.printStackTrace();
-				throw e;
+				e.printStackTrace();
 			}
-			throw ex;
-		} finally {
 			manager.close();
+			return false;
 		}
+		
+		manager.close();
 		return true;
 	}
 	
@@ -325,12 +327,13 @@ public class DataAccess
 				}
 			} catch (Exception e) {
 				ex.printStackTrace();
-				throw e;
+				e.printStackTrace();
 			}
-			throw ex;
-		} finally {
 			manager.close();
+			return false;
 		}
+		
+		manager.close();
 		return true;
 	}
 	
@@ -351,12 +354,13 @@ public class DataAccess
 				}
 			} catch (Exception e) {
 				ex.printStackTrace();
-				throw e;
+				e.printStackTrace();
 			}
-			throw ex;
-		} finally {
 			manager.close();
+			return false;
 		}
+		
+		manager.close();
 		return true;
 	}
 	
@@ -376,12 +380,19 @@ public class DataAccess
 			receiver.removeMessagesReceived(managed);
 			manager.getTransaction().commit();
 		} catch(Exception ex) {
-			logger.error("Exception in method removeMessage");
-			ex.printStackTrace();
-		} finally {
+			try {
+				if (manager.getTransaction().isActive()) {
+					manager.getTransaction().rollback();
+				}
+			} catch (Exception e) {
+				ex.printStackTrace();
+				e.printStackTrace();
+			}
 			manager.close();
+			return false;
 		}
 		
+		manager.close();
 		return true;
 	}
 	
@@ -392,7 +403,6 @@ public class DataAccess
 			Query query = manager.createNamedQuery("Reservation.findAll", Reservation.class);
 			results = query.getResultList();
 		} catch(Exception ex) {
-			//logger.error("Exception in method getAllUsers");
 			ex.printStackTrace();
 			results = new ArrayList();
 		} finally {
@@ -403,11 +413,12 @@ public class DataAccess
 	
 	public static boolean createReservation(Reservation reservation) {
 		PreparedStatement stmt = null;
-		logger.info("creating Reservation");
 		try {
 			connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/airbnbdb?user=userLQE&password=2dAlhk2RqPhVlFOK" + 
 							"&useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC");
+			
 			stmt = connection.prepareStatement("INSERT INTO Reservation VALUES(?,?,?,?,?,?,?)");
+			
 			stmt.setString(1, reservation.getUser().getEmail());
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");  
 			stmt.setString(2, dateFormat.format(reservation.getDate()));
@@ -416,11 +427,41 @@ public class DataAccess
 			stmt.setString(5, reservation.getApartment().getStreet());
 			stmt.setString(6, reservation.getApartment().getFlatNumber());
 			stmt.setString(7, reservation.getApartment().getCity());
+			
 		    stmt.executeUpdate();
 		     
 		} catch(Exception ex) {
-			logger.error("Exception in method createReservation");
+			
+			try {
+				
+				if (connection != null) {
+					connection.close();
+				}
+				
+				if (stmt != null) {
+					stmt.close();
+				}
+				
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+			
 			ex.printStackTrace();
+			return false;
+		}
+		
+		try {
+			
+			if (connection != null) {
+				connection.close();
+			}
+			
+			if (stmt != null) {
+				stmt.close();
+			}
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
 		}
 		
 		return true;
@@ -443,12 +484,13 @@ public class DataAccess
 				}
 			} catch (Exception e) {
 				ex.printStackTrace();
-				throw e;
+				e.printStackTrace();
 			}
-			throw ex;
-		} finally {
 			manager.close();
+			return false;
 		}
+		
+		manager.close();
 		return true;
 	}
 
