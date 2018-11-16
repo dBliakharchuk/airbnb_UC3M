@@ -25,7 +25,7 @@ public class Application {
 //		boolean success5 = UserLogic.modifyUser(null);
 //		boolean success6 = ApartmentLogic.modifyApartment(null);
 //		//boolean success7 = DataAccess.updateMessage(null);
-//		//boolean success8 = DataAccess.updateReservation(null);
+//		boolean success8 = DataAccess.createReservation(null);
 //
 //		boolean success9 = UserLogic.removeUser("");
 //		//boolean success10 = ApartmentLogic.removeApartment(null);
@@ -40,9 +40,9 @@ public class Application {
 //		System.out.println(success5);
 //		System.out.println(success6);
 //		//System.out.println(success7);
-//		//System.out.println(success8);
+//		System.out.println(success8);
 //		
-//		System.out.println(success9);
+//		System.out.println("test");
 //		//System.out.println(success10);
 //		//System.out.println(success11);
 //		System.out.println(success12);
