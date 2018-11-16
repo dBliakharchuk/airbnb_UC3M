@@ -83,14 +83,22 @@
 
 		<div id="fh5co-tours" class="fh5co-section-gray">
 			<div class="container" id="add-new-house-container">
-				<h1>Add New House</h1>
+				<h1>Add New Apartment</h1>
 				<div class="" id="add-new-house-form" >
-					<label for="name">Place Name</label>
+					<label for="name">Apartment Name</label>
 					<input type="text" name="name" value="" >
 					<label for="host-email">Host Email</label>
 					<input type="email" name="host-email" value="" >
-					<label for="localization">Localization</label>
-					<input type="text" name="localization" value="" >
+					<label for="country">Country</label>
+					<input type="text" name="country" value="" >	
+					<label for="buildingNumber">Building Number</label>
+					<input type="text" name="buildingNumber" value="" >
+					<label for="street">Street</label>
+					<input type="text" name="street" value="" >
+					<label for="flatNumber">FlatNumber</label>
+					<input type="text" name="flatNumber" value="" >
+					<label for="city">City</label>
+					<input type="text" name="city" value="" >		
 					<label for="price-per-day">Price Per Day</label>
 					<input type="number" name="price-per-day" value="" >
 					<label for="type-of-apartment">Type Of Apartment</label>

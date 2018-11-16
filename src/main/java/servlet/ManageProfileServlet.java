@@ -3,9 +3,7 @@ package servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebInitParam;
@@ -19,42 +17,40 @@ import logic.AdministratorLogic;
 import model.Apartment;
 import model.User;
 
-@WebServlet(urlPatterns = "/administatorUsers", loadOnStartup = 1, initParams = {
+@WebServlet(urlPatterns = "/manageProfile", loadOnStartup = 1, initParams = {
 		@WebInitParam(name = "configuracion", value = "es.uc3m.tiw") })
-public class AdministratorUsersServlet extends HttpServlet
+public class ManageProfileServlet extends HttpServlet
 {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	private ServletConfig config;
-	private List<User> users;
 
-	private Boolean userUpdated = false;
-	
-		@Override
-		public void init(ServletConfig config) throws ServletException {
-			this.config = config;
+	@Override
+	public void init(ServletConfig config) throws ServletException
+	{
+		this.config = config;
 
-		}
-	       
+	}
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		String emailOfLoggedUser = (String) request.getSession().getAttribute("emailOfLoggedUser"); 
-		if (emailOfLoggedUser != null) {	
-			if (emailOfLoggedUser.equals("admin")) {
-					users = new ArrayList<User>(DataAccess.getAllUsers());
-					request.setAttribute("users", users);
-					request.getRequestDispatcher("administatorUsers.jsp").forward(request, response);
-			}
-		} else {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp"); 
-			dispatcher.forward(request, response); 
+		String email = (String)request.getSession().getAttribute("emailOfLoggedUser");
+		if(email != null)
+		{
+			User user = DataAccess.getUserByEmail(email);
+			request.setAttribute("user", user);
+		
+			ArrayList<Apartment> userApartments =  new ArrayList<Apartment>(DataAccess.getApartmentByHost(email));
+			request.setAttribute("userApartments", userApartments);
 		}
+		
+		request.getRequestDispatcher("manageProfile.jsp").forward(request, response);
 	}
 
 	/**
@@ -63,11 +59,8 @@ public class AdministratorUsersServlet extends HttpServlet
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
+	
 		
-
-		
-
-
 	}
 
 }

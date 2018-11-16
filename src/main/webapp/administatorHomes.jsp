@@ -157,9 +157,6 @@
 									%>
 
 
-
-
-
 							</div>
 							<div id="midle-panel" class="panel-containter">
 								<div class="eidit-apartment-form">
