@@ -146,9 +146,7 @@ public class AccountServlet extends HttpServlet
 				String name = request.getParameter("name");
 				String surname = request.getParameter("surname");
 				String phone = request.getParameter("phoneNumber");
-				
-				System.out.println(email);
-		
+						
 				User user = DataAccess.getUserByEmail(email);
 				if(user != null)
 				{
@@ -158,14 +156,8 @@ public class AccountServlet extends HttpServlet
 					status =  UserLogic.modifyUser(user) ? 1 : 0;
 
 				}else
-				{
 					writer.println("I cant find the user");
-				}
-				
-				
-				
-				
-	
+		
 				writer.println(status);
 
 			} else if ("changePassword".equals(action))
