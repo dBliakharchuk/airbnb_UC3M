@@ -86,37 +86,45 @@
 
 		<div id="fh5co-tours" class="fh5co-section-gray">
 			<div class="container" id="add-new-house-container">
-				<h1>Add New Apartment</h1>
+				<h1>Edit Your Apartment</h1>
 				<form class="row-bottom-padded-md animate-box" id="add-new-house-form" action="ApartmentServlet"  method="POST" >
-					<label for="placeName">Apartment Name</label>
-					<input type="text" name="placeName" value="" required>
+				<% Apartment apartment = (Apartment)request.getSession().getAttribute("selectedApartment"); 
+					if(apartment != null)
+					{%>
+					<h2>Address</h2>
 					<label for="country">Country</label>
-					<input type="text" name="country" value="" required>	
-					<label for="building_number">Building Number</label>
-					<input type="text" name="building_number" value="" required>
-					<label for="street">Street</label>
-					<input type="text" name="street" value="" required>
-					<label for="flat_number">FlatNumber</label>
-					<input type="text" name="flat_number" value="" required>
+					<input type="text" name="country" value="<%=apartment.getCountry() %>" required readonly>
 					<label for="city">City</label>
-					<input type="text" name="city" value="" required>		
+					<input type="text" name="city" value="<%=apartment.getCity() %>" required readonly>
+					<label for="street">Street</label>
+					<input type="text" name="street" value="<%=apartment.getStreet() %>" required readonly>
+					<label for="building_number">Building Number</label>
+					<input type="text" name="building_number" value="<%=apartment.getBuildingNumber() %>" required readonly>
+					<label for="flat_number">FlatNumber</label>
+					<input type="text" name="flat_number" value="<%=apartment.getFlatNumber() %>" required readonly>
+					<h2 id="apartament-info-heding">Apartment Informations</h2>
+					<label for="placeName">Apartment Name</label>
+					<input type="text" name="placeName" value="<%=apartment.getName() %>" required >
+						
 					<label for="price">Price Per Day</label>
-					<input type="number" name="price" value="" required>
+					<input type="number" name="price" value="<%=apartment.getPrice() %>" required>
 					<label for="type">Type Of Apartment</label>
-					<input type="text" name="type" value="" required>
+					<input type="text" name="type" value="<%=apartment.getType().toString() %>" required>
 					<label for="adults_beds">Adults Beds</label>
-					<input type="number" name="adults_beds" value="" required>
+					<input type="number" name="adults_beds" value="<%=apartment.getBedsAdult() %>" required>
 					<label for="childeren_beds">Children Beds</label>
-					<input type="number" name="childeren_beds" value="" required>
+					<input type="number" name="childeren_beds" value="<%=apartment.getBedsChild() %>" required>
 					<label for="description">Description</label>
-					<textarea id="place-description" name="description" required></textarea>
-					<input type="file" name="apartment-picture" id="file" class="inputfile" required>
-					<label for="file">Upload Photo</label>
-					<input type="hidden" name="action" value="addApartment">
-				    <input type="hidden" name="email" value="<%= emailOfLoggedUser %>" required >
+					<textarea id="place-description" name="description" required><%=apartment.getDescription() %></textarea>
+					
+					<input type="hidden" name="action" value="updateApartment">
+					<input type="hidden" name="email" value="<%= emailOfLoggedUser %>" readonly required>
+					
 					
 					<input type="submit" class="btn btn-success" id="save-home-button" value = "Save">
 					<button type="button" class="btn btn-warning" id="cancel-home-button" onclick="window.location.href = 'manageProfile'">Cancel</button>
+					<button type="button" class="btn btn-danger" id="delete-apartment-button" onclick="deleteApartment()">Delete Apartment</button>
+				<% } %>
 				</form>
 
 			</div>

@@ -12,6 +12,10 @@
    padding: 10px;
 }
 
+#your-profile-header{
+	width: 100%;
+}
+
 #user-houses-container{
    width: 55%;
    float: left;
@@ -61,12 +65,7 @@
    font-size: 150px;
 }
 
-#profile-picture{
-   width: 200px;
-   height: 200px;
-   background-color: white;
-   margin-bottom: 20px;
-}
+
 
 .user-apartment{
 	padding: 10px;
@@ -122,6 +121,12 @@
 #add-new-house-form > textarea:focus{
    border: 1px solid #F78536;
 }
+#your-profile-header{
+	z-index: 2;
+}
+#add-new-house-form {
+	z-index: 3;
+}
 
 .inputfile {
 	width: 0.1px;
@@ -159,14 +164,25 @@
 	outline: -webkit-focus-ring-color auto 5px;
 }
 
+
+
 #save-home-button{
 
-   width: 45%;
-   float: left;
+   width: 100%;
+   margin-bottom: 10px;
 
 }
 
 #cancel-home-button{
-   width: 45%;
-   float: right;
+  width: 100%;
+  margin-bottom: 15px;
+  
+}
+
+#delete-apartment-button{
+	width: 100%;
+}
+
+#apartament-info-heding{
+	margin-top: 35px;
 }
