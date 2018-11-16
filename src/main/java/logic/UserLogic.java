@@ -31,7 +31,7 @@ public class UserLogic {
 		return DataAccess.createUser(user);
 	}
 	
-	public static boolean deleteUser(User user) {
+	public static boolean removeUser(User user) {
 		if (user == null || !isUserRegistered(user) || user.getApartments().size() > 0) {
 			return false;
 		}
@@ -39,12 +39,12 @@ public class UserLogic {
 		return DataAccess.removeUser(user);
 	}
 	
-	public static boolean deleteUser(String email) {
+	public static boolean removeUser(String email) {
 		if (email == null || email.equals("")) {
 			return false;
 		}
 		User toDelete = DataAccess.getUserByEmail(email);
-		return deleteUser(toDelete);
+		return removeUser(toDelete);
 	}
 	
 	public static boolean changeUserName(String email, String name) {
