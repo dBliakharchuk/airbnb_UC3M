@@ -83,6 +83,7 @@ public class ApartmentLogic {
 		return numberOfDays;
 	}
 	
+
 	private static boolean checkApartmentName(Apartment apartment, String obtainedName) {
 		if (apartment == null || obtainedName == null) {
 			return false;
@@ -194,6 +195,7 @@ public class ApartmentLogic {
 		return dateStart.compareTo(examinedDate) * dateEnd.compareTo(examinedDate) <= 0;
 	}
 	
+
 	public static boolean bookApartment(User user, Apartment apartment, Date start, Date end) {
 		if (user == null || apartment == null || start == null || end == null || end.before(start)) {
 			return false;

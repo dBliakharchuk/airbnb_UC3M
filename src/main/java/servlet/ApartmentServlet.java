@@ -3,13 +3,20 @@ package servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import database.DataAccess;
+import logic.ApartmentLogic;
+import logic.UserLogic;
+import model.Apartment;
 import model.ApartmentPK;
+import model.ApartmentType;
+import model.User;
 
 /**
  * Servlet implementation class ApartmentServlet
@@ -67,6 +74,7 @@ public class ApartmentServlet extends HttpServlet {
 			
 			System.out.println(email + placeName + cuntry  + type + Double.toString(price) + Integer.toString(childeren_beds) + Integer.toString(adults_beds)
 					 + description + buildingNumber + street + flatNumber + city);
+			
 		}if ("addApartment".equals(action))
 		{	
 			String email = request.getParameter("email");
@@ -82,24 +90,24 @@ public class ApartmentServlet extends HttpServlet {
 			String street = request.getParameter("street");
 			String flatNumber = request.getParameter("flat_number");
 			String	city = request.getParameter("city");
+	
+			byte[] picture = new byte[1];				//to do !!!! proces picture !!!!!!!!!!!!
 			
-			//to do !!!! proces picture !!!!!!!!!!!!
+			ApartmentPK apartmentPK = new ApartmentPK(email, buildingNumber, street, flatNumber, city);
+			User host = DataAccess.getUserByEmail(email);
+		
+			Apartment newApartment = new Apartment(host, buildingNumber, street, flatNumber, city, adults_beds, childeren_beds, cuntry, description, placeName, picture, price, ApartmentType.fromString(type) );
+			Boolean apartmentAddedStatus = ApartmentLogic.addApartment(newApartment);
+			if(apartmentAddedStatus)
+			{
+				RequestDispatcher rd = request.getRequestDispatcher("/manageProfile");
+				rd.forward(request, response);
+			}
 			
-			//test!
-			
-			System.out.println(email + placeName + cuntry  + type + Double.toString(price) + Integer.toString(childeren_beds) + Integer.toString(adults_beds)
-			+ description + buildingNumber + street + flatNumber + city);;
-			
-//			ApartmentPK apartmentPK = new ApartmentPK(email, buildingNumber, street, flatNumber, city);
-//			writer.println(1);
-			
-//			 Apartment apartmen = new Apartment(apartmentPK, adults_beds, childeren_beds, cuntry, description, placeName, price, type); change type
-//			 User updatedUserData = new User(email, name, phoneNumber, surname);
-//			 int userUpdatedStatus = AdministratorLogic.updateUserData(updatedUserData);
-			
-			
-//			 writer.println(email + placeName + cuntry  + type + Double.toString(price) + Integer.toString(childeren_beds) + Integer.toString(adults_beds)
-//					 + description + buildingNumber + street + flatNumber + city);
+//			System.out.println(email + placeName + cuntry  + type + Double.toString(price) + Integer.toString(childeren_beds) + Integer.toString(adults_beds)
+//			+ description + buildingNumber + street + flatNumber + city);
+		
+
 		}else if ("deletePlace".equals(action))
 		{
 			
@@ -110,6 +118,7 @@ public class ApartmentServlet extends HttpServlet {
 			String	city = request.getParameter("city");
 			
 			
+			ApartmentPK apartmentPK = new ApartmentPK(email, buildingNumber, street, flatNumber, city);
 			
 			writer.println(1);
 			

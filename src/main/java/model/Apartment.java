@@ -98,7 +98,7 @@ public class Apartment implements Serializable {
 		this.price = price;
 		this.type = type;
 		this.host = host;
-		this.reservations = new ArrayList<Reservation>();;
+		this.reservations = new ArrayList<Reservation>();
 	}
 
 	public ApartmentPK getId() {
