@@ -84,9 +84,10 @@
 			String emailOfLoggedUser = (String) request.getSession().getAttribute("emailOfLoggedUser"); 		
 			if (emailOfLoggedUser != null && emailOfLoggedUser.equals("admin")) {  %>
 				<jsp:include page="headerAdmin.jsp"/>
-			<% } else { %>  
-				<jsp:include page="headerLogout.jsp"/>
-			<% } %>
+			<% } else { 
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp"); 
+				dispatcher.forward(request, response); 
+			}%>
 			<script type="text/javascript">
 				document.getElementById("tab-admin-homes").classList.add("active");
 			</script>
@@ -157,9 +158,6 @@
 									%>
 
 
-
-
-
 							</div>
 							<div id="midle-panel" class="panel-containter">
 								<div class="eidit-apartment-form">
@@ -191,7 +189,7 @@
 								<button type="button" class="btn btn-success"
 									onclick="messageUser()">Message Host</button>
 								<button type="button" class="btn btn-danger"
-									onclick="deleteApartment()">Delete Place</button>
+									onclick="deleteApartment()">Delete Apartment</button>
 
 							</div>
 						</div>

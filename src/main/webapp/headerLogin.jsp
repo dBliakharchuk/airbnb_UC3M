@@ -8,7 +8,7 @@
 							<li id="tab-index"><a href="index.jsp" >Home</a></li>
 							<li id="tab-trips"><a href="trips" >Trips</a></li>
 							<li id="tab-messages"><a href="messages" >Messages</a></li>
-							<li id="tab-profile"><a href="manageProfile.jsp" >Manage Profile</a></li>
+							<li id="tab-profile"><a href="manageProfile" >Manage Profile</a></li>
 							<li ><a href='logoutServlet'>Log out</a></li>                           
 							</li>
 						</ul>

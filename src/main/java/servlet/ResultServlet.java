@@ -45,14 +45,15 @@ public class ResultServlet extends HttpServlet {
 		 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 		 */
 		protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+				request.getSession().setAttribute("selectedApartment", DataAccess.getApartmentById(new ApartmentPK(request.getParameter("apartmentHost"),
+				request.getParameter("apartmentBuildingNumber"), request.getParameter("apartmentStreet"), request.getParameter("apartmentFlatNumber"), 
+				request.getParameter("apartmentCity"))));
+						
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/accommodation.jsp");
+				
+				dispatcher.forward(request, response); 
 			
-			request.getSession().setAttribute("selectedApartment", DataAccess.getApartmentById(new ApartmentPK(request.getParameter("apartmentHost"),
-					request.getParameter("apartmentBuildingNumber"), request.getParameter("apartmentStreet"), request.getParameter("apartmentFlatNumber"), 
-					request.getParameter("apartmentCity"))));
-					
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/accommodation.jsp");
-			
-			dispatcher.forward(request, response);
 		}
 
 		/**
