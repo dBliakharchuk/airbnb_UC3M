@@ -7,9 +7,9 @@
 						<!-- START #fh5co-menu-wrap -->
 						<nav id="fh5co-menu-wrap" role="navigation">
 							<ul class="sf-menu" id="fh5co-primary-menu">
-								<li ><a href="administatorUsers" id="tab-admin-users">Users</a></li>
-								<li ><a href="administatorHomes" id="tab-admin-homes">Homes</a></li>
-								<li ><a href="messages.jsp" id="tab-messages">Messages</a></li>
+								<li id="tab-admin-users"><a href="administatorUsers" >Users</a></li>
+								<li id="tab-admin-homes"><a href="administatorHomes" >Homes</a></li>
+								<li id="tab-messages"><a href="messages.jsp" >Messages</a></li>
 								<li><a href="logoutServlet" id="Log Out">Log out</a></li>
 							</ul>
 						</nav>

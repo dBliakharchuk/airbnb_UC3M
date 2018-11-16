@@ -84,9 +84,10 @@
 			String emailOfLoggedUser = (String) request.getSession().getAttribute("emailOfLoggedUser"); 		
 			if (emailOfLoggedUser != null && emailOfLoggedUser.equals("admin")) {  %>
 				<jsp:include page="headerAdmin.jsp"/>
-			<% } else { %>  
-				<jsp:include page="headerLogout.jsp"/>
-			<% } %>
+			<% } else { 
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp"); 
+				dispatcher.forward(request, response); 
+			}%>
 			<script type="text/javascript">
 				document.getElementById("tab-admin-homes").classList.add("active");
 			</script>
