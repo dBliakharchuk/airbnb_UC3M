@@ -4,6 +4,9 @@
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+	<%@ page import="model.*" %>
+	
+	
 	<head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -80,29 +83,38 @@
 
 		<div id="fh5co-tours" class="fh5co-section-gray">
 			<div class="container" id="add-new-house-container">
-				<h1>Add New House</h1>
-				<div class="" id="add-new-house-form" >
-					<label for="name">Place Name</label>
-					<input type="text" name="name" value="" >
-					<label for="host-email">Host Email</label>
-					<input type="email" name="host-email" value="" >
-					<label for="localization">Localization</label>
-					<input type="text" name="localization" value="" >
-					<label for="price-per-day">Price Per Day</label>
-					<input type="number" name="price-per-day" value="" >
-					<label for="type-of-apartment">Type Of Apartment</label>
-					<input type="text" name="type-of-apartment" value="" >
-					<label for="beds-adult">Adults Beds</label>
-					<input type="number" name="beds-adult" value="" >
-					<label for="beds-child">Children Beds</label>
-					<input type="number" name="beds-child" value="" >
+				<h1>Add New Apartment</h1>
+				<form class="row-bottom-padded-md animate-box" id="add-new-house-form" action="ApartmentServlet"  method="POST" >
+					<label for="placeName">Apartment Name</label>
+					<input type="text" name="placeName" value="" required>
+					<label for="country">Country</label>
+					<input type="text" name="country" value="" required>	
+					<label for="building_number">Building Number</label>
+					<input type="text" name="building_number" value="" required>
+					<label for="street">Street</label>
+					<input type="text" name="street" value="" required>
+					<label for="flat_number">FlatNumber</label>
+					<input type="text" name="flat_number" value="" required>
+					<label for="city">City</label>
+					<input type="text" name="city" value="" required>		
+					<label for="price">Price Per Day</label>
+					<input type="number" name="price" value="" required>
+					<label for="type">Type Of Apartment</label>
+					<input type="text" name="type" value="" required>
+					<label for="adults_beds">Adults Beds</label>
+					<input type="number" name="adults_beds" value="" required>
+					<label for="childeren_beds">Children Beds</label>
+					<input type="number" name="childeren_beds" value="" required>
 					<label for="description">Description</label>
-					<textarea id="place-description" name="description"> </textarea>
-					<input type="file" name="file" id="file" class="inputfile" />
+					<textarea id="place-description" name="description" required></textarea>
+					<input type="file" name="apartment-picture" id="file" class="inputfile" required>
 					<label for="file">Upload Photo</label>
-					<button type="button" class="btn btn-success" id="save-home-button">Save</button>
-					<button type="button" class="btn btn-warning" id="cancel-home-button">Cancel</button>
-				</div>
+					<input type="hidden" name="action" value="addApartment">
+				    <input type="hidden" name="email" value="<%= emailOfLoggedUser %>" required >
+					
+					<input type="submit" class="btn btn-success" id="save-home-button" value = "Save">
+					<button type="button" class="btn btn-warning" id="cancel-home-button" onclick="window.location.href = 'manageProfile'">Cancel</button>
+				</form>
 
 			</div>
 		</div>

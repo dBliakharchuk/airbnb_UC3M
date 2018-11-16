@@ -71,6 +71,7 @@ public class UserLogic {
 		if (!isUserValid(toChange)) {
 			return false;
 		}
+
 		return DataAccess.updateUser(toChange);
 	}
 	

@@ -158,9 +158,6 @@
 									%>
 
 
-
-
-
 							</div>
 							<div id="midle-panel" class="panel-containter">
 								<div class="eidit-apartment-form">
@@ -192,7 +189,7 @@
 								<button type="button" class="btn btn-success"
 									onclick="messageUser()">Message Host</button>
 								<button type="button" class="btn btn-danger"
-									onclick="deleteApartment()">Delete Place</button>
+									onclick="deleteApartment()">Delete Apartment</button>
 
 							</div>
 						</div>
