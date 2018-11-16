@@ -1,7 +1,7 @@
 #reservation-box{
     padding-right:20px;
     padding-top:20px;
-    padding-bottom:20px;
+    padding-bottom:80px;
     padding-left:40px;
     font-size:17px;
 }
@@ -44,4 +44,5 @@ font-weight:bold;
 .reservation-button{
 	margin-left:5%;
 	width: 41%;	
+	float:left;
 }

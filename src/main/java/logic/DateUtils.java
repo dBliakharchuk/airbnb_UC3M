@@ -28,4 +28,8 @@ public class DateUtils {
 	    return datesInRange;
 	}
 	
+	public static boolean isDateBetweenTwoDates(Date dateStart, Date dateEnd, Date examinedDate) {
+		
+		return dateStart.compareTo(examinedDate) * dateEnd.compareTo(examinedDate) <= 0;
+	}
 }

@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 import database.DataAccess;
 import model.Apartment;
@@ -34,53 +33,28 @@ public class ApartmentLogic {
 					&& checkApartmentDates(apartment, dateStart, dateEnd)==true) {
 					
 					resultApartmentsList.add(apartment);
-			}
-				
+			}	
 		}
 		
 		return resultApartmentsList;
 	}
 
 	public static String correctApartmentTypeDisplay (String apartmentType) {
-		if (apartmentType == null) {
-			return "";
-		}
 		
-		String apartmentTypeToDisplay = null;
-	
-		if(apartmentType.equals("ENTIRE_APARTMENT")){
-			apartmentTypeToDisplay = "Entire Apartment";
-		} else if(apartmentType.equals("PRIVATE_ROOM")){
-			apartmentTypeToDisplay = "Private Room";
-		} else if(apartmentType.equals("SHARED_ROOM")){
-			apartmentTypeToDisplay = "Shared Room";
-		} else {
-			apartmentTypeToDisplay = "None";
-		}
-		
-		return apartmentTypeToDisplay;
+		return ApartmentType.fromString(apartmentType).toString();
 	}
 	
 	public static double countTotalPrice (String dateStart, String dateEnd, Apartment apartment) {
-		
-		return daysBetweenTwoDates(dateStart, dateEnd) * apartment.getPrice();
-	}
-	
-	private static int daysBetweenTwoDates(String dateStart, String dateEnd) {
-		
 		SimpleDateFormat myFormat = new SimpleDateFormat("MM/dd/yyyy");
-		int numberOfDays = 0;
-
+		double totalPrice = 0;
+		
 		try {
-		    Date date1 = myFormat.parse(dateStart);
-		    Date date2 = myFormat.parse(dateEnd);
-		    long diff = date2.getTime() - date1.getTime();
-		    numberOfDays = (int)TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
-		} catch (ParseException e) {
+			totalPrice = DateUtils.getDatesBetween(myFormat.parse(dateStart), myFormat.parse(dateEnd)).size() * apartment.getPrice();
+		} 
+		catch (ParseException e) {
 		    e.printStackTrace();
 		}
-		
-		return numberOfDays;
+		return totalPrice;
 	}
 	
 	private static boolean checkApartmentName(Apartment apartment, String obtainedName) {
@@ -158,7 +132,7 @@ public class ApartmentLogic {
 			if(dateStart.before(dateEnd)==true) {
 				
 				for(Date date : bookedDays) {
-					if(isDateBetweenTwoDates(dateStart, dateEnd, date)==true) {
+					if(DateUtils.isDateBetweenTwoDates(dateStart, dateEnd, date)==true) {
 						return false;
 					}
 				}
@@ -178,7 +152,7 @@ public class ApartmentLogic {
 			Date currentDate = new Date(new Date().getTime());
 			
 			for(Date date : bookedDays) {
-				if(isDateBetweenTwoDates(currentDate, dateEnd, date)==true) {
+				if(DateUtils.isDateBetweenTwoDates(currentDate, dateEnd, date)==true) {
 					return false;
 				}
 			}
@@ -188,12 +162,12 @@ public class ApartmentLogic {
 		}	
 		
 	}
-	
+  
 	private static boolean isDateBetweenTwoDates(Date dateStart, Date dateEnd, Date examinedDate) {
 		
 		return dateStart.compareTo(examinedDate) * dateEnd.compareTo(examinedDate) <= 0;
 	}
-	
+
 	public static boolean bookApartment(User user, Apartment apartment, Date start, Date end) {
 		if (user == null || apartment == null || start == null || end == null || end.before(start)) {
 			return false;
