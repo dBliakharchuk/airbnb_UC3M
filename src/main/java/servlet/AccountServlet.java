@@ -172,8 +172,10 @@ public class AccountServlet extends HttpServlet
 			} else if ("deleteUser".equals(action))
 			{
 				String email = request.getParameter("email");
-			//	Boolean userDeletedStatus = UserLogic.deleteUser(email);
-			//	writer.println(userDeletedStatus);
+				Boolean userDeletedStatus = UserLogic.deleteUser(email);
+				
+				int deleteUserStatusInt = userDeletedStatus ? 1 : 0;
+				writer.println(deleteUserStatusInt);
 			}
 			
 			
