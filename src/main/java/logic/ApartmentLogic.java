@@ -60,10 +60,12 @@ public class ApartmentLogic {
 		
 		return apartmentTypeToDisplay;
 	}
+	
 	public static double countTotalPrice (String dateStart, String dateEnd, Apartment apartment) {
 		
 		return daysBetweenTwoDates(dateStart, dateEnd) * apartment.getPrice();
 	}
+	
 	private static int daysBetweenTwoDates(String dateStart, String dateEnd) {
 		
 		SimpleDateFormat myFormat = new SimpleDateFormat("MM/dd/yyyy");
@@ -80,6 +82,7 @@ public class ApartmentLogic {
 		
 		return numberOfDays;
 	}
+	
 	private static boolean checkApartmentName(Apartment apartment, String obtainedName) {
 		if (apartment == null || obtainedName == null) {
 			return false;
@@ -185,17 +188,10 @@ public class ApartmentLogic {
 		}	
 		
 	}
+	
 	private static boolean isDateBetweenTwoDates(Date dateStart, Date dateEnd, Date examinedDate) {
 		
 		return dateStart.compareTo(examinedDate) * dateEnd.compareTo(examinedDate) <= 0;
-	}
-	
-	public static void addApartment(Apartment apartment) {
-		if (!UserLogic.isUserRegistered(apartment.getHost())) {
-			UserLogic.registerUser(apartment.getHost());
-		}
-		
-		DataAccess.createApartment(apartment);
 	}
 	
 	public static boolean bookApartment(User user, Apartment apartment, Date start, Date end) {
@@ -232,7 +228,23 @@ public class ApartmentLogic {
 		
 		return true;
 	}
+	
+	public static void addApartment(Apartment apartment) {
+		if (!UserLogic.isUserRegistered(apartment.getHost())) {
+			UserLogic.registerUser(apartment.getHost());
+		}
+		
+		DataAccess.createApartment(apartment);
+	}
   
+	public static boolean modifyApartment(Apartment apartment) {
+		if (apartment == null || !isApartmentRegistered(apartment)) {
+			return false;
+		}
+		
+		return DataAccess.updateApartment(apartment);
+	}
+	
 	public static boolean removeApartment(ApartmentPK apartmentPk) {
 		if (apartmentPk == null) {
 			return false;
@@ -247,5 +259,9 @@ public class ApartmentLogic {
 		}
 		
 		return DataAccess.removeApartment(apartment);
+	}
+	
+	public static boolean isApartmentRegistered(Apartment apartment) {
+		return apartment != null && DataAccess.getApartmentById(apartment.getId()) != null;
 	}
 }
