@@ -193,7 +193,7 @@ public class ApartmentLogic {
 		List<Reservation> userReservations = user.getReservations();
 		userReservations.addAll(reservations);
 		
-		user.setReservations(new ArrayList(new HashSet(reservations)));
+		user.setReservations(new ArrayList(new HashSet(userReservations)));
 		apartment.setReservations(new ArrayList(bookings.values()));
 		
 		DataAccess.updateApartment(apartment);

@@ -266,7 +266,9 @@ public class DataAccess
 	public static boolean createApartment(Apartment apartment)  {
 		EntityManager manager = managerFactory.createEntityManager();
 		try {
+			User host = manager.find(User.class, apartment.getHost().getEmail());
 			manager.getTransaction().begin();
+			host.addApartment(apartment);
 			manager.persist(apartment);
 			manager.getTransaction().commit();
 		} catch (Exception ex) {
@@ -314,10 +316,12 @@ public class DataAccess
 		EntityManager manager = managerFactory.createEntityManager();
 		Apartment managed = null;
 		try {
+			User host = manager.find(User.class, apartment.getHost().getEmail());
 			manager.getTransaction().begin();
 			if (!manager.contains(apartment)) {
 			    managed = manager.merge(apartment);
 			}
+			host.removeApartment(apartment);
 			manager.remove(managed);
 			manager.getTransaction().commit();
 		} catch (Exception ex) {
@@ -471,10 +475,12 @@ public class DataAccess
 		EntityManager manager = managerFactory.createEntityManager();
 		Reservation managed = null;
 		try {
+			User user = manager.find(User.class, reservation.getUser().getEmail());
 			manager.getTransaction().begin();
 			if (!manager.contains(reservation)) {
 			    managed = manager.merge(reservation);
 			}
+			user.removeReservation(reservation);
 			manager.remove(managed);
 			manager.getTransaction().commit();
 		} catch (Exception ex) {
