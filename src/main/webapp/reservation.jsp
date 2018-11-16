@@ -1,4 +1,4 @@
-
+<%@ page contentType="text/html; charset=UTF-8" %>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -89,8 +89,9 @@
 		<% 	Apartment apartment = (Apartment)request.getSession().getAttribute("selectedApartment"); 
 			
 			String dateStart = request.getSession().getAttribute("dateStart").toString();
-			String dateEnd = request.getSession().getAttribute("dateEnd").toString();	
-		%>
+			String dateEnd = request.getSession().getAttribute("dateEnd").toString();	%>
+			
+			
 		 <div class="fh5co-hero">
 			<div class="fh5co-overlay"></div>
 			<div class="fh5co-cover" data-stellar-background-ratio="0.5" style="background-image: url(images/cover_bg_5.jpg);">
@@ -112,7 +113,7 @@
 								</div>
 								<div class="reservation-info-field">
 									<span class="reservation-field-title">User:</span>
-									piotrszylar@gmail.com
+									<%= request.getSession().getAttribute("emailOfLoggedUser") %>
 								</div>
 									<div class="date-box">
 										<div class="input-field">
@@ -128,12 +129,16 @@
 									</div>
 										<div id="reservation-price">
 											<span>Price:</span>
-											<%= String.format ("%.2f", ApartmentLogic.countTotalPrice(dateStart, dateEnd, apartment)) %> 
+											<%= String.format ("%.2f", ApartmentLogic.countTotalPrice(dateStart, dateEnd, apartment)) %>€ 
 										</div>
 									<div style="clear:both;"></div>
 									<br/>
-									<input type="submit" class="btn btn-primary reservation-button" value="Reserve">
-									<input type="submit" class="btn btn-primary reservation-button" value="Cancel">
+									<form action="reservations">
+                            			<input type="submit" class="btn btn-primary reservation-button" value="Reserve">
+                        			</form>
+									<form action="ReservationFilter">
+										<input type="submit" class="btn btn-primary reservation-button" value="Cancel">
+									</form>
 								</div>
 						</div>
 					</div>
@@ -246,8 +251,18 @@
 	<!-- Main JS -->
 	<script src="js/main.js"></script>
 
-        
     <script>
+          $(document).on('click', '#Login', function () {
+              $("#loginModal").modal("show");
+           });
+          $(document).on('click', '#Registro', function () {
+              $("#RegistroModal").modal("show");
+           });
+        
+        $(document).on('click', '#goRegistroLogin', function () {
+              $("#RegistroModal").modal("hide");
+              $("#loginModal").modal("show");              
+           });
 		
     </script>
         
