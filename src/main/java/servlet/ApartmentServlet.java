@@ -59,15 +59,14 @@ public class ApartmentServlet extends HttpServlet {
 			
 			
 			ApartmentPK apartmentPK = new ApartmentPK(email, buildingNumber, street, flatNumber, city);
-			writer.println(1);
 			
 //			 Apartment apartmen = new Apartment(apartmentPK, adults_beds, childeren_beds, cuntry, description, placeName, price, type); change type
 //			 User updatedUserData = new User(email, name, phoneNumber, surname);
 //			 int userUpdatedStatus = AdministratorLogic.updateUserData(updatedUserData);
 			
 			
-//			 writer.println(email + placeName + cuntry  + type + Double.toString(price) + Integer.toString(childeren_beds) + Integer.toString(adults_beds)
-//					 + description + buildingNumber + street + flatNumber + city);
+			System.out.println(email + placeName + cuntry  + type + Double.toString(price) + Integer.toString(childeren_beds) + Integer.toString(adults_beds)
+					 + description + buildingNumber + street + flatNumber + city);
 		}if ("addApartment".equals(action))
 		{	
 			String email = request.getParameter("email");
@@ -85,6 +84,8 @@ public class ApartmentServlet extends HttpServlet {
 			String	city = request.getParameter("city");
 			
 			//to do !!!! proces picture !!!!!!!!!!!!
+			
+			//test!
 			
 			System.out.println(email + placeName + cuntry  + type + Double.toString(price) + Integer.toString(childeren_beds) + Integer.toString(adults_beds)
 			+ description + buildingNumber + street + flatNumber + city);;

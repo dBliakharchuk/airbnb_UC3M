@@ -131,12 +131,14 @@
 				<div class="row row-bottom-padded-md">
 				
 				
-					<%
+					<%		ApartmentPK apartmentKey = null;
 							ArrayList<Apartment> userApartments = (ArrayList<Apartment>) request.getAttribute("userApartments");
 							if(userApartments != null)
 							{
 								for (int i = 0; i < userApartments.size(); i++)
-								{ %>
+								{ 
+									apartmentKey = userApartments.get(i).getId();
+								%>
 									
 								<div class="col-md-4 col-sm-6 fh5co-tours animate-box" data-animate-effect="fadeIn">
 									<div href="#"><img src="images/place-1.jpg" alt="Free HTML5 Website Template by FreeHTML5.co" class="img-responsive">
@@ -145,7 +147,16 @@
 											<h3 class="user-apartment-title"> <%=userApartments.get(i).getName() %></h3>
 											<span><%=userApartments.get(i).getType().toString() %></span>
 											<span class="price"><%=userApartments.get(i).getPrice() + "E" %></span>
-											<a class="btn btn-primary btn-outline" href="#">Edit <i class="icon-arrow-right22"></i></a>
+											<form method="get" action="editApartment">
+												<input name="apartmentHost" type="text" value="<%= apartmentKey.getHost() %>" hidden>
+												<input name="apartmentBuildingNumber" type="text" value="<%= apartmentKey.getBuildingNumber() %>" hidden>
+												<input name="apartmentStreet" type="text" value="<%= apartmentKey.getStreet() %>" hidden>
+												<input name="apartmentFlatNumber" type="text" value="<%= apartmentKey.getFlatNumber() %>" hidden>
+												<input name="apartmentCity" type="text" value="<%= apartmentKey.getCity() %>" hidden>
+												<input name="action" type="text" value="editPlace" hidden>
+												
+												<input type="submit" class="btn btn-primary btn-outline" value="Select">
+											</form>
 										</div>
 									</div>
 								</div>
