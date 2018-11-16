@@ -1,3 +1,4 @@
+<%@ page contentType="text/html; charset=UTF-8" %>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -126,7 +127,7 @@
 													<label for="class">Price</label>
 													<select class="cs-select cs-skin-border" id="price" name="price">
 														<option value="" disabled selected>Less than 35€</option>
-														<option value="P1">Less than 35</option>            
+														<option value="P1">Less than 35€</option>            
 														<option value="P2">36€ - 69€</option>
 														<option value="P3">70€ - 130€</option>
 														<option value="P4">131€ or more</option>
@@ -186,7 +187,7 @@
 									<h3>TIWbnb</h3>
 									<h2>Plan your stay</h2>
 									<h3>Choose from thousands of available accommodations</h3>
-									<p>From <span class="price">35€</span> per night</p>
+									<p>From <span class="price">30€</span> per night</p>
 									<!-- <p><a class="btn btn-primary btn-lg" href="#">Get Started</a></p> -->
 								</div>
 							</div>

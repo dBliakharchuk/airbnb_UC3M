@@ -32,8 +32,6 @@ public class ReservationServlet extends HttpServlet {
 
 		}
 	       
-
-
 		/**
 		 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 		 */
@@ -43,6 +41,7 @@ public class ReservationServlet extends HttpServlet {
 			
 			dispatcher.forward(request, response);
 		}
+		
 		/**
 		 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 		 */

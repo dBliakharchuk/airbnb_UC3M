@@ -1,9 +1,9 @@
 package model;
 
 public enum ApartmentType {
-	PRIVATE_ROOM ("PRIVATE_ROOM"), //default
-    ENTIRE_APARTMENT ("ENTIRE_APARTMENT"),
-    SHARED_ROOM ("SHARED_ROOM");
+	PRIVATE_ROOM ("Private Room"), //default
+    ENTIRE_APARTMENT ("Entire Apartment"),
+    SHARED_ROOM ("Shared Room");
 
     private final String name;       
 
