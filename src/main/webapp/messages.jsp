@@ -69,9 +69,10 @@
 				<%} else { %>
 				<jsp:include page="headerAdmin.jsp"/>
 			<% } 
-			} else {  %>
-				<jsp:include page="headerLogout.jsp"/>
-			<% } %>
+			} else { 
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp"); 
+				dispatcher.forward(request, response); 
+			}%>
 			<script type="text/javascript">
 				document.getElementById("tab-messages").classList.add("active");
 			</script>

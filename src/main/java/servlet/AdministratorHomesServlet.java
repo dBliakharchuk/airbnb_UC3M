@@ -46,14 +46,12 @@ public class AdministratorHomesServlet extends HttpServlet {
 		 */
 		protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			String emailOfLoggedUser = (String) request.getSession().getAttribute("emailOfLoggedUser"); 
-			if (emailOfLoggedUser != null) {
-				if (emailOfLoggedUser.equals("admin")) {
+			if (emailOfLoggedUser != null && emailOfLoggedUser.equals("admin") ) {
 					apartments =  new ArrayList<Apartment>(DataAccess.getAllApartments());
 					request.setAttribute("apartments", apartments);
 					
 					RequestDispatcher dispatcher = request.getRequestDispatcher("/administatorHomes.jsp"); 
 					dispatcher.forward(request, response); 
-				}
 			} else {
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp"); 
 				dispatcher.forward(request, response); 

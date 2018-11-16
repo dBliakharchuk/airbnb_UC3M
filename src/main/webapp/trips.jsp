@@ -19,6 +19,7 @@
 
 
 
+
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -83,18 +84,16 @@
 			<!-- start:header-top -->
 			<%
 			String emailOfLoggedUser = (String) request.getSession().getAttribute("emailOfLoggedUser"); 		
-			if (emailOfLoggedUser != null) { 
-				if (!emailOfLoggedUser.equals("admin")) {%>
+			if (emailOfLoggedUser != null) { %>
 				<jsp:include page="headerLogin.jsp"/> 
-				<%} else { %>
-				<jsp:include page="headerAdmin.jsp"/>
-			<% } 
-			} else {  %>
-				<jsp:include page="headerLogout.jsp"/>
-			<% } %>
+			<% } else { 
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp"); 
+				dispatcher.forward(request, response); 
+			}%>
 			<script type="text/javascript">
 				document.getElementById("tab-trips").classList.add("active");
 			</script>
+			
 
 			<!-- end:header-top -->
 
@@ -111,11 +110,36 @@
 						</div>
 					</div>
 					<div class="row row-bottom-padded-md">
-					
+						<%
+							
+							ArrayList<Trip> tripsList = (ArrayList<Trip>) request.getAttribute("userTrips");
+							if (tripsList != null) {
+								for (int i = 0; i < tripsList.size(); i++)
+								{ %>
+									
+								<div class="col-md-4 col-sm-6 fh5co-tours animate-box"
+									data-animate-effect="fadeIn">
+									<div href="#">
+										<img src="images/place-1.jpg"
+											alt="Free HTML5 Website Template by FreeHTML5.co"
+											class="img-responsive">
+										<div class="desc">
+											<span></span>
+											<h3><%= tripsList.get(i).getReservations().get(0).getId().getApartmentCity()%></h3>
+											<span><%= tripsList.get(i).getReservations().get(0).getId().getApartmentHost() %></span> 
+											<span>Dates:
+												<%=tripsList.get(i).getBeginning().getDay() + "/" + tripsList.get(i).getBeginning().getMonth()  + "/" + (tripsList.get(i).getBeginning().getYear()+1900) + " to " 
+												+  tripsList.get(i).getEnd().getDay() + "/" + tripsList.get(i).getEnd().getMonth() + "/" + (tripsList.get(i).getEnd().getYear()+1900) %>
+												</span> <a class="btn btn-primary btn-outline"
+												href="#">More Info<i class="icon-arrow-right22"></i></a>
+										</div>
+									</div>
+								</div>
+								<% } %>
+						<% } %>
+						</div>
 						
-												
-						
-					</div>
+				</div>
 				<!-- Login Modal -->
 				<jsp:include page="loginWindow.jsp"></jsp:include>     
 			           
@@ -124,12 +148,12 @@
 
 				<jsp:include page="footer.jsp"/>
 
-			</div>
+	
 			<!-- END fh5co-page -->
 
 			</div>
 			<!-- END fh5co-wrapper -->
-
+			</div>
 
 			<!-- jQuery -->
 

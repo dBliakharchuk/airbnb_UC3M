@@ -45,12 +45,10 @@ public class AdministratorUsersServlet extends HttpServlet
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		String emailOfLoggedUser = (String) request.getSession().getAttribute("emailOfLoggedUser"); 
-		if (emailOfLoggedUser != null) {	
-			if (emailOfLoggedUser.equals("admin")) {
+		if (emailOfLoggedUser != null && emailOfLoggedUser.equals("admin")) {	
 					users = new ArrayList<User>(DataAccess.getAllUsers());
 					request.setAttribute("users", users);
 					request.getRequestDispatcher("administatorUsers.jsp").forward(request, response);
-			}
 		} else {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp"); 
 			dispatcher.forward(request, response); 

@@ -1,7 +1,8 @@
 package servlet;
 
-import java.io.IOException;
+import java.io.IOException; 
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebInitParam;
@@ -33,12 +34,12 @@ public class AccommodationServlet extends HttpServlet {
 		}
 	       
 
-
 		/**
 		 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 		 */
 		protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			request.getRequestDispatcher("accommodation.jsp").forward(request, response);
+				String emailOfLoggedUser = (String) request.getSession().getAttribute("emailOfLoggedUser"); 
+				request.getRequestDispatcher("accommodation.jsp").forward(request, response);
 		}
 
 		/**

@@ -82,7 +82,7 @@ public class AccountServlet extends HttpServlet {
 				inputSurname = request.getParameter("inputSurname");
 				inputPassword = request.getParameter("inputPassword");
 				
-				registeredUser = new User(inputEmail, inputName, inputSurname, inputPassword, "000000000000");
+				registeredUser = new User(inputEmail, inputName, inputSurname, inputPassword, "00000000000");
 				boolean isRegistered  = UserLogic.registerUser(registeredUser);
 				
 				if (isRegistered) 
@@ -90,7 +90,7 @@ public class AccountServlet extends HttpServlet {
 					msgBox = "User was created";
 				} else 
 				{
-					msgBox = "User already exist in DB!!!";
+					msgBox = "You provided wrong date!!!";
 				}				
 			} else if (urlPath.equals(LOGIN_SERVLET)) {
 				inputEmail = request.getParameter("inputEmail");
