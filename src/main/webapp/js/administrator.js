@@ -132,12 +132,6 @@ function deleteUser() {
 
 // *********************** administratorHomes ***********************
 
-function deletePlace() {
-	confirm("Do you want to delete this place?");
-}
-
-
-
 
 
 function selectApartmentCell(id, elementsNumber) {
@@ -239,7 +233,7 @@ function updateApartmentData() {
 				
 			}).done(function(status) {
 				if (status == 1) {
-					if (alert("User data updated successfully")) {
+					if (alert("Apartment updated successfully")) {
 					} else
 						window.location.reload();
 				} else if (status == 0)
@@ -282,7 +276,6 @@ function deleteApartment() {
 				flat_number : flat_number,
 				city : city,
 			}).done(function(status) {
-				alert(status);
 				if (status == 1) {
 					if (alert("Apartment deleteed successfully")) {
 					} else

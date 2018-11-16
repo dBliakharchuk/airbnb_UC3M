@@ -34,19 +34,17 @@ function changePassword() {
 
 function deleteAccount(){
 
-	var selectedUserEmail = $("#user-email").val();
+	var selectedUserEmail = $("#user-email").val().trim();
 
 	if (selectedUserEmail != null && selectedUserEmail != "") {
 
-		if (confirm("Do you want to delete this user?")) {
+		if (confirm("Do you want your acount?")) {
 			$.post("updateUserServlet", {
 				action : "deleteUser",
 				email : selectedUserEmail
 			}).done(function(status) {
 				if (status == 1) {
-					if (alert("User deleteed successfully")) {
-					} else
-						window.location.load();
+					alert("Your acount was deleted");
 				} else if (status == 0)
 					alert("Incorrect Data");
 				else
@@ -58,5 +56,44 @@ function deleteAccount(){
 	} else {
 		alert("User not selected");
 	}
+
+}
+
+
+function deleteApartment() {
+
+	
+	var building_number = $("#building-nr").val();
+	var street = $("#street").val();
+	var flat_number = $("#flat-nr").val();
+	var city = $("#city").val();
+	
+	var email = $("#email").val();
+
+	
+
+	
+
+		if (confirm("Do you want to delete this apartment?")) {
+			$.post("/airbnb/ApartmentServlet", {
+				action : "deletePlace",
+				email : email,
+				building_number : building_number,
+				street : street,
+				flat_number : flat_number,
+				city : city,
+			}).done(function(status) {
+				if (status == 1) {
+					if (alert("Apartment deleteed successfully")) {
+					} else
+						window.location.reload();
+				} else if (status == 0)
+					alert("Incorrect Data");
+				else
+					alert("Unknow error");
+			});
+		}
+
+	
 
 }

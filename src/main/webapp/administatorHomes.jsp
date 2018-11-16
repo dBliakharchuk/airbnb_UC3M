@@ -165,8 +165,7 @@
 									<input type="text" name="name" id="apartment-name" value=""> 
 									<label for="host-email">Host Email</label> 
 									<input type="email"  name="host-email" id="host-email" value="" readonly>
-									<label for="country">Country</label>
-									 <input type="text" name="country" id="apartment-country" value=""> 
+									<input type="hidden" name="country" id="apartment-country" value=""> 
 									 <label for="price-per-day">Price Per Day</label>
 									 <input type="number" name="price-per-day" id="apartment-price" value="">
 									 <label for="type-of-apartment">Type Of Apartment</label> 
