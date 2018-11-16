@@ -143,6 +143,8 @@ public class ApartmentServlet extends HttpServlet {
 			{
 				if(apartmentDeletedtatus)
 				{
+					int apartmentDeletedtatusInt = apartmentDeletedtatus ? 1 : 0;
+					writer.println(apartmentDeletedtatusInt);
 					RequestDispatcher rd = request.getRequestDispatcher("manageProfile"); 
 					rd.forward(request, response);
 					//not working -> manageProfile
