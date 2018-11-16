@@ -1,11 +1,9 @@
 package servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -22,7 +20,6 @@ import logic.ApartmentLogic;
 import model.Apartment;
 import model.ApartmentPK;
 import model.ApartmentType;
-import model.Reservation;
 
 
 @WebServlet(
@@ -64,21 +61,28 @@ public class ResultServlet extends HttpServlet {
 		protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			
 			String fromPlace = request.getParameter("from-place").replaceAll("\\s","").toLowerCase();
+			
+			String dateStartString = request.getParameter("date-start");
+			String dateEndString = request.getParameter("date-end");
 			Date dateStart = null;
 			Date dateEnd = null;
-			try {
-				dateStart = new Date ((new SimpleDateFormat("MM/dd/yyyy")).parse(request.getParameter("date-start")).getTime());
-			} 
-			catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			if(dateStartString.equals("")==false) {
+				try {
+					dateStart = new Date ((new SimpleDateFormat("MM/dd/yyyy")).parse(dateStartString).getTime());
+				} 
+				catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
-			try {
-				dateEnd = new Date((new SimpleDateFormat("MM/dd/yyyy")).parse(request.getParameter("date-end")).getTime());
-			} 
-			catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			if(dateEndString.equals("")==false) {
+				try {
+					dateEnd = new Date((new SimpleDateFormat("MM/dd/yyyy")).parse(dateEndString).getTime());
+				} 
+				catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 			String price = request.getParameter("price");
 			
@@ -101,8 +105,8 @@ public class ResultServlet extends HttpServlet {
 				children = new Integer(request.getParameter("children"));
 			}
 			
-			request.getSession().setAttribute("dateStart", request.getParameter("date-start"));
-			request.getSession().setAttribute("dateEnd", request.getParameter("date-end"));
+			request.getSession().setAttribute("dateStart", dateStartString);
+			request.getSession().setAttribute("dateEnd", dateEndString);
 			
 			List<Apartment> resultApartmentsList = ApartmentLogic.search(fromPlace, price, typeOfAccom, adults, children, dateStart, dateEnd);
 		
@@ -133,7 +137,6 @@ public class ResultServlet extends HttpServlet {
 //			out.flush();
 //			out.close();
 					
-		}
-		
+	}
 }
 
