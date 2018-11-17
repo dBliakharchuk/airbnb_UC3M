@@ -42,13 +42,6 @@ function deleteAccount(){
 			$.post("updateUserServlet", {
 				action : "deleteUser",
 				email : selectedUserEmail
-			}).done(function(status) {
-				if (status == 1) {
-					alert("Your acount was deleted");
-				} else if (status == 0)
-					alert("Incorrect Data");
-				else
-					alert("Unknow error");
 			});
 
 		}

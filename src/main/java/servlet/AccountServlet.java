@@ -165,7 +165,7 @@ public class AccountServlet extends HttpServlet
 				}else 
 				{
 				
-					//reload the page manageProfile
+					response.sendRedirect("manageProfile");
 				}
 		
 				
@@ -191,10 +191,11 @@ public class AccountServlet extends HttpServlet
 				if("admin".equals(emailOfLoggedUser))
 				{
 					writer.println(deleteUserStatusInt);
-;
+
 				}else 
 				{
-					//logout! and load home page 
+					if(userDeletedStatus)
+						response.sendRedirect("logoutServlet");
 				}
 				
 			}
