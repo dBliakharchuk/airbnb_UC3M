@@ -37,8 +37,11 @@ INSERT INTO `airbnbdb`.`Apartment`
 VALUES('dima@gmail.com',60.0,2,'ENTIRE_APARTMENT','Apartment in Sol','Apartment in Sol is a cozy accommodation right in the center of Madrid, where on every corner there is fun due to the innumerable bars, restaurants, shops and markets in the area. The apartment has a kitchenette, free wifi in all areas, television, oven and microwave, washing machine, hair dryer, coffee maker and toaster. Sheets and towels are provided upon arrival.',1,'4','Calle de Preciados','Madrid','Spain','56','');
 
 INSERT INTO `airbnbdb`.`Reservation`
-VALUES('customer@gmail.com','2018-7-04', 'dima@gmail.com','4','Calle de Preciados','56','Madrid');
+VALUES('customer@gmail.com','2018-8-21', 'dima@gmail.com','4','Calle de Preciados','56','Madrid');
 
 INSERT INTO `airbnbdb`.`Reservation`
-VALUES('customer@gmail.com','2018-8-16', 'piotrszylar@gmail.com','34','Gran Via','2A','Madrid');
+VALUES('customer@gmail.com','2018-8-21', 'piotrszylar@gmail.com','34','Gran Via','2A','Madrid');
+
+INSERT INTO `airbnbdb`.`Message`
+VALUES('customer@gmail.com','dima@gmail.com','Hello','2018-8-11', true);
 
