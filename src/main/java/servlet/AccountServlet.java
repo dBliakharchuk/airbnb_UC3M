@@ -97,7 +97,7 @@ public class AccountServlet extends HttpServlet
 				msgBox = "User was created";
 			} else
 			{
-				msgBox = "User already exist in DB!!!";
+				msgBox = "Incorect data or email adress already exist!!!";
 			}
 		} else if (urlPath.equals(LOGIN_SERVLET))
 		{

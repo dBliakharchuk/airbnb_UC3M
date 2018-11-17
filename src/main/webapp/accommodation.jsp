@@ -67,13 +67,10 @@
 		<!-- start:header-top -->
 			<%
 			String emailOfLoggedUser = (String) request.getSession().getAttribute("emailOfLoggedUser"); 		
-			if (emailOfLoggedUser != null) { 
-				if (!emailOfLoggedUser.equals("admin")) {%>
+			if (emailOfLoggedUser != null) { %>
 				<jsp:include page="headerLogin.jsp"/> 
-				<%} else { %>
-				<jsp:include page="headerAdmin.jsp"/>
-			<% } 
-			} else {  %>
+				
+			<% } else {  %>
 				<jsp:include page="headerLogout.jsp"/>
 			<% } %>
 			<script type="text/javascript">

@@ -126,7 +126,7 @@
 										<div class="desc">
 											<span></span>
 											<h3><%= tripsList.get(i).getReservations().get(0).getId().getApartmentCity()%></h3>
-											<span><%= tripsList.get(i).getReservations().get(0).getId().getApartmentHost() %></span> 
+											<span>Host: <%= tripsList.get(i).getReservations().get(0).getId().getApartmentHost() %></span> 
 											<span>Dates:
 												<%=tripsList.get(i).getBeginning().getDay() + "/" + tripsList.get(i).getBeginning().getMonth()  + "/" + (tripsList.get(i).getBeginning().getYear()+1900) + " to " 
 												+  tripsList.get(i).getEnd().getDay() + "/" + tripsList.get(i).getEnd().getMonth() + "/" + (tripsList.get(i).getEnd().getYear()+1900) %>
