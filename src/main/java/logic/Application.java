@@ -16,87 +16,49 @@ import model.User;
 
 public class Application {
 	
-	public static void main(String[] args) throws InterruptedException {
-		
-		//List<Apartment> aps = DataAccess.getAllApartments();
-		User piotr = DataAccess.getUserByEmail("customer@gmail.com");
-		User mat = DataAccess.getUserByEmail("mateusz@gmail.com");
-		//UserLogic.deleteUser(piotr);
-		List<Trip> trips = TripLogic.getUserTrips(piotr);
-		System.out.println(trips.size());
-		
-		for (Trip t : trips) {
-			System.out.println(t.getBeginning() + " " + t.getEnd());
-		}
-//		List<User> users = DataAccess.getAllUsers();
-//		List<Reservation> reservs = DataAccess.getAllReservations();
-//		//ApartmentPK apKey = new ApartmentPK("dima@gmail.com", "15", "Calle Central", "5", "Madrid");
-//		
-		//DataAccess.createMessage(new Message(piotr, mat, new Date(), "test"));
-		
-//		Apartment toReserve = null;
-//		User customer = null;
-//		Reservation res = null;
-//		
-//		for (Apartment a : aps) {
-//			if (a.getStreet().equals("Gran Via")) {
-//				toReserve = a;
-//				break;
-//			}
-//		}
-//		for (User u : users) {
-//			if (u.getEmail().equals("customer@gmail.com")) {
-//				customer = u;
-//				break;
-//			}
-//		}
-//		for (Reservation r : reservs) {
-//			if (r.getUser().getEmail().equals("customer@gmail.com") && r.getApartment().getStreet().equals("Gran Via")) {
-//				res = r;
-//				break;
-//			}
-//		}
-				
+	public static void main(String[] args) {
+//		removeReservationTest();
+//		removeApartmentTest();
+//		removeMessageTest();
+//		removeUserTest();
 	}
 	
-	private static void addApartmentTest(Apartment apartment, User host) {
-		List<Apartment> apartments = DataAccess.getAllApartments();
-		System.out.println("Jest tyle: " + apartments.size());
-		boolean succededUser = DataAccess.createUser(host);
-		boolean succededApartment = DataAccess.createApartment(apartment);
-		System.out.println(succededUser + "  " + succededApartment);
-		List<Apartment> apartmentsAfter = DataAccess.getAllApartments();
-		System.out.println("Teraz jest tyle: " + apartmentsAfter.size());
+	private static void removeReservationTest() {
+		List<Reservation> aps = DataAccess.getAllReservations();
+		User cust = aps.get(0).getUser();
+		System.out.println(DataAccess.getUserByEmail(cust.getEmail()).getReservations().size());
+		boolean s = TripLogic.removeReservation(aps.get(0));
+		System.out.println(s);
+		System.out.println(DataAccess.getUserByEmail(cust.getEmail()).getReservations().size());
 		
 	}
 	
-	private static void removeApartmentTest(Apartment apartment) {
-		List<Apartment> apartments = DataAccess.getAllApartments();
-		System.out.println("Jest tyle: " + apartments.size());
-		boolean succededApartment = DataAccess.removeApartment(apartment);
-		System.out.println(succededApartment);
-		List<Apartment> apartmentsAfter = DataAccess.getAllApartments();
-		System.out.println("Teraz jest tyle: " + apartmentsAfter.size());
+	private static void removeApartmentTest() {
+		List<Reservation> aps = DataAccess.getAllReservations();
+		Apartment a = aps.get(0).getApartment();
+		User cust = a.getHost();
+		System.out.println(DataAccess.getUserByEmail(cust.getEmail()).getApartments().size());
+		boolean s = ApartmentLogic.removeApartment(a);
+		System.out.println(s);
+		System.out.println(DataAccess.getUserByEmail(cust.getEmail()).getApartments().size());
 		
 	}
 	
-	private static void removeUserTest(User user) {
-		List<User> users = DataAccess.getAllUsers();
-		System.out.println("Jest tyle: " + users.size());
-		boolean succededUser = DataAccess.removeUser(user);
-		System.out.println(succededUser);
-		List<User> usersAfter = DataAccess.getAllUsers();
-		System.out.println("Teraz jest tyle: " + usersAfter.size());
+	private static void removeMessageTest() {
+		User user = DataAccess.getUserByEmail("customer@gmail.com");
+		System.out.println(user.getMessagesSent().size());
+		boolean s = MessageLogic.removeMessage(user.getMessagesSent().get(0));
+		System.out.println(s);
+		System.out.println(user.getMessagesSent().size());
 		
 	}
 	
-	private static void updateUserTest(User user) {
-		User before = DataAccess.getUserByEmail(user.getEmail());
-		System.out.println(before.getName());
-		before.setName(before.getName() + "test");
-		DataAccess.updateUser(before);
-		User after = DataAccess.getUserByEmail(user.getEmail());
-		System.out.println(after.getName());
+	private static void removeUserTest() {
+		User user = DataAccess.getUserByEmail("customer@gmail.com");
+		System.out.println(DataAccess.getAllUsers().size());
+		boolean s = UserLogic.removeUser(user);
+		System.out.println(s);
+		System.out.println(DataAccess.getAllUsers().size());
 	}
 	
 	private static void sendMessageTest(User sender, User receiver, String message) {

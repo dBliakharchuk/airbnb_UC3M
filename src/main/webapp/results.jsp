@@ -1,4 +1,4 @@
-
+<%@ page contentType="text/html; charset=UTF-8" %>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -107,7 +107,7 @@
 						<span></span>
 								<h3><%= apartment.getName() %></h3>
 								<span><%= ApartmentLogic.correctApartmentTypeDisplay(apartment.getType().toString()) %></span> 
-								<span class="price"><%= String.format ("%.2f", apartment.getPrice()) %></span>
+								<span class="price"><%= String.format ("%.2f", apartment.getPrice()) %>€</span>
 								<form method="get">
 									<input name="apartmentHost" type="text" value="<%= apartmentKey.getHost() %>" hidden>
 									<input name="apartmentBuildingNumber" type="text" value="<%= apartmentKey.getBuildingNumber() %>" hidden>
@@ -120,72 +120,6 @@
 						</div>
 					</div>
 				<% } %>
-<!-- 					<div class="col-md-4 col-sm-6 fh5co-tours animate-box" data-animate-effect="fadeIn"> -->
-<!-- 						<div href="#"><img src="images/place-1.jpg" alt="Free HTML5 Website Template by FreeHTML5.co" class="img-responsive"> -->
-<!-- 							<div class="desc"> -->
-<!-- 								<span></span> -->
-<!-- 								<h3>Apartment in Sol</h3> -->
-<!-- 								<span>Entire apartment, two beds</span> -->
-<!-- 								<span class="price">60€</span> -->
-<!-- 								<a class="btn btn-primary btn-outline" href="#">Select <i class="icon-arrow-right22"></i></a> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-<!-- 					<div class="col-md-4 col-sm-6 fh5co-tours animate-box" data-animate-effect="fadeIn"> -->
-<!-- 						<div href="#"><img src="images/place-2.jpg" alt="Free HTML5 Website Template by FreeHTML5.co" class="img-responsive"> -->
-<!-- 							<div class="desc"> -->
-<!-- 								<span></span> -->
-<!-- 								<h3>Apartment near Gran Via</h3> -->
-<!-- 								<span>Entire apartment, one bed</span> -->
-<!-- 								<span class="price">70€</span> -->
-<!-- 								<a class="btn btn-primary btn-outline" href="#">Select <i class="icon-arrow-right22"></i></a> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-<!-- 					<div class="col-md-4 col-sm-6 fh5co-tours animate-box" data-animate-effect="fadeIn"> -->
-<!-- 						<div href="#"><img src="images/place-3.jpg" alt="Free HTML5 Website Template by FreeHTML5.co" class="img-responsive"> -->
-<!-- 							<div class="desc"> -->
-<!-- 								<span></span> -->
-<!-- 								<h3>Flat in front of the Royal Palace</h3> -->
-<!-- 								<span>Entire loft, two beds</span> -->
-<!-- 								<span class="price">80€</span> -->
-<!-- 								<a class="btn btn-primary btn-outline" href="#">Select <i class="icon-arrow-right22"></i></a> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-<!-- 					<div class="col-md-4 col-sm-6 fh5co-tours animate-box" data-animate-effect="fadeIn"> -->
-<!-- 						<div href="#"><img src="images/place-1.jpg" alt="Free HTML5 Website Template by FreeHTML5.co" class="img-responsive"> -->
-<!-- 							<div class="desc"> -->
-<!-- 								<span></span> -->
-<!-- 								<h3>Central and quiet</h3> -->
-<!-- 								<span>Entire apartment, two beds</span> -->
-<!-- 								<span class="price">65€</span> -->
-<!-- 								<a class="btn btn-primary btn-outline" href="#">Select <i class="icon-arrow-right22"></i></a> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-<!-- 					<div class="col-md-4 col-sm-6 fh5co-tours animate-box" data-animate-effect="fadeIn"> -->
-<!-- 						<div href="#"><img src="images/place-2.jpg" alt="Free HTML5 Website Template by FreeHTML5.co" class="img-responsive"> -->
-<!-- 							<div class="desc"> -->
-<!-- 								<span></span> -->
-<!-- 								<h3>Stunning Apartment in Sol</h3> -->
-<!-- 								<span>Entire apartment, two beds</span> -->
-<!-- 								<span class="price">50€</span> -->
-<!-- 								<a class="btn btn-primary btn-outline" href="#">Select <i class="icon-arrow-right22"></i></a> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-<!-- 					<div class="col-md-4 col-sm-6 fh5co-tours animate-box" data-animate-effect="fadeIn"> -->
-<!-- 						<div href="#"><img src="images/place-3.jpg" alt="Free HTML5 Website Template by FreeHTML5.co" class="img-responsive"> -->
-<!-- 							<div class="desc"> -->
-<!-- 								<span></span> -->
-<!-- 								<h3>Pretty Apartment in Plaza Mayor</h3> -->
-<!-- 								<span>Entire apartment, one bed</span> -->
-<!-- 								<span class="price">30€</span> -->
-<!-- 								<a class="btn btn-primary btn-outline" href="#">Select <i class="icon-arrow-right22"></i></a> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
 				</div>
 
 			</div>

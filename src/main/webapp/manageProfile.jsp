@@ -109,7 +109,7 @@
 				<% }	%> 
 					</form>
 					<button type="button" class="btn btn-warning" id="change-password-button" onclick="changePassword()">Change Password</button>
-			 		<button type="button" class="btn btn-danger"  id="delete-acount-button"onclick="deleteAccount()">Delete Account</button>
+			 		<button type="button" class="btn btn-danger"  id="delete-acount-button" onclick="deleteAccount()">Delete Account</button>
 				
 				
 				</div>

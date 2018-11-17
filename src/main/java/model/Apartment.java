@@ -98,7 +98,7 @@ public class Apartment implements Serializable {
 		this.price = price;
 		this.type = type;
 		this.host = host;
-		this.reservations = new ArrayList<Reservation>();;
+		this.reservations = new ArrayList<Reservation>();
 	}
 
 	public ApartmentPK getId() {
@@ -183,7 +183,6 @@ public class Apartment implements Serializable {
 
 	public void setHost(User host) {
 		this.host = host;
-		id.setHost(host.getEmail());
 	}
 	
 	public String getBuildingNumber() {

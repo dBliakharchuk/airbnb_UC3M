@@ -1,4 +1,4 @@
-
+<%@ page contentType="text/html; charset=UTF-8" %>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -83,7 +83,16 @@
 			<div class="container">
 		
 				<div class="row">
-					<% Apartment apartment = (Apartment)request.getSession().getAttribute("selectedApartment"); %>
+					<% Apartment apartment = (Apartment)request.getSession().getAttribute("selectedApartment"); 
+					
+					String loginError = (String)request.getAttribute("loginError");
+			
+					if(loginError!=null){ %>
+				
+						<script type="text/javascript">
+							alert("<%= loginError%>")
+						</script>
+					<% } %>
 					<div class="col-md-12 animate-box">
 						<h2 class="heading-title"><%= apartment.getName() %></h2>
 					</div>
@@ -105,7 +114,7 @@
                                 
                                 <tr>                                
                                         <th scope="row">Price:</th>
-                                    <td><span class="price"><%= String.format ("%.2f", apartment.getPrice()) %></span></td>
+                                    <td><span class="price"><%= String.format ("%.2f", apartment.getPrice()) %>€</span></td>
                                 </tr>
                                 <tr>
                                         <th scope="row">Beds:</th>

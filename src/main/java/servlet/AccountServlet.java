@@ -81,6 +81,8 @@ public class AccountServlet extends HttpServlet
 		User loggedUser = null;
 		msgBox = null;
 		urlPath = (String) request.getServletPath();
+		String emailOfLoggedUser = (String) request.getSession().getAttribute("emailOfLoggedUser"); 
+
 
 		if (urlPath.equals(REGISTRATION_SERVLET))
 		{
@@ -155,10 +157,18 @@ public class AccountServlet extends HttpServlet
 					user.setPhone(phone);
 					status =  UserLogic.modifyUser(user) ? 1 : 0;
 
-				}else
-					writer.println("I cant find the user");
+				}
+				
+				if("admin".equals(emailOfLoggedUser))
+				{
+					writer.println(status);
+				}else 
+				{
+				
+					//reload the page manageProfile
+				}
 		
-				writer.println(status);
+				
 
 			} else if ("changePassword".equals(action))
 			{
@@ -168,12 +178,25 @@ public class AccountServlet extends HttpServlet
 				
 				int passwordUpdateStatusInt = passwordUpdateStatus ? 1 : 0;
 				writer.println(passwordUpdateStatusInt);
+				
+				
 
 			} else if ("deleteUser".equals(action))
 			{
 				String email = request.getParameter("email");
-			//	Boolean userDeletedStatus = UserLogic.deleteUser(email);
-			//	writer.println(userDeletedStatus);
+				Boolean userDeletedStatus = UserLogic.removeUser(email);
+				
+				int deleteUserStatusInt = userDeletedStatus ? 1 : 0;
+				
+				if("admin".equals(emailOfLoggedUser))
+				{
+					writer.println(deleteUserStatusInt);
+;
+				}else 
+				{
+					//logout! and load home page 
+				}
+				
 			}
 			
 			
