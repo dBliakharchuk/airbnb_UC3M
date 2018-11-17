@@ -183,7 +183,6 @@ public class Apartment implements Serializable {
 
 	public void setHost(User host) {
 		this.host = host;
-		id.setHost(host.getEmail());
 	}
 	
 	public String getBuildingNumber() {

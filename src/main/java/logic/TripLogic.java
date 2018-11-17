@@ -23,6 +23,14 @@ public class TripLogic {
 			return false;
 		}
 		
+		User user = reservation.getUser();
+		user.removeReservation(reservation);
+		DataAccess.updateUser(user);
+		
+		Apartment apartment = reservation.getApartment();
+		apartment.removeReservation(reservation);
+		DataAccess.updateApartment(apartment);
+		
 		return DataAccess.removeReservation(reservation);
 	}
 	

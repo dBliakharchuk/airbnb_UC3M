@@ -236,6 +236,10 @@ public class ApartmentLogic {
 			return false;
 		}
 		
+		User host = apartment.getHost();
+		host.removeApartment(apartment);
+		DataAccess.updateUser(host);
+				
 		return DataAccess.removeApartment(apartment);
 	}
 	

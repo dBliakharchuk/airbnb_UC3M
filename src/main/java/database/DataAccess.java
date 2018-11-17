@@ -316,15 +316,12 @@ public class DataAccess
 		EntityManager manager = managerFactory.createEntityManager();
 		Apartment managed = null;
 		try {
-			User host = manager.find(User.class, apartment.getHost().getEmail());
 			manager.getTransaction().begin();
-			if (!manager.contains(apartment)) {
-			    managed = manager.merge(apartment);
-			}
-			host.removeApartment(apartment);
+			managed = manager.find(Apartment.class, apartment.getId());
 			manager.remove(managed);
 			manager.getTransaction().commit();
 		} catch (Exception ex) {
+			ex.printStackTrace();
 			try {
 				if (manager.getTransaction().isActive()) {
 					manager.getTransaction().rollback();
@@ -369,19 +366,12 @@ public class DataAccess
 	}
 	
 	public static boolean removeMessage(Message message) {
-		List<Message> results = null;
 		EntityManager manager = managerFactory.createEntityManager();
 		Message managed = null;
 		try {
-			User sender = manager.find(User.class, message.getSender().getEmail());
-			User receiver = manager.find(User.class, message.getReceiver().getEmail());
 			manager.getTransaction().begin();
-			if (!manager.contains(message)) {
-			    managed = manager.merge(message);
-			}
+			managed = manager.find(Message.class, message.getId());
 			manager.remove(managed);
-			sender.removeMessagesSent(managed);
-			receiver.removeMessagesReceived(managed);
 			manager.getTransaction().commit();
 		} catch(Exception ex) {
 			try {
@@ -475,15 +465,12 @@ public class DataAccess
 		EntityManager manager = managerFactory.createEntityManager();
 		Reservation managed = null;
 		try {
-			User user = manager.find(User.class, reservation.getUser().getEmail());
 			manager.getTransaction().begin();
-			if (!manager.contains(reservation)) {
-			    managed = manager.merge(reservation);
-			}
-			user.removeReservation(reservation);
+			managed = manager.find(Reservation.class, reservation.getId());
 			manager.remove(managed);
 			manager.getTransaction().commit();
 		} catch (Exception ex) {
+			ex.printStackTrace();
 			try {
 				if (manager.getTransaction().isActive()) {
 					manager.getTransaction().rollback();
