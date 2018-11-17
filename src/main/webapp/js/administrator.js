@@ -158,12 +158,17 @@ function selectApartmentCell(id, elementsNumber) {
 	document.getElementById("apartment-name").value = apartment_name;
 	document.getElementById("apartment-country").value = cuntry;
 	document.getElementById("apartment-price").value = price;
-	document.getElementById("apartment-type").value = type;
 	document.getElementById("apartment-adults-beds").value = adultsBeds;
 	document.getElementById("apartment-child-beds").value = childrensBeds ;
 	document.getElementById("place-description").value = descriptions;
 
-
+	if(type == "Entire Apartment"){
+		document.getElementById("type-entire").checked = true;
+	}else if(type == "Private Room"){
+		document.getElementById("type-private").checked = true;
+	}else if(type == "Shared Room"){
+		document.getElementById("type-shared").checked = true;
+	}
 }
 
 function updateApartmentData() {
@@ -173,14 +178,24 @@ function updateApartmentData() {
 	var placeName = $("#apartment-name").val();
 	var cuntry = $("#apartment-country").val();
 	var price = $("#apartment-price").val().toString();
-	
-	var type = $("#apartment-type").val();
 	var adults_beds = $("#apartment-adults-beds").val().toString();
 	var childeren_beds = $("#apartment-child-beds").val().toString();
 	var description = $("#place-description").val();
 	
 
+	var type_entire = $("#type-entire")[0];
+	var type_private = $("#type-private")[0];
+	var type_shared = $("#type-shared")[0];
+	var type;
 	
+	if (type_entire.checked){
+		type ="ENTIRE";
+	}else if (type_private.checked){
+		type ="PRIVATE";
+	}else if (type_shared.checked){
+		type ="SHARED";
+	}
+
 
 	if (email != null && email != "") {
 		if (placeName != null && placeName != ""
