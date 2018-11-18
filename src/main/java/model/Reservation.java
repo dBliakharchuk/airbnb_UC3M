@@ -6,8 +6,10 @@ import java.util.Date;
 
 
 /**
- * The persistent class for the reservation database table.
+ * Reservation class is a Java representative of Reservation table in database.
+ * One Reservation can only be per one day and apartment.
  * 
+ * @author Mateusz
  */
 @Entity
 @NamedQuery(name="Reservation.findAll", query="SELECT r FROM Reservation r")
@@ -70,11 +72,6 @@ public class Reservation implements Serializable, Comparable<Reservation> {
 
 	public void setApartment(Apartment apartment) {
 		this.apartment = apartment;
-		id.setApartmentBuildingNumber(apartment.getBuildingNumber());
-		id.setApartmentCity(apartment.getCity());
-		id.setApartmentFlatNumber(apartment.getFlatNumber());
-		id.setApartmentHost(apartment.getHost().getEmail());
-		id.setApartmentStreet(apartment.getStreet());
 	}
 
 	public User getUser() {
@@ -83,7 +80,6 @@ public class Reservation implements Serializable, Comparable<Reservation> {
 
 	public void setUser(User user) {
 		this.user = user;
-		id.setUserEmail(user.getEmail());
 	}
 
 	@Override

@@ -97,11 +97,39 @@ public class ApartmentPK implements Serializable {
 		
 		return hash;
 	}
+	
+	
 
 	@Override
 	public String toString() {
 		return "ApartmentPK [host=" + host + ", buildingNumber=" + buildingNumber + ", street=" + street
 				+ ", flatNumber=" + flatNumber + ", city=" + city + "]";
+	}
+	
+	
+	public String toUrl() {
+		
+		String newStreet = street.replace(" ", "-");
+		return host + "/" + buildingNumber + "/" + newStreet
+				+ "/" + flatNumber + "/" + city;
+		
+		
+	}
+	
+	static public ApartmentPK fromUlr(String url)
+	{
+		String[] parts = url.split("/");
+		String host = parts[0];
+		String buildingNumber = parts[1];
+		String street= parts[2];
+		String flatNumber= parts[3];
+		String city = parts[4];
+		
+		
+		String newStreet = street.replace("-", " ");
+		
+		return new ApartmentPK(host, buildingNumber,  newStreet,  flatNumber,  city);
+		
 	}
 	
 	

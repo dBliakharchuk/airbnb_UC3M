@@ -4,6 +4,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Trip is a wrapper of Reservation class. It operates on higher level of abstraction making it more user-friendly.
+ * Trip consist of two dates marking a beginning and an end of a Trip and list of reservations which correspond to database entries.
+ * 
+ * @author Mateusz
+ *
+ */
+
 public class Trip {
 	Date beginning;
 	Date end;

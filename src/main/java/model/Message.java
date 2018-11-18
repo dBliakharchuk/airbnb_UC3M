@@ -8,8 +8,9 @@ import javax.persistence.*;
 
 
 /**
- * The persistent class for the message database table.
+ * Message class is a Java representative of Message table in database.
  * 
+ * @author Mateusz
  */
 @Entity
 @NamedQueries({
@@ -23,11 +24,11 @@ public class Message implements Serializable {
 	private boolean isUnread;
 
 	@ManyToOne
-	@JoinColumn(name="receiver")
+	@JoinColumn(name="sender")
 	private User sender;
 
 	@ManyToOne
-	@JoinColumn(name="sender")
+	@JoinColumn(name="receiver")
 	private User receiver;
 
 	public Message() {
@@ -68,10 +69,6 @@ public class Message implements Serializable {
 
 	public void setSender(User sender) {
 		this.sender = sender;
-		if (sender != null) {
-			id.setSender(sender.getEmail());
-		}
-		
 	}
 
 	public User getReceiver() {
@@ -79,11 +76,7 @@ public class Message implements Serializable {
 	}
 
 	public void setReceiver(User receiver) {
-		this.receiver = receiver;
-		if (receiver != null) {
-			id.setReceiver(receiver.getEmail());
-		}
-		
+		this.receiver = receiver;		
 	}
 	
 	public String getMessage() {

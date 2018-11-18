@@ -6,7 +6,7 @@
 					<nav id="fh5co-menu-wrap" role="navigation">
 						<ul class="sf-menu" id="fh5co-primary-menu">
 							<li id="tab-index"><a href="index.jsp" >Home</a></li>
-							<li id="tab-trips"><a href="trips" >Trips</a></li>
+							<li id="tab-trips"><a href="tripServlet" >Trips</a></li>
 							<li id="tab-messages"><a href="messages" >Messages</a></li>
 							<li id="tab-profile"><a href="manageProfile" >Manage Profile</a></li>
 							<li ><a href='logoutServlet'>Log out</a></li>                           

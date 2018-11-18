@@ -81,6 +81,8 @@ public class AccountServlet extends HttpServlet
 		User loggedUser = null;
 		msgBox = null;
 		urlPath = (String) request.getServletPath();
+		String emailOfLoggedUser = (String) request.getSession().getAttribute("emailOfLoggedUser"); 
+
 
 		if (urlPath.equals(REGISTRATION_SERVLET))
 		{
@@ -97,7 +99,7 @@ public class AccountServlet extends HttpServlet
 				msgBox = "User was created";
 			} else
 			{
-				msgBox = "User already exist in DB!!!";
+				msgBox = "Incorect data or email adress already exist!!!";
 			}
 		} else if (urlPath.equals(LOGIN_SERVLET))
 		{
@@ -155,10 +157,18 @@ public class AccountServlet extends HttpServlet
 					user.setPhone(phone);
 					status =  UserLogic.modifyUser(user) ? 1 : 0;
 
-				}else
-					writer.println("I cant find the user");
+				}
+				
+				if("admin".equals(emailOfLoggedUser))
+				{
+					writer.println(status);
+				}else 
+				{
+				
+					response.sendRedirect("manageProfile");
+				}
 		
-				writer.println(status);
+				
 
 			} else if ("changePassword".equals(action))
 			{
@@ -168,14 +178,26 @@ public class AccountServlet extends HttpServlet
 				
 				int passwordUpdateStatusInt = passwordUpdateStatus ? 1 : 0;
 				writer.println(passwordUpdateStatusInt);
+				
+				
 
-//			} else if ("deleteUser".equals(action))
-//			{
-//				String email = request.getParameter("email");
-//				Boolean userDeletedStatus = UserLogic.deleteUser(email);
-//				
-//				int deleteUserStatusInt = userDeletedStatus ? 1 : 0;
-//				writer.println(deleteUserStatusInt);
+			} else if ("deleteUser".equals(action))
+			{
+				String email = request.getParameter("email");
+				Boolean userDeletedStatus = UserLogic.removeUser(email);
+				
+				int deleteUserStatusInt = userDeletedStatus ? 1 : 0;
+				
+				if("admin".equals(emailOfLoggedUser))
+				{
+					writer.println(deleteUserStatusInt);
+
+				}else 
+				{
+					if(userDeletedStatus)
+						response.sendRedirect("logoutServlet");
+				}
+				
 			}
 			
 			

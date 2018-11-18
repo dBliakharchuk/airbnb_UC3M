@@ -54,6 +54,9 @@
 
 	<!-- Modernizr JS -->
 	<script src="js/modernizr-2.6.2.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+	<script type="text/javascript" src="js/manageProfile.js"></script>
+	
 	<!-- FOR IE9 below -->
 	<!--[if lt IE 9]>
 	<script src="js/respond.min.js"></script>
@@ -67,15 +70,12 @@
 		<!-- start:header-top -->
 			<%
 			String emailOfLoggedUser = (String) request.getSession().getAttribute("emailOfLoggedUser"); 		
-			if (emailOfLoggedUser != null) { 
-				if (!emailOfLoggedUser.equals("admin")) {%>
-				<jsp:include page="headerLogin.jsp"/> 
-				<%} else { %>
-				<jsp:include page="headerAdmin.jsp"/>
-			<% } 
-			} else {  %>
-				<jsp:include page="headerLogout.jsp"/>
-			<% } %>
+			if (emailOfLoggedUser != null) { %>
+			<jsp:include page="headerLogin.jsp"/> 
+			<% } else { 
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp"); 
+				dispatcher.forward(request, response); 
+			}%>
 			<script type="text/javascript">
 				document.getElementById("tab-profile").classList.add("active");
 			</script>
@@ -95,21 +95,27 @@
 					<label for="country">Country</label>
 					<input type="text" name="country" value="<%=apartment.getCountry() %>" required readonly>
 					<label for="city">City</label>
-					<input type="text" name="city" value="<%=apartment.getCity() %>" required readonly>
+					<input type="text" name="city" id="city" value="<%=apartment.getCity() %>" required readonly>
 					<label for="street">Street</label>
-					<input type="text" name="street" value="<%=apartment.getStreet() %>" required readonly>
-					<label for="building_number">Building Number</label>
-					<input type="text" name="building_number" value="<%=apartment.getBuildingNumber() %>" required readonly>
+					<input type="text" name="street" id="street" value="<%=apartment.getStreet() %>" required readonly>
+					<label for="building_number" >Building Number</label>
+					<input type="text" name="building_number" id="building-nr" value="<%=apartment.getBuildingNumber() %>" required readonly>
 					<label for="flat_number">FlatNumber</label>
-					<input type="text" name="flat_number" value="<%=apartment.getFlatNumber() %>" required readonly>
+					<input type="text" name="flat_number" id="flat-nr" value="<%=apartment.getFlatNumber() %>" required readonly>
+					
 					<h2 id="apartament-info-heding">Apartment Informations</h2>
 					<label for="placeName">Apartment Name</label>
 					<input type="text" name="placeName" value="<%=apartment.getName() %>" required >
-						
+	
 					<label for="price">Price Per Day</label>
 					<input type="number" name="price" value="<%=apartment.getPrice() %>" required>
-					<label for="type">Type Of Apartment</label>
-					<input type="text" name="type" value="<%=apartment.getType().toString() %>" required>
+					<label for="type">Type Of Apartment - <%=apartment.getType().toString() %></label> 
+					<input type="radio" name="type" value="ENTIRE"  required>Entire Apartment<br>
+					<input type="radio" name="type" value="PRIVATE">Private Room<br>
+					<input type="radio" name="type" value="SHARED"> Shared Room
+					
+					
+				
 					<label for="adults_beds">Adults Beds</label>
 					<input type="number" name="adults_beds" value="<%=apartment.getBedsAdult() %>" required>
 					<label for="childeren_beds">Children Beds</label>
@@ -118,7 +124,7 @@
 					<textarea id="place-description" name="description" required><%=apartment.getDescription() %></textarea>
 					
 					<input type="hidden" name="action" value="updateApartment">
-					<input type="hidden" name="email" value="<%= emailOfLoggedUser %>" readonly required>
+					<input type="hidden" name="email" id="email" value="<%= emailOfLoggedUser %>" readonly required>
 					
 					
 					<input type="submit" class="btn btn-success" id="save-home-button" value = "Save">
