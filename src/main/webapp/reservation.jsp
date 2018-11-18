@@ -63,7 +63,7 @@
 	<![endif]-->
 
 	</head>
-	<body>
+	<body  onload="setInitialDates()">
 		<div id="fh5co-wrapper">
 		<div id="fh5co-page">
 
@@ -125,17 +125,17 @@
 										<div class="input-field">
 											<span class="reservation-field-title">Start:</span>
 											<input type="date" class="form-control" id="date-start-reservation" name="date-start-reservation" value="<%= dateStart %>" required
-											min="<%= dateFormat.format(minStartDate) %>"/>
+											min="<%= dateFormat.format(minStartDate) %>" onchange="isDateInputCorrect(this)"/>
 										</div>
 									</div>
 									<div class="date-box">
 										<div class="input-field">
 											<span class="reservation-field-title">End:</span>
 											<input type="date" class="form-control" id="date-end-reservation" name="date-end-reservation" value="<%= dateEnd %>" required
-											min="<%= dateFormat.format(minEndDate) %>"/>
+											min="<%= dateFormat.format(minEndDate) %>" onchange="isDateInputCorrect(this)"/>
 										</div>
 									</div>
-										<div id="reservation-price">
+										<div id="reservation-price" >
 											<span>Price:</span>
 											<%= String.format ("%.2f", ApartmentLogic.countTotalPrice(dateStart, dateEnd, apartment)) %>€ 
 										</div>
@@ -197,6 +197,9 @@
 	<!-- Main JS -->
 	<script src="js/main.js"></script>
 	<script>
+		
+		var actualDateStart = null;
+		var actualDateEnd = null;
           $(document).on('click', '#Login', function () {
               $("#loginModal").modal("show");
            });
@@ -207,9 +210,32 @@
         $(document).on('click', '#goRegistroLogin', function () {
               $("#RegistroModal").modal("hide");
               $("#loginModal").modal("show");              
-           });
+        });
+		function setInitialDates(){
+        	
+        	actualDateStart = document.getElementById("date-start-reservation").value;
+        	actualDateEnd = document.getElementById("date-end-reservation").value;
+        	alert(actualDateStart);
+        	alert(actualDateEnd);
+        }
+        function isDateInputCorrect(elem){
+        	
+        	var newDateStart = document.getElementById("date-start-reservation").value;
+        	var newDateEnd = document.getElementById("date-end-reservation").value;
+        	
+        	if(dateCompare(newDateStart, newDateEnd)==false){
+        		
+        		document.getElementById("date-start-reservation").value = actualDateStart;
+        		document.getElementById("date-end-reservation").value = actualDateEnd;
+        		
+        		alert("Incorrect dates!")
+        	}
+        }
+        function dateCompare(dateStart, dateEnd){
+            return new Date(dateEnd) > new Date(dateStart);
+        }
 		
-    </script>
+        </script>
         
 	</body>
 </html>
