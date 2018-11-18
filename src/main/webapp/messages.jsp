@@ -4,6 +4,15 @@
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+
+
+<%@ page import="model.*" %>
+<%@ page import=" java.util.*"%>
+<%@ page import="logic.*" %>
+<%@ page import="java.text.*" %>
+
+
+
 	<head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -51,6 +60,8 @@
 
 	<!-- Modernizr JS -->
 	<script src="js/modernizr-2.6.2.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+	<script type="text/javascript" src="js/sendMessages.js"></script>
 	<!-- FOR IE9 below -->
 	<!--[if lt IE 9]>
 	<script src="js/respond.min.js"></script>
@@ -113,12 +124,35 @@
 									<button type="button" class="btn btn-default btn-filter" data-target="all">All</button>
 								</div>
 							</div>
+							<input type="hidden" id="userEmail" value= <%=emailOfLoggedUser	%> >
+							
 							<div class="table-container">
-							<% 
-								for (Message tempMessage: messagesList) {
-									if (tempMessage != null)
-							%>
-							<tr data-status="no-leido" class="no-leido" onclick="">
+								<table class="table table-filter">
+									<tbody>
+										  
+										<%  ArrayList<Message> messages = (ArrayList<Message>) request.getAttribute("messages");
+											if(messages != null)
+											{	
+												int counter = 0;
+												boolean isUnread;
+												String messageClass;
+												String messageId;
+												String senderId;
+												
+												for (Message message : messages)
+												{
+													isUnread = message.getIsUnread();
+													if(isUnread)
+														messageClass = "no-leido";
+													else
+														messageClass = "leido";
+													
+													messageId = Integer.toString(counter);
+													senderId = "email" + Integer.toString(counter);
+												
+										%>
+										 
+										<tr data-status=<%= messageClass%> class=<%= messageClass%> id=<%= messageId%> >
 											<td>
 												<a href="javascript:;" class="star">
 													<i class="glyphicon glyphicon-star"></i>
@@ -126,20 +160,36 @@
 											</td>
 											<td>
 												<div class="media">
-													<h4 class="title">
-														<%= tempMessage.getSender() %>
+
+												<input type="hidden" id=<%= senderId%> value= <%= message.getSender().getEmail()	%> >
+													<h4 class="title" >
+																<%= message.getSender().getEmail()	%>
 													</h4>
 												</div>
 											</td>                                        
 											<td>      
-													<div class="media">
-														<p class="summary"><%= tempMessage.getMessage() %></p>
-														<p class="meta"><%= tempMessage.getDate().getDay() + "/" + tempMessage.getDate().getMonth() + "/" + (tempMessage.getDate().getYear() + 1900) %></p>                                                
+													<div class="media" onclick="showMessage()">
+														<p class="summary"><%= message.getMessage()	%></p>
+														<p class="meta"><%= message.getDate()%></p>                                                
 													</div>
+													<button type="button" class="btn btn-success" onclick="reply(<%= messageId%>)" style="float:right; margin-top: -30px; margin-right: 20px;">Reply</button>
+
 											</td>
-										</tr> 
-							<% } 
-					} %>
+										</tr>   
+										
+										
+										<%			counter++;
+										
+										
+										
+												}
+												}%>
+										
+										                                
+									</tbody>
+								</table>
+							</div>
+
 						</div>
 					</div>
 				</div>

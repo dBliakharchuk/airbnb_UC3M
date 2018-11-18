@@ -5,7 +5,6 @@ import java.io.InputStream;
 import java.io.PrintWriter;
 import java.nio.file.Paths;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -18,7 +17,6 @@ import org.apache.commons.io.IOUtils;
 
 import database.DataAccess;
 import logic.ApartmentLogic;
-import logic.UserLogic;
 import model.Apartment;
 import model.ApartmentPK;
 import model.ApartmentType;
@@ -129,6 +127,7 @@ public class ApartmentServlet extends HttpServlet
 
 			ApartmentPK apartmentPK = new ApartmentPK(email, buildingNumber, street, flatNumber, city);
 			User host = DataAccess.getUserByEmail(email);
+
 			
 			Apartment newApartment = new Apartment(host, buildingNumber, street, flatNumber, city, adults_beds,
 					childeren_beds, cuntry, description, placeName, picture, price, ApartmentType.fromString(type));

@@ -38,7 +38,7 @@ function deleteAccount(){
 
 	if (selectedUserEmail != null && selectedUserEmail != "") {
 
-		if (confirm("Do you want your acount?")) {
+		if (confirm("Do you want to delete your acount?")) {
 			$.post("updateUserServlet", {
 				action : "deleteUser",
 				email : selectedUserEmail

@@ -1,10 +1,14 @@
 package model;
 
 import java.io.Serializable;
-import java.util.Calendar;
 import java.util.Date;
 
-import javax.persistence.*;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 
 /**

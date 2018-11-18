@@ -1,17 +1,11 @@
 package logic;
 
-import java.util.Date;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import database.DataAccess;
 import model.Apartment;
-import model.ApartmentPK;
-import model.ApartmentType;
 import model.Message;
 import model.Reservation;
-import model.ReservationPK;
-import model.Trip;
 import model.User;
 
 public class Application {
@@ -21,6 +15,8 @@ public class Application {
 //		removeApartmentTest();
 //		removeMessageTest();
 //		removeUserTest();
+//		sendMessageTest(DataAccess.getAllUsers().get(0), DataAccess.getAllUsers().get(1), "test");
+//		MessageLogic.notifyReceiver(Message.createNewMessage(DataAccess.getAllUsers().get(0), DataAccess.getAllUsers().get(1), "test"));
 	}
 	
 	private static void removeReservationTest() {

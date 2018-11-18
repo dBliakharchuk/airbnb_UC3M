@@ -1,11 +1,9 @@
 package servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Calendar;
-import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -17,11 +15,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import database.DataAccess;
 import logic.ApartmentLogic;
-import logic.DateUtils;
 import model.Apartment;
-import model.ApartmentPK;
 import model.ApartmentType;
 
 
@@ -94,6 +89,19 @@ public class ResultServlet extends HttpServlet {
 					e.printStackTrace();
 				}
 			}
+			
+			if((dateStart == null || dateEnd == null) || dateStart.before(dateEnd)==false){
+				
+				dateStart = new Date();
+				dateEnd = new Date(dateStart.getYear(), dateStart.getMonth(), dateStart.getDate() + 7);
+			}
+			
+			SimpleDateFormat dateFormat = null;
+			dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			
+			request.getSession().setAttribute("dateStart", dateFormat.format(dateStart));
+			request.getSession().setAttribute("dateEnd", dateFormat.format(dateEnd));
+			
 			String price = request.getParameter("price");
 			
 			ApartmentType typeOfAccom = null;
@@ -115,15 +123,11 @@ public class ResultServlet extends HttpServlet {
 				children = new Integer(request.getParameter("children"));
 			}
 			
-			request.getSession().setAttribute("dateStart", dateStartString);
-			request.getSession().setAttribute("dateEnd", dateEndString);
-			
 			List<Apartment> resultApartmentsList = ApartmentLogic.search(fromPlace, price, typeOfAccom, adults, children, dateStart, dateEnd);
 		
 			request.getSession().setAttribute("resultApartments", resultApartmentsList);
 			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/results.jsp");
-			
 			dispatcher.forward(request, response);
 			
 //			response.setContentType("text/html");
@@ -141,6 +145,6 @@ public class ResultServlet extends HttpServlet {
 //			out.println("</html>");		
 //			out.flush();
 //			out.close();
-			}		
+		}		
 	}
 

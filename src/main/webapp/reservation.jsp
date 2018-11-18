@@ -8,6 +8,7 @@
 <%@ page import="model.*" %>
 <%@ page import=" java.util.*"%>
 <%@ page import="logic.*" %>
+<%@ page import="java.text.SimpleDateFormat;" %>
 
 	<head>
 	<meta charset="utf-8">
@@ -62,7 +63,7 @@
 	<![endif]-->
 
 	</head>
-	<body>
+	<body  onload="setInitialDates()">
 		<div id="fh5co-wrapper">
 		<div id="fh5co-page">
 
@@ -111,26 +112,37 @@
 									<span class="reservation-field-title">User:</span>
 									<%= request.getSession().getAttribute("emailOfLoggedUser") %>
 								</div>
+								
+								<% 		Date minStartDate = new Date();
+										Date minEndDate = new Date(minStartDate.getYear(), minStartDate.getMonth(), minStartDate.getDate() + 1);
+										
+										SimpleDateFormat dateFormat = null;
+										dateFormat = new SimpleDateFormat("yyyy-MM-dd");	
+										%>
+								
+									<form action="payments" method="post">
 									<div class="date-box">
 										<div class="input-field">
 											<span class="reservation-field-title">Start:</span>
-											<input type="text" class="form-control" id="date-start" name="date-start" placeholder="<%= dateStart %>"/>
+											<input type="date" class="form-control" id="date-start-reservation" name="date-start-reservation" value="<%= dateStart %>" required
+											min="<%= dateFormat.format(minStartDate) %>" onchange="isDateInputCorrect(this)"/>
 										</div>
 									</div>
 									<div class="date-box">
 										<div class="input-field">
 											<span class="reservation-field-title">End:</span>
-											<input type="text" class="form-control" id="date-end" name="date-end" placeholder="<%= dateEnd %>"/>
+											<input type="date" class="form-control" id="date-end-reservation" name="date-end-reservation" value="<%= dateEnd %>" required
+											min="<%= dateFormat.format(minEndDate) %>" onchange="isDateInputCorrect(this)"/>
 										</div>
 									</div>
-										<div id="reservation-price">
+										<div id="reservation-price" >
 											<span>Price:</span>
-											<%= String.format ("%.2f", ApartmentLogic.countTotalPrice(dateStart, dateEnd, apartment)) %>€ 
+											<span id="priceToDisplay"><%= String.format ("%.2f", ApartmentLogic.countTotalPrice(dateStart, dateEnd, apartment)) %> </span>€
 										</div>
 									<div style="clear:both;"></div>
 									<br/>
-									<form action="payments" method="post">
-										<input name="totalPrice" type="text" value="100" hidden>
+										<input name="apartmentPrice" id="apartmentPrice" type="text" value="<%= apartment.getPrice() %>" hidden>
+										<input name="totalPrice" id="totalPrice" type="text" hidden>
                             			<input type="submit" class="btn btn-primary reservation-button" value="Pay">
                         			</form>
 									<form action="accommodations" method="post">
@@ -186,6 +198,9 @@
 	<!-- Main JS -->
 	<script src="js/main.js"></script>
 	<script>
+		
+		var actualDateStart = null;
+		var actualDateEnd = null;
           $(document).on('click', '#Login', function () {
               $("#loginModal").modal("show");
            });
@@ -196,9 +211,50 @@
         $(document).on('click', '#goRegistroLogin', function () {
               $("#RegistroModal").modal("hide");
               $("#loginModal").modal("show");              
-           });
+        });
+		function setInitialDates(){
+        	
+        	actualDateStart = document.getElementById("date-start-reservation").value;
+        	actualDateEnd = document.getElementById("date-end-reservation").value;
+        }
+        function isDateInputCorrect(){
+        	
+        	var newDateStart = document.getElementById("date-start-reservation").value;
+        	var newDateEnd = document.getElementById("date-end-reservation").value;
+        	
+        	if(dateCompare(newDateStart, newDateEnd)==false){
+        		
+        		document.getElementById("date-start-reservation").value = actualDateStart;
+        		document.getElementById("date-end-reservation").value = actualDateEnd;
+        		
+        		alert("Incorrect dates!")
+        	}
+        	else{
+        		
+        		actualDateStart = newDateStart;
+        		actualDateEnd = newDateEnd;
+        		
+        		var pricePerNight = document.getElementById("apartmentPrice").value;
+        		var totalCost = daysBetweenTwoDates(actualDateStart, actualDateEnd) * pricePerNight;
+        		document.getElementById("totalPrice").value = totalCost;
+        		document.getElementById("priceToDisplay").textContent = totalCost;
+        	}
+        }
+        function dateCompare(dateStart, dateEnd){
+            return new Date(dateEnd) > new Date(dateStart);
+        }
+        function daysBetweenTwoDates(dateStartString, dateEndString){
+        	
+        	var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
+        	var dateStart = new Date(dateStartString);
+        	var dateEnd = new Date(dateEndString);
+
+        	var diffDays = Math.round(Math.abs((dateStart.getTime() - dateEnd.getTime())/(oneDay)));
+        	
+        	return diffDays;
+        }
 		
-    </script>
+        </script>
         
 	</body>
 </html>

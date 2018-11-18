@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,10 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import database.DataAccess;
-import logic.AdministratorLogic;
 import model.Apartment;
-import model.ApartmentPK;
-import model.User;
 
 
 @WebServlet(
