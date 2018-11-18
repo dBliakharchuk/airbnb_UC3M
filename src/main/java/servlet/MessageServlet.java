@@ -2,10 +2,8 @@ package servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-
 import java.util.ArrayList;
 import java.util.Date;
-import java.text.SimpleDateFormat;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -18,7 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import database.DataAccess;
 import logic.MessageLogic;
-import model.Apartment;
 import model.Message;
 import model.User;
 
