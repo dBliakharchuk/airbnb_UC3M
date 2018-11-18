@@ -163,8 +163,8 @@
 								<div class="eidit-apartment-form">
 									<label for="name">Apartment Name</label> 
 									<input type="text" name="name" id="apartment-name" value=""> 
-									<label for="host-email">Host Email</label> 
-									<input type="email"  name="host-email" id="host-email" value="" readonly>
+									<label for="user-email">Host Email</label> 
+									<input type="email"  name="user-email" id="user-email" value="" readonly>
 									<input type="hidden" name="country" id="apartment-country" value=""> 
 									 <label for="price-per-day">Price Per Day</label>
 									 <input type="number" name="price-per-day" id="apartment-price" value="">
