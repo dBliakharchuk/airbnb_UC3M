@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -10,6 +11,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import database.DataAccess;
+import logic.TripLogic;
+import logic.UserLogic;
+import model.Message;
+import model.Trip;
 
 
 @WebServlet(
@@ -39,6 +46,10 @@ public class MessageServlet extends HttpServlet {
 		protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			String emailOfLoggedUser = (String) request.getSession().getAttribute("emailOfLoggedUser"); 
 			if (emailOfLoggedUser != null) {
+				List<Message> userMessages = DataAccess.getUserByEmail(emailOfLoggedUser).getMessagesReceived();
+				request.setAttribute("userMessages", userMessages);
+				
+				
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/messages.jsp"); 
 				dispatcher.forward(request, response); 
 			} else {

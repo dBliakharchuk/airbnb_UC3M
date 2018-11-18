@@ -67,7 +67,7 @@ public class TripServlet extends HttpServlet {
 		 */
 		protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			
-			request.getSession().setAttribute("selectedApartment", DataAccess.getApartmentById(new ApartmentPK(request.getParameter("apartmentHost"),
+			request.getSession().setAttribute("selectedTrip", DataAccess.getApartmentById(new ApartmentPK(request.getParameter("apartmentHost"),
 			request.getParameter("apartmentBuildingNumber"), request.getParameter("apartmentStreet"), request.getParameter("apartmentFlatNumber"), 
 			request.getParameter("apartmentCity"))));
 					

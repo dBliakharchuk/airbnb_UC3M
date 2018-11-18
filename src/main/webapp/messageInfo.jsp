@@ -8,6 +8,7 @@
 <%@ page import="model.*" %>
 <%@ page import=" java.util.*"%>
 <%@ page import="logic.*" %>
+
 	<head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -50,6 +51,8 @@
 	<link rel="stylesheet" href="css/cs-skin-border.css">
 	
 	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/reservation.css" type="text/css"/>
+	<link rel="stylesheet" href="css/payment.css" type="text/css"/>
 
 
 	<!-- Modernizr JS -->
@@ -64,78 +67,73 @@
 		<div id="fh5co-wrapper">
 		<div id="fh5co-page">
 
-		<!-- start:header-top -->
-			<%
-			String emailOfLoggedUser = (String) request.getSession().getAttribute("emailOfLoggedUser"); 		
-			if (emailOfLoggedUser != null) { %>
-				<jsp:include page="headerLogin.jsp"/> 
-			<% } else { 
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp"); 
-				dispatcher.forward(request, response); 
-			}%>
-			<script type="text/javascript">
-				document.getElementById("tab-trips").classList.add("active");
-			</script>
-		<!-- end:header-top -->
+				<!-- start:header-top -->
+<%-- 			<% --%>
+// 			String emailOfLoggedUser = (String) request.getSession().getAttribute("emailOfLoggedUser"); 		
+<%-- 			if (emailOfLoggedUser != null) { %> --%>
+<%-- 				<jsp:include page="headerLogin.jsp"/>  --%>
+<%-- 			<% } else {  --%>
+// 				RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp"); 
+// 				dispatcher.forward(request, response); 
+<%-- 			}%> --%>
+<!-- 			<script type="text/javascript"> -->
+// 				document.getElementById("tab-messages").classList.add("active");
+<!-- 			</script> -->
 
-		<div id="fh5co-tours" class="fh5co-section-gray">
-			<div class="container">
-				<div class="row">
-					<% 
-						Apartment apartment = (Apartment)request.getSession().getAttribute("selectedTrip");
-						if (apartment != null) {
-					 %>
-					<div class="col-md-12 animate-box">
-						<h2 class="heading-title"><%= apartment.getName() %></h2>
-					</div>
-					<div class="col-md-6 animate-box">
-                        <span class="description">
-						<p><%= apartment.getDescription() %></p> 
-                        </span>
-                        <table class="table">
-                            <tbody>
-                            	<tr>
-                                        <th scope="row">Address:</th>
-                                        <td><span class="beds"><%= apartment.getId().getStreet() + " " + apartment.getId().getBuildingNumber() + "/" +apartment.getId().getFlatNumber() 
-                                        							+ ", " + apartment.getId().getCity() +", " + apartment.getCountry()%></span></td>
-                                </tr>
-                                <tr>                                
-                                    <th scope="row">Host:</th>
-                                    <td><span class="host"><%= apartment.getHost().getName() + " " + apartment.getHost().getSurname() %></span></td>
-                                </tr>
-                                
-                                <tr>                                
-                                        <th scope="row">Price:</th>
-                                    <td><span class="price"><%= String.format ("%.2f", apartment.getPrice()) %>€</span></td>
-                                </tr>
-                                <tr>
-                                        <th scope="row">Beds:</th>
-                                        <td><span class="beds"><%= apartment.getBedsAdult() + " for adults and " + apartment.getBedsChild() + " for children"%></span></td>
-                                </tr>
-                                <tr>
-                                        <th scope="row">Type:</th>
-                                        <td><span class="type">
-                                        <%=  ApartmentLogic.correctApartmentTypeDisplay(apartment.getType().toString()) %>
-                                       </span></td>
-                                </tr>                               
-                            </tbody>
-                        </table>
-                        	
-                        <div class="col-xxs-12 col-xs-12 mt">
-                            <a href="tripServlet" class="btn btn-primary btn-block">Cancel</a>
-                        </div>
-                                                                        
-                    </div>
-					<div class="col-md-6 animate-box">
-						<img class="img-responsive" src="images/cover_bg_2.jpg" alt="travel">
+			<!-- end:header-top -->
+			
+			
+		 <div class="fh5co-hero">
+			<div class="fh5co-overlay"></div>
+			<div class="fh5co-cover" data-stellar-background-ratio="0.5" style="background-image: url(images/cover_bg_5.jpg);">
+				<div class="desc">
+					<div class="container">
+						<div id="reservation-container">
+							<div>
+								<span id="reservation-header">Message</span>
+							</div>
+							<div id="message-box">
+								<br/>
+								<form action="transfers" method="post">
+								<div class="col-xxs-12 col-xs-12 mt">
+									<div class="input-field">
+										<label for="from">Sender mail:</label>
+										<input type="text" class="form-control" name="senderMail" placeholder=""/>
+									</div>
+								</div>
+								<div class="col-xxs-12 col-xs-12 mt">
+									<div class="input-field">
+										<label for="from">Receiver mail:</label>
+										<input type="text" class="form-control" name="receiverMail" placeholder=""/>
+									</div>
+								</div>
+								<div class="col-xxs-12 col-xs-12 mt">
+									<div class="input-field">
+										<label for="from">Message:</label>
+										<input type="text" class="form-control" name="message" placeholder=""/>
+									</div>
+								</div>
+<!-- 								<div class="col-xxs-12 col-xs-12 mt"> -->
+<!-- 									<div class="input-field"> -->
+<!-- 										<label for="from">Message:</label> -->
+<!-- 										<span class="description"> -->
+<!-- 											<p>fdsfsdfsdsdfsddfsdfd</p>  -->
+<!-- 				                        </span> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+                           			<input type="submit" class="btn btn-primary payment-button" value="Reply">
+                       			</form>
+								<form action="reservations" method="get">
+									<input type="submit" class="btn btn-primary payment-button" value="Cancel">
+								</form>
+							</div>
+						</div>
 					</div>
 				</div>
-				<%} else {
-					RequestDispatcher dispatcher = request.getRequestDispatcher("/trips.jsp"); 
-					dispatcher.forward(request, response); 
-				} %>
 			</div>
+
 		</div>
+	</div>
 		<!-- Login Modal -->
 		<jsp:include page="loginWindow.jsp"></jsp:include>     
             
@@ -195,4 +193,3 @@
         
 	</body>
 </html>
-

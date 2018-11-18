@@ -55,6 +55,11 @@
 	<!--[if lt IE 9]>
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
+	<%@ page import="database.*"%>
+	<%@ page import="model.*"%>
+	<%@ page import=" java.util.*"%>
+	<%@ page import="java.sql.Date"%>
+	<%@ page import="java.net.URL"%>
 
 	</head>
 	<body>
@@ -78,6 +83,13 @@
 			</script>
 
 		<!-- end:header-top -->
+		
+		
+		
+		
+		
+		
+	
      <div id="message-container" class="fh5co-section-gray">	
 		<div class="container">
 			<div class="row">
@@ -86,7 +98,10 @@
 						<p>These are the messages you have received</p>
 				</div>
 			</div>
-			
+			<% 
+				List<Message> messagesList = (List<Message>) request.getAttribute("userMessages");
+				if (!messagesList.isEmpty()) { %>
+					
 			<div class="row row-bottom-padded-md">			
 				<div class="col-md-8 col-md-offset-2">
 					<div class="panel panel-default">
@@ -99,9 +114,11 @@
 								</div>
 							</div>
 							<div class="table-container">
-								<table class="table table-filter">
-									<tbody>
-										<tr data-status="no-leido" class="no-leido">
+							<% 
+								for (Message tempMessage: messagesList) {
+									if (tempMessage != null)
+							%>
+							<tr data-status="no-leido" class="no-leido" onclick="">
 											<td>
 												<a href="javascript:;" class="star">
 													<i class="glyphicon glyphicon-star"></i>
@@ -110,100 +127,19 @@
 											<td>
 												<div class="media">
 													<h4 class="title">
-																User Identifier
+														<%= tempMessage.getSender() %>
 													</h4>
 												</div>
 											</td>                                        
 											<td>      
 													<div class="media">
-														<p class="summary">Ut enim ad minim veniam, quis nostrud exercitation...</p>
-														<p class="meta">Febrero 13, 2018</p>                                                
-													</div>
-											</td>
-										</tr>    
-										<tr data-status="no-leido" class="no-leido">
-											<td>
-												<a href="javascript:;" class="star">
-													<i class="glyphicon glyphicon-star"></i>
-												</a>
-											</td>
-											<td>
-												<div class="media">
-													<h4 class="title">
-																User Identifier
-													</h4>
-												</div>
-											</td>                                        
-											<td>      
-													<div class="media">
-														<p class="summary">Ut enim ad minim veniam, quis nostrud exercitation...</p>
-														<p class="meta">Febrero 13, 2018</p>                                                
-													</div>
-											</td>
-										</tr>    
-										<tr data-status="leido" class="leido">
-											<td>
-												<a href="javascript:;" class="star">
-													<i class="glyphicon glyphicon-star"></i>
-												</a>
-											</td>
-											<td>
-												<div class="media">
-													<h4 class="title">
-																User Identifier
-													</h4>
-												</div>
-											</td>                                        
-											<td>      
-													<div class="media">
-														<p class="summary">Ut enim ad minim veniam, quis nostrud exercitation...</p>
-														<p class="meta">Febrero 13, 2018</p>                                                
+														<p class="summary"><%= tempMessage.getMessage() %></p>
+														<p class="meta"><%= tempMessage.getDate().getDay() + "/" + tempMessage.getDate().getMonth() + "/" + (tempMessage.getDate().getYear() + 1900) %></p>                                                
 													</div>
 											</td>
 										</tr> 
-										<tr data-status="leido" class="leido">
-											<td>
-												<a href="javascript:;" class="star">
-													<i class="glyphicon glyphicon-star"></i>
-												</a>
-											</td>
-											<td>
-												<div class="media">
-													<h4 class="title">
-																User Identifier
-													</h4>
-												</div>
-											</td>                                        
-											<td>      
-													<div class="media">
-														<p class="summary">Ut enim ad minim veniam, quis nostrud exercitation...</p>
-														<p class="meta">Febrero 13, 2018</p>                                                
-													</div>
-											</td>
-										</tr>    
-										<tr data-status="leido" class="leido">
-											<td>
-												<a href="javascript:;" class="star">
-													<i class="glyphicon glyphicon-star"></i>
-												</a>
-											</td>
-											<td>
-												<div class="media">
-													<h4 class="title">
-																User Identifier
-													</h4>
-												</div>
-											</td>                                        
-											<td>      
-													<div class="media">
-														<p class="summary">Ut enim ad minim veniam, quis nostrud exercitation...</p>
-														<p class="meta">Febrero 13, 2018</p>                                                
-													</div>
-											</td>
-										</tr>                                        
-									</tbody>
-								</table>
-							</div>
+							<% } 
+					} %>
 						</div>
 					</div>
 				</div>
