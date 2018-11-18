@@ -127,20 +127,7 @@ public class ApartmentServlet extends HttpServlet
 
 			ApartmentPK apartmentPK = new ApartmentPK(email, buildingNumber, street, flatNumber, city);
 			User host = DataAccess.getUserByEmail(email);
-<<<<<<< HEAD
-		
-//			Apartment newApartment = new Apartment(host, buildingNumber, street, flatNumber, city, adults_beds, childeren_beds, cuntry, description, placeName, picture, price, ApartmentType.fromString(type) );
-//			Boolean apartmentAddedStatus = ApartmentLogic.addApartment(newApartment);
-//			if(apartmentAddedStatus)
-//			{
-//				RequestDispatcher rd = request.getRequestDispatcher("/manageProfile");
-//				rd.forward(request, response);
-//			}
-//			
-//			System.out.println(email + placeName + cuntry  + type + Double.toString(price) + Integer.toString(childeren_beds) + Integer.toString(adults_beds)
-//			+ description + buildingNumber + street + flatNumber + city);
-		
-=======
+
 			
 			Apartment newApartment = new Apartment(host, buildingNumber, street, flatNumber, city, adults_beds,
 					childeren_beds, cuntry, description, placeName, picture, price, ApartmentType.fromString(type));
@@ -150,7 +137,6 @@ public class ApartmentServlet extends HttpServlet
 				response.sendRedirect("manageProfile");
 
 			}
->>>>>>> dfd6eb8e7d953a3ed3ef811fb7f3703ab6a129c4
 
 		} else if ("deletePlace".equals(action))
 		{
