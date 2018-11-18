@@ -145,7 +145,7 @@
 											<span></span>
 											<h3 class="user-apartment-title"> <%=userApartments.get(i).getName() %></h3>
 											<span><%=userApartments.get(i).getType().toString() %></span>
-											<span class="price"><%=userApartments.get(i).getPrice() + "E" %></span>
+											<span class="price"><%=userApartments.get(i).getPrice() + "&euro;" %></span>
 											<form method="get" action="editApartment">
 												<input name="apartmentHost" type="text" value="<%= apartmentKey.getHost() %>" hidden>
 												<input name="apartmentBuildingNumber" type="text" value="<%= apartmentKey.getBuildingNumber() %>" hidden>
