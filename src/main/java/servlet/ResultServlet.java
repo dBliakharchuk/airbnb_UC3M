@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Calendar;
 import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -17,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import database.DataAccess;
 import logic.ApartmentLogic;
+import logic.DateUtils;
 import model.Apartment;
 import model.ApartmentPK;
 import model.ApartmentType;
@@ -46,13 +49,20 @@ public class ResultServlet extends HttpServlet {
 		 */
 		protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			
-			request.getSession().setAttribute("selectedApartment", DataAccess.getApartmentById(new ApartmentPK(request.getParameter("apartmentHost"),
-					request.getParameter("apartmentBuildingNumber"), request.getParameter("apartmentStreet"), request.getParameter("apartmentFlatNumber"), 
-					request.getParameter("apartmentCity"))));
-					
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/accommodation.jsp");
+			RequestDispatcher dispatcher = null;
 			
-			dispatcher.forward(request, response);
+			if(request.getSession().getAttribute("resultApartments")==null) {
+			
+				dispatcher = request.getRequestDispatcher("/index.jsp");
+			
+				dispatcher.forward(request, response);
+			}
+			else {
+				
+				dispatcher = request.getRequestDispatcher("/results.jsp");
+				
+				dispatcher.forward(request, response);
+			}
 		}
 
 		/**
@@ -110,32 +120,27 @@ public class ResultServlet extends HttpServlet {
 			
 			List<Apartment> resultApartmentsList = ApartmentLogic.search(fromPlace, price, typeOfAccom, adults, children, dateStart, dateEnd);
 		
-			request.setAttribute("resultApartments", resultApartmentsList);
+			request.getSession().setAttribute("resultApartments", resultApartmentsList);
 			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/results.jsp");
 			
 			dispatcher.forward(request, response);
-				
+			
 //			response.setContentType("text/html");
 //			PrintWriter out = response.getWriter();
 //			out.println("<html>");
 //			out.println("<head>");
 //			out.println("</head>");						
 //			out.println("<body>");
-//			out.println("<h1> Your fromPlace  is:"+fromPlace+"</h1>");
-//			out.println("<h1> Your price  is:"+price+"</h1>");	
-//			out.println("<h1> Your typeOfAccom  is:"+typeOfAccom+"</h1>");	
-//			out.println("<h1> Your adults  is:"+adults+"</h1>");	
-//			out.println("<h1> Your children  is:"+children+"</h1>");
-//			out.println("<h1> Your dateStart  is:"+dateStart+"</h1>");
-//			out.println("<h1> Your dateEnd  is:"+dateEnd+"</h1>");
-//			out.println("<h1> Your resultApartment  is:"+resultApartmentsList.size()+"</h1>");
-//			
+//			out.println("<h1> today not true date  is:"+new Date(118,11,31)+"</h1>");
+//			out.println("<h1> today not true date  is:"+tempDate.getMonth()+"</h1>");
+//			out.println("<h1> temp date is:"+tempDate+"</h1>");
+//			out.println("<h1> other temp date is:"+otherTempDate+"</h1>");
+//			out.println("<h1> Your fromPlace  is:"+DateUtils.isExpirationDateCorrect("12/2018")+"</h1>");
 //			out.println("</body>");				
 //			out.println("</html>");		
-//			
 //			out.flush();
 //			out.close();
-					
+			}		
 	}
-}
+

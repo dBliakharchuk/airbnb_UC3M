@@ -51,6 +51,8 @@
 	<link rel="stylesheet" href="css/cs-skin-border.css">
 	
 	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/reservation.css" type="text/css"/>
+	<link rel="stylesheet" href="css/payment.css" type="text/css"/>
 
 
 	<!-- Modernizr JS -->
@@ -65,7 +67,7 @@
 		<div id="fh5co-wrapper">
 		<div id="fh5co-page">
 
-		<!-- start:header-top -->
+				<!-- start:header-top -->
 			<%
 			String emailOfLoggedUser = (String) request.getSession().getAttribute("emailOfLoggedUser"); 		
 			if (emailOfLoggedUser != null) { 
@@ -82,65 +84,67 @@
 			</script>
 
 			<!-- end:header-top -->
-
-		<div id="fh5co-tours" class="fh5co-section-gray">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
-						<h3>Results</h3>
-						<% ArrayList<Apartment> apartments = (ArrayList<Apartment>)request.getSession().getAttribute("resultApartments");
-						
-						if(apartments.isEmpty()==true){
-																			%>
-						<p>There are no offers matching to your selection. </p>
-						<% } else{ %>
-							<p> These are the results according to your selection:</p>
-							
-						<% } %>
-					</div>
-				</div>
+			
+			
+		 <div class="fh5co-hero">
+			<div class="fh5co-overlay"></div>
+			<div class="fh5co-cover" data-stellar-background-ratio="0.5" style="background-image: url(images/cover_bg_5.jpg);">
+				<div class="desc">
+					<div class="container">
+					<%String dataError = (String)request.getAttribute("dataError");
+			
+					if(dataError!=null){ %>
 				
-  				<div class="row row-bottom-padded-md">
-			<%
-				
-				
-				ApartmentPK apartmentKey = null;		
-					
-					for (Apartment apartment : apartments)
-					{ 
-					
-					apartmentKey = apartment.getId();%>
-						
-					<div class="col-md-4 col-sm-6 fh5co-tours animate-box" data-animate-effect="fadeIn">
-					<div href="#"><img src="images/place-1.jpg" alt="Free HTML5 Website Template by FreeHTML5.co" class="img-responsive">
-						<div class="desc">
-						<span></span>
-								<h3><%= apartment.getName() %></h3>
-								<span><%= ApartmentLogic.correctApartmentTypeDisplay(apartment.getType().toString()) %></span> 
-								<span class="price"><%= String.format ("%.2f", apartment.getPrice()) %>€</span>
-								<form method="post" action="accommodations">
-									<input name="apartmentHost" type="text" value="<%= apartmentKey.getHost() %>" hidden>
-									<input name="apartmentBuildingNumber" type="text" value="<%= apartmentKey.getBuildingNumber() %>" hidden>
-									<input name="apartmentStreet" type="text" value="<%= apartment.getStreet() %>" hidden>
-									<input name="apartmentFlatNumber" type="text" value="<%= apartment.getFlatNumber() %>" hidden>
-									<input name="apartmentCity" type="text" value="<%= apartment.getCity() %>" hidden>
-									<input type="submit" class="btn btn-primary btn-outline" value="Select">
-								</form>
-							</div>
+						<script type="text/javascript">
+							alert("<%= dataError%>")
+						</script>
+					<% } %>
+							<div id="reservation-container">
+								<div>
+									<span id="reservation-header">Payment</span>
+								</div>
+								<div id="payment-box">
+									<br/>
+									<h4>Provide necessary payment information to finalize transaction</h4>
+									<form action="transfers" method="post">
+									<div class="col-xxs-12 col-xs-12 mt">
+										<div class="input-field">
+											<label for="from">Card number:</label>
+											<input type="text" class="form-control" name="card-number" placeholder=""/>
+										</div>
+									</div>
+									<div class="col-xxs-12 col-xs-6 mt alternate">
+										<div class="input-field">
+											<label for="from">Expiration date:</label>
+											<input type="text" class="form-control" name="expiration-date" placeholder="mm/yyyy"/>
+										</div>
+									</div>
+									<div class="col-xxs-12 col-xs-6 mt alternate">
+										<div class="input-field">
+											<label for="from">CV2 code:</label>
+											<input type="text" class="form-control" name="cv2-code" placeholder=""/>
+										</div>
+									</div>
+                            			<input type="submit" class="btn btn-primary payment-button" value="Confirm">
+                        			</form>
+									<form action="reservations" method="get">
+										<input type="submit" class="btn btn-primary payment-button" value="Cancel">
+									</form>
+								</div>
 						</div>
 					</div>
-				<% } %>
-				</div> 
-
+				</div>
 			</div>
+
 		</div>
+	</div>
 		<!-- Login Modal -->
 		<jsp:include page="loginWindow.jsp"></jsp:include>     
             
 		<!-- Registro Modal -->
 		<jsp:include page="registrationWindow.jsp"></jsp:include>
-		
-		<jsp:include page="footer.jsp"/>
+  
+     	<jsp:include page="footer.jsp"/>
 
 	</div>
 	<!-- END fh5co-page -->
@@ -176,8 +180,7 @@
 	
 	<!-- Main JS -->
 	<script src="js/main.js"></script>
-
-    <script>
+	<script>
           $(document).on('click', '#Login', function () {
               $("#loginModal").modal("show");
            });
@@ -194,4 +197,3 @@
         
 	</body>
 </html>
-

@@ -1,5 +1,7 @@
 package logic;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -31,5 +33,29 @@ public class DateUtils {
 	public static boolean isDateBetweenTwoDates(Date dateStart, Date dateEnd, Date examinedDate) {
 		
 		return dateStart.compareTo(examinedDate) * dateEnd.compareTo(examinedDate) <= 0;
+	}
+	public static boolean isExpirationDateCorrect(String expirationDate){
+		
+		Date tempDate = null;
+		
+		try {
+			tempDate = new Date(new SimpleDateFormat("MM/yyyy").parse(expirationDate).getTime());
+		} 
+		catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		if(tempDate == null) {
+			
+			return false;
+		}
+		else {
+			
+			Date otherTempDate = new Date(tempDate.getYear(), tempDate.getMonth() + 1, 1);
+			Date today = new Date();
+			
+			return today.before(otherTempDate);
+		}
 	}
 }

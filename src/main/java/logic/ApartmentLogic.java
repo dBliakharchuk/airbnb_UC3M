@@ -108,11 +108,11 @@ public class ApartmentLogic {
 		
 		if(numberOfAdults == null && numberOfChildren == null){
 			return true;
-		} else if(numberOfAdults == null && numberOfChildren <= bedsForChildren) {
+		} else if((numberOfAdults != null && numberOfAdults <= bedsForAdults) && numberOfChildren == null) {
 			return true;
-		} else if(numberOfAdults <= bedsForAdults && numberOfChildren <= bedsForChildren){
+		} else if(numberOfAdults == null && (numberOfChildren != null && numberOfChildren <= bedsForChildren)) {
 			return true;
-		} else if(numberOfAdults <= bedsForAdults && numberOfChildren == null) {
+		} else if((numberOfAdults != null && numberOfAdults <= bedsForAdults) && (numberOfChildren != null && numberOfChildren <= bedsForChildren)){
 			return true;
 		} else {
 			return false;
