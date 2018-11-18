@@ -79,18 +79,7 @@ public class TransferServlet extends HttpServlet {
         		
         		Message reservationMessage = Message.createNewMessage(user, DataAccess.getUserByEmail("admin"), textMessage);
         		
-    			response.setContentType("text/html");
-    			PrintWriter out = response.getWriter();
-    			out.println("<html>");
-    			out.println("<head>");
-    			out.println("</head>");						
-    			out.println("<body>");
-    			out.println("<h1> today not true date  is:"+textMessage+"</h1>");
-
-    			out.println("</body>");				
-    			out.println("</html>");		
-    			out.flush();
-    			out.close();
+        		DataAccess.createMessage(reservationMessage);
         	}
 		}
 }

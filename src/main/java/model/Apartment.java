@@ -9,8 +9,9 @@ import java.util.List;
 
 
 /**
- * The persistent class for the apartment database table.
+ * Apartment class is a Java representative of Apartment table in database.
  * 
+ * @author Mateusz
  */
 @Entity
 @NamedQueries({
@@ -183,7 +184,6 @@ public class Apartment implements Serializable {
 
 	public void setHost(User host) {
 		this.host = host;
-		id.setHost(host.getEmail());
 	}
 	
 	public String getBuildingNumber() {

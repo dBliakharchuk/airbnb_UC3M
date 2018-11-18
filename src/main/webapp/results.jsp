@@ -96,25 +96,30 @@
 					</div>
 				</div>
 				
-  				<div class="row row-bottom-padded-md">
-			<%
-				
-				
+
+				<div class="row row-bottom-padded-md">
+				<%
 				ApartmentPK apartmentKey = null;		
+
+				String photoUrl;
+
 					
 					for (Apartment apartment : apartments)
 					{ 
 					
-					apartmentKey = apartment.getId();%>
-						
+					apartmentKey = apartment.getId();
+					photoUrl = request.getContextPath() + "/apartmentsImages/" + apartmentKey.toUrl();
+					%>
 					<div class="col-md-4 col-sm-6 fh5co-tours animate-box" data-animate-effect="fadeIn">
-					<div href="#"><img src="images/place-1.jpg" alt="Free HTML5 Website Template by FreeHTML5.co" class="img-responsive">
+						<div href="#"><img src= <%=photoUrl %> alt="Free HTML5 Website Template by FreeHTML5.co" class="img-responsive">
 						<div class="desc">
 						<span></span>
 								<h3><%= apartment.getName() %></h3>
 								<span><%= ApartmentLogic.correctApartmentTypeDisplay(apartment.getType().toString()) %></span> 
 								<span class="price"><%= String.format ("%.2f", apartment.getPrice()) %>€</span>
+
 								<form method="post" action="accommodations">
+
 									<input name="apartmentHost" type="text" value="<%= apartmentKey.getHost() %>" hidden>
 									<input name="apartmentBuildingNumber" type="text" value="<%= apartmentKey.getBuildingNumber() %>" hidden>
 									<input name="apartmentStreet" type="text" value="<%= apartment.getStreet() %>" hidden>

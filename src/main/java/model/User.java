@@ -8,8 +8,9 @@ import java.util.List;
 
 
 /**
- * The persistent class for the user database table.
+ * User class is a Java representative of User table in database.
  * 
+ * @author Mateusz
  */
 @Entity
 @NamedQueries({

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -22,11 +23,19 @@ import model.Message;
 import model.Reservation;
 import model.User;
 
+/**
+ * DataAccess allows system to create, read, update and delete data from database.
+ * Get methods return objects or arrays if succeeded and null or empty array if not
+ * Create, Update and Remove methods return true if succeeded and false if not.
+ * 
+ * @author Mateusz Kobierski
+ *
+ */
+
 public class DataAccess 
 {	
 	private static EntityManagerFactory managerFactory = Persistence.createEntityManagerFactory("airbnb");
 	private static Connection connection = null;
-	private static Logger logger = Logger.getLogger(DataAccess.class); 
 	
 	public static List<User> getAllUsers() {
 		List<User> results;
@@ -35,7 +44,6 @@ public class DataAccess
 			Query query = manager.createNamedQuery("User.findAll", User.class);
 			results = query.getResultList();
 		} catch(Exception ex) {
-			//logger.error("Exception in method getAllUsers");
 			ex.printStackTrace();
 			results = new ArrayList();
 		} finally {
@@ -50,7 +58,6 @@ public class DataAccess
 		try {
 			result = manager.find(User.class, email);
 		} catch(Exception ex) {
-			//logger.error("Exception in method getUserByEmail");
 			ex.printStackTrace();
 		} finally {
 			manager.close();
@@ -67,12 +74,11 @@ public class DataAccess
 			query.setParameter("surname", surname);
 			results = query.getResultList();
 		} catch(Exception ex) {
-			//logger.error("Exception in method getUserByEmail");
 			ex.printStackTrace();
+			results = new ArrayList();
 		} finally {
 			manager.close();
 		}
-		
 		return results;
 	}
 	
@@ -89,20 +95,21 @@ public class DataAccess
 				}
 			} catch (Exception e) {
 				ex.printStackTrace();
-				throw e;
+				e.printStackTrace();
 			}
-			throw ex;
-		} finally {
 			manager.close();
+			return false;
 		}
+		
+		manager.close();
 		return true;
 	}
 	
 	public static boolean updateUser(User user) {
 		EntityManager manager = managerFactory.createEntityManager();
 		try {
-			manager.find(User.class, user.getEmail());
 			manager.getTransaction().begin();
+			manager.find(User.class, user.getEmail());
 			manager.merge(user);
 			manager.getTransaction().commit();
 		} catch (Exception ex) {
@@ -112,12 +119,13 @@ public class DataAccess
 				}
 			} catch (Exception e) {
 				ex.printStackTrace();
-				throw e;
+				e.printStackTrace();
 			}
-			throw ex;
-		} finally {
 			manager.close();
+			return false;
 		}
+		
+		manager.close();
 		return true;
 	}
 	
@@ -126,9 +134,7 @@ public class DataAccess
 		User managed = null;
 		try {
 			manager.getTransaction().begin();
-			if (!manager.contains(user)) {
-			    managed = manager.merge(user);
-			}
+			managed = manager.find(User.class, user.getEmail());
 			manager.remove(managed);
 			manager.getTransaction().commit();
 		} catch (Exception ex) {
@@ -138,12 +144,13 @@ public class DataAccess
 				}
 			} catch (Exception e) {
 				ex.printStackTrace();
-				throw e;
+				e.printStackTrace();
 			}
-			throw ex;
-		} finally {
 			manager.close();
+			return false;
 		}
+		
+		manager.close();
 		return true;
 	}
 	
@@ -154,7 +161,6 @@ public class DataAccess
 			Query query = manager.createNamedQuery("Apartment.findAll", Apartment.class);
 			results = query.getResultList();
 		} catch(Exception ex) {
-			//logger.error("Exception in method getAllUsers");
 			ex.printStackTrace();
 			results = new ArrayList();
 		} finally {
@@ -169,7 +175,6 @@ public class DataAccess
 		try {
 			result = manager.find(Apartment.class, apartmentKey);
 		} catch(Exception ex) {
-			//logger.error("Exception in method getUserByEmail");
 			ex.printStackTrace();
 		} finally {
 			manager.close();
@@ -186,7 +191,6 @@ public class DataAccess
 			query.setParameter("host", email);
 			results = query.getResultList();
 		} catch(Exception ex) {
-			//logger.error("Exception in method getUserByEmail");
 			ex.printStackTrace();
 		} finally {
 			manager.close();
@@ -203,7 +207,6 @@ public class DataAccess
 			query.setParameter("name", name);
 			results = query.getResultList();
 		} catch(Exception ex) {
-			//logger.error("Exception in method getUserByEmail");
 			ex.printStackTrace();
 		} finally {
 			manager.close();
@@ -220,7 +223,6 @@ public class DataAccess
 			query.setParameter("country", country);
 			results = query.getResultList();
 		} catch(Exception ex) {
-			//logger.error("Exception in method getUserByEmail");
 			ex.printStackTrace();
 		} finally {
 			manager.close();
@@ -237,7 +239,6 @@ public class DataAccess
 			query.setParameter("city", city);
 			results = query.getResultList();
 		} catch(Exception ex) {
-			//logger.error("Exception in method getUserByEmail");
 			ex.printStackTrace();
 		} finally {
 			manager.close();
@@ -254,7 +255,6 @@ public class DataAccess
 			query.setParameter("price", limit);
 			results = query.getResultList();
 		} catch(Exception ex) {
-			//logger.error("Exception in method getUserByEmail");
 			ex.printStackTrace();
 		} finally {
 			manager.close();
@@ -267,6 +267,8 @@ public class DataAccess
 		EntityManager manager = managerFactory.createEntityManager();
 		try {
 			manager.getTransaction().begin();
+			User host = manager.find(User.class, apartment.getHost().getEmail());
+			host.addApartment(apartment);
 			manager.persist(apartment);
 			manager.getTransaction().commit();
 		} catch (Exception ex) {
@@ -276,20 +278,21 @@ public class DataAccess
 				}
 			} catch (Exception e) {
 				ex.printStackTrace();
-				throw e;
+				e.printStackTrace();
 			}
-			throw ex;
-		} finally {
 			manager.close();
+			return false;
 		}
+		
+		manager.close();
 		return true;
 	}
 	
 	public static boolean updateApartment(Apartment apartment)  {
 		EntityManager manager = managerFactory.createEntityManager();
 		try {
-			manager.find(Apartment.class, apartment.getId());
 			manager.getTransaction().begin();
+			manager.find(Apartment.class, apartment.getId());
 			manager.merge(apartment);
 			manager.getTransaction().commit();
 		} catch (Exception ex) {
@@ -299,12 +302,13 @@ public class DataAccess
 				}
 			} catch (Exception e) {
 				ex.printStackTrace();
-				throw e;
+				e.printStackTrace();
 			}
-			throw ex;
-		} finally {
 			manager.close();
+			return false;
 		}
+		
+		manager.close();
 		return true;
 	}
 	
@@ -313,33 +317,33 @@ public class DataAccess
 		Apartment managed = null;
 		try {
 			manager.getTransaction().begin();
-			if (!manager.contains(apartment)) {
-			    managed = manager.merge(apartment);
-			}
+			managed = manager.find(Apartment.class, apartment.getId());
 			manager.remove(managed);
 			manager.getTransaction().commit();
 		} catch (Exception ex) {
+			ex.printStackTrace();
 			try {
 				if (manager.getTransaction().isActive()) {
 					manager.getTransaction().rollback();
 				}
 			} catch (Exception e) {
 				ex.printStackTrace();
-				throw e;
+				e.printStackTrace();
 			}
-			throw ex;
-		} finally {
 			manager.close();
+			return false;
 		}
+		
+		manager.close();
 		return true;
 	}
 	
 	public static boolean createMessage(Message message) {
 		EntityManager manager = managerFactory.createEntityManager();
 		try {
+			manager.getTransaction().begin();
 			User sender = manager.find(User.class, message.getSender().getEmail());
 			User receiver = manager.find(User.class, message.getReceiver().getEmail());
-			manager.getTransaction().begin();
 			manager.persist(message);
 			sender.addMessagesSent(message);
 			receiver.addMessagesReceived(message);
@@ -351,37 +355,38 @@ public class DataAccess
 				}
 			} catch (Exception e) {
 				ex.printStackTrace();
-				throw e;
+				e.printStackTrace();
 			}
-			throw ex;
-		} finally {
 			manager.close();
+			return false;
 		}
+		
+		manager.close();
 		return true;
 	}
 	
 	public static boolean removeMessage(Message message) {
-		List<Message> results = null;
 		EntityManager manager = managerFactory.createEntityManager();
 		Message managed = null;
 		try {
-			User sender = manager.find(User.class, message.getSender().getEmail());
-			User receiver = manager.find(User.class, message.getReceiver().getEmail());
 			manager.getTransaction().begin();
-			if (!manager.contains(message)) {
-			    managed = manager.merge(message);
-			}
+			managed = manager.find(Message.class, message.getId());
 			manager.remove(managed);
-			sender.removeMessagesSent(managed);
-			receiver.removeMessagesReceived(managed);
 			manager.getTransaction().commit();
 		} catch(Exception ex) {
-			logger.error("Exception in method removeMessage");
-			ex.printStackTrace();
-		} finally {
+			try {
+				if (manager.getTransaction().isActive()) {
+					manager.getTransaction().rollback();
+				}
+			} catch (Exception e) {
+				ex.printStackTrace();
+				e.printStackTrace();
+			}
 			manager.close();
+			return false;
 		}
 		
+		manager.close();
 		return true;
 	}
 	
@@ -392,7 +397,6 @@ public class DataAccess
 			Query query = manager.createNamedQuery("Reservation.findAll", Reservation.class);
 			results = query.getResultList();
 		} catch(Exception ex) {
-			//logger.error("Exception in method getAllUsers");
 			ex.printStackTrace();
 			results = new ArrayList();
 		} finally {
@@ -403,11 +407,12 @@ public class DataAccess
 	
 	public static boolean createReservation(Reservation reservation) {
 		PreparedStatement stmt = null;
-		logger.info("creating Reservation");
 		try {
 			connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/airbnbdb?user=userLQE&password=2dAlhk2RqPhVlFOK" + 
 							"&useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC");
+			
 			stmt = connection.prepareStatement("INSERT INTO Reservation VALUES(?,?,?,?,?,?,?)");
+			
 			stmt.setString(1, reservation.getUser().getEmail());
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");  
 			stmt.setString(2, dateFormat.format(reservation.getDate()));
@@ -416,11 +421,41 @@ public class DataAccess
 			stmt.setString(5, reservation.getApartment().getStreet());
 			stmt.setString(6, reservation.getApartment().getFlatNumber());
 			stmt.setString(7, reservation.getApartment().getCity());
+			
 		    stmt.executeUpdate();
 		     
 		} catch(Exception ex) {
-			logger.error("Exception in method createReservation");
+			
+			try {
+				
+				if (connection != null) {
+					connection.close();
+				}
+				
+				if (stmt != null) {
+					stmt.close();
+				}
+				
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+			
 			ex.printStackTrace();
+			return false;
+		}
+		
+		try {
+			
+			if (connection != null) {
+				connection.close();
+			}
+			
+			if (stmt != null) {
+				stmt.close();
+			}
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
 		}
 		
 		return true;
@@ -431,24 +466,24 @@ public class DataAccess
 		Reservation managed = null;
 		try {
 			manager.getTransaction().begin();
-			if (!manager.contains(reservation)) {
-			    managed = manager.merge(reservation);
-			}
+			managed = manager.find(Reservation.class, reservation.getId());
 			manager.remove(managed);
 			manager.getTransaction().commit();
 		} catch (Exception ex) {
+			ex.printStackTrace();
 			try {
 				if (manager.getTransaction().isActive()) {
 					manager.getTransaction().rollback();
 				}
 			} catch (Exception e) {
 				ex.printStackTrace();
-				throw e;
+				e.printStackTrace();
 			}
-			throw ex;
-		} finally {
 			manager.close();
+			return false;
 		}
+		
+		manager.close();
 		return true;
 	}
 

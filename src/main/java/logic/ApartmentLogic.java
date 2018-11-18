@@ -16,6 +16,15 @@ import model.ApartmentType;
 import model.Reservation;
 import model.User;
 
+/**
+ * ApartmentLogic wraps DataAccess methods on Apartment objects.
+ * Moreover this class is used for all logic operations on Apartment objects.
+ * It allows user to operate on higher level of abstraction and work with Apartments seamlessly.
+ * 
+ * @author Mateusz Kobierski, Piotr Szylar
+ *
+ */
+
 public class ApartmentLogic {
 
 	public static List<Apartment> search(String fromPlace, String price, 
@@ -193,7 +202,7 @@ public class ApartmentLogic {
 		List<Reservation> userReservations = user.getReservations();
 		userReservations.addAll(reservations);
 		
-		user.setReservations(new ArrayList(new HashSet(reservations)));
+		user.setReservations(new ArrayList(new HashSet(userReservations)));
 		apartment.setReservations(new ArrayList(bookings.values()));
 		
 		DataAccess.updateApartment(apartment);
@@ -203,12 +212,16 @@ public class ApartmentLogic {
 		return true;
 	}
 	
-	public static void addApartment(Apartment apartment) {
+	public static boolean addApartment(Apartment apartment) {
+		if (apartment == null) {
+			return false;
+		}
+		
 		if (!UserLogic.isUserRegistered(apartment.getHost())) {
 			UserLogic.registerUser(apartment.getHost());
 		}
 		
-		DataAccess.createApartment(apartment);
+		return DataAccess.createApartment(apartment);
 	}
   
 	public static boolean modifyApartment(Apartment apartment) {
@@ -232,6 +245,10 @@ public class ApartmentLogic {
 			return false;
 		}
 		
+		User host = apartment.getHost();
+		host.removeApartment(apartment);
+		DataAccess.updateUser(host);
+				
 		return DataAccess.removeApartment(apartment);
 	}
 	
