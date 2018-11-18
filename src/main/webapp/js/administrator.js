@@ -30,8 +30,37 @@ function selectUserCell(id, elementsNumber) {
 
 function messageUser() {
 	var message = prompt("Please enter your message");
+	var selectedUserEmail = $("#user-email").val();
+	var adminEmail = "admin";
 
+	if (selectedUserEmail != null && selectedUserEmail != "") {
+		if (message  != null && message  != "") {
+			
+			$.post("messages", {
+				senderEmail : adminEmail,
+				reciverEmail : selectedUserEmail,
+				message : message
+			}).done(function(status) {
+				if (status == 1) {
+					if (alert("Message send")) {
+					} else
+						window.location.reload();
+				} else if (status == 0)
+					alert("Servlet error");
+				else
+					alert("Unknow error");
+			});
+		
+				
+		}else {
+			alert("Pls enter message");
+		}
+	}else {
+		alert("User not selected");
+	}
 }
+
+
 
 function updateUserData() {
 
@@ -154,7 +183,7 @@ function selectApartmentCell(id, elementsNumber) {
 	var childrensBeds = cell.children[6].innerHTML.trim();
 	var descriptions = cell.children[7].innerText.trim();
 
-	document.getElementById("host-email").value = email;
+	document.getElementById("user-email").value = email;
 	document.getElementById("apartment-name").value = apartment_name;
 	document.getElementById("apartment-country").value = cuntry;
 	document.getElementById("apartment-price").value = price;
@@ -174,7 +203,7 @@ function selectApartmentCell(id, elementsNumber) {
 function updateApartmentData() {
 	
 	
-	var email = $("#host-email").val();
+	var email = $("#user-email").val();
 	var placeName = $("#apartment-name").val();
 	var cuntry = $("#apartment-country").val();
 	var price = $("#apartment-price").val().toString();
@@ -276,7 +305,7 @@ function deleteApartment() {
 	var flat_number = place_cel_active.children[10].innerHTML.trim();
 	var city = place_cel_active.children[11].innerText.trim();
 	
-	var email = $("#host-email").val();
+	var email = $("#user-email").val();
 
 	
 
