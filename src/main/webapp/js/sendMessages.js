@@ -6,6 +6,8 @@ function reply(id){
 	
 	
 	var message = prompt("Please enter your message");
+	
+	
 
 	if (selectedUserEmail != null && selectedUserEmail != "") {
 		if (message  != null && message  != "") {
