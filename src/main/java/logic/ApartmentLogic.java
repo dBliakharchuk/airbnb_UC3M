@@ -11,6 +11,7 @@ import java.util.Map;
 
 import database.DataAccess;
 import model.Apartment;
+import model.ApartmentPK;
 import model.ApartmentType;
 import model.Reservation;
 import model.User;
@@ -42,8 +43,8 @@ public class ApartmentLogic {
 		
 		return ApartmentType.fromString(apartmentType).toString();
 	}
+	
 	public static double countTotalPrice (String dateStart, String dateEnd, Apartment apartment) {
-		
 		SimpleDateFormat myFormat = new SimpleDateFormat("MM/dd/yyyy");
 		double totalPrice = 0;
 		
@@ -161,15 +162,12 @@ public class ApartmentLogic {
 		}	
 		
 	}
-	
-	public static void addApartment(Apartment apartment) {
-		if (!UserLogic.isUserRegistered(apartment.getHost())) {
-			UserLogic.registerUser(apartment.getHost());
-		}
+  
+	private static boolean isDateBetweenTwoDates(Date dateStart, Date dateEnd, Date examinedDate) {
 		
-		DataAccess.createApartment(apartment);
+		return dateStart.compareTo(examinedDate) * dateEnd.compareTo(examinedDate) <= 0;
 	}
-	
+
 	public static boolean bookApartment(User user, Apartment apartment, Date start, Date end) {
 		if (user == null || apartment == null || start == null || end == null || end.before(start)) {
 			return false;
@@ -204,12 +202,40 @@ public class ApartmentLogic {
 		
 		return true;
 	}
+	
+	public static void addApartment(Apartment apartment) {
+		if (!UserLogic.isUserRegistered(apartment.getHost())) {
+			UserLogic.registerUser(apartment.getHost());
+		}
+		
+		DataAccess.createApartment(apartment);
+	}
   
+	public static boolean modifyApartment(Apartment apartment) {
+		if (apartment == null || !isApartmentRegistered(apartment)) {
+			return false;
+		}
+		
+		return DataAccess.updateApartment(apartment);
+	}
+	
+	public static boolean removeApartment(ApartmentPK apartmentPk) {
+		if (apartmentPk == null) {
+			return false;
+		}
+		Apartment toDelete = DataAccess.getApartmentById(apartmentPk);
+		return removeApartment(toDelete);
+	}
+	
 	public static boolean removeApartment(Apartment apartment) {
 		if (apartment == null) {
 			return false;
 		}
 		
 		return DataAccess.removeApartment(apartment);
+	}
+	
+	public static boolean isApartmentRegistered(Apartment apartment) {
+		return apartment != null && DataAccess.getApartmentById(apartment.getId()) != null;
 	}
 }

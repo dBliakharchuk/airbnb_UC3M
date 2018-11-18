@@ -15,6 +15,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import database.DataAccess;
+import logic.TripLogic;
+import logic.UserLogic;
+import model.Trip;
 import model.User;
 
 
@@ -32,7 +35,8 @@ public class TripServlet extends HttpServlet {
 	
 		@Override
 		public void init(ServletConfig config) throws ServletException {
-			this.config = config;		
+			this.config = config;	
+			
 		}
 	       
 
@@ -41,8 +45,12 @@ public class TripServlet extends HttpServlet {
 		 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 		 */
 		protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {			
+			
 			String emailOfLoggedUser = (String) request.getSession().getAttribute("emailOfLoggedUser"); 
 			if (emailOfLoggedUser != null) {
+				List<Trip> tripsList = TripLogic.getUserTrips(DataAccess.getUserByEmail(emailOfLoggedUser));
+				request.setAttribute("userTrips", tripsList);
+				
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/trips.jsp"); 
 				dispatcher.forward(request, response); 
 			} else {

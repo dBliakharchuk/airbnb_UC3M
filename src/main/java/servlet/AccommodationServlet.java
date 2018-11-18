@@ -77,3 +77,4 @@ public class AccommodationServlet extends HttpServlet {
 
 
 }
+
