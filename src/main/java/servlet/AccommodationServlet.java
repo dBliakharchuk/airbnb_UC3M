@@ -1,6 +1,6 @@
 package servlet;
 
-import java.io.IOException; 
+import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -12,10 +12,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import database.DataAccess;
+import model.ApartmentPK;
 
 
 @WebServlet(
-		urlPatterns="/accommodation",
+		urlPatterns="/accommodations",
 		loadOnStartup=1,
 		initParams={@WebInitParam(name="configuracion", value="es.uc3m.tiw")}
 		)
@@ -34,12 +35,27 @@ public class AccommodationServlet extends HttpServlet {
 		}
 	       
 
+
 		/**
 		 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 		 */
 		protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-				String emailOfLoggedUser = (String) request.getSession().getAttribute("emailOfLoggedUser"); 
-				request.getRequestDispatcher("accommodation.jsp").forward(request, response);
+			
+			RequestDispatcher dispatcher = null;
+			
+			if(request.getSession().getAttribute("selectedApartment")==null) {
+				
+				dispatcher = request.getRequestDispatcher("/index.jsp");
+			
+				dispatcher.forward(request, response);
+			}
+			else {
+				
+				dispatcher = request.getRequestDispatcher("/accommodation.jsp");
+				
+				dispatcher.forward(request, response);
+			}
+
 		}
 
 		/**
@@ -47,9 +63,18 @@ public class AccommodationServlet extends HttpServlet {
 		 */
 		protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			
-				
+			if(request.getSession().getAttribute("selectedApartment")==null) {			
+			request.getSession().setAttribute("selectedApartment", DataAccess.getApartmentById(new ApartmentPK(request.getParameter("apartmentHost"),
+					request.getParameter("apartmentBuildingNumber"), request.getParameter("apartmentStreet"), request.getParameter("apartmentFlatNumber"), 
+					request.getParameter("apartmentCity"))));
+			}
+					
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/accommodation.jsp");
+			
+			dispatcher.forward(request, response);
 			
 		}
 
 
 }
+

@@ -6,8 +6,10 @@ import java.util.Date;
 
 
 /**
- * The persistent class for the reservation database table.
+ * Reservation class is a Java representative of Reservation table in database.
+ * One Reservation can only be per one day and apartment.
  * 
+ * @author Mateusz
  */
 @Entity
 @NamedQuery(name="Reservation.findAll", query="SELECT r FROM Reservation r")

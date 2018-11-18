@@ -13,6 +13,13 @@ import model.Message;
 import model.Reservation;
 import model.User;
 
+/**
+ * UserLogic allows to change User data and remove User account if it is possible.
+ * It also handles data validation.
+ * 
+ * @author Mateusz
+ *
+ */
 public class UserLogic {
 	
 	public static boolean modifyUser(User user) {
