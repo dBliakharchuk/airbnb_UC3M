@@ -63,7 +63,7 @@
 	<![endif]-->
 
 	</head>
-	<body>
+	<body  onload="setInitialDates()">
 		<div id="fh5co-wrapper">
 		<div id="fh5co-page">
 
@@ -125,23 +125,24 @@
 										<div class="input-field">
 											<span class="reservation-field-title">Start:</span>
 											<input type="date" class="form-control" id="date-start-reservation" name="date-start-reservation" value="<%= dateStart %>" required
-											min="<%= dateFormat.format(minStartDate) %>"/>
+											min="<%= dateFormat.format(minStartDate) %>" onchange="isDateInputCorrect(this)"/>
 										</div>
 									</div>
 									<div class="date-box">
 										<div class="input-field">
 											<span class="reservation-field-title">End:</span>
 											<input type="date" class="form-control" id="date-end-reservation" name="date-end-reservation" value="<%= dateEnd %>" required
-											min="<%= dateFormat.format(minEndDate) %>"/>
+											min="<%= dateFormat.format(minEndDate) %>" onchange="isDateInputCorrect(this)"/>
 										</div>
 									</div>
-										<div id="reservation-price">
+										<div id="reservation-price" >
 											<span>Price:</span>
-											<%= String.format ("%.2f", ApartmentLogic.countTotalPrice(dateStart, dateEnd, apartment)) %>€ 
+											<span id="priceToDisplay"><%= String.format ("%.2f", ApartmentLogic.countTotalPrice(dateStart, dateEnd, apartment)) %> </span>€
 										</div>
 									<div style="clear:both;"></div>
 									<br/>
-										<input name="totalPrice" type="text" value="100" hidden>
+										<input name="apartmentPrice" id="apartmentPrice" type="text" value="<%= apartment.getPrice() %>" hidden>
+										<input name="totalPrice" id="totalPrice" type="text" hidden>
                             			<input type="submit" class="btn btn-primary reservation-button" value="Pay">
                         			</form>
 									<form action="accommodations" method="post">
@@ -197,6 +198,9 @@
 	<!-- Main JS -->
 	<script src="js/main.js"></script>
 	<script>
+		
+		var actualDateStart = null;
+		var actualDateEnd = null;
           $(document).on('click', '#Login', function () {
               $("#loginModal").modal("show");
            });
@@ -207,9 +211,50 @@
         $(document).on('click', '#goRegistroLogin', function () {
               $("#RegistroModal").modal("hide");
               $("#loginModal").modal("show");              
-           });
+        });
+		function setInitialDates(){
+        	
+        	actualDateStart = document.getElementById("date-start-reservation").value;
+        	actualDateEnd = document.getElementById("date-end-reservation").value;
+        }
+        function isDateInputCorrect(){
+        	
+        	var newDateStart = document.getElementById("date-start-reservation").value;
+        	var newDateEnd = document.getElementById("date-end-reservation").value;
+        	
+        	if(dateCompare(newDateStart, newDateEnd)==false){
+        		
+        		document.getElementById("date-start-reservation").value = actualDateStart;
+        		document.getElementById("date-end-reservation").value = actualDateEnd;
+        		
+        		alert("Incorrect dates!")
+        	}
+        	else{
+        		
+        		actualDateStart = newDateStart;
+        		actualDateEnd = newDateEnd;
+        		
+        		var pricePerNight = document.getElementById("apartmentPrice").value;
+        		var totalCost = daysBetweenTwoDates(actualDateStart, actualDateEnd) * pricePerNight;
+        		document.getElementById("totalPrice").value = totalCost;
+        		document.getElementById("priceToDisplay").textContent = totalCost;
+        	}
+        }
+        function dateCompare(dateStart, dateEnd){
+            return new Date(dateEnd) > new Date(dateStart);
+        }
+        function daysBetweenTwoDates(dateStartString, dateEndString){
+        	
+        	var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
+        	var dateStart = new Date(dateStartString);
+        	var dateEnd = new Date(dateEndString);
+
+        	var diffDays = Math.round(Math.abs((dateStart.getTime() - dateEnd.getTime())/(oneDay)));
+        	
+        	return diffDays;
+        }
 		
-    </script>
+        </script>
         
 	</body>
 </html>

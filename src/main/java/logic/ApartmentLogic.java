@@ -54,7 +54,7 @@ public class ApartmentLogic {
 	}
 	
 	public static double countTotalPrice (String dateStart, String dateEnd, Apartment apartment) {
-		SimpleDateFormat myFormat = new SimpleDateFormat("MM/dd/yyyy");
+		SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd");
 		double totalPrice = 0;
 		
 		try {
