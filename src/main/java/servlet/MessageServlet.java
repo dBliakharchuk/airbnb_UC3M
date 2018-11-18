@@ -2,6 +2,9 @@ package servlet;
 
 import java.io.IOException;
 
+import javax.annotation.Resource;
+import javax.jms.ConnectionFactory;
+import javax.jms.Queue;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -23,7 +26,7 @@ public class MessageServlet extends HttpServlet {
 	 */
 	private static final long serialVersionUID = 1L;
 	private ServletConfig config;
-
+	
 	
 		@Override
 		public void init(ServletConfig config) throws ServletException {

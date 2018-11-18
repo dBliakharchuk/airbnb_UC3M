@@ -21,6 +21,8 @@ public class Application {
 //		removeApartmentTest();
 //		removeMessageTest();
 //		removeUserTest();
+//		sendMessageTest(DataAccess.getAllUsers().get(0), DataAccess.getAllUsers().get(1), "test");
+//		MessageLogic.notifyReceiver(Message.createNewMessage(DataAccess.getAllUsers().get(0), DataAccess.getAllUsers().get(1), "test"));
 	}
 	
 	private static void removeReservationTest() {
