@@ -8,6 +8,7 @@
 <%@ page import="model.*" %>
 <%@ page import=" java.util.*"%>
 <%@ page import="logic.*" %>
+<%@ page import="java.text.SimpleDateFormat;" %>
 
 	<head>
 	<meta charset="utf-8">
@@ -111,16 +112,27 @@
 									<span class="reservation-field-title">User:</span>
 									<%= request.getSession().getAttribute("emailOfLoggedUser") %>
 								</div>
+								
+								<% 		Date minStartDate = new Date();
+										Date minEndDate = new Date(minStartDate.getYear(), minStartDate.getMonth(), minStartDate.getDate() + 1);
+										
+										SimpleDateFormat dateFormat = null;
+										dateFormat = new SimpleDateFormat("yyyy-MM-dd");	
+										%>
+								
+									<form action="payments" method="post">
 									<div class="date-box">
 										<div class="input-field">
 											<span class="reservation-field-title">Start:</span>
-											<input type="text" class="form-control" id="date-start" name="date-start" placeholder="<%= dateStart %>"/>
+											<input type="date" class="form-control" id="date-start-reservation" name="date-start-reservation" value="<%= dateStart %>" required
+											min="<%= dateFormat.format(minStartDate) %>"/>
 										</div>
 									</div>
 									<div class="date-box">
 										<div class="input-field">
 											<span class="reservation-field-title">End:</span>
-											<input type="text" class="form-control" id="date-end" name="date-end" placeholder="<%= dateEnd %>"/>
+											<input type="date" class="form-control" id="date-end-reservation" name="date-end-reservation" value="<%= dateEnd %>" required
+											min="<%= dateFormat.format(minEndDate) %>"/>
 										</div>
 									</div>
 										<div id="reservation-price">
@@ -129,7 +141,6 @@
 										</div>
 									<div style="clear:both;"></div>
 									<br/>
-									<form action="payments" method="post">
 										<input name="totalPrice" type="text" value="100" hidden>
                             			<input type="submit" class="btn btn-primary reservation-button" value="Pay">
                         			</form>

@@ -169,13 +169,13 @@ public class AccountServlet extends HttpServlet
 				int passwordUpdateStatusInt = passwordUpdateStatus ? 1 : 0;
 				writer.println(passwordUpdateStatusInt);
 
-			} else if ("deleteUser".equals(action))
-			{
-				String email = request.getParameter("email");
-				Boolean userDeletedStatus = UserLogic.deleteUser(email);
-				
-				int deleteUserStatusInt = userDeletedStatus ? 1 : 0;
-				writer.println(deleteUserStatusInt);
+//			} else if ("deleteUser".equals(action))
+//			{
+//				String email = request.getParameter("email");
+//				Boolean userDeletedStatus = UserLogic.deleteUser(email);
+//				
+//				int deleteUserStatusInt = userDeletedStatus ? 1 : 0;
+//				writer.println(deleteUserStatusInt);
 			}
 			
 			

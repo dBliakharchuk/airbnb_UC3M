@@ -14,7 +14,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import database.DataAccess;
 import logic.PaymentUtils;
+import model.Apartment;
 import model.ApartmentPK;
+import model.Message;
+import model.User;
 
 
 @WebServlet(
@@ -63,12 +66,31 @@ public class TransferServlet extends HttpServlet {
         		request.setAttribute("dataError", dataError);
 			
         		RequestDispatcher dispatcher = request.getRequestDispatcher("/payment.jsp");
-			
         		dispatcher.forward(request, response);
         	} else {    
-        	
+        		Apartment apartment = (Apartment)request.getSession().getAttribute("selectedApartment");
+        		ApartmentPK apartmentPK = apartment.getId();
+        		User user = DataAccess.getUserByEmail(request.getSession().getAttribute("emailOfLoggedUser").toString());
+        		String textMessage = "Hello Admin!\nThe user " + user.getName() + " " + user.getSurname() + " (" + user.getEmail() +") wants to make a reservation of '"
+        				+ apartment.getName() + "' (address: " +apartmentPK.getStreet() + " " + apartmentPK.getBuildingNumber() + "/" +apartmentPK.getFlatNumber() 
+						+ ", " + apartmentPK.getCity() +", " + apartment.getCountry() +"), between " + request.getSession().getAttribute("dateStart") + " and " 
+        				+ request.getSession().getAttribute("dateEnd") + ". Payment was confirmed with valid credit card. You have to either accept the reservation "
+        				+ "request or decline.";
+        		
+        		Message reservationMessage = Message.createNewMessage(user, DataAccess.getUserByEmail("admin"), textMessage);
+        		
+    			response.setContentType("text/html");
+    			PrintWriter out = response.getWriter();
+    			out.println("<html>");
+    			out.println("<head>");
+    			out.println("</head>");						
+    			out.println("<body>");
+    			out.println("<h1> today not true date  is:"+textMessage+"</h1>");
+
+    			out.println("</body>");				
+    			out.println("</html>");		
+    			out.flush();
+    			out.close();
         	}
 		}
-
-
 }

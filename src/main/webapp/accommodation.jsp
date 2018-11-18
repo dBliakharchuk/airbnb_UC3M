@@ -88,6 +88,8 @@
 				<div class="row">
 					<% Apartment apartment = (Apartment)request.getSession().getAttribute("selectedApartment"); 
 					
+					ApartmentPK apartmentPK = apartment.getId();
+					
 					String loginError = (String)request.getAttribute("loginError");
 			
 					if(loginError!=null){ %>
@@ -107,8 +109,8 @@
                             <tbody>
                             	<tr>
                                         <th scope="row">Address:</th>
-                                        <td><span class="beds"><%= apartment.getId().getStreet() + " " + apartment.getId().getBuildingNumber() + "/" +apartment.getId().getFlatNumber() 
-                                        							+ ", " + apartment.getId().getCity() +", " + apartment.getCountry()%></span></td>
+                                        <td><span class="beds"><%= apartmentPK.getStreet() + " " + apartmentPK.getBuildingNumber() + "/" +apartmentPK.getFlatNumber() 
+                                        							+ ", " + apartmentPK.getCity() +", " + apartment.getCountry()%></span></td>
                                 </tr>
                                 <tr>                                
                                     <th scope="row">Host:</th>

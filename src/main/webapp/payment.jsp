@@ -110,24 +110,24 @@
 									<div class="col-xxs-12 col-xs-12 mt">
 										<div class="input-field">
 											<label for="from">Card number:</label>
-											<input type="text" class="form-control" name="card-number" placeholder=""/>
+											<input type="text" class="form-control" name="card-number" placeholder="" required/>
 										</div>
 									</div>
 									<div class="col-xxs-12 col-xs-6 mt alternate">
 										<div class="input-field">
 											<label for="from">Expiration date:</label>
-											<input type="text" class="form-control" name="expiration-date" placeholder="mm/yyyy"/>
+											<input type="text" class="form-control" name="expiration-date" placeholder="mm/yyyy" required/>
 										</div>
 									</div>
 									<div class="col-xxs-12 col-xs-6 mt alternate">
 										<div class="input-field">
 											<label for="from">CV2 code:</label>
-											<input type="text" class="form-control" name="cv2-code" placeholder=""/>
+											<input type="text" class="form-control" name="cv2-code" placeholder="" required/>
 										</div>
 									</div>
                             			<input type="submit" class="btn btn-primary payment-button" value="Confirm">
                         			</form>
-									<form action="reservations" method="get">
+									<form action="reservations" method="post">
 										<input type="submit" class="btn btn-primary payment-button" value="Cancel">
 									</form>
 								</div>
