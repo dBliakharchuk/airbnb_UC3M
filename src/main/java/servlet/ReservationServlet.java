@@ -46,7 +46,6 @@ public class ReservationServlet extends HttpServlet {
 		protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/reservation.jsp");
-			
 			dispatcher.forward(request, response);
 		}
 }
