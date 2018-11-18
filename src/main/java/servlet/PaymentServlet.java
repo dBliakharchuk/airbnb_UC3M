@@ -1,6 +1,10 @@
 package servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -50,10 +54,29 @@ public class PaymentServlet extends HttpServlet {
 		 */
 		protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			
+			
+			Date dateStart = null;
+			Date dateEnd = null;
+			try {
+				dateStart = new Date ((new SimpleDateFormat("yyyy-MM-dd")).parse(request.getParameter("date-start-reservation")).getTime());
+			} 
+			catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				dateEnd = new Date((new SimpleDateFormat("yyyy-MM-dd")).parse(request.getParameter("date-end-reservation")).getTime());
+			} 
+			catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			request.getSession().setAttribute("dateStart", dateStart);
+			request.getSession().setAttribute("dateEnd", dateEnd);
 			request.getSession().setAttribute("totalPrice", Double.parseDouble(request.getParameter("totalPrice")));
+
 					
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/payment.jsp");
-			
 			dispatcher.forward(request, response);
 			
 		}
