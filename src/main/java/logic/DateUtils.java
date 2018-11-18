@@ -8,6 +8,12 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+/**
+ * DateUtils is a utility class which handles help methods on Date objects. 
+ * 
+ * @author Mateusz Kobierski, Piotr Szylar
+ *
+ */
 public class DateUtils {
 	public static List<Date> getDatesBetween(Date startDate, Date endDate) {
 		if (startDate.after(endDate)) {

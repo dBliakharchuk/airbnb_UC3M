@@ -23,6 +23,15 @@ import model.Message;
 import model.Reservation;
 import model.User;
 
+/**
+ * DataAccess allows system to create, read, update and delete data from database.
+ * Get methods return objects or arrays if succeeded and null or empty array if not
+ * Create, Update and Remove methods return true if succeeded and false if not.
+ * 
+ * @author Mateusz Kobierski
+ *
+ */
+
 public class DataAccess 
 {	
 	private static EntityManagerFactory managerFactory = Persistence.createEntityManagerFactory("airbnb");

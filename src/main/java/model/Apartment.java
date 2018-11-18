@@ -9,8 +9,9 @@ import java.util.List;
 
 
 /**
- * The persistent class for the apartment database table.
+ * Apartment class is a Java representative of Apartment table in database.
  * 
+ * @author Mateusz
  */
 @Entity
 @NamedQueries({

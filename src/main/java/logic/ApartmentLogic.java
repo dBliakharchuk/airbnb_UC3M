@@ -16,6 +16,15 @@ import model.ApartmentType;
 import model.Reservation;
 import model.User;
 
+/**
+ * ApartmentLogic wraps DataAccess methods on Apartment objects.
+ * Moreover this class is used for all logic operations on Apartment objects.
+ * It allows user to operate on higher level of abstraction and work with Apartments seamlessly.
+ * 
+ * @author Mateusz Kobierski, Piotr Szylar
+ *
+ */
+
 public class ApartmentLogic {
 
 	public static List<Apartment> search(String fromPlace, String price, 
