@@ -100,8 +100,8 @@
 				<div class="row row-bottom-padded-md">
 				<%
 				ApartmentPK apartmentKey = null;		
-				String photoUrl = "";
 
+				String photoUrl;
 
 					
 					for (Apartment apartment : apartments)
