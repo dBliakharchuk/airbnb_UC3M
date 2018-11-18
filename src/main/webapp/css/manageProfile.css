@@ -3,7 +3,7 @@
 }
 
 #user-data-container{
-   width: 30%;
+   width: 20%;
    float: left;
    /* background-color: black; */
    height: 100%;
@@ -17,7 +17,7 @@
 }
 
 #user-houses-container{
-   width: 55%;
+   width: 65%;
    float: left;
    height: 100%;
 
