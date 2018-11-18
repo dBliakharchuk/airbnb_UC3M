@@ -79,22 +79,28 @@
 
 			<!-- end:header-top -->
 
-		<!-- end:header-top -->
-
 		<div id="fh5co-tours" class="fh5co-section-gray">
 			<div class="container">
 				<div class="row">
 					<div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
 						<h3>Results</h3>
-						<p>These are the results according to your selection</p>
+						<% ArrayList<Apartment> apartments = (ArrayList<Apartment>)request.getSession().getAttribute("resultApartments");
+						
+						if(apartments.isEmpty()==true){
+																			%>
+						<p>There are no offers matching to your selection. </p>
+						<% } else{ %>
+							<p> These are the results according to your selection:</p>
+							
+						<% } %>
 					</div>
 				</div>
 				
-				<div class="row row-bottom-padded-md">
-				<%
-				ApartmentPK apartmentKey = null;		
+  				<div class="row row-bottom-padded-md">
+			<%
 				
-				ArrayList<Apartment> apartments = (ArrayList<Apartment>)request.getAttribute("resultApartments");
+				
+				ApartmentPK apartmentKey = null;		
 					
 					for (Apartment apartment : apartments)
 					{ 
@@ -108,7 +114,7 @@
 								<h3><%= apartment.getName() %></h3>
 								<span><%= ApartmentLogic.correctApartmentTypeDisplay(apartment.getType().toString()) %></span> 
 								<span class="price"><%= String.format ("%.2f", apartment.getPrice()) %>€</span>
-								<form method="get">
+								<form method="post" action="accommodations">
 									<input name="apartmentHost" type="text" value="<%= apartmentKey.getHost() %>" hidden>
 									<input name="apartmentBuildingNumber" type="text" value="<%= apartmentKey.getBuildingNumber() %>" hidden>
 									<input name="apartmentStreet" type="text" value="<%= apartment.getStreet() %>" hidden>
@@ -120,7 +126,7 @@
 						</div>
 					</div>
 				<% } %>
-				</div>
+				</div> 
 
 			</div>
 		</div>

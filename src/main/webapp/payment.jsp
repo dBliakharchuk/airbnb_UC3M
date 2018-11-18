@@ -52,6 +52,7 @@
 	
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="css/reservation.css" type="text/css"/>
+	<link rel="stylesheet" href="css/payment.css" type="text/css"/>
 
 
 	<!-- Modernizr JS -->
@@ -83,64 +84,58 @@
 			</script>
 
 			<!-- end:header-top -->
-		<% 	Apartment apartment = (Apartment)request.getSession().getAttribute("selectedApartment"); 
 			
-			String dateStart = request.getSession().getAttribute("dateStart").toString();
-			String dateEnd = request.getSession().getAttribute("dateEnd").toString();	%>
 			
 		 <div class="fh5co-hero">
 			<div class="fh5co-overlay"></div>
 			<div class="fh5co-cover" data-stellar-background-ratio="0.5" style="background-image: url(images/cover_bg_5.jpg);">
 				<div class="desc">
 					<div class="container">
+					<%String dataError = (String)request.getAttribute("dataError");
+			
+					if(dataError!=null){ %>
+				
+						<script type="text/javascript">
+							alert("<%= dataError%>")
+						</script>
+					<% } %>
 							<div id="reservation-container">
 								<div>
-									<span id="reservation-header">Reservation</span>
+									<span id="reservation-header">Payment</span>
 								</div>
-								<div id="reservation-box">
-								<div class="reservation-info-field">
-									<span class="reservation-field-title">Apartment:</span>
-									<%= apartment.getName() %> 
-								</div>
-								<div class="reservation-info-field">
-									<span class="reservation-field-title">Address:</span>
-									<%= apartment.getId().getStreet() + " " + apartment.getId().getBuildingNumber() + "/" +apartment.getId().getFlatNumber() 
-									+ ", " + apartment.getId().getCity() +", " + apartment.getCountry()%>
-								</div>
-								<div class="reservation-info-field">
-									<span class="reservation-field-title">User:</span>
-									<%= request.getSession().getAttribute("emailOfLoggedUser") %>
-								</div>
-									<div class="date-box">
-										<div class="input-field">
-											<span class="reservation-field-title">Start:</span>
-											<input type="text" class="form-control" id="date-start" name="date-start" placeholder="<%= dateStart %>"/>
-										</div>
-									</div>
-									<div class="date-box">
-										<div class="input-field">
-											<span class="reservation-field-title">End:</span>
-											<input type="text" class="form-control" id="date-end" name="date-end" placeholder="<%= dateEnd %>"/>
-										</div>
-									</div>
-										<div id="reservation-price">
-											<span>Price:</span>
-											<%= String.format ("%.2f", ApartmentLogic.countTotalPrice(dateStart, dateEnd, apartment)) %>€ 
-										</div>
-									<div style="clear:both;"></div>
+								<div id="payment-box">
 									<br/>
-									<form action="payments" method="post">
-										<input name="totalPrice" type="text" value="100" hidden>
-                            			<input type="submit" class="btn btn-primary reservation-button" value="Pay">
+									<h4>Provide necessary payment information to finalize transaction</h4>
+									<form action="transfers" method="post">
+									<div class="col-xxs-12 col-xs-12 mt">
+										<div class="input-field">
+											<label for="from">Card number:</label>
+											<input type="text" class="form-control" name="card-number" placeholder=""/>
+										</div>
+									</div>
+									<div class="col-xxs-12 col-xs-6 mt alternate">
+										<div class="input-field">
+											<label for="from">Expiration date:</label>
+											<input type="text" class="form-control" name="expiration-date" placeholder="mm/yyyy"/>
+										</div>
+									</div>
+									<div class="col-xxs-12 col-xs-6 mt alternate">
+										<div class="input-field">
+											<label for="from">CV2 code:</label>
+											<input type="text" class="form-control" name="cv2-code" placeholder=""/>
+										</div>
+									</div>
+                            			<input type="submit" class="btn btn-primary payment-button" value="Confirm">
                         			</form>
-									<form action="accommodations" method="post">
-										<input type="submit" class="btn btn-primary reservation-button" value="Cancel">
+									<form action="reservations" method="get">
+										<input type="submit" class="btn btn-primary payment-button" value="Cancel">
 									</form>
 								</div>
 						</div>
 					</div>
 				</div>
 			</div>
+
 		</div>
 	</div>
 		<!-- Login Modal -->

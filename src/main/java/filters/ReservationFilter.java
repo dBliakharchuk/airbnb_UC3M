@@ -40,22 +40,31 @@ public class ReservationFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		// TODO Auto-generated method stub
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
-        HttpServletResponse httpResponse = (HttpServletResponse) response;
-        HttpSession session = httpRequest.getSession();
+    	HttpServletResponse httpResponse = (HttpServletResponse) response;
+    	HttpSession session = httpRequest.getSession();
 		
-		if (httpRequest.getSession().getAttribute("emailOfLoggedUser")==null) {
+		if(httpRequest.getSession().getAttribute("selectedApartment")!=null){
+		
+        	if (httpRequest.getSession().getAttribute("emailOfLoggedUser")==null) {
 			
-			String loginError = "You need to be logged in to make a reservation. Login and try again, or register in case you don't have an account yet.";
+        		String loginError = "You need to be logged in to make a reservation. Login and try again, or register in case you don't have an account yet.";
         	
-        	httpRequest.setAttribute("loginError", loginError);
+        		httpRequest.setAttribute("loginError", loginError);
 			
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/accommodation.jsp");
+        		RequestDispatcher dispatcher = request.getRequestDispatcher("/accommodation.jsp");
 			
-			dispatcher.forward(request, response);
-        } else {      	
-        	// pass the request along the filter chain	
-        	chain.doFilter(httpRequest, httpResponse);
-        }
+        		dispatcher.forward(request, response);
+        	} else {    
+        	
+        		chain.doFilter(request, response);
+        	}
+		}
+		else {
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
+			
+    		dispatcher.forward(request, response);
+		}
 	}
 
 	/**
