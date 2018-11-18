@@ -43,6 +43,7 @@ public class ImageServlet extends HttpServlet {
 		 byte[] content = apartment.getPicture();
 		 if(content.length < 1)
 		 {
+			 	// ******** change this *********
 			    File f = new File("/Users/piotrducki/Desktop/uc3m/CTFW/p/airbnb/src/main/webapp/images/place-1.jpg");
 			    DataInputStream dis = new DataInputStream(new FileInputStream(f));
 			    content = new byte[(int) f.length()];

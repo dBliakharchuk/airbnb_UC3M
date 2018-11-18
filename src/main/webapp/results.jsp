@@ -109,7 +109,7 @@
 								<h3><%= apartment.getName() %></h3>
 								<span><%= ApartmentLogic.correctApartmentTypeDisplay(apartment.getType().toString()) %></span> 
 								<span class="price"><%= String.format ("%.2f", apartment.getPrice()) %>€</span>
-								<form method="get">
+								<form method="get" >
 									<input name="apartmentHost" type="text" value="<%= apartmentKey.getHost() %>" hidden>
 									<input name="apartmentBuildingNumber" type="text" value="<%= apartmentKey.getBuildingNumber() %>" hidden>
 									<input name="apartmentStreet" type="text" value="<%= apartment.getStreet() %>" hidden>
