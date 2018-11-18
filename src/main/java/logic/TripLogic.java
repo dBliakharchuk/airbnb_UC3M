@@ -16,6 +16,14 @@ import model.Reservation;
 import model.Trip;
 import model.User;
 
+/**
+ * TripLogic handles Trip objects which are wrappers of Reservations.
+ * This class allows user to get user trips from list of Reservations, remove Reservation and book Trip.
+ * It allows user to work with high level of abstraction objects (Trip) instead of database types (Reservation).
+ * 
+ * @author Mateusz Kobierski
+ *
+ */
 public class TripLogic {
 	
 	public static boolean removeReservation(Reservation reservation) {

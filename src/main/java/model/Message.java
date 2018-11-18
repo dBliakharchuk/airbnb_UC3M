@@ -8,8 +8,9 @@ import javax.persistence.*;
 
 
 /**
- * The persistent class for the message database table.
+ * Message class is a Java representative of Message table in database.
  * 
+ * @author Mateusz
  */
 @Entity
 @NamedQueries({

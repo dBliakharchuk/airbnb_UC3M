@@ -106,7 +106,7 @@
 											<div class="col-xxs-12 col-xs-12 mt">
 												<div class="input-field">
 													<label for="from">City:</label>
-													<input type="text" class="form-control" id="from-place" name="from-place" placeholder="Madrid, SPAIN"/>
+													<input type="text" class="form-control" id="from-place" name="from-place" placeholder="Where do you want to go?"/>
 												</div>
 											</div>
 											<div class="col-xxs-12 col-xs-6 mt alternate">
@@ -126,7 +126,7 @@
 												<section>
 													<label for="class">Price</label>
 													<select class="cs-select cs-skin-border" id="price" name="price">
-														<option value="" disabled selected>Less than 35€</option>
+														<option value="" disabled selected>Select price range...</option>
 														<option value="P1">Less than 35€</option>            
 														<option value="P2">36€ - 69€</option>
 														<option value="P3">70€ - 130€</option>
@@ -139,7 +139,7 @@
 												<section>
 													<label for="class">Type of accommodation</label>
 													<select class="cs-select cs-skin-border" id="typeOfAccom" name="typeOfAccom">
-														<option value="" disabled selected>Entire accommodation</option>
+														<option value="" disabled selected>Select accommodation type...</option>
 														<option value="ENTIRE_APARTMENT">Entire accommodation</option>
 														<option value="PRIVATE_ROOM">Private room</option>
 														<option value="SHARED_ROOM">Shared room</option>
@@ -151,7 +151,7 @@
 												<section>
 													<label for="class">Adults:</label>
 													<select class="cs-select cs-skin-border" id="adults" name="adults">
-														<option value="" disabled selected>1</option>
+														<option value="" disabled selected>0</option>
 														<option value="1">1</option>
 														<option value="2">2</option>
 														<option value="3">3</option>
@@ -163,7 +163,7 @@
 												<section>
 													<label for="class">Children:</label>
 													<select class="cs-select cs-skin-border" id="children" name="children">
-														<option value="" disabled selected>1</option>
+														<option value="" disabled selected>0</option>
 														<option value="1">1</option>
 														<option value="2">2</option>
 														<option value="3">3</option>

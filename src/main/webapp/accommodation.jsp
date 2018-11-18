@@ -130,9 +130,9 @@
                                 </tr>                               
                             </tbody>
                         </table>
-                        	<form action="reservations" method="get">
+                        	<form action="reservations" method="post">
                         	<div class="col-xxs-12 col-xs-6 mt">
-                            	<input type="submit" class="btn btn-primary btn-block" value="Reserve">
+                            	<input type="submit" class="btn btn-primary btn-block" value="Reservation">
                         	</div>
                         	</form>
                         <div class="col-xxs-12 col-xs-6 mt">

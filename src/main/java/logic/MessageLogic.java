@@ -5,6 +5,12 @@ import model.Message;
 import model.Reservation;
 import model.User;
 
+/**
+ * MessageLogic creates higher level of abstraction when dealing with Messaging subsystem.
+ * 
+ * @author Mateusz
+ *
+ */
 public class MessageLogic {
 	
 	public static boolean sendMessage(Message msg) {
