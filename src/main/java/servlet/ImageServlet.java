@@ -1,5 +1,8 @@
 package servlet;
 
+import java.io.DataInputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -38,9 +41,20 @@ public class ImageServlet extends HttpServlet {
 		 
 		
 		 byte[] content = apartment.getPicture();
-         response.setContentType(getServletContext().getMimeType(""));
-         response.setContentLength(content.length);
-         response.getOutputStream().write(content);
+		 if(content.length < 1)
+		 {
+			    File f = new File("/Users/piotrducki/Desktop/uc3m/CTFW/p/airbnb/src/main/webapp/images/place-1.jpg");
+			    DataInputStream dis = new DataInputStream(new FileInputStream(f));
+			    content = new byte[(int) f.length()];
+			    dis.readFully(content);
+			    dis.close(); 
+		 }
+		 
+		response.setContentType(getServletContext().getMimeType(""));
+		response.setContentLength(content.length);
+		response.getOutputStream().write(content);
+		 
+       
 	}
 
 	/**

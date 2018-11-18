@@ -113,17 +113,21 @@
 						<%
 							
 							ArrayList<Trip> tripsList = (ArrayList<Trip>) request.getAttribute("userTrips");
+							String photoUrl;
+
 							if (tripsList != null) {
 								for (Trip tempTrip : tripsList){
 									Apartment tempApartment = tempTrip.getReservations().get(0).getApartment();
 									if (tempApartment != null){ 
 										ApartmentPK apartmentKey = tempApartment.getId();
+										photoUrl = request.getContextPath() + "/apartmentsImages/" + apartmentKey.toUrl();
+
 								 %>
 									
 								<div class="col-md-4 col-sm-6 fh5co-tours animate-box"
 									data-animate-effect="fadeIn">
 									<div href="#">
-										<img src="images/place-1.jpg"
+										<img src=<%=photoUrl %>
 											alt="Free HTML5 Website Template by FreeHTML5.co"
 											class="img-responsive">
 										<div class="desc">
