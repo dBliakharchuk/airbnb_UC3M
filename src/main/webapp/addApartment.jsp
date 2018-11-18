@@ -84,7 +84,7 @@
 		<div id="fh5co-tours" class="fh5co-section-gray">
 			<div class="container" id="add-new-house-container">
 				<h1>Add New Apartment</h1>
-				<form class="row-bottom-padded-md animate-box" id="add-new-house-form" action="ApartmentServlet"  method="POST" >
+				<form class="row-bottom-padded-md animate-box" id="add-new-house-form" action="ApartmentServlet"  method="POST" enctype="multipart/form-data">
 					<label for="placeName">Apartment Name</label>
 					<input type="text" name="placeName" value="" required>
 					<label for="country">Country</label>

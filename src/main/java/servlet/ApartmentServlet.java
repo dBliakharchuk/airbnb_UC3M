@@ -1,14 +1,20 @@
 package servlet;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
+import java.nio.file.Paths;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+
+import org.apache.commons.io.IOUtils;
 
 import database.DataAccess;
 import logic.ApartmentLogic;
@@ -22,6 +28,7 @@ import model.User;
  * Servlet implementation class ApartmentServlet
  */
 @WebServlet("/ApartmentServlet")
+@MultipartConfig
 public class ApartmentServlet extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
@@ -115,11 +122,14 @@ public class ApartmentServlet extends HttpServlet
 			String flatNumber = request.getParameter("flat_number");
 			String city = request.getParameter("city");
 
-			byte[] picture = new byte[1]; // to do !!!! proces picture !!!!!!!!!!!!
+			Part filePart = request.getPart("apartment-picture"); // Retrieves <input type="file" name="file">
+			String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
+			InputStream fileContent = filePart.getInputStream();
+			byte[] picture = IOUtils.toByteArray(fileContent);
 
 			ApartmentPK apartmentPK = new ApartmentPK(email, buildingNumber, street, flatNumber, city);
 			User host = DataAccess.getUserByEmail(email);
-
+			
 			Apartment newApartment = new Apartment(host, buildingNumber, street, flatNumber, city, adults_beds,
 					childeren_beds, cuntry, description, placeName, picture, price, ApartmentType.fromString(type));
 			Boolean apartmentAddedStatus = ApartmentLogic.addApartment(newApartment);
@@ -143,16 +153,10 @@ public class ApartmentServlet extends HttpServlet
 
 			System.out.println(email + buildingNumber + street + flatNumber + city + apartmentDeletedtatus);
 
-			if (!("admin".equals(emailOfLoggedUser)))
-			{
-				if (apartmentDeletedtatus)
-					response.sendRedirect("manageProfile");
-				
-			} else
-			{
-				int apartmentDeletedtatusInt = apartmentDeletedtatus ? 1 : 0;
-				writer.println(apartmentDeletedtatusInt);
-			}
+			
+			int apartmentDeletedtatusInt = apartmentDeletedtatus ? 1 : 0;
+			writer.println(apartmentDeletedtatusInt);
+			
 
 		}
 
