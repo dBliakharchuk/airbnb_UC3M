@@ -1,8 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -16,12 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import database.DataAccess;
 import logic.TripLogic;
-import logic.UserLogic;
-import model.Apartment;
 import model.ApartmentPK;
-import model.ReservationPK;
 import model.Trip;
-import model.User;
 
 
 @WebServlet(

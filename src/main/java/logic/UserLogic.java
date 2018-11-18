@@ -1,6 +1,5 @@
 package logic;
 
-import java.awt.datatransfer.StringSelection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -9,7 +8,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import database.DataAccess;
 import model.Apartment;
-import model.Message;
 import model.Reservation;
 import model.User;
 

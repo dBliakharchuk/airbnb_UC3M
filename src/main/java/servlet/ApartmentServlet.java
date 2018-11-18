@@ -5,7 +5,6 @@ import java.io.InputStream;
 import java.io.PrintWriter;
 import java.nio.file.Paths;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -18,7 +17,6 @@ import org.apache.commons.io.IOUtils;
 
 import database.DataAccess;
 import logic.ApartmentLogic;
-import logic.UserLogic;
 import model.Apartment;
 import model.ApartmentPK;
 import model.ApartmentType;

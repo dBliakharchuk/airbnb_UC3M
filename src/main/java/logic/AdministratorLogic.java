@@ -1,7 +1,5 @@
 package logic;
 
-import model.User;
-
 public class AdministratorLogic
 {
 	public static int updateUserData(String email,String name,String phoneNumber,String surname)
