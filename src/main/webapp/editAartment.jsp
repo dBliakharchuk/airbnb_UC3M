@@ -70,15 +70,12 @@
 		<!-- start:header-top -->
 			<%
 			String emailOfLoggedUser = (String) request.getSession().getAttribute("emailOfLoggedUser"); 		
-			if (emailOfLoggedUser != null) { 
-				if (!emailOfLoggedUser.equals("admin")) {%>
-				<jsp:include page="headerLogin.jsp"/> 
-				<%} else { %>
-				<jsp:include page="headerAdmin.jsp"/>
-			<% } 
-			} else {  %>
-				<jsp:include page="headerLogout.jsp"/>
-			<% } %>
+			if (emailOfLoggedUser != null) { %>
+			<jsp:include page="headerLogin.jsp"/> 
+			<% } else { 
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp"); 
+				dispatcher.forward(request, response); 
+			}%>
 			<script type="text/javascript">
 				document.getElementById("tab-profile").classList.add("active");
 			</script>

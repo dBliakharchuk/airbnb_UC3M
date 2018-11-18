@@ -114,8 +114,11 @@
 							
 							ArrayList<Trip> tripsList = (ArrayList<Trip>) request.getAttribute("userTrips");
 							if (tripsList != null) {
-								for (int i = 0; i < tripsList.size(); i++)
-								{ %>
+								for (Trip tempTrip : tripsList){
+									Apartment tempApartment = tempTrip.getReservations().get(0).getApartment();
+									if (tempApartment != null){ 
+										ApartmentPK apartmentKey = tempApartment.getId();
+								 %>
 									
 								<div class="col-md-4 col-sm-6 fh5co-tours animate-box"
 									data-animate-effect="fadeIn">
@@ -125,17 +128,24 @@
 											class="img-responsive">
 										<div class="desc">
 											<span></span>
-											<h3><%= tripsList.get(i).getReservations().get(0).getId().getApartmentCity()%></h3>
-											<span><%= tripsList.get(i).getReservations().get(0).getId().getApartmentHost() %></span> 
+											<h3><%= tempApartment.getCity() %></h3>
+											<span><%= tempApartment.getName() %></span> 
 											<span>Dates:
-												<%=tripsList.get(i).getBeginning().getDay() + "/" + tripsList.get(i).getBeginning().getMonth()  + "/" + (tripsList.get(i).getBeginning().getYear()+1900) + " to " 
-												+  tripsList.get(i).getEnd().getDay() + "/" + tripsList.get(i).getEnd().getMonth() + "/" + (tripsList.get(i).getEnd().getYear()+1900) %>
-												</span> <a class="btn btn-primary btn-outline"
-												href="#">More Info<i class="icon-arrow-right22"></i></a>
+												<%=tempTrip.getBeginning().getDay() + "/" + tempTrip.getBeginning().getMonth()  + "/" + (tempTrip.getBeginning().getYear()+1900) + " to " 
+												+  tempTrip.getEnd().getDay() + "/" + tempTrip.getEnd().getMonth() + "/" + (tempTrip.getEnd().getYear()+1900) %>
+												<form action="tripServlet" method="post">
+												<input name="apartmentHost" type="text" value="<%= apartmentKey.getHost() %>" hidden>
+												<input name="apartmentBuildingNumber" type="text" value="<%= apartmentKey.getBuildingNumber() %>" hidden>
+												<input name="apartmentStreet" type="text" value="<%= tempApartment.getStreet() %>" hidden>
+												<input name="apartmentFlatNumber" type="text" value="<%= tempApartment.getFlatNumber() %>" hidden>
+												<input name="apartmentCity" type="text" value="<%= tempApartment.getCity() %>" hidden>
+					                            	<input type="submit" class="btn btn-primary btn-outline" value="More info">
+					                        	</form>
 										</div>
 									</div>
 								</div>
-								<% } %>
+								<% }
+								} %>
 						<% } %>
 						</div>
 						

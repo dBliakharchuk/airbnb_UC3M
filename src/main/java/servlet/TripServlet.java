@@ -17,12 +17,15 @@ import javax.servlet.http.HttpServletResponse;
 import database.DataAccess;
 import logic.TripLogic;
 import logic.UserLogic;
+import model.Apartment;
+import model.ApartmentPK;
+import model.ReservationPK;
 import model.Trip;
 import model.User;
 
 
 @WebServlet(
-		urlPatterns="/trips",
+		urlPatterns="/tripServlet",
 		loadOnStartup=1,
 		initParams={@WebInitParam(name="configuracion", value="es.uc3m.tiw")}
 		)
@@ -64,6 +67,12 @@ public class TripServlet extends HttpServlet {
 		 */
 		protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			
+			request.getSession().setAttribute("selectedApartment", DataAccess.getApartmentById(new ApartmentPK(request.getParameter("apartmentHost"),
+			request.getParameter("apartmentBuildingNumber"), request.getParameter("apartmentStreet"), request.getParameter("apartmentFlatNumber"), 
+			request.getParameter("apartmentCity"))));
+					
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/tripsMoreInf.jsp");
+			dispatcher.forward(request, response); 
 			
 		}
 
