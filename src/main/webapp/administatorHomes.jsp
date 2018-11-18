@@ -169,7 +169,9 @@
 									 <label for="price-per-day">Price Per Day</label>
 									 <input type="number" name="price-per-day" id="apartment-price" value="">
 									 <label for="type-of-apartment">Type Of Apartment</label> 
-									 <input type="text" name="type-of-apartment" id="apartment-type" value=""> 
+									 <input type="radio" id="type-entire" name="type" value="ENTIRE"  required>Entire Apartment<br>
+									 <input type="radio" id="type-private" name="type" value="PRIVATE">Private Room<br>
+									 <input type="radio" id="type-shared" name="type" value="SHARED"> Shared Room 
 									 <label for="beds-adult">Adults Beds</label> 
 									 <input type="number" name="beds-adult" id="apartment-adults-beds" value=""> 
 									 <label for="beds-child">Children Beds</label> 

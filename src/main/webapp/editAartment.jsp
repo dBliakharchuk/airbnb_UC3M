@@ -109,8 +109,13 @@
 	
 					<label for="price">Price Per Day</label>
 					<input type="number" name="price" value="<%=apartment.getPrice() %>" required>
-					<label for="type">Type Of Apartment</label>
-					<input type="text" name="type" value="<%=apartment.getType().toString() %>" required>
+					<label for="type">Type Of Apartment - <%=apartment.getType().toString() %></label> 
+					<input type="radio" name="type" value="ENTIRE"  required>Entire Apartment<br>
+					<input type="radio" name="type" value="PRIVATE">Private Room<br>
+					<input type="radio" name="type" value="SHARED"> Shared Room
+					
+					
+				
 					<label for="adults_beds">Adults Beds</label>
 					<input type="number" name="adults_beds" value="<%=apartment.getBedsAdult() %>" required>
 					<label for="childeren_beds">Children Beds</label>
