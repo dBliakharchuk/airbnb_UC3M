@@ -86,7 +86,9 @@
 					<% Apartment apartment = (Apartment)request.getSession().getAttribute("selectedApartment"); 
 					
 					String loginError = (String)request.getAttribute("loginError");
-			
+					ApartmentPK apartmentKey = apartment.getId();
+					String photoUrl = request.getContextPath() + "/apartmentsImages/" + apartmentKey.toUrl();
+
 					if(loginError!=null){ %>
 				
 						<script type="text/javascript">
@@ -139,7 +141,7 @@
                                                                         
                     </div>
 					<div class="col-md-6 animate-box">
-						<img class="img-responsive" src="images/cover_bg_2.jpg" alt="travel">
+						<img class="img-responsive" src=<%=photoUrl %> alt="travel">
 					</div>
 				</div>
 			</div>
