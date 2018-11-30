@@ -37,7 +37,7 @@
 	<link rel="shortcut icon" href="favicon.ico">
 
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,300' rel='stylesheet' type='text/css'>
-	
+
 	<!-- Animate.css -->
 	<link rel="stylesheet" href="css/animate.css">
 	<!-- Icomoon Icon Fonts-->
@@ -53,10 +53,12 @@
 	<!-- CS Select -->
 	<link rel="stylesheet" href="css/cs-select.css">
 	<link rel="stylesheet" href="css/cs-skin-border.css">
-	
+
 	<link rel="stylesheet" href="css/style.css">
 
 	<link rel="stylesheet" href="css/messaging.css">
+	<link rel="stylesheet" href="css/message.css">
+
 
 	<!-- Modernizr JS -->
 	<script src="js/modernizr-2.6.2.min.js"></script>
@@ -73,23 +75,23 @@
 		<div id="fh5co-page">
 
 			<%
-			String emailOfLoggedUser = (String) request.getSession().getAttribute("emailOfLoggedUser"); 		
-			if (emailOfLoggedUser != null) { 
+			String emailOfLoggedUser = (String) request.getSession().getAttribute("emailOfLoggedUser");
+			if (emailOfLoggedUser != null) {
 				if (!emailOfLoggedUser.equals("admin")) {%>
-				<jsp:include page="headerLogin.jsp"/> 
+				<jsp:include page="headerLogin.jsp"/>
 				<%} else { %>
 				<jsp:include page="headerAdmin.jsp"/>
-			<% } 
-			} else { 
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp"); 
-				dispatcher.forward(request, response); 
+			<% }
+			} else {
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
+				dispatcher.forward(request, response);
 			}%>
 			<script type="text/javascript">
 				document.getElementById("tab-messages").classList.add("active");
 			</script>
 
 		<!-- end:header-top -->
-     <div id="message-container" class="fh5co-section-gray">	
+     <div id="message-container" class="fh5co-section-gray">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
@@ -97,8 +99,8 @@
 						<p>These are the messages you have received</p>
 				</div>
 			</div>
-			
-			<div class="row row-bottom-padded-md">			
+
+			<div class="row row-bottom-padded-md">
 				<div class="col-md-8 col-md-offset-2">
 					<div class="panel panel-default">
 						<div class="panel-body">
@@ -110,20 +112,20 @@
 								</div>
 							</div>
 							<input type="hidden" id="userEmail" value= <%=emailOfLoggedUser	%> >
-							
+
 							<div class="table-container">
 								<table class="table table-filter">
 									<tbody>
-										  
+
 										<%  ArrayList<Message> messages = (ArrayList<Message>) request.getAttribute("messages");
 											if(messages != null)
-											{	
+											{
 												int counter = 0;
 												boolean isUnread;
 												String messageClass;
 												String messageId;
 												String senderId;
-												
+
 												for (Message message : messages)
 												{
 													isUnread = message.getIsUnread();
@@ -131,12 +133,12 @@
 														messageClass = "no-leido";
 													else
 														messageClass = "leido";
-													
+
 													messageId = Integer.toString(counter);
 													senderId = "email" + Integer.toString(counter);
-												
+
 										%>
-										 
+
 										<tr data-status=<%= messageClass%> class=<%= messageClass%> id=<%= messageId%> >
 											<td>
 												<a href="javascript:;" class="star">
@@ -150,26 +152,26 @@
 																<%= message.getSender().getEmail()	%>
 													</h4>
 												</div>
-											</td>                                        
-											<td>      
+											</td>
+											<td>
 													<div class="media" onclick="showMessage()">
 														<p class="summary"><%= message.getMessage()	%></p>
-														<p class="meta"><%= message.getDate()%></p>                                                
+														<p class="meta"><%= message.getDate()%></p>
 													</div>
 													<button type="button" class="btn btn-success" onclick="reply(<%= messageId%>)" style="float:right; margin-top: -30px; margin-right: 20px;">Reply</button>
 
 											</td>
-										</tr>   
-										
-										
+										</tr>
+
+
 										<%			counter++;
-										
-										
-										
+
+
+
 												}
 												}%>
-										
-										                                
+
+
 									</tbody>
 								</table>
 							</div>
@@ -180,10 +182,10 @@
 		</div>
 	</div>
 	<!-- Login Modal -->
-	<jsp:include page="loginWindow.jsp"></jsp:include>     
-           
+	<jsp:include page="loginWindow.jsp"></jsp:include>
+
 	<!-- Registro Modal -->
-	<jsp:include page="registrationWindow.jsp"></jsp:include> 	
+	<jsp:include page="registrationWindow.jsp"></jsp:include>
     <jsp:include page="footer.jsp"/>
 
 	</div>
@@ -192,7 +194,7 @@
 	</div>
 	<!-- END fh5co-wrapper -->
 
-                
+
 	<!-- jQuery -->
 
 	<script src="js/jquery.min.js"></script>
@@ -217,11 +219,11 @@
 	<!-- CS Select -->
 	<script src="js/classie.js"></script>
 	<script src="js/selectFx.js"></script>
-	
+
 	<!-- Main JS -->
 	<script src="js/main.js"></script>
 
-        
+
 <!-- Main JS -->
 	<script src="js/main.js"></script>
 
@@ -232,20 +234,20 @@
 	          $(document).on('click', '#Registro', function () {
 	              $("#RegistroModal").modal("show");
 	           });
-	        
+
 	        $(document).on('click', '#goRegistroLogin', function () {
 	              $("#RegistroModal").modal("hide");
-	              $("#loginModal").modal("show");              
+	              $("#loginModal").modal("show");
 	           });
-			
+
     	</script>
      	<script type="text/javascript">
 	        $(document).ready(function () {
 				$('.star').on('click', function () {
 			      $(this).toggleClass('star-checked');
 			    });
-			
-			
+
+
 			    $('.btn-filter').on('click', function () {
 			      var $target = $(this).data('target');
 			      if ($target != 'all') {
@@ -255,10 +257,9 @@
 			        $('.table tr').css('display', 'none').fadeIn('slow');
 			      }
 			    });
-			
+
 			 });
 		</script>
-        
+
 	</body>
 </html>
-

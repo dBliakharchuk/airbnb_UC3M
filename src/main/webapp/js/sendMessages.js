@@ -1,6 +1,6 @@
 function reply(id){
 	
-	var selectedUserEmail = $("#email" + id).val();
+	var selectedUserEmail = $("#email" + id).val().trim();
 	var logeInUserEmail = $("#userEmail").val();
 
 	

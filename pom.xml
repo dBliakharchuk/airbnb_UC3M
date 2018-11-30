@@ -90,7 +90,7 @@
                 <artifactId>maven-dependency-plugin</artifactId>
                 <version>2.6</version>
                 <executions>
-                    <execution>
+                    <!-- <execution>
                         <phase>validate</phase>
                         <goals>
                             <goal>copy</goal>
@@ -107,7 +107,7 @@
                                 </artifactItem>
                             </artifactItems>
                         </configuration>
-                    </execution>
+                    </execution> -->
                 </executions>
             </plugin>
         </plugins>
